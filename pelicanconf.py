@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'ozkriff'
-SITENAME = u'marauder'
+SITENAME = u'Зона Контроля'
 SITEURL = 'http://ozkriff.github.io'
 
 TIMEZONE = 'Europe/Moscow'
