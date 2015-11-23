@@ -11,7 +11,10 @@ SITEURL = 'http://ozkriff.github.io'
 
 TIMEZONE = 'Europe/Moscow'
 
+LOCALE = 'ru_RU.UTF-8'
 DEFAULT_LANG = u'ru'
+# LOCALE = 'en_US.UTF-8'
+# DEFAULT_LANG = u'en'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
