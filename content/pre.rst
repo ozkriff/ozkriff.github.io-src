@@ -2,7 +2,7 @@
 ################################
 
 :date: 2014-02-28 00:00
-:tags: devlog, marauder, gamedev
+:tags: devlog, marauder
 :slug: pre
 :author: ozkriff
 :summary: Что мародер представляет из себя на 2014.02.23

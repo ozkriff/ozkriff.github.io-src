@@ -3,7 +3,7 @@
 ################################
 
 :date: 2014-04-14 12:00
-:tags: devlog, marauder, gamedev
+:tags: devlog, marauder
 :slug: week-recap-7
 :author: ozkriff
 :summary: Седьмой недельный отчет
