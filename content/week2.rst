@@ -84,11 +84,27 @@ Github streak
 Узнал про 'wc -L \*.rs' для поиска самой длинной строчки в куче
 файлов, прикольно.
 
-|wc-l-example-pic|
+.. code::
+
+    $ find src/core -name "*.rs" | xargs wc -L | sort -h
+    59 src/core/src/game_state.rs
+    59 src/core/src/player.rs
+    59 src/core/src/unit.rs
+    65 src/core/src/geom.rs
+    71 src/core/src/map.rs
+    72 src/core/src/partial_state.rs
+    76 src/core/src/pathfinder.rs
+    78 src/core/src/ai.rs
+    80 src/core/src/db.rs
+    80 src/core/src/fov.rs
+    83 src/core/src/dir.rs
+    84 src/core/src/fow.rs
+    91 src/core/src/internal_state.rs
+    93 src/core/src/filter.rs
+    121 src/core/src/lib.rs
+    121 итого
 
 
 .. |github-streak-pic| image:: http://i.imgur.com/jfKsmWv.png
-.. |wc-l-example-pic| image:: TODO
-.. |byzanz-link| image:: TODO
 
 .. vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab:
