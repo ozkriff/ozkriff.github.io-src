@@ -28,6 +28,7 @@ GITHUB_URL = 'http://github.com/ozkriff'
 DEFAULT_PAGINATION = 10
 
 THEME = "flasky-theme"
+PDF_GENERATOR = False
 
 # document-relative URLs when developing
 RELATIVE_URLS = True
