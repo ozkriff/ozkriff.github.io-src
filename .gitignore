@@ -1,3 +1,5 @@
 *.pyc
 output
 *.swp # vim tmp files
+pelican.pid
+srv.pid
