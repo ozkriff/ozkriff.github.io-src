@@ -6,7 +6,7 @@
 :tags: devlog, marauder
 :slug: week-recap-7
 :author: ozkriff
-:summary: Седьмой недельный отчет
+:excerpt: Седьмой недельный отчет
 
 На этой неделе у меня был отпуск, о даа.
 

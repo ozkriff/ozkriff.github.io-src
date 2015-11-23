@@ -6,7 +6,7 @@
 :tags: devlog, marauder
 :slug: week-recap-6
 :author: ozkriff
-:summary: Шестой недельный отчет
+:excerpt: Шестой недельный отчет
 
 Аналогично с прошлой - ничего, только смотрю, что б Мародер собирался.
 

@@ -6,7 +6,7 @@
 :tags: devlog, marauder
 :slug: week-recap-3
 :author: ozkriff
-:summary: Третий недельный отчет
+:excerpt: Третий недельный отчет
 
 
 Ну что ж. За эту неделю я почти ничего не сделал, времени на

@@ -6,7 +6,7 @@
 :tags: devlog, marauder
 :slug: week-recap-2
 :author: ozkriff
-:summary: Второй недельный отчет
+:excerpt: Второй недельный отчет
 
 
 Ну, этот понедельник я считаю последним днем недели. Не может у меня

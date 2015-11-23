@@ -6,7 +6,7 @@
 :tags: devlog, marauder
 :slug: week-recap-4
 :author: ozkriff
-:summary: Четвертый недельный отчет
+:excerpt: Четвертый недельный отчет
 
 
 Сходил на Manowar, о да, нужно больше пафоса. Только теперь

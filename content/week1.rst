@@ -6,7 +6,7 @@
 :tags: devlog, marauder
 :slug: week-recap-1
 :author: ozkriff
-:summary: Первый недельный отчет
+:excerpt: Первый недельный отчет
 
 
 Так, что я сделал за эту неделю? Вообще, намного меньше, чем собирался :( .
