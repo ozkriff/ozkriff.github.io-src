@@ -3,8 +3,7 @@
 ################################
 
 :date: 2014-03-03 10:20
-:tags: marauder, gamedev
-:category: devblog
+:tags: devlog, marauder, gamedev
 :slug: week-recap-1
 :author: ozkriff
 :summary: Первый недельный отчет
