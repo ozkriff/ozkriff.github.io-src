@@ -21,6 +21,10 @@ SECTIONS = [
     (u'О блоге', 'pages/about.html')
 ]
 
+DISQUS_SITENAME = "ozkriffgithubio"
+LINKEDIN_URL = 'https://www.linkedin.com/profile/view?id=AAMAABfeM3EBZh_SzJlI-iSEgVAs12f9d0S6ues'
+GITHUB_URL = 'http://github.com/ozkriff'
+
 DEFAULT_PAGINATION = 10
 
 THEME = "flasky-theme"
