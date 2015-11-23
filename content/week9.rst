@@ -4,6 +4,7 @@
 
 :date: 2014-04-28 11:00
 :tags: devlog, marauder
+:slug: week-recap-9
 :author: ozkriff
 :excerpt: Девятый недельный отчет
 
