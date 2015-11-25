@@ -14,11 +14,6 @@ TIMEZONE = 'Europe/Moscow'
 LOCALE = 'ru_RU.UTF-8'
 DEFAULT_LANG = u'ru'
 
-# Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
-
 FILENAME_METADATA = '(?P<slug>(?P<date>\d{4}-\d{2}-\d{2})--.*)'
 
 SECTIONS = [
@@ -36,5 +31,11 @@ DEFAULT_PAGINATION = 10
 THEME = "theme"
 PDF_GENERATOR = False
 
-# document-relative URLs when developing
+
+# dev settings
+
 RELATIVE_URLS = True
+
+FEED_ALL_ATOM = None
+CATEGORY_FEED_ATOM = None
+TRANSLATION_FEED_ATOM = None
