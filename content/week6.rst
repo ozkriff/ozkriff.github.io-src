@@ -2,7 +2,7 @@
 Разработка Мародера - 2014.04.07
 ################################
 
-:date: 2014-04-08 11:00
+:date: 2014-04-08
 :tags: devlog, marauder
 :slug: week-recap-6
 :author: ozkriff
