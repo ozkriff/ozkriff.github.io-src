@@ -3,7 +3,7 @@
 ################################
 
 :tags: devlog, marauder
-:excerpt: Первый недельный отчет
+:excerpt: Путенахождение, разделение на ядро и визуализатор
 
 
 Так, что я сделал за эту неделю? Вообще, намного меньше, чем собирался :( .
@@ -44,6 +44,5 @@
 
 .. |pathfinding-pic-1| image:: http://i.imgur.com/vCdvn0i.gif
 .. |pathfinding-pic-2| image:: http://i.imgur.com/Wda41RD.gif
-
 
 .. vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab:
