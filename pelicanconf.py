@@ -21,6 +21,8 @@ FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
+FILENAME_METADATA = '(?P<date>\d{4}-\d{2}-\d{2})-(?P<slug>.*)'
+
 SECTIONS = [
     (u'Архив', 'archives.html'),
     (u'Тэги', 'tags.html'),

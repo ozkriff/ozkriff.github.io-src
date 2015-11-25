@@ -2,9 +2,7 @@
 Разработка Мародера - 2014.05.11
 ################################
 
-:date: 2014-05-12
 :tags: devlog, marauder
-:slug: week-recap-11
 :author: ozkriff
 :excerpt: Одиннадцатый недельный отчет
 
