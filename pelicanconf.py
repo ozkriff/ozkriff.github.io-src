@@ -23,7 +23,7 @@ FILENAME_METADATA = '(?P<slug>(?P<date>\d{4}-\d{2}-\d{2})--.*)'
 
 SECTIONS = [
     (u'Архив', 'archives.html'),
-    (u'Тэги', 'tags.html'),
+    (u'Метки', 'tags.html'),
     (u'О журнале', 'pages/about.html')
 ]
 
