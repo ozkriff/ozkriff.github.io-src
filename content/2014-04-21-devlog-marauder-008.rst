@@ -3,7 +3,6 @@
 ################################
 
 :tags: devlog, marauder
-:author: ozkriff
 :excerpt: Восьмой недельный отчет
 
 
