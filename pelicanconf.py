@@ -24,7 +24,7 @@ TRANSLATION_FEED_ATOM = None
 SECTIONS = [
     (u'Архив', 'archives.html'),
     (u'Тэги', 'tags.html'),
-    (u'О блоге', 'pages/about.html')
+    (u'О журнале', 'pages/about.html')
 ]
 
 DISQUS_SITENAME = "ozkriffgithubio"
