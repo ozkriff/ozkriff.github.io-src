@@ -43,6 +43,6 @@
 .. |font-cli| image:: images/2014-03-20--font-cli.png
 .. |color-picking-01| image:: images/2014-03-20--color-picking-1.gif
 .. |color-picking-02| image:: images/2014-03-20--color-picking-2.png
-.. |color-picking-03| image:: images/2014-03-20--color-picking-1.gif
+.. |color-picking-03| image:: images/2014-03-20--color-picking-3.gif
 
 .. vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab:
