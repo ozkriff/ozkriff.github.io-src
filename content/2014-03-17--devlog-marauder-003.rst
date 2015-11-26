@@ -33,7 +33,7 @@ gl-вызова.
 |qapitrace-pic|
 
 
-.. |apocalyptica-pic| image:: http://i.imgur.com/92UkLwm.jpg
-.. |qapitrace-pic| image:: http://i.imgur.com/OA0Re36.png
+.. |apocalyptica-pic| image:: images/2015-11-23--apocalyptica.jpg
+.. |qapitrace-pic| image:: images/2015-11-23--qapitrace.jpg
 
 .. vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab:

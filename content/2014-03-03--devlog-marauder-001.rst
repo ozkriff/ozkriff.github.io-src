@@ -42,7 +42,7 @@
   начала визуализации события.
 
 
-.. |pathfinding-pic-1| image:: http://i.imgur.com/vCdvn0i.gif
-.. |pathfinding-pic-2| image:: http://i.imgur.com/Wda41RD.gif
+.. |pathfinding-pic-1| image:: images/2014-03-10--no-pathfinding.gif
+.. |pathfinding-pic-2| image:: images/2014-03-10--basic-pathfinding.gif
 
 .. vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab:

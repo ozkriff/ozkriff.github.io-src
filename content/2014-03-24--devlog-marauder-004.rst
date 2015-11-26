@@ -39,10 +39,10 @@
 
 |color-picking-03|
 
-.. |github-streak-fail| image:: http://i.imgur.com/Iky0iZx.png
-.. |font-cli| image:: http://i.imgur.com/m0ywZJt.png
-.. |color-picking-01| image:: http://i.imgur.com/QYOgFjh.gif
-.. |color-picking-02| image:: http://i.imgur.com/gZHqS4P.png
-.. |color-picking-03| image:: http://i.imgur.com/U0iHH5R.gif
+.. |github-streak-fail| image:: images/2014-03-20--github-streak-fail.png
+.. |font-cli| image:: images/2014-03-20--font-cli.png
+.. |color-picking-01| image:: images/2014-03-20--color-picking-1.gif
+.. |color-picking-02| image:: images/2014-03-20--color-picking-2.png
+.. |color-picking-03| image:: images/2014-03-20--color-picking-1.gif
 
 .. vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab:

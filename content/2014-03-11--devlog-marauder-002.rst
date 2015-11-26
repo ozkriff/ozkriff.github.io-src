@@ -101,6 +101,6 @@ Github streak
     121 итого
 
 
-.. |github-streak-pic| image:: http://i.imgur.com/jfKsmWv.png
+.. |github-streak-pic| image:: images/2014-03-09--github-streak.png
 
 .. vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab:

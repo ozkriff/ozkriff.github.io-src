@@ -63,6 +63,6 @@
 Вооооот, так что делать мне еще очень и очень и очень много. :)
 
 
-.. |ugly-tank-pic| image:: http://i.imgur.com/Qw9WsSm.png
+.. |ugly-tank-pic| image:: images/2014-02-23--ugly-tank.png
 
 .. vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab:

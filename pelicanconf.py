@@ -5,6 +5,8 @@ from __future__ import unicode_literals
 PLUGIN_PATHS = ["plugins"]
 PLUGINS = ["tag_cloud"]
 
+STATIC_PATHS = ['images']
+
 AUTHOR = u'ozkriff'
 SITENAME = u'Зона Контроля'
 SITEURL = 'http://ozkriff.github.io'
