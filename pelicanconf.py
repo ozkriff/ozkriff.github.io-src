@@ -18,6 +18,10 @@ DEFAULT_LANG = u'ru'
 
 FILENAME_METADATA = '(?P<slug>(?P<date>\d{4}-\d{2}-\d{2})--.*)'
 
+EXTRA_PATH_METADATA = {
+    'images/favicon.png': {'path': 'favicon.png'},
+}
+
 SECTIONS = [
     (u'Архив', 'archives.html'),
     (u'Метки', 'tags.html'),
