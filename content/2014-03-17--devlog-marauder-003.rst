@@ -34,8 +34,6 @@ gl-вызова.
 
 
 .. |apocalyptica-pic| image:: images/2015-11-23--apocalyptica.jpg
-
 .. |qapitrace-pic| image:: images/2015-11-23--qapitrace.jpg
-    :width: 100%
 
 .. vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab:
