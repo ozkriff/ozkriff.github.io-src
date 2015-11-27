@@ -25,8 +25,12 @@ EXTRA_PATH_METADATA = {
 SECTIONS = [
     (u'Архив', 'archives.html'),
     (u'Метки', 'tags.html'),
-    (u'О журнале', 'pages/about.html')
+    (u'О журнале', 'about.html')
 ]
+
+# Cleaner page links
+PAGE_URL = '{slug}.html'
+PAGE_SAVE_AS = '{slug}.html'
 
 DISQUS_SITENAME = "ozkriffgithubio"
 LINKEDIN_URL = 'https://www.linkedin.com/profile/view?id=AAMAABfeM3EBZh_SzJlI-iSEgVAs12f9d0S6ues'
