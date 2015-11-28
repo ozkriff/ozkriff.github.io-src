@@ -2,7 +2,7 @@
 body    { font: 15px/25px 'Palatino', 'Palatino Linotype', 'Georgia', serif;
           margin: 0; padding: 0; }
 a       { /*color: #432165;*/ color: #234764; }
-a:hover { color: #3b185f; background: #f9f8fa; }
+a:hover { color: #3b185f; }
 
 /* headlines */
 h1, h2, h3, h4, h5, h6      { /*font-family: 'Vollkorn', 'Georgia', serif;*/
