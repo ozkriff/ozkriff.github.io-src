@@ -1,47 +1,28 @@
-PY=python
-PELICAN=pelican
-PELICANOPTS=
+INPUTDIR=content
+OUTPUTDIR=output
+CONFFILE=pelicanconf.py
+PUBLISHCONF=publishconf.py
 
-BASEDIR=$(CURDIR)
-INPUTDIR=$(BASEDIR)/content
-OUTPUTDIR=$(BASEDIR)/output
-CONFFILE=$(BASEDIR)/pelicanconf.py
-PUBLISHCONF=$(BASEDIR)/publishconf.py
-
-help:
-	@echo 'Usage:                                                                 '
-	@echo '   make html                        (re)generate the web site          '
-	@echo '   make clean                       remove the generated files         '
-	@echo '   make regenerate                  regenerate files upon modification '
-	@echo '   make publish                     generate using production settings '
-	@echo '   make serve                       serve site at http://localhost:8000'
-	@echo '   make devserver                   start/restart develop_server.sh    '
-	@echo '   make stopserver                  stop local server                  '
-	@echo '                                                                       '
+all: html
 
 html: clean $(OUTPUTDIR)/index.html
 
 $(OUTPUTDIR)/%.html:
-	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
-
-clean:
-	[ ! -d $(OUTPUTDIR) ] || find $(OUTPUTDIR) -mindepth 1 -delete
-
-regenerate: clean
-	$(PELICAN) -r $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
-
-serve:
-	cd $(OUTPUTDIR) && $(PY) -m pelican.server
-
-devserver:
-	$(BASEDIR)/develop_server.sh restart
-
-stopserver:
-	kill -9 `cat pelican.pid`
-	kill -9 `cat srv.pid`
-	@echo 'Stopped Pelican and SimpleHTTPServer processes running in background.'
+	pelican $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE)
 
 publish:
-	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
+	pelican $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF)
 
-.PHONY: html help clean regenerate serve devserver publish
+start_devserver:
+	./develop_server.sh start
+
+stop_devserver:
+	./develop_server.sh stop
+
+restart_devserver:
+	./develop_server.sh restart
+
+clean:
+	rm -rf $(OUTPUTDIR)
+
+.PHONY: html publish start_devserver stop_devserver restart_devserver clean
