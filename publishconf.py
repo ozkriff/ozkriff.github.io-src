@@ -26,4 +26,4 @@ DELETE_OUTPUT_DIRECTORY = True
 # Following items are often useful when publishing
 
 DISQUS_SITENAME = "ozkriffgithubio"
-#GOOGLE_ANALYTICS = ""
+GOOGLE_ANALYTICS_ACCOUNT = "UA-70829739-1"
