@@ -11,6 +11,13 @@
       <div class=detail>
           <h1><a href="/{{ article.url }}">{{ article.title }}</a></h1>
           <div class=summary><p> {{ article.excerpt }}</p></div>
+          {% if article.tags %}
+          <div class=summary><p>
+              {% for tag in article.tags %}
+                  <a href="/{{ tag.url }}">{{ tag }}</a>
+              {% endfor %}
+          </p></div>
+          {% endif %}
       </div>
     </div>
   {% endfor %}
