@@ -22,6 +22,8 @@ EXTRA_PATH_METADATA = {
     'images/favicon.png': {'path': 'favicon.png'},
 }
 
+DEFAULT_DATE_FORMAT = '%a. %d %B %Y'
+
 SECTIONS = [
     (u'Архив', 'archives.html'),
     (u'Метки', 'tags.html'),
