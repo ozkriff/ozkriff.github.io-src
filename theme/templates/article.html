@@ -9,7 +9,7 @@
     
     {% include "twitter.html" %}
     {% if article.tags %}
-    <p class=tags>Запись помечена как
+    <p class=tags>This entry was tagged as
       {% for tag in article.tags %}
       <a href="/{{ tag.url }}">{{ tag }}</a>
       {% endfor %}
