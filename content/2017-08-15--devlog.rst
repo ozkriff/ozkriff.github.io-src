@@ -71,6 +71,9 @@ Why?
 Zemeroth
 --------
 
+.. image:: http://i.imgur.com/L8gaqaP.png
+  :alt: inscape mockup
+
 TODO: insert second mockup picture
 
 I’d spent a few months in the end of the  sprint (TODO concrete months)
@@ -79,12 +82,15 @@ thinking about do i still want to make rusty games and what’s important.
 Beautiful artiacle:
 http://makegames.tumblr.com/post/1136623767/finishing-a-game
 
-Totally ignored rule 3
+Totally ignored rule 3 (TODO: движок описан позже, так что перенеси куда-то вниз)
 
-Rule 14: "14. IF YOU DO QUIT, SCALE DOWN, NOT UP"
+    Rule 14: "14. IF YOU DO QUIT, SCALE DOWN, NOT UP"
 
+What are the main points?
 
 - android support from the begining of the development
+
+What are the differences from ZoC?
 
 - simple vector 2d graphics with just 2-5 sprites per unit
 
@@ -111,11 +117,19 @@ Rule 14: "14. IF YOU DO QUIT, SCALE DOWN, NOT UP"
 
   dodged the strike - fall back on tile, attacker will move to your old position.
 
+Something in between of the Banner Saga, Hoplite, Auro and AoD
 
 
 ---------------------------------
 
 Ok, that was just the plan. What's actually done already?
+
+Here's the repo: https://github.com/ozkriff/zemeroth
+
+.. image:: http://i.imgur.com/EEtIxGp.png
+  :alt: old screenshot
+
+Some fresh videos:
 
 .. raw:: html
 
@@ -127,6 +141,13 @@ Movement interruption:
 
   <div class="youtube"><iframe src="https://www.youtube.com/embed/nWrnVCdNZDU" frameborder="0"></iframe></div>
 
+
+Imgur devlog: http://imgur.com/a/SMVqO
+
+Works on android:
+
+.. image:: http://i.imgur.com/T9EgPR1.png
+  :alt: zemeroth on android photo
 
 
 Häte2d - custom 2d engine. yeah, i’m fool who don’t learn anything :(
@@ -140,16 +161,22 @@ TODO: umlaut, love2d, ggez
 
 reuse of ZoC’s codebase - not from scratch
 
-scene action system - based on cocos’s one and something I did
+------
+
+.. figure:: http://i.imgur.com/9A6GnDK.jpg
+  :alt: data loop
+  
+^ scene action system - based on cocos’s one and something I did
 in dead ZoC’s devbranch.
+
 btw, piston has something similar.
+
+------
 
 only two type of units for now
 reaction attacks, movement interruptions, hitpoints, AI
 
 basic UI with panels
 
-github: https://github.com/ozkriff/zemeroth
-
-@ozkriff on twitter: https://twitter.com/ozkriff
+So, subscribe to updates: https://twitter.com/ozkriff ;-)
 
