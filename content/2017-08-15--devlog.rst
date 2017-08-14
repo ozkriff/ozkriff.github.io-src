@@ -1,0 +1,155 @@
+
+ZoC is dead. Long life Zemeroth.
+################################
+
+:tags: devlog, zoc, zemeroth
+
+
+sorry for the big pos (TODO: I can’t split this into two parts, right?)
+I should have written about ZoC’s death a month ago or so, but at that
+time I wasn’t sure about zemeroth.
+And zemeroth is partly implemented, so it seems strange not to tell about it.
+
+TODO: link to the tweet
+
+I’ll try not to bloat the text without need but be ready to scroll a lot
+(mostly because of images :-D)
+
+
+
+ZoC's is dead, baby. ZoC is dead.
+---------------------------------
+
+.. image:: http://i.imgur.com/cONHdvy.png
+  :alt: scene from Pulp Fiction
+
+Soo, yeah, `Zone of Control <https://github.com/ozkriff/zoc>`_ project
+is officially discontinued.
+Sorry, friends.
+
+https://twitter.com/ozkriff/status/885502939204395008
+
+Why?
+
+- I had overestimated my skills + my views on what's is
+  important for strategic games have changed
+
+- I’ve greeeeatly overestimated my resources/abilities
+  lost the hope to ever finish the game
+  lost motivation to continue
+
+
+- visual scale problems - unit models are too small and there’re too much of
+  everything on the screen. this problem’s especially bad on the android phone’s
+
+
+- three-slot system is a strange beast (TODO: explain what is it)
+
+- I had no idea what exactly I can feature-cut.
+
+
+- follow up on slots system: no idea how to make some friendly user intarface.
+  yes, two panels is ugly. context menu is ugly too.
+
+- strategic mode? oh oh
+
+
+.. image:: http://i.imgur.com/CKczL44.png
+  :alt: blob shadows
+
+^ nice blob shadows
+
+(TODO: were there anything interedting more in that branch?)
+
+.. image:: http://i.imgur.com/F6qf4FN.png
+  :alt: first-person tactics game, ha
+
+^ first person tactics, ha :)
+
+
+
+Zemeroth
+--------
+
+TODO: insert second mockup picture
+
+I’d spent a few months in the end of the  sprint (TODO concrete months)
+thinking about do i still want to make rusty games and what’s important.
+
+Beautiful artiacle:
+http://makegames.tumblr.com/post/1136623767/finishing-a-game
+
+Totally ignored rule 3
+
+Rule 14: "14. IF YOU DO QUIT, SCALE DOWN, NOT UP"
+
+
+- android support from the begining of the development
+
+- simple vector 2d graphics with just 2-5 sprites per unit
+
+  The style was born from my old experiments with 2d ZoC:
+
+  .. image:: http://i.imgur.com/NNQkC1e.png
+    :alt: old experiments with 2d ZoC
+
+- single player only, intentionally stupid and predictable AI
+
+- short game session (under an hour)
+
+- reaction attacks and action’s interruption
+
+  spearman can control a big territory but can’t really be an attacking force
+
+- high dynamic and a lot of movement
+
+  most of the commands must result in unit movement as a side effect
+
+  jump & slash
+
+  throw around fighters after big blows
+
+  dodged the strike - fall back on tile, attacker will move to your old position.
+
+
+
+---------------------------------
+
+Ok, that was just the plan. What's actually done already?
+
+.. raw:: html
+
+  <div class="youtube"><iframe src="https://www.youtube.com/embed/MVt_UOnmdKI" frameborder="0"></iframe></div>
+
+Movement interruption:
+
+.. raw:: html
+
+  <div class="youtube"><iframe src="https://www.youtube.com/embed/nWrnVCdNZDU" frameborder="0"></iframe></div>
+
+
+
+Häte2d - custom 2d engine. yeah, i’m fool who don’t learn anything :(
+
+In the begining of hate I didn't know that ggez is mature.
+TODO: link to discussion on reddit
+
+https://www.reddit.com/r/rust/comments/6nri26/whats_everyone_working_on_this_week_292017/dkbtzqv/
+
+TODO: umlaut, love2d, ggez
+
+reuse of ZoC’s codebase - not from scratch
+
+scene action system - based on cocos’s one and something I did
+in dead ZoC’s devbranch.
+btw, piston has something similar.
+
+only two type of units for now
+reaction attacks, movement interruptions, hitpoints, AI
+
+basic UI with panels
+
+github: https://github.com/ozkriff/zemeroth
+
+@ozkriff on twitter: https://twitter.com/ozkriff
+
