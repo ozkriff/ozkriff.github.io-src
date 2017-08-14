@@ -6,17 +6,18 @@ This Month in ZoC - 2017.01.24
 
 (copy of the 1st post from https://users.rust-lang.org/t/this-month-in-zone-of-control/6993)
 
-# This Month in ZoC - 2017.01.24
-
-Hi, everyone :smiley:
+Hi, everyone! :)
  
 It has been four months since the first post, sorry.
 I'm struggling to find enough time for the project plus I was busy with
-[porting glutin to winit](https://github.com/tomaka/glutin/issues/813)
+`porting glutin to winit <https://github.com/tomaka/glutin/issues/813>`_
 for about a month around October.
 
 
-## [Helicopters](https://github.com/ozkriff/zoc/issues/111)
+Helicopters
+-----------
+
+https://github.com/ozkriff/zoc/issues/111
 
 .. image:: http://i.imgur.com/cW4Sr9q.png
   :alt: helicopters
@@ -55,18 +56,22 @@ The upper-left corner displays the amount of reinforcement
 points that current player has and their per-turn increment:
 
 .. image:: http://i.imgur.com/jqlxAZY.png
+  :alt: Reinforcements
 
 Reinforcement sectors are marked by two circles in player's color:
 
 .. image:: http://i.imgur.com/bFrBAwN.png
+  :alt: Circle marks
 
 There's an additional "reinforcements" item in the context menu: when clicked it opens a list of available units:
 
 .. image:: http://i.imgur.com/UNpnteQ.png
+  :alt: Main context menu
 
 This opens a list of available units:
 
 .. image:: http://i.imgur.com/3Kz0l5W.png
+  :alt: Context sub-menu
 
 There must be enough reinforcement points and enough room for the unit. Units have no move or attack points at their first turn.
 
@@ -80,10 +85,12 @@ After the implementation of reinforcements it became possible to add map selecti
 You can change map by clicking on the current map's name in the main menu screen:
 
 .. image:: http://i.imgur.com/AAN510s.png
+  :alt: Main menu
 
 It was mostly needed for testing/debugging purposes so most of the maps look like this for now:
 
 .. image:: http://i.imgur.com/4UnfdmC.png
+  :alt: Debugging map
 
 Tests however are in early prototype phase and are not in the repo yet. Right now they use special maps but I intend to implement some ASCII-DSL like the following:
 
@@ -118,6 +125,7 @@ Android is totally different story with all its SDKs/NDKs and is still built and
 Now destroyed vehicles leave wreckages.
 
 .. image:: http://i.imgur.com/0fQW8jQ.png
+  :alt: Wreckages
 
 They only obstruct movement for now. Later they'll be used by infantry as protective covering.
 
@@ -171,6 +179,7 @@ This change caused some refactorings in the codebase:
 - Added "zoom in/out" buttons:
 
   .. image:: http://i.imgur.com/G5E2Va2.png
+    :alt: zoom in-out buttons
 
   because it's simpler than handling multi-touch gestures on android :)
 
@@ -178,10 +187,12 @@ This change caused some refactorings in the codebase:
 ## Gameplay screenshots
 
 .. image:: http://i.imgur.com/DxfBok2.png
+  :alt: gameplay screenshot 1
 
 .. image:: http://i.imgur.com/V4ZPCrT.png
+  :alt: gameplay screenshot 2
 
 
 I'll try to release next issue of TMIZ by the end of February.
 
-[@ozkriff](https://twitter.com/ozkriff)
+[@ozkriff on Twitter](https://twitter.com/ozkriff)
