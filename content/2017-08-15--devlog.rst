@@ -16,42 +16,45 @@ Sorry, friends.
 
 ------
 
-Why am I killing it?
+Why have I killed it?
 I've overestimated my resources/skills and got totally overwhelmed by the scope:
 
 - I can't see the finish line and had no idea what exactly I can feature-cut.
-
   Strategic mode? Sane UI? Networking? Skeletal animations? Particles?
-  
-  Oh-oh, I don't beleive that ZoC could be cool without any of these (and many more) features.
+  Oh-oh, I don't believe that ZoC could be cool without any of these (and many more) features.
 
-  Lost the hope to ever finish the game and a motivation to continue.
+  This situation totally drained all my motivation to continue the project.
 
 - Slot system is a strange beast (TODO: explain what is it)
 
-  follow up on slots system: no idea how to make some friendly user intarface.
-  yes, two panels is ugly. context menu is ugly too.
+  No idea how to make some friendly user interface.
+  Two panels (for friends and enemies) solution is ugly.
+  Context menu is ugly too.
 
-  It created some problems with visual scale:
-  unit models are too small and there’re too much of everything on the screen.
-  It's especially bad on the android as the screen is small.
+  Slots created some problems with visual scale:
+  infantry models are just too small, especially on phone’s screen.
 
 - `Maybe I should make an FPS? No, that's stupid. <http://i.imgur.com/F6qf4FNl.png>`_
+  Ahem, no, that was just a joke.
 
-Ahem, Another reason is that my views on what's is important for strategic games
+Another reason is that my views on what's is important for strategic games
 have changed in the last several years (опиши)
 
-Smaller games, singleplayer, less content, stupid AI - это же все уменьшает масштаб проекта.
+Smaller games, single player, less content, stupid AI - это же все уменьшает масштаб проекта.
 
 http://keithburgun.net/articles/
 
 ------
 
-So, some final screenshots:
+So, some farewell screenshots:
 
 .. image:: http://i.imgur.com/TYoAVj6m.png
   :target: http://i.imgur.com/TYoAVj6.png
-  :alt: ZoC gameplay screenshot
+  :alt: ZoC gameplay screenshot 1
+
+.. image:: http://i.imgur.com/V4ZPCrTm.png
+  :target: http://i.imgur.com/V4ZPCrT.png
+  :alt: ZoC gameplay screenshot 2
 
 .. image:: http://i.imgur.com/CKczL44m.png
   :target: http://i.imgur.com/CKczL44.png
@@ -65,13 +68,14 @@ Goodbye, my old friend Zone of Control.
 Zemeroth
 --------
 
-I’d spent a few months in the end of the spring (TODO concrete months)
-thinking about do i still want to make rusty games and what’s important.
+There’s one great article:
 
-Beautiful article:
 http://makegames.tumblr.com/post/1136623767/finishing-a-game
 
-    Rule 14: "14. IF YOU DO QUIT, SCALE DOWN, NOT UP"
+I have re-read it a dozen times.
+In this context, the most important rule is:
+
+    Rule 14: IF YOU DO QUIT, SCALE DOWN, NOT UP
 
     Okay, sometimes it is time to call it quits.
     Maybe there’s just no way you’ll ever finish, and what you have is too big a mess to cut anything out.
@@ -85,43 +89,37 @@ http://makegames.tumblr.com/post/1136623767/finishing-a-game
     “My SKILLS are improving! I’m learning from my failure,” is a common excuse.
     But I think this is why it’s important to treat finishing as a skill, too.
 
-TODO: чуть подробнее про статью
+So I need a new project, which needs to share some of the core principles (ценности)
+with ZoC, but it should be much smaller also.
 
-Initial Zemeroth's svg mockup:
+
+I’ve spent May and June
+(in the heavy existential crisis)
+resting and thinking about do i still want to make rusty games and what’s important.
+
+^ TODO: думая о том, что именно делать дальше.
+
+
+
+- Single player only;
+- 3-6 fighters under player’s control;
+- Intentionally stupid and predictable AI;
+- Small maps without scrolling;
+- Short game session (under an hour);
+- Simple vector 2d graphics with just 2-5 sprites per unit.
+  Something like `my old experiments with 2d ZoC <http://i.imgur.com/NNQkC1e.png>`_;
+- Reaction attacks and action’s interruption;
+- High dynamic and lots of movement;
+
+Something in between of the Banner Saga, Hoplite, Auro and AoD
+
+(TODO: ^^^ add links to projects)
+
+Initial svg mockup:
 
 .. image:: http://i.imgur.com/L8gaqaP.png
   :alt: inscape mockup
 
-What are the main points?
-What are the differences from ZoC?
-
-TODO: не надо так подробно тут, только общее видение в паре предложений.
-
-- simple vector 2d graphics with just 2-5 sprites per unit
-
-  The style was born from `my old experiments with 2d ZoC <http://i.imgur.com/NNQkC1e.png>`_.
-
-- single player only, intentionally stupid and predictable AI
-
-- short game session (under an hour)
-
-- reaction attacks and action’s interruption
-
-  spearman can control a big territory but can’t really be an attacking force
-
-- high dynamic and a lot of movement
-
-  most of the commands must result in unit movement as a side effect
-
-  jump & slash
-
-  throw around fighters after big blows
-
-  dodged the strike - fall back on tile, attacker will move to your old position.
-
-(TODO: add links to projects)
-
-Something in between of the Banner Saga, Hoplite, Auro and AoD
 
 ------
 
@@ -149,7 +147,7 @@ Recent "gameplay" video:
 
 Only two type of units for now - basic infantry.
 
-Units have a few hitpoints.
+Units have a few hit points.
 
 Every unit has two active attack points and one reactive AP.
 
@@ -170,14 +168,18 @@ Works on android:
 
 ------
 
-Häte2d - custom 2d engine. yeah, i’m fool who don’t learn anything :(
-
-
-Totally ignored rule 3 from hot-to-finish-a-game article:
+I’m a fool who don’t learn anything and
+totally ignored rule 3 from hot-to-finish-a-game article:
 
     3. DON’T ROLL YOUR OWN TECH IF YOU DON’T HAVE TO
 
-In the begining of hate I didn't know that ggez is mature.
+Say hello to yet another Rust 2d engine: Häte2d :-D (TODO: ссылкку поставь)
+
+It’s not intended for general use by anyone.
+It doesn’t even have keyboard input yet.
+Maybe, later.
+
+In the beginning of hate I didn't know that ggez is mature.
 TODO: link to discussion on reddit
 
 https://www.reddit.com/r/rust/comments/6nri26/whats_everyone_working_on_this_week_292017/dkbtzqv/
@@ -196,7 +198,7 @@ Architecture is mostly taken from ZoC (minus networking and multiple game states
   :alt: data loop
 
 Scene action system - based on cocos’s one and something I did
-in dead ZoC’s devbranch:
+in dead ZoC’s dev branch:
 
 .. image:: http://i.imgur.com/ajv6ILN.png
   :alt: example of scene actions
