@@ -16,12 +16,14 @@ Sorry, friends.
 
 ------
 
-Why am I killing ZoC?
+Why am I killing it?
 I've overestimated my resources/skills and got totally overwhelmed by the scope:
 
 - I can't see the finish line and had no idea what exactly I can feature-cut.
 
-  Strategic mode? Sane UI? Networking? Skeletal animations? Particles? oh-oh
+  Strategic mode? Sane UI? Networking? Skeletal animations? Particles?
+  
+  Oh-oh, I don't beleive that ZoC could be cool without any of these (and many more) features.
 
   Lost the hope to ever finish the game and a motivation to continue.
 
@@ -39,25 +41,29 @@ I've overestimated my resources/skills and got totally overwhelmed by the scope:
 Another reason is that my views on what's is important for strategic games
 have changed in the last several years (опиши)
 
+Smaller games, singleplayer, less content, stupid AI - это же все уменьшает масштаб проекта.
+
 http://keithburgun.net/articles/
 
 ------
 
-Some final screenshots os ZoC:
+Some final screenshots:
 
-.. image:: http://i.imgur.com/CKczL44.png
+.. image:: http://i.imgur.com/TYoAVj6m.png
+  :target: http://i.imgur.com/TYoAVj6.png
+  :alt: ZoC gameplay screenshot
+
+.. image:: http://i.imgur.com/CKczL44m.png
+  :target: http://i.imgur.com/CKczL44.png
   :alt: blob shadows
 
-...And that it. Goodbye, my old friend Zone of Control.
+...And that it.
+
+Goodbye, my old friend Zone of Control.
 
 
 Zemeroth
 --------
-
-.. image:: http://i.imgur.com/L8gaqaP.png
-  :alt: inscape mockup
-
-^ initial Zemeroth's svg mockup
 
 I’d spent a few months in the end of the  sprint (TODO concrete months)
 thinking about do i still want to make rusty games and what’s important.
@@ -69,16 +75,19 @@ Totally ignored rule 3 (TODO: движок описан позже, так чт�
 
     Rule 14: "14. IF YOU DO QUIT, SCALE DOWN, NOT UP"
 
-What are the main points?
+Initial Zemeroth's svg mockup:
 
+.. image:: http://i.imgur.com/L8gaqaP.png
+  :alt: inscape mockup
+
+What are the main points?
 What are the differences from ZoC?
+
+TODO: не надо так подробно тут, только общее видение в паре предложений.
 
 - simple vector 2d graphics with just 2-5 sprites per unit
 
-  The style was born from my old experiments with 2d ZoC:
-
-  .. image:: http://i.imgur.com/NNQkC1e.png
-    :alt: old experiments with 2d ZoC
+  The style was born from `my old experiments with 2d ZoC <http://i.imgur.com/NNQkC1e.png>`_.
 
 - single player only, intentionally stupid and predictable AI
 
@@ -98,8 +107,9 @@ What are the differences from ZoC?
 
   dodged the strike - fall back on tile, attacker will move to your old position.
 
-Something in between of the Banner Saga, Hoplite, Auro and AoD
+TODO: add links to projects
 
+Something in between of the Banner Saga, Hoplite, Auro and AoD
 
 ---------------------------------
 
@@ -108,7 +118,7 @@ Ok, that was just the plan. What's actually done already?
 Here's the repo: https://github.com/ozkriff/zemeroth
 
 .. image:: http://i.imgur.com/EEtIxGp.png
-  :alt: old screenshot
+  :alt: old Zemeroth's screenshot
 
 Video:
 
@@ -140,7 +150,7 @@ reuse of ZoC’s codebase - not from scratch
 
 ------
 
-.. image:: http://i.imgur.com/9A6GnDK.jpg
+.. image:: http://i.imgur.com/9A6GnDKl.jpg
   :alt: data loop
 
 ^ scene action system - based on cocos’s one and something I did
@@ -150,7 +160,7 @@ in dead ZoC’s devbranch.
 
 ------
 
-only two type of units for now
+Only two type of units for now
 reaction attacks, movement interruptions, hitpoints, AI
 
 basic UI with text/image buttons and panels.
