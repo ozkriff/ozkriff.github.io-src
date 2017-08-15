@@ -5,23 +5,13 @@ ZoC is dead. Long life Zemeroth.
 :tags: devlog, zoc, zemeroth
 
 
-sorry for the big pos (TODO: I can’t split this into two parts, right?)
-I should have written about ZoC’s death a month ago or so, but at that
-time I wasn’t sure about zemeroth.
-And zemeroth is partly implemented, so it seems strange not to tell about it.
-
-TODO: link to the tweet
-
-I’ll try not to bloat the text without need but be ready to scroll a lot
-(mostly because of images :-D)
-
-
-
-ZoC's is dead, baby. ZoC is dead.
----------------------------------
+Sooo, yeah, ZoC's dead. :(
 
 .. image:: http://i.imgur.com/cONHdvy.png
   :alt: scene from Pulp Fiction
+
+^ ZoC's is dead, baby. ZoC is dead.
+
 
 Soo, yeah, `Zone of Control <https://github.com/ozkriff/zoc>`_ project
 is officially discontinued.
@@ -159,13 +149,15 @@ https://www.reddit.com/r/rust/comments/6nri26/whats_everyone_working_on_this_wee
 
 TODO: umlaut, love2d, ggez
 
+(Name and umlauts is a reference to Love2d framework. just in case)
+
 reuse of ZoC’s codebase - not from scratch
 
 ------
 
-.. figure:: http://i.imgur.com/9A6GnDK.jpg
+.. image:: http://i.imgur.com/9A6GnDK.jpg
   :alt: data loop
-  
+
 ^ scene action system - based on cocos’s one and something I did
 in dead ZoC’s devbranch.
 
