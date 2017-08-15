@@ -36,9 +36,9 @@ I've overestimated my resources/skills and got totally overwhelmed by the scope:
   unit models are too small and there’re too much of everything on the screen.
   It's especially bad on the android as the screen is small.
 
-------
+- `Maybe I should make an FPS? No, that's stupid. <http://i.imgur.com/F6qf4FNl.png>`_
 
-Another reason is that my views on what's is important for strategic games
+Ahem, Another reason is that my views on what's is important for strategic games
 have changed in the last several years (опиши)
 
 Smaller games, singleplayer, less content, stupid AI - это же все уменьшает масштаб проекта.
@@ -47,7 +47,7 @@ http://keithburgun.net/articles/
 
 ------
 
-Some final screenshots:
+So, some final screenshots:
 
 .. image:: http://i.imgur.com/TYoAVj6m.png
   :target: http://i.imgur.com/TYoAVj6.png
@@ -65,15 +65,27 @@ Goodbye, my old friend Zone of Control.
 Zemeroth
 --------
 
-I’d spent a few months in the end of the  sprint (TODO concrete months)
+I’d spent a few months in the end of the spring (TODO concrete months)
 thinking about do i still want to make rusty games and what’s important.
 
 Beautiful article:
 http://makegames.tumblr.com/post/1136623767/finishing-a-game
 
-Totally ignored rule 3 (TODO: движок описан позже, так что перенеси куда-то вниз)
-
     Rule 14: "14. IF YOU DO QUIT, SCALE DOWN, NOT UP"
+
+    Okay, sometimes it is time to call it quits.
+    Maybe there’s just no way you’ll ever finish, and what you have is too big a mess to cut anything out.
+    Maybe the rest of your team has quit already.
+    My hope in writing this list is to help people avoid this possibility,
+    but hey, maybe you’re just coming off of such a project.
+    And sometimes... shit just happens.
+
+    If there’s no salvaging it, at least make sure that you scale down your next project.
+    It’s easy to set your sights higher and higher, even as your projects become less and less finished.
+    “My SKILLS are improving! I’m learning from my failure,” is a common excuse.
+    But I think this is why it’s important to treat finishing as a skill, too.
+
+TODO: чуть подробнее про статью
 
 Initial Zemeroth's svg mockup:
 
@@ -107,9 +119,15 @@ TODO: не надо так подробно тут, только общее ви
 
   dodged the strike - fall back on tile, attacker will move to your old position.
 
-TODO: add links to projects
+(TODO: add links to projects)
 
 Something in between of the Banner Saga, Hoplite, Auro and AoD
+
+------
+
+So, yeah, I'm starting over _again_. What will be different this time?
+
+(TODO: или не надо это расписывать?)
 
 ---------------------------------
 
@@ -117,14 +135,31 @@ Ok, that was just the plan. What's actually done already?
 
 Here's the repo: https://github.com/ozkriff/zemeroth
 
+Right now it looks like this:
+
 .. image:: http://i.imgur.com/EEtIxGp.png
   :alt: old Zemeroth's screenshot
 
-Video:
+Recent "gameplay" video:
 
 .. raw:: html
 
   <div class="youtube"><iframe src="https://www.youtube.com/embed/MVt_UOnmdKI" frameborder="0"></iframe></div>
+
+
+Only two type of units for now - basic infantry.
+
+Units have a few hitpoints.
+
+Every unit has two active attack points and one reactive AP.
+
+Reaction attacks, movement interruptions - the cornerstone of the game.
+
+Basic AI - move closer and attack.
+
+basic UI with text/image buttons and panels.
+
+-------
 
 Works on android:
 
@@ -136,6 +171,11 @@ Works on android:
 ------
 
 Häte2d - custom 2d engine. yeah, i’m fool who don’t learn anything :(
+
+
+Totally ignored rule 3 from hot-to-finish-a-game article:
+
+    3. DON’T ROLL YOUR OWN TECH IF YOU DON’T HAVE TO
 
 In the begining of hate I didn't know that ggez is mature.
 TODO: link to discussion on reddit
@@ -150,20 +190,18 @@ reuse of ZoC’s codebase - not from scratch
 
 ------
 
+Architecture is mostly taken from ZoC (minus networking and multiple game states):
+
 .. image:: http://i.imgur.com/9A6GnDKl.jpg
   :alt: data loop
 
-^ scene action system - based on cocos’s one and something I did
-in dead ZoC’s devbranch.
+Scene action system - based on cocos’s one and something I did
+in dead ZoC’s devbranch:
 
-(`btw, piston has something similar <https://docs.rs/piston2d-sprite/0.36.0/sprite/enum.Animation.html>`_)
+.. image:: http://i.imgur.com/ajv6ILN.png
+  :alt: example of scene actions
 
-------
-
-Only two type of units for now
-reaction attacks, movement interruptions, hitpoints, AI
-
-basic UI with text/image buttons and panels.
+(`Btw, piston has something similar <https://docs.rs/piston2d-sprite/0.36.0/sprite/enum.Animation.html>`_)
 
 ------
 
