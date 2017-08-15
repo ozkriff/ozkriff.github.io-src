@@ -5,57 +5,50 @@ ZoC is dead. Long life Zemeroth.
 :tags: devlog, zoc, zemeroth
 
 
-Sooo, yeah, ZoC's dead. :(
-
-.. image:: http://i.imgur.com/cONHdvy.png
-  :alt: scene from Pulp Fiction
-
-^ ZoC's is dead, baby. ZoC is dead.
-
-
 Soo, yeah, `Zone of Control <https://github.com/ozkriff/zoc>`_ project
 is officially discontinued.
 Sorry, friends.
 
-https://twitter.com/ozkriff/status/885502939204395008
+.. image:: http://i.imgur.com/cONHdvy.png
+  :alt: scene from Pulp Fiction
 
-Why?
+^ "ZoC's is dead, baby. ZoC is dead."
 
-- I had overestimated my skills + my views on what's is
-  important for strategic games have changed
+------
 
-- I’ve greeeeatly overestimated my resources/abilities
-  lost the hope to ever finish the game
-  lost motivation to continue
+Why am I killing ZoC?
+I've overestimated my resources/skills and got totally overwhelmed by the scope:
 
+- I can't see the finish line and had no idea what exactly I can feature-cut.
 
-- visual scale problems - unit models are too small and there’re too much of
-  everything on the screen. this problem’s especially bad on the android phone’s
+  Strategic mode? Sane UI? Networking? Skeletal animations? Particles? oh-oh
 
+  Lost the hope to ever finish the game and a motivation to continue.
 
-- three-slot system is a strange beast (TODO: explain what is it)
+- Slot system is a strange beast (TODO: explain what is it)
 
-- I had no idea what exactly I can feature-cut.
-
-
-- follow up on slots system: no idea how to make some friendly user intarface.
+  follow up on slots system: no idea how to make some friendly user intarface.
   yes, two panels is ugly. context menu is ugly too.
 
-- strategic mode? oh oh
+  It created some problems with visual scale:
+  unit models are too small and there’re too much of everything on the screen.
+  It's especially bad on the android as the screen is small.
 
+------
+
+Another reason is that my views on what's is important for strategic games
+have changed in the last several years (опиши)
+
+http://keithburgun.net/articles/
+
+------
+
+Some final screenshots os ZoC:
 
 .. image:: http://i.imgur.com/CKczL44.png
   :alt: blob shadows
 
-^ nice blob shadows
-
-(TODO: were there anything interedting more in that branch?)
-
-.. image:: http://i.imgur.com/F6qf4FN.png
-  :alt: first-person tactics game, ha
-
-^ first person tactics, ha :)
-
+...And that it. Goodbye, my old friend Zone of Control.
 
 
 Zemeroth
@@ -64,12 +57,12 @@ Zemeroth
 .. image:: http://i.imgur.com/L8gaqaP.png
   :alt: inscape mockup
 
-TODO: insert second mockup picture
+^ initial Zemeroth's svg mockup
 
 I’d spent a few months in the end of the  sprint (TODO concrete months)
 thinking about do i still want to make rusty games and what’s important.
 
-Beautiful artiacle:
+Beautiful article:
 http://makegames.tumblr.com/post/1136623767/finishing-a-game
 
 Totally ignored rule 3 (TODO: движок описан позже, так что перенеси куда-то вниз)
@@ -77,8 +70,6 @@ Totally ignored rule 3 (TODO: движок описан позже, так чт�
     Rule 14: "14. IF YOU DO QUIT, SCALE DOWN, NOT UP"
 
 What are the main points?
-
-- android support from the begining of the development
 
 What are the differences from ZoC?
 
@@ -119,26 +110,20 @@ Here's the repo: https://github.com/ozkriff/zemeroth
 .. image:: http://i.imgur.com/EEtIxGp.png
   :alt: old screenshot
 
-Some fresh videos:
+Video:
 
 .. raw:: html
 
   <div class="youtube"><iframe src="https://www.youtube.com/embed/MVt_UOnmdKI" frameborder="0"></iframe></div>
-
-Movement interruption:
-
-.. raw:: html
-
-  <div class="youtube"><iframe src="https://www.youtube.com/embed/nWrnVCdNZDU" frameborder="0"></iframe></div>
-
-
-Imgur devlog: http://imgur.com/a/SMVqO
 
 Works on android:
 
 .. image:: http://i.imgur.com/T9EgPR1.png
   :alt: zemeroth on android photo
 
+^ android support from the begining of the development (наследство зока)
+
+------
 
 Häte2d - custom 2d engine. yeah, i’m fool who don’t learn anything :(
 
@@ -161,14 +146,18 @@ reuse of ZoC’s codebase - not from scratch
 ^ scene action system - based on cocos’s one and something I did
 in dead ZoC’s devbranch.
 
-btw, piston has something similar.
+(`btw, piston has something similar <https://docs.rs/piston2d-sprite/0.36.0/sprite/enum.Animation.html>`_)
 
 ------
 
 only two type of units for now
 reaction attacks, movement interruptions, hitpoints, AI
 
-basic UI with panels
+basic UI with text/image buttons and panels.
 
-So, subscribe to updates: https://twitter.com/ozkriff ;-)
+------
+
+Btw, here's Imgur devlog - http://imgur.com/a/SMVqO - that I'm trying to keep updated.
+
+And some instant updates on twitter: https://twitter.com/ozkriff ;-)
 
