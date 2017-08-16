@@ -21,7 +21,9 @@ I've overestimated my resources/skills and got totally overwhelmed by the scope:
 
 - I can't see the finish line and had no idea what exactly I can feature-cut.
   Strategic mode? Sane UI? Networking? Skeletal animations? Particles?
-  Oh-oh, I don't believe that ZoC could be cool without any of these (and some others) features.
+  Ships? Aircrafts? Tens of unit types?
+  Oh-oh, I don't believe that ZoC could be really cool without
+  any of these (and some others) features.
 
   This situation totally drained all my motivation to continue the project.
 
@@ -160,43 +162,41 @@ Android is supported from the beginning of the development (as I’m reusing ZoC
 Speaking about reusing ZoC’s codebase…
 
 I’m a fool who don’t learn anything and
-totally ignored rule 3 from finishing-a-game article:
+totally ignored the third rule from finishing-a-game article:
 
     3. DON’T ROLL YOUR OWN TECH IF YOU DON’T HAVE TO
 
-Say hello to yet another Rust 2d engine: Häte2d: https://docs.rs/hate :-D
+Say hello to yet another Rust 2d engine: `Häte2d <https://docs.rs/hate>`_ :-D
 
-(Name is a reference to Love2d framework. just in case)
+(Name is a silly reference to `LÖVE framework <https://love2d.org>`_. just in case)
 
-It’s not intended for general use by anyone yet and it’s not a goal.
-It doesn’t even have keyboard input yet!
+NOTE: Häte isn’t a general-purpose game engine (at least right now) and it’s not my goal.
+Just a simple 2d engine for Zemeroth’s needs.
 
-In the beginning of hate I didn't know that ggez is mature.
-TODO: link to discussion on reddit
-TODO: да и в целом как-то получше бы объяснить
-
-https://www.reddit.com/r/rust/comments/6nri26/whats_everyone_working_on_this_week_292017/dkbtzqv/
-
-TODO: umlaut, love2d, ggez
+Why I didn’t use geez?
+See `this reddit thread <https://www.reddit.com/r/rust/comments/6nri26//dkbtzqv>`_.
 
 ------
 
-Zemeroth’s architecture is mostly taken from ZoC (minus networking and multiple game states):
+Zemeroth’s architecture is mostly taken from ZoC (minus the networking and multiple game states):
 
 .. image:: http://i.imgur.com/9A6GnDKl.jpg
   :alt: data loop
 
-Scene action system - based on cocos’s one and something I did
+Scene action system is based on cocos’s one and something I did
 in dead ZoC’s dev branch:
 
 .. image:: http://i.imgur.com/ajv6ILN.png
   :alt: example of scene actions
 
-(`Btw, piston has something similar <https://docs.rs/piston2d-sprite/0.36.0/sprite/enum.Animation.html>`_)
+(`btw, piston has something similar <https://docs.rs/piston2d-sprite/0.36.0/sprite/enum.Animation.html>`_)
 
 ------
 
-Btw, here's full Imgur-devlog which I'm trying to keep updated: http://imgur.com/a/SMVqO
+That’s all for today :)
+
+In case you're wondering, here's full Imgur-devlog
+which I'm trying to keep updated: http://imgur.com/a/SMVqO
 
 And you can subscribe to instant updates on twitter: https://twitter.com/ozkriff ;-)
 
