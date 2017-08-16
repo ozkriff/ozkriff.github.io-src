@@ -1,18 +1,18 @@
 
-О журнале
-#########
+About
+#####
 
 :slug: about
 
 
-Это моя попытка вести бложик о том, как я пытаюсь написать игру
-- https://github.com/ozkriff/zoc.
+Hi, my name is Andrey Lesnikov (@ozkriff).
 
-На всякий предупреждаю, что без зазрения совести буду редактировать
-записи - если вы чего-то увидели, а потом оно пропало, то посмотрите в
-`исходнике блога`_, там есть история изменений.
+I’m a system programmer, 🦀rustacean, (hobby) game developer.
 
+Mostly experienced in: Rust, C++, C, Lua and Python.
 
-.. _исходнике блога: https://github.com/ozkriff/ozkriff.github.io-src
+GMT+3
 
-.. vim: set tabstop=4 shiftwidth=4 softtabstop=4 expandtab:
+———————
+
+You can find blog's source here: https://github.com/ozkriff/ozkriff.github.io-src

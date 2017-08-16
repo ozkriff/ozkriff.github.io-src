@@ -8,13 +8,13 @@ PLUGINS = ["tag_cloud"]
 STATIC_PATHS = ['images', 'pdfs']
 
 AUTHOR = u'ozkriff'
-SITENAME = u'Зона Контроля'
+SITENAME = u'ozkriff\'s devlog'
 SITEURL = 'http://ozkriff.github.io'
 
 TIMEZONE = 'Europe/Moscow'
 
-LOCALE = 'ru_RU.UTF-8'
-DEFAULT_LANG = u'ru'
+LOCALE = 'en_US.UTF-8'
+DEFAULT_LANG = u'en'
 
 FILENAME_METADATA = '(?P<slug>(?P<date>\d{4}-\d{2}-\d{2})--.*)'
 
@@ -22,12 +22,12 @@ EXTRA_PATH_METADATA = {
     'images/favicon.png': {'path': 'favicon.png'},
 }
 
-DEFAULT_DATE_FORMAT = '%a. %d %B %Y'
+DEFAULT_DATE_FORMAT = '%Y.%m.%d'
 
 SECTIONS = [
-    (u'Архив', 'archives.html'),
-    (u'Метки', 'tags.html'),
-    (u'О журнале', 'about.html')
+    (u'archives', 'archives.html'),
+    (u'tags', 'tags.html'),
+    (u'about', 'about.html')
 ]
 
 # Cleaner page links
@@ -35,10 +35,11 @@ PAGE_URL = '{slug}.html'
 PAGE_SAVE_AS = '{slug}.html'
 
 DISQUS_SITENAME = "ozkriffgithubio"
+TWITTER_USERNAME = 'ozkriff'
 LINKEDIN_URL = 'https://www.linkedin.com/profile/view?id=AAMAABfeM3EBZh_SzJlI-iSEgVAs12f9d0S6ues'
-GITHUB_URL = 'http://github.com/ozkriff'
+GITHUB_URL = 'https://github.com/ozkriff'
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = 20
 
 THEME = "theme"
 PDF_GENERATOR = False
