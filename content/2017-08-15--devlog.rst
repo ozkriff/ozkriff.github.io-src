@@ -27,13 +27,13 @@ I've overestimated my resources/skills and got totally overwhelmed by the scope:
 
   This situation totally drained all my motivation to continue the project.
 
-- Slot system is a strange beast (TODO: explain what is it)
+- Slot system (multiple units per tile with fixed positions) is a strange beast.
 
-  No idea how to make some friendly user interface.
-  Two panels (for friends and enemies) solution is ugly.
-  Context menu is ugly too.
+  1) No idea how to make some friendly user interface:
+  two panels (for friends and enemies) solution is ugly,
+  context menus are not cool too.
 
-  Slots created some problems with visual scale:
+  2) Slots create problems with visual scale:
   infantry models are just too small, especially on phone’s screen.
 
 - `Maybe I should make an FPS? No, that's stupid. <http://i.imgur.com/F6qf4FNl.png>`_
@@ -181,7 +181,7 @@ totally ignored the third rule from finishing-a-game article:
 
 Say hello to yet another Rust 2d engine: `Häte2d <https://docs.rs/hate>`_ :-D
 
-(Name is a silly reference to `LÖVE framework <https://love2d.org>`_. just in case)
+Name is a silly reference to `LÖVE framework <https://love2d.org>`_ (just in case).
 
 NOTE: Häte isn’t a general-purpose game engine (at least right now) and it’s not my goal.
 Just a simple 2d engine for Zemeroth’s needs.
@@ -213,13 +213,9 @@ Quote from reddit:
     - Right now ggez uses SDL2 (and it's not easy to replace it with glutin)
       but I really want to use cargo-apk.
 
-See `this reddit thread <https://www.reddit.com/r/rust/comments/6nri26//dkbtzqv>`_.
-
 Maybe I was wrong and using geez would be a good idea,
 `see Icefoxen’s answer <https://www.reddit.com/r/rust/comments/6nri26//dkbqtiu/>`_.
-
-
-But the decision is taken. We’ll see what happens.
+But so far working on Häte was fun and we’ll see what happens later.
 
 ———
 
