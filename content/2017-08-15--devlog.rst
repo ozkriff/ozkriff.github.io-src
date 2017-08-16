@@ -14,14 +14,13 @@ Sorry, friends.
 
 ^ "ZoC's is dead, baby. ZoC is dead."
 
-------
 
 Why have I killed it?
 I've overestimated my resources/skills and got totally overwhelmed by the scope:
 
 - I can't see the finish line and had no idea what exactly I can feature-cut.
   Strategic mode? Sane UI? Networking? Skeletal animations? Particles?
-  Oh-oh, I don't believe that ZoC could be cool without any of these (and many more) features.
+  Oh-oh, I don't believe that ZoC could be cool without any of these (and some others) features.
 
   This situation totally drained all my motivation to continue the project.
 
@@ -35,14 +34,14 @@ I've overestimated my resources/skills and got totally overwhelmed by the scope:
   infantry models are just too small, especially on phone’s screen.
 
 - `Maybe I should make an FPS? No, that's stupid. <http://i.imgur.com/F6qf4FNl.png>`_
-  Ahem, no, that was just a joke.
+  Ahem, just joking.
 
 Another reason is that my views on what's is important for strategic games
-have changed in the last several years (опиши)
-
-Smaller games, single player, less content, stupid AI - это же все уменьшает масштаб проекта.
-
-http://keithburgun.net/articles/
+have changed in the last several years.
+Now I prefer `smaller <http://keithburgun.net/videogames-are-broken-toys>`_
+`single-player <http://keithburgun.net/the-default-number-of-players-is-one>`_
+games
+`with strong accent on emergent complexity <http://keithburgun.net/minimalism-vs-elegance>`_.
 
 ------
 
