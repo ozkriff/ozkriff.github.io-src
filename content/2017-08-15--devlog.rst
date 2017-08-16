@@ -116,13 +116,10 @@ Something in between of
 and
 `Age of Decadence <http://store.steampowered.com/app/230070/The_Age_of_Decadence/>`_.
 
-Initial svg mockup:
+Initial svg mockup (based on `my old experiments with 2d ZoC <http://i.imgur.com/NNQkC1e.png>`_):
 
 .. image:: http://i.imgur.com/L8gaqaP.png
   :alt: inscape mockup
-
-Something like `my old experiments with 2d ZoC <http://i.imgur.com/NNQkC1e.png>`_
-
 
 ---------------------------------
 
@@ -143,13 +140,12 @@ TODO: embed https://www.youtube.com/embed/MVt_UOnmdKI video
 
   <div class="youtube"><iframe src="https://www.youtube.com/embed/MVt_UOnmdKI" frameborder="0"></iframe></div>
 
-What’s implemented at this moment:
+What’s implemented:
 
 - The cornerstone of the game: reaction attacks and movement interruptions;
-- basic infantry unit type;
-- Units have a few hit points;
-- Every unit has two active attack points and one reactive AP;
-- Basic AI - it can move closer and attack;
+- Basic infantry unit type;
+- Hitpoints;
+- Basic AI: move closer and attack;
 - Some basic UI with text/image buttons and grouping.
 
 -------
