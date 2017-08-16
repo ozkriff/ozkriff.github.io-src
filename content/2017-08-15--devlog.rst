@@ -129,7 +129,7 @@ Ok, that was just the plan. What's actually done already?
 
 Here's the code: https://github.com/ozkriff/zemeroth
 
-Right now it looks like this:
+Right now Zemeroth looks ~ like this:
 
 .. image:: http://i.imgur.com/EEtIxGp.png
   :alt: old Zemeroth's screenshot
@@ -150,33 +150,10 @@ What’s implemented:
 - Basic AI: move closer and attack;
 - Some basic UI with text/image buttons and grouping.
 
--------
-
 Android is supported from the beginning of the development (as I’m reusing ZoC’s codebase):
 
 .. image:: http://i.imgur.com/T9EgPR1.png
   :alt: zemeroth on android photo
-
-------
-
-Speaking about reusing ZoC’s codebase…
-
-I’m a fool who don’t learn anything and
-totally ignored the third rule from finishing-a-game article:
-
-    3. DON’T ROLL YOUR OWN TECH IF YOU DON’T HAVE TO
-
-Say hello to yet another Rust 2d engine: `Häte2d <https://docs.rs/hate>`_ :-D
-
-(Name is a silly reference to `LÖVE framework <https://love2d.org>`_. just in case)
-
-NOTE: Häte isn’t a general-purpose game engine (at least right now) and it’s not my goal.
-Just a simple 2d engine for Zemeroth’s needs.
-
-Why I didn’t use geez?
-See `this reddit thread <https://www.reddit.com/r/rust/comments/6nri26//dkbtzqv>`_.
-
-------
 
 Zemeroth’s architecture is mostly taken from ZoC (minus the networking and multiple game states):
 
@@ -191,7 +168,60 @@ in dead ZoC’s dev branch:
 
 (`btw, piston has something similar <https://docs.rs/piston2d-sprite/0.36.0/sprite/enum.Animation.html>`_)
 
+
+Häte2d
 ------
+
+About reusing ZoC’s codebase...
+
+I’m a fool who don’t learn anything and
+totally ignored the third rule from finishing-a-game article:
+
+    3. DON’T ROLL YOUR OWN TECH IF YOU DON’T HAVE TO
+
+Say hello to yet another Rust 2d engine: `Häte2d <https://docs.rs/hate>`_ :-D
+
+(Name is a silly reference to `LÖVE framework <https://love2d.org>`_. just in case)
+
+NOTE: Häte isn’t a general-purpose game engine (at least right now) and it’s not my goal.
+Just a simple 2d engine for Zemeroth’s needs.
+
+Why I haven’t used ggez.rs?
+
+Quote from reddit:
+
+    @pwgen-n1024:
+    have you seen this? its a löve2d clone in rust, it might allow you to save some work.
+    https://www.reddit.com/r/rust/comments/6mg02o/ggez_a_rust_library_to_create_good_games_easily/
+
+    @ozkriff:
+    Granted, I'm well aware of ggez! :-)
+
+    I'm too lazy to read the docs! NIH syndrome!111 :-D
+
+    Ahem... It's a cool engine and I recommend it whenever anybody asks me about 2d game engines,
+    but I don't think that ggez's core values match my needs in Zemeroth project:
+
+    - Ggez tries to mirror Löve as closely as possible but
+      I don't believe that what's good for highly dynamic Lua is equally good for Rust.
+
+    - It seems to me that ggez is targeted on beginners and fast prototype-like
+      projects but I'm going to invest a lot of time into this project.
+
+    - I want the engine to be much more opinionated about UI, scene, etc.
+
+    - Right now ggez uses SDL2 (and it's not easy to replace it with glutin)
+      but I really want to use cargo-apk.
+
+See `this reddit thread <https://www.reddit.com/r/rust/comments/6nri26//dkbtzqv>`_.
+
+Maybe I was wrong and using geez would be a good idea,
+`see Icefoxen’s answer <https://www.reddit.com/r/rust/comments/6nri26//dkbqtiu/>`_.
+
+
+But the decision is taken. We’ll see what happens.
+
+———
 
 That’s all for today :)
 
