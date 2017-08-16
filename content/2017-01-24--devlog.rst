@@ -242,7 +242,8 @@ Other changes
   because it's simpler than handling multi-touch gestures on android :)
 
 
-## Gameplay screenshots
+Gameplay screenshots
+--------------------
 
 .. image:: http://i.imgur.com/DxfBok2.png
   :alt: gameplay screenshot 1
@@ -250,6 +251,7 @@ Other changes
 .. image:: http://i.imgur.com/V4ZPCrT.png
   :alt: gameplay screenshot 2
 
+------
 
 I'll try to release next issue of TMIZ by the end of February.
 

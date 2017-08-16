@@ -19,30 +19,39 @@ Core game features are:
 - reaction fire (xcom-like)
 - morale and suppression
 
-------
 
-`Zgl <https://github.com/ozkriff/zoc/tree/c8b11f4/src/zgl/src>`_
-/`stb_truetype <https://github.com/ozkriff/stb-tt-rs>`_
+GFX and rusttype
+----------------
+
+`Zgl <https://github.com/ozkriff/zoc/tree/c8b11f4/src/zgl/src>`_/`stb_truetype <https://github.com/ozkriff/stb-tt-rs>`_
 were finally replaced with
 `GFX <https://github.com/gfx-rs/gfx>`_
 and
-`rusttype <https://github.com/dylanede/rusttype>`_
-, YAY :-D !!1 - `#183 <https://github.com/ozkriff/zoc/issues/183>`_
+`rusttype <https://github.com/dylanede/rusttype>`_,
+YAY :-D !!1 - `#183 <https://github.com/ozkriff/zoc/issues/183>`_
+
+
+Android
+-------
 
 ZoC is now build with `cargo-apk <https://github.com/tomaka/android-rs-glue>`_.
 
 There are still some problems with android version though: https://github.com/ozkriff/zoc/issues/197 :(
 
-------
 
-`Roads <https://github.com/ozkriff/zoc/issues/152>`_:
+Roads
+-----
+
+https://github.com/ozkriff/zoc/issues/152
 
 .. image:: http://i.imgur.com/gZeJJGM.png?1
   :alt: Simple road
 
-------
 
-`Sectors, victory points and game results screen: <https://github.com/ozkriff/zoc/issues/124>`_
+Sectors, victory points and game results screen
+-----------------------------------------------
+
+https://github.com/ozkriff/zoc/issues/124
 
 .. raw:: html
 
@@ -54,9 +63,11 @@ There are still some problems with android version though: https://github.com/oz
 .. image:: http://i.imgur.com/gWbWorT.png?1
   :alt: Sectors
 
-------
 
-`Basic smoke screens <https://github.com/ozkriff/zoc/issues/160>`_:
+Basic smoke screens
+-------------------
+
+https://github.com/ozkriff/zoc/issues/160
 
 .. image:: http://i.imgur.com/9o8o7dk.png?1
   :alt: Smoke
@@ -68,16 +79,18 @@ There are still some problems with android version though: https://github.com/oz
 
     <div class="youtube"><iframe frameborder="0" allowfullscreen src="https://www.youtube.com/embed/WJHkuWwAb7A?color=white&rel=0&showinfo=0"></iframe></div>
 
-------
 
-`Water tiles <https://github.com/ozkriff/zoc/issues/204>`_:
+Water tiles
+-----------
+
+https://github.com/ozkriff/zoc/issues/204
  
 .. image:: http://i.imgur.com/POhSLwh.png?1
   :alt: Water
 
-------
 
-GUI updates:
+GUI updates
+-----------
 
 - Replaced unit ids with unit type names
 - Added hit chances
@@ -92,16 +105,18 @@ GUI updates:
 .. image:: http://i.imgur.com/qnZZgdX.png
   :alt: basic unit info
 
-------
 
-`Fixed switching between normal and wireframe mode for buildings <https://github.com/ozkriff/zoc/issues/182>`_:
+Fixed switching between normal and wireframe mode for buildings
+---------------------------------------------------------------
+
+https://github.com/ozkriff/zoc/issues/182
 
 .. image:: http://i.imgur.com/wjWcix7.png
   :alt: combined wireframe and normal buildings
 
-------
 
-Other notable changes:
+Other notable changes
+---------------------
 
 - `Fixed armored units reaction to light reactive fire <https://github.com/ozkriff/zoc/issues/191>`_
 - `Improved error message about missing assets <https://github.com/ozkriff/zoc/issues/211>`_
@@ -110,17 +125,20 @@ Other notable changes:
 - `Added personal independent camera for each human player <https://github.com/ozkriff/zoc/commit/fde38>`_
 - `Fixed AI hangup <https://github.com/ozkriff/zoc/issues/196>`_
 
-------
 
-Bonus 1: ZoC on android:
+Bonus 1: ZoC on android
+-----------------------
 
 .. image:: http://i.imgur.com/MzFwvI7.jpg
   :alt: photo
 
-Bonus 2: memoir44-mockup of smoke demo map:
+
+Bonus 2: memoir44-mockup of smoke demo map
+------------------------------------------
 
 .. image:: http://i.imgur.com/ZplFvxR.jpg
   :alt: photo
+
 
 ------
 
