@@ -136,11 +136,9 @@ Right now Zemeroth looks ~ like this:
 
 Recent "gameplay" video:
 
-TODO: embed https://www.youtube.com/embed/MVt_UOnmdKI video
-
 .. raw:: html
 
-  <div class="youtube"><iframe src="https://www.youtube.com/embed/MVt_UOnmdKI" frameborder="0"></iframe></div>
+  <div class="youtube"><iframe frameborder="0" allowfullscreen src="https://www.youtube.com/embed/MVt_UOnmdKI?rel=0&showinfo=0"></iframe></div>
 
 What’s implemented:
 
@@ -217,7 +215,7 @@ Maybe I was wrong and using geez would be a good idea,
 `see Icefoxen’s answer <https://www.reddit.com/r/rust/comments/6nri26//dkbqtiu/>`_.
 But so far working on Häte was fun and we’ll see what happens later.
 
-———
+------
 
 That’s all for today :)
 

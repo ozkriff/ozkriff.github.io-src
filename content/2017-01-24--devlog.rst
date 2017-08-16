@@ -4,7 +4,7 @@ This Month in ZoC - 2017.01.24
 
 :tags: devlog, zoc
 
-(copy of the 1st post from https://users.rust-lang.org/t/this-month-in-zone-of-control/6993)
+(Repost from https://users.rust-lang.org/t/this-month-in-zone-of-control/6993)
 
 Hi, everyone! :)
  
@@ -35,19 +35,34 @@ https://github.com/ozkriff/zoc/issues/111
 
 IDLE animation:
 
-https://www.youtube.com/watch?v=wj8ldf7sBRc
+.. raw:: html
+
+    <div class="youtube"><iframe
+        frameborder="0"
+        allowfullscreen
+        src="https://www.youtube.com/embed/wj8ldf7sBRc?color=white&rel=0&showinfo=0"
+    ></iframe></div>
 
 It's not easy for ground units to catch up with a helicopter :) :
 
-https://www.youtube.com/watch?v=u5yNCP_1G4M
+.. raw:: html
+
+    <div class="youtube"><iframe
+        frameborder="0"
+        allowfullscreen
+        src="https://www.youtube.com/embed/u5yNCP_1G4M?color=white&rel=0&showinfo=0"
+    ></iframe></div>
 
 Haven't got around to implement
-[AA-guns](https://github.com/ozkriff/zoc/issues/226)
-and [Manpads](https://github.com/ozkriff/zoc/issues/226)
+`AA-guns <https://github.com/ozkriff/zoc/issues/226>`_
+and `Manpads <https://github.com/ozkriff/zoc/issues/226>`_
 yet so the main AA-defence for now is just jeep's machinegun.
 
 
-## [Reinforcements](https://github.com/ozkriff/zoc/issues/208)
+Reinforcements
+--------------
+
+https://github.com/ozkriff/zoc/issues/208
 
 Players have no starting forces now - everything is bought
 in reinforcement sectors for reinforcement points.
@@ -78,7 +93,10 @@ There must be enough reinforcement points and enough room for the unit. Units ha
 And, by the way, AI has been taught to buy units too.
 
 
-## [Map selection](https://github.com/ozkriff/zoc/issues/213)
+Map selection
+-------------
+
+https://github.com/ozkriff/zoc/issues/213
 
 After the implementation of reinforcements it became possible to add map selection.
 
@@ -92,7 +110,8 @@ It was mostly needed for testing/debugging purposes so most of the maps look lik
 .. image:: http://i.imgur.com/4UnfdmC.png
   :alt: Debugging map
 
-Tests however are in early prototype phase and are not in the repo yet. Right now they use special maps but I intend to implement some ASCII-DSL like the following:
+Tests however are in early prototype phase and are not in the repo yet.
+Right now they use special maps but I intend to implement some ASCII-DSL like the following:
 
 .. code::
 
@@ -108,19 +127,26 @@ Tests however are in early prototype phase and are not in the repo yet. Right no
 where 't' is a 'trees', 'r' is a road and 'ABC' are positions.
 
 Tests work by sending hardcoded commands and waiting for specified events in response.
-I can't test anything that depends on RNG (attacks mostly) but the movements, FoW, etc are more or less testable. It can't help with errors in visualizer but it makes it easier for me to refactor the Core.
+I can't test anything that depends on RNG (attacks mostly) but the movements, FoW, etc are more or less testable.
+It can't help with errors in visualizer but it makes it easier for me to refactor the Core.
 
 
-## [Auto-deploy to github releases](https://github.com/ozkriff/zoc/pull/246)
+Auto-deploy to github releases
+------------------------------
 
-[@Gordon-F](https://github.com/Gordon-F) has implemented auto-deploy of releases for travis and appveyor.
+https://github.com/ozkriff/zoc/pull/246
 
-Now you can download windows, linux and osx builds for tagged releases here from the [github releases page](https://github.com/ozkriff/zoc/releases).
+`@Gordon-F <https://github.com/Gordon-F>`_ has implemented auto-deploy of releases for travis and appveyor.
+
+Now you can download windows, linux and osx builds for tagged releases here from the `github releases page <https://github.com/ozkriff/zoc/releases>`_.
 
 Android is totally different story with all its SDKs/NDKs and is still built and uploaded manually.
 
 
-## [Wreckages](https://github.com/ozkriff/zoc/issues/247)
+Wreckages
+---------
+
+https://github.com/ozkriff/zoc/issues/247
 
 Now destroyed vehicles leave wreckages.
 
@@ -132,49 +158,81 @@ They only obstruct movement for now. Later they'll be used by infantry as protec
 When particle system will be implemented wreckages will emit smoke and fire.
 
 
-## [Towing](https://github.com/ozkriff/zoc/issues/161)
+Towing
+------
+
+https://github.com/ozkriff/zoc/issues/161
 
 There're two new items in context menu: "attach" and "detach".
 
 You can't chain attachments or attach WholeTile-sized units.
 
-Towing system is mostly important for quick reposition of field guns but it can also help with clearing roads from wrecked vehicles. The latter reason will become more important w  hen partial damage for vehicles gets implemented.
+Towing system is mostly important for quick reposition of field
+guns but it can also help with clearing roads from wrecked vehicles.
+The latter reason will become more important when partial damage for vehicles gets implemented.
 
-https://www.youtube.com/watch?v=WEBmAvGUMGU
+.. raw:: html
+
+    <div class="youtube"><iframe
+        frameborder="0"
+        allowfullscreen
+        src="https://www.youtube.com/embed/WEBmAvGUMGU?color=white&rel=0&showinfo=0"
+    ></iframe></div>
 
 
-## [Smoothly fading to alpha Fog of War](https://github.com/ozkriff/zoc/issues/210)
+Smoothly fading to alpha Fog of War
+-----------------------------------
 
-https://youtu.be/eNwlOO_tTqs
+https://github.com/ozkriff/zoc/issues/210
+
+.. raw:: html
+
+    <div class="youtube"><iframe
+        frameborder="0"
+        allowfullscreen
+        src="https://www.youtube.com/embed/eNwlOO_tTqs?color=white&rel=0&showinfo=0"
+    ></iframe></div>
 
 Opening FoW is a very common action so it deserves to be a little more pretty :)
 
-It was easy though I had to rework the FoW rendering code to make it use a lot of independently colored scene nodes instead of a single big mesh.
+It was easy though I had to rework the FoW rendering code to make it use
+a lot of independently colored scene nodes instead of a single big mesh.
 
 
-## [Fixed an old error with units moving into invisible enemies](https://github.com/ozkriff/zoc/issues/106)
+Fixed an old error with units moving into invisible enemies
+-----------------------------------------------------------
+
+https://github.com/ozkriff/zoc/issues/106
 
 This change caused some refactorings in the codebase:
 
 - Added a new event type: `Reveal`, similar to ShowUnit but generated by `Core` itself and not by the filtering system
 
-- [Merge all `*State` structs and `GameState` trait into one universal `State` struct](https://github.com/ozkriff/zoc/issues/255)
+- `Merge all `*State` structs and `GameState` trait into one universal `State` struct <https://github.com/ozkriff/zoc/issues/255>`_
 
 - Added a proper FoW layer for air units
 
 
-## Other changes
+Other changes
+-------------
 
-- [The short-term roadmap was translated into English and updated](https://github.com/ozkriff/zoc/issues/159)
+- `The short-term roadmap was translated into English and updated <https://github.com/ozkriff/zoc/issues/159>`_
 
-- [AI was taught to capture sectors](https://github.com/ozkriff/zoc/issues/205)
-  AI is still in poor state and crashes once in a while. I need to implement replays to reproduce and fix these errors. It's either AI sometimes issues orders to units that are already dead or there are bugs in the event filtering system.
+- `AI was taught to capture sectors <https://github.com/ozkriff/zoc/issues/205>`_
 
-- [Android memory alignment errors are finally gone](https://github.com/ozkriff/zoc/issues/197), thanks to @not-fl3, @tomaka, @brendanzab and @mhintz.   [Though android port is still not very stable](https://github.com/ozkriff/zoc/issues/248).
+  AI is still in poor state and crashes once in a while.
+  I need to implement replays to reproduce and fix these errors.
+  It's either AI sometimes issues orders to units that are already dead or there are bugs in the event filtering system.
 
-- [Fixed bridge slots count](https://github.com/ozkriff/zoc/issues/214). Now bridges are real strategic points which can be controlled or blocked easily.
+- `Android memory alignment errors are finally gone <https://github.com/ozkriff/zoc/issues/197>`_,
+  thanks to @not-fl3, @tomaka, @brendanzab and @mhintz.
 
-- [Do not reduce unit morale if the attack was harmless](https://github.com/ozkriff/zoc/issues/220) 
+  `Though android port is still not very stable <https://github.com/ozkriff/zoc/issues/248>`_.
+
+- `Fixed bridge slots count https://github.com/ozkriff/zoc/issues/214>`_.
+  Now bridges are real strategic points which can be controlled or blocked easily.
+
+- `Do not reduce unit morale if the attack was harmless <https://github.com/ozkriff/zoc/issues/220>`_
 
 - Added "zoom in/out" buttons:
 
@@ -195,4 +253,4 @@ This change caused some refactorings in the codebase:
 
 I'll try to release next issue of TMIZ by the end of February.
 
-[@ozkriff on Twitter](https://twitter.com/ozkriff)
+`@ozkriff on Twitter <https://twitter.com/ozkriff>`_

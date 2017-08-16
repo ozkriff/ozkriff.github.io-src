@@ -66,11 +66,7 @@ There are still some problems with android version though: https://github.com/oz
 
 .. raw:: html
 
-    <div class="youtube"><iframe
-        frameborder="0"
-        allowfullscreen
-        src="https://www.youtube.com/embed/WJHkuWwAb7A?color=white&rel=0&showinfo=0"
-    ></iframe></div>
+    <div class="youtube"><iframe frameborder="0" allowfullscreen src="https://www.youtube.com/embed/WJHkuWwAb7A?color=white&rel=0&showinfo=0"></iframe></div>
 
 ------
 
