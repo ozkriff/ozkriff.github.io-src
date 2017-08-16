@@ -92,22 +92,19 @@ Sounds reasonable to me.
 So I need a new much less ambitious project
 which still shares some of the ZoC’s core values.
 
-I’ve spent May and June
-(in the heavy existential crisis)
-resting and thinking about do i still want to make rusty games and what’s important.
+I’ve spent May and June - in the heavy existential crisis - ahem, resting
+and thinking about what can I made.
 
-^ TODO: думая о том, что именно делать дальше.
+Here’s what I came up with:
 
-
-
+- Random-based skirmish-level digital tabletop game;
 - Single player only;
 - 3-6 fighters under player’s control;
-- Intentionally stupid and predictable AI;
-- Short game session (under an hour) and small maps without scrolling;
-- Simple vector 2d graphics with just 2-5 sprites per unit.
-  Something like `my old experiments with 2d ZoC <http://i.imgur.com/NNQkC1e.png>`_;
+- Short game session (under an hour) and small unscrollable maps;
+- Simple vector 2d graphics with just 3-5 sprites per unit;
 - Reaction attacks and action’s interruption;
 - Highly dynamic (lots of small unit moves as a side effect of other events);
+- Intentionally stupid and predictable AI;
 
 Something in between of
 `Banner Saga <http://store.steampowered.com/app/237990/The_Banner_Saga>`_,
@@ -121,12 +118,8 @@ Initial svg mockup:
 .. image:: http://i.imgur.com/L8gaqaP.png
   :alt: inscape mockup
 
+Something like `my old experiments with 2d ZoC <http://i.imgur.com/NNQkC1e.png>`_
 
-------
-
-So, yeah, I'm starting over _again_. What will be different this time?
-
-(TODO: или не надо это расписывать?)
 
 ---------------------------------
 
@@ -141,44 +134,42 @@ Right now it looks like this:
 
 Recent "gameplay" video:
 
+TODO: embed https://www.youtube.com/embed/MVt_UOnmdKI video
+
 .. raw:: html
 
   <div class="youtube"><iframe src="https://www.youtube.com/embed/MVt_UOnmdKI" frameborder="0"></iframe></div>
 
 
-Only two type of units for now - basic infantry.
+What’s implemented at this moment:
 
-Units have a few hit points.
-
-Every unit has two active attack points and one reactive AP.
-
-Reaction attacks, movement interruptions - the cornerstone of the game.
-
-Basic AI - move closer and attack.
-
-basic UI with text/image buttons and panels.
+- two type of units for now - basic infantry;
+- Units have a few hit points;
+- Every unit has two active attack points and one reactive AP;
+- The cornerstone of the game: reaction attacks and movement interruptions;
+- Basic AI - it can move closer and attack;
+- Some basic UI with text/image buttons and grouping.
 
 -------
 
-Works on android:
+Android is supported from the beginning of the development (as I’m reusing ZoC’s codebase):
 
 .. image:: http://i.imgur.com/T9EgPR1.png
   :alt: zemeroth on android photo
 
-^ android support from the begining of the development (наследство зока)
-
 ------
 
+Speaking about reusing ZoC’s codebase…
+
 I’m a fool who don’t learn anything and
-totally ignored rule 3 from hot-to-finish-a-game article:
+totally ignored rule 3 from finishing-a-game article:
 
     3. DON’T ROLL YOUR OWN TECH IF YOU DON’T HAVE TO
 
-Say hello to yet another Rust 2d engine: Häte2d :-D (TODO: ссылкку поставь)
+Say hello to yet another Rust 2d engine: Häte2d: https://docs.rs/hate :-D
 
-It’s not intended for general use by anyone.
-It doesn’t even have keyboard input yet.
-Maybe, later.
+It’s not intended for general use by anyone yet and it’s not a goal.
+It doesn’t even have keyboard input yet!
 
 In the beginning of hate I didn't know that ggez is mature.
 TODO: link to discussion on reddit
@@ -188,8 +179,6 @@ https://www.reddit.com/r/rust/comments/6nri26/whats_everyone_working_on_this_wee
 TODO: umlaut, love2d, ggez
 
 (Name and umlauts is a reference to Love2d framework. just in case)
-
-reuse of ZoC’s codebase - not from scratch
 
 ------
 
