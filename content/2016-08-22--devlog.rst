@@ -1,0 +1,150 @@
+
+This Month in ZoC - 2016.08.22
+##############################
+
+:tags: devlog, zoc
+
+(Repost from https://users.rust-lang.org/t/this-month-in-zone-of-control/6993)
+
+Hi, comrades! Welcome to the first issue of ZoC's monthly report!
+
+------
+
+`ZoC <https://github.com/ozkriff/zoc>`_ is a turn-based hexagonal strategy game written in Rust.
+
+Core game features are:
+
+- advanced fog of war
+- slot system (multiple units per tile)
+- reaction fire (xcom-like)
+- morale and suppression
+
+
+GFX and rusttype
+----------------
+
+`Zgl <https://github.com/ozkriff/zoc/tree/c8b11f4/src/zgl/src>`_/`stb_truetype <https://github.com/ozkriff/stb-tt-rs>`_
+were finally replaced with
+`GFX <https://github.com/gfx-rs/gfx>`_
+and
+`rusttype <https://github.com/dylanede/rusttype>`_,
+YAY :-D !!1 - `#183 <https://github.com/ozkriff/zoc/issues/183>`_
+
+
+Android
+-------
+
+ZoC is now build with `cargo-apk <https://github.com/tomaka/android-rs-glue>`_.
+
+There are still some problems with android version though: https://github.com/ozkriff/zoc/issues/197 :(
+
+
+Roads
+-----
+
+https://github.com/ozkriff/zoc/issues/152
+
+.. image:: http://i.imgur.com/gZeJJGM.png?1
+  :alt: Simple road
+
+
+Sectors, victory points and game results screen
+-----------------------------------------------
+
+https://github.com/ozkriff/zoc/issues/124
+
+.. raw:: html
+
+    <div class="youtube"><iframe
+        frameborder="0"
+        src="https://www.youtube.com/embed/hI6YmZeuZ3s"
+    ></iframe></div>
+
+.. image:: http://i.imgur.com/gWbWorT.png?1
+  :alt: Sectors
+
+
+Basic smoke screens
+-------------------
+
+https://github.com/ozkriff/zoc/issues/160
+
+.. image:: http://i.imgur.com/9o8o7dk.png?1
+  :alt: Smoke
+
+.. image:: http://i.imgur.com/WgQNu8H.png
+  :alt: Smoke screen in action
+
+.. raw:: html
+
+    <div class="youtube"><iframe frameborder="0" allowfullscreen src="https://www.youtube.com/embed/WJHkuWwAb7A?color=white&rel=0&showinfo=0"></iframe></div>
+
+
+Water tiles
+-----------
+
+https://github.com/ozkriff/zoc/issues/204
+
+.. image:: http://i.imgur.com/POhSLwh.png?1
+  :alt: Water
+
+
+GUI updates
+-----------
+
+- Replaced unit ids with unit type names
+- Added hit chances
+- Added basic unit info to the upper-left corner of the screen
+
+.. image:: http://i.imgur.com/m0h2d5j.png
+  :alt: unit types
+
+.. image:: http://i.imgur.com/YdfyxNW.png
+  :alt: hit chances
+
+.. image:: http://i.imgur.com/qnZZgdX.png
+  :alt: basic unit info
+
+
+Fixed switching between normal and wireframe mode for buildings
+---------------------------------------------------------------
+
+https://github.com/ozkriff/zoc/issues/182
+
+.. image:: http://i.imgur.com/wjWcix7.png
+  :alt: combined wireframe and normal buildings
+
+
+Other notable changes
+---------------------
+
+- `Fixed armored units reaction to light reactive fire <https://github.com/ozkriff/zoc/issues/191>`_
+- `Improved error message about missing assets <https://github.com/ozkriff/zoc/issues/211>`_
+- `Made MapText fading to alpha smoothly <https://github.com/ozkriff/zoc/commit/ac2c7c6>`_
+- `Fixed annoying vehicle-in-building pathfinder bug <https://github.com/ozkriff/zoc/commit/1ee698>`_
+- `Added personal independent camera for each human player <https://github.com/ozkriff/zoc/commit/fde38>`_
+- `Fixed AI hangup <https://github.com/ozkriff/zoc/issues/196>`_
+
+
+Bonus 1: ZoC on android
+-----------------------
+
+.. image:: http://i.imgur.com/MzFwvI7.jpg
+  :alt: photo
+
+
+Bonus 2: memoir44-mockup of smoke demo map
+------------------------------------------
+
+.. image:: http://i.imgur.com/ZplFvxR.jpg
+  :alt: photo
+
+
+------
+
+Weekly links: `1 <https://users.rust-lang.org/t/whats-everyone-working-on-this-week-31-2016/6747/2>`_,
+`2 <https://www.reddit.com/r/rust/comments/4wob4b/whats_everyone_working_on_this_week_322016/d68pxx4>`_,
+`3 <https://www.reddit.com/r/rust/comments/4xrycf/whats_everyone_working_on_this_week_332016/d6i0d1a>`_,
+`4 <https://www.reddit.com/r/rust/comments/4yzx43/whats_everyone_working_on_this_week_342016/d6rp869>`_.
+
+https://github.com/ozkriff/zoc, `@ozkriff on Twitter <https://twitter.com/ozkriff>`_
