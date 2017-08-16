@@ -16,6 +16,7 @@ Sorry, friends.
 
 
 Why have I killed it?
+The primary reason is classic:
 I've overestimated my resources/skills and got totally overwhelmed by the scope:
 
 - I can't see the finish line and had no idea what exactly I can feature-cut.
@@ -40,8 +41,8 @@ Another reason is that my views on what's is important for strategic games
 have changed in the last several years.
 Now I prefer `smaller <http://keithburgun.net/videogames-are-broken-toys>`_
 `single-player <http://keithburgun.net/the-default-number-of-players-is-one>`_
-games
-`with strong accent on emergent complexity <http://keithburgun.net/minimalism-vs-elegance>`_.
+games with strong accent on
+`emergent complexity <http://keithburgun.net/minimalism-vs-elegance>`_.
 
 ------
 
@@ -77,14 +78,16 @@ In the context of ZoC’s fail the most important part of that article is:
     Rule 14: IF YOU DO QUIT, SCALE DOWN, NOT UP
 
     Okay, sometimes it is time to call it quits.
-    Maybe there’s just no way you’ll ever finish, and what you have is too big a mess to cut anything out.
+    Maybe there’s just no way you’ll ever finish,
+    and what you have is too big a mess to cut anything out.
     Maybe the rest of your team has quit already.
     My hope in writing this list is to help people avoid this possibility,
     but hey, maybe you’re just coming off of such a project.
     And sometimes... shit just happens.
 
     If there’s no salvaging it, at least make sure that you scale down your next project.
-    It’s easy to set your sights higher and higher, even as your projects become less and less finished.
+    It’s easy to set your sights higher and higher,
+    even as your projects become less and less finished.
     “My SKILLS are improving! I’m learning from my failure,” is a common excuse.
     But I think this is why it’s important to treat finishing as a skill, too.
 
@@ -125,7 +128,7 @@ Something like `my old experiments with 2d ZoC <http://i.imgur.com/NNQkC1e.png>`
 
 Ok, that was just the plan. What's actually done already?
 
-Here's the repo: https://github.com/ozkriff/zemeroth
+Here's the code: https://github.com/ozkriff/zemeroth
 
 Right now it looks like this:
 
@@ -140,13 +143,12 @@ TODO: embed https://www.youtube.com/embed/MVt_UOnmdKI video
 
   <div class="youtube"><iframe src="https://www.youtube.com/embed/MVt_UOnmdKI" frameborder="0"></iframe></div>
 
-
 What’s implemented at this moment:
 
-- two type of units for now - basic infantry;
+- The cornerstone of the game: reaction attacks and movement interruptions;
+- basic infantry unit type;
 - Units have a few hit points;
 - Every unit has two active attack points and one reactive AP;
-- The cornerstone of the game: reaction attacks and movement interruptions;
 - Basic AI - it can move closer and attack;
 - Some basic UI with text/image buttons and grouping.
 
@@ -168,21 +170,22 @@ totally ignored rule 3 from finishing-a-game article:
 
 Say hello to yet another Rust 2d engine: Häte2d: https://docs.rs/hate :-D
 
+(Name is a reference to Love2d framework. just in case)
+
 It’s not intended for general use by anyone yet and it’s not a goal.
 It doesn’t even have keyboard input yet!
 
 In the beginning of hate I didn't know that ggez is mature.
 TODO: link to discussion on reddit
+TODO: да и в целом как-то получше бы объяснить
 
 https://www.reddit.com/r/rust/comments/6nri26/whats_everyone_working_on_this_week_292017/dkbtzqv/
 
 TODO: umlaut, love2d, ggez
 
-(Name and umlauts is a reference to Love2d framework. just in case)
-
 ------
 
-Architecture is mostly taken from ZoC (minus networking and multiple game states):
+Zemeroth’s architecture is mostly taken from ZoC (minus networking and multiple game states):
 
 .. image:: http://i.imgur.com/9A6GnDKl.jpg
   :alt: data loop
@@ -197,7 +200,7 @@ in dead ZoC’s dev branch:
 
 ------
 
-Btw, here's Imgur devlog - http://imgur.com/a/SMVqO - that I'm trying to keep updated.
+Btw, here's full Imgur-devlog which I'm trying to keep updated: http://imgur.com/a/SMVqO
 
-And some instant updates on twitter: https://twitter.com/ozkriff ;-)
+And you can subscribe to instant updates on twitter: https://twitter.com/ozkriff ;-)
 
