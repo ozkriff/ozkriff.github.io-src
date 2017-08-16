@@ -229,7 +229,7 @@ Other changes
 
   `Though android port is still not very stable <https://github.com/ozkriff/zoc/issues/248>`_.
 
-- `Fixed bridge slots count https://github.com/ozkriff/zoc/issues/214>`_.
+- `Fixed bridge slots count <https://github.com/ozkriff/zoc/issues/214>`_.
   Now bridges are real strategic points which can be controlled or blocked easily.
 
 - `Do not reduce unit morale if the attack was harmless <https://github.com/ozkriff/zoc/issues/220>`_
@@ -251,8 +251,5 @@ Gameplay screenshots
 .. image:: http://i.imgur.com/V4ZPCrT.png
   :alt: gameplay screenshot 2
 
-------
-
-I'll try to release next issue of TMIZ by the end of February.
 
 `@ozkriff on Twitter <https://twitter.com/ozkriff>`_
