@@ -205,7 +205,7 @@ Quote from reddit:
     - Ggez tries to mirror Löve as closely as possible but
       I don't believe that what's good for highly dynamic Lua is equally good for Rust.
 
-    - It seems to me that ggez is targeted on beginners and fast prototype-like
+    - It seems to me that ggez targets beginners and fast prototype-like
       projects but I'm going to invest a lot of time into this project.
 
     - I want the engine to be much more opinionated about UI, scene, etc.
