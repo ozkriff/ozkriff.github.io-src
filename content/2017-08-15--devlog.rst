@@ -71,8 +71,8 @@ There’s one great article:
 
 http://makegames.tumblr.com/post/1136623767/finishing-a-game
 
-I have re-read it a dozen times.
-In this context, the most important rule is:
+I have re-read it a dozen times in the last few years.
+In the context of ZoC’s fail the most important part of that article is:
 
     Rule 14: IF YOU DO QUIT, SCALE DOWN, NOT UP
 
@@ -88,9 +88,9 @@ In this context, the most important rule is:
     “My SKILLS are improving! I’m learning from my failure,” is a common excuse.
     But I think this is why it’s important to treat finishing as a skill, too.
 
-So I need a new project, which needs to share some of the core principles (ценности)
-with ZoC, but it should be much smaller also.
-
+Sounds reasonable to me.
+So I need a new much less ambitious project
+which still shares some of the ZoC’s core values.
 
 I’ve spent May and June
 (in the heavy existential crisis)
@@ -103,16 +103,18 @@ resting and thinking about do i still want to make rusty games and what’s impo
 - Single player only;
 - 3-6 fighters under player’s control;
 - Intentionally stupid and predictable AI;
-- Small maps without scrolling;
-- Short game session (under an hour);
+- Short game session (under an hour) and small maps without scrolling;
 - Simple vector 2d graphics with just 2-5 sprites per unit.
   Something like `my old experiments with 2d ZoC <http://i.imgur.com/NNQkC1e.png>`_;
 - Reaction attacks and action’s interruption;
-- High dynamic and lots of movement;
+- Highly dynamic (lots of small unit moves as a side effect of other events);
 
-Something in between of the Banner Saga, Hoplite, Auro and AoD
-
-(TODO: ^^^ add links to projects)
+Something in between of
+`Banner Saga <http://store.steampowered.com/app/237990/The_Banner_Saga>`_,
+`Hoplite <https://play.google.com/store/apps/details?id=com.magmafortress.hoplite>`_,
+`Auro <http://store.steampowered.com/app/459680/Auro_A_MonsterBumping_Adventure/>`_
+and
+`Age of Decadence <http://store.steampowered.com/app/230070/The_Age_of_Decadence/>`_.
 
 Initial svg mockup:
 
