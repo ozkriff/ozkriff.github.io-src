@@ -39,7 +39,7 @@ I've overestimated my resources/skills and got totally overwhelmed by the scope:
 - `Maybe I should make an FPS? No, that's stupid. <http://i.imgur.com/F6qf4FNl.png>`_
   Ahem, just joking.
 
-Another reason is that my views on what's is important for strategic games
+Another reason is that my views on what's important for strategic games
 have changed in the last several years.
 Now I prefer `smaller <http://keithburgun.net/videogames-are-broken-toys>`_
 `single-player <http://keithburgun.net/the-default-number-of-players-is-one>`_
