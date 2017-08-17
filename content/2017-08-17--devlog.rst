@@ -189,8 +189,8 @@ Why I haven’t used ggez.rs?
 Quote from reddit:
 
     @pwgen-n1024:
-    have you seen this? its a löve2d clone in rust, it might allow you to save some work.
-    https://www.reddit.com/r/rust/comments/6mg02o/ggez_a_rust_library_to_create_good_games_easily/
+    have you seen `this <https://www.reddit.com/r/rust/comments/6mg02o/ggez_a_rust_library_to_create_good_games_easily/>`_?
+    its a löve2d clone in rust, it might allow you to save some work.
 
     @ozkriff:
     Granted, I'm well aware of ggez! :-)
