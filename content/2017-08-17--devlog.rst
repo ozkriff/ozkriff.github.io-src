@@ -98,7 +98,7 @@ So I need a new much less ambitious project
 which still shares some of the ZoC’s core values.
 
 I’ve spent May and June - in the heavy existential crisis - ahem, resting
-and thinking about what can I made.
+and thinking about what can I make.
 
 Here’s what I came up with:
 
@@ -179,12 +179,12 @@ totally ignored the third rule from finishing-a-game article:
 
 Say hello to yet another Rust 2d engine: `Häte2d <https://docs.rs/hate>`_ :-D
 
-Name is a silly reference to `LÖVE framework <https://love2d.org>`_ (just in case).
+The name is a silly reference to `LÖVE2D framework <https://love2d.org>`_ (just in case).
 
 NOTE: Häte isn’t a general-purpose game engine (at least right now) and it’s not my goal.
 Just a simple 2d engine for Zemeroth’s needs.
 
-Why I haven’t used ggez.rs?
+Why haven't I used ggez.rs?
 
 Quote from reddit:
 
