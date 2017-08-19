@@ -19,7 +19,7 @@ Why have I killed it?
 The primary reason is classic:
 I've overestimated my resources/skills and got totally overwhelmed by the scope:
 
-- I can't see the finish line and had no idea what exactly I can feature-cut.
+- I can't see the finish line and have no idea what exactly I can feature-cut.
   Strategic mode? Sane UI? Networking? Skeletal animations? Particles?
   Ships? Aircrafts? Tens of unit types?
   Oh-oh, I don't believe that ZoC could be really cool without
@@ -31,7 +31,7 @@ I've overestimated my resources/skills and got totally overwhelmed by the scope:
 
   1) No idea how to make some friendly user interface:
   two panels (for friends and enemies) solution is ugly,
-  context menus are not cool too.
+  context menus are not cool either.
 
   2) Slots create problems with visual scale:
   infantry models are just too small, especially on phone’s screen.
