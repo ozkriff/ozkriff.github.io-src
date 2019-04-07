@@ -1,9 +1,7 @@
-
-About
-#####
-
-:slug: about
-
+---
+title: About
+slug: about
+---
 
 Hi, my name is Andrey Lesnikov (@ozkriff).
 
@@ -15,4 +13,6 @@ GMT+3
 
 ———————
 
-You can find blog's source here: https://github.com/ozkriff/ozkriff.github.io-src
+You can find blog's source here:
+<https://github.com/ozkriff/ozkriff.github.io-src>
+
