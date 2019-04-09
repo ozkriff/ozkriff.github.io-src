@@ -1,7 +1,7 @@
----
-title: About
-slug: about
----
++++
+title = "About"
+slug = "about"
++++
 
 Hi, my name is Andrey Lesnikov (@ozkriff).
 

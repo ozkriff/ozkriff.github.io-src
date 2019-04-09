@@ -1,8 +1,10 @@
----
-title: Перезапуск журнала
-tags: devlog, zoc
-excerpt: Через полтора года я таки вспомнил про этот журнал
----
++++
+title = "Перезапуск журнала"
+description = "Через полтора года я таки вспомнил про этот журнал"
+
+[taxonomies]
+tags = ["devlog", "zoc"]
++++
 
 Насмотрелся я тут на журналы [reangd](http://reangdblog.blogspot.com),
 [cogmind](http://www.gridsagegames.com/blog),

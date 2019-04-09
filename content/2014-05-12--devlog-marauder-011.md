@@ -1,8 +1,10 @@
----
-title: Разработка Мародера - 2014.05.11
-tags: devlog, marauder
-excerpt: Макросы, опять error_context, кнопки
----
++++
+title = "Разработка Мародера - 2014.05.11"
+description = "Макросы, опять error_context, кнопки"
+
+[taxonomies]
+tags = ["devlog", "marauder"]
++++
 
 Тревис все так и сломан.
 

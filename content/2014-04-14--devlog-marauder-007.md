@@ -1,8 +1,10 @@
----
-title: Разработка Мародера - 2014.04.13
-tags: devlog, marauder
-excerpt: Отпуск, бложик, stb-rr-rs
----
++++
+title = "Разработка Мародера - 2014.04.13"
+description = "Отпуск, бложик, stb-rr-rs"
+
+[taxonomies]
+tags = ["devlog", "marauder"]
++++
 
 На этой неделе у меня был отпуск, о даа.
 
