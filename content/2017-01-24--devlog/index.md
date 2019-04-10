@@ -1,9 +1,6 @@
 +++
 title = "This Month in ZoC - 2017.01.24"
 slug = "2017-01-24--devlog"
-
-[taxonomies]
-tags = ["devlog", "zoc"]
 +++
 
 (Repost from <https://users.rust-lang.org/t/this-month-in-zone-of-control/6993>)

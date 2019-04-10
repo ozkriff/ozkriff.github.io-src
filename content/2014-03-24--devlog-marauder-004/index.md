@@ -2,9 +2,6 @@
 title = "Разработка Мародера - 2014.03.23"
 slug = "2014-03-24--devlog-marauder-004"
 description = "Manowar, обновление rustc, Eq для float, мертвый страйк, выделение отдельных отрядов в клетке"
-
-[taxonomies]
-tags = ["devlog", "marauder"]
 +++
 
 Сходил на Manowar, о да, нужно больше пафоса. Только теперь вообще

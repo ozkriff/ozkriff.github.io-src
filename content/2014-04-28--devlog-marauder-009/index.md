@@ -2,9 +2,6 @@
 title = "Разработка Мародера - 2014.04.27"
 slug = "2014-04-28--devlog-marauder-009"
 description = "str->Path, шейдеры, bool"
-
-[taxonomies]
-tags = ["devlog", "marauder"]
 +++
 
 Меня поплющило пару дней на тему перехода с 3д моделей на 2д маркеры.

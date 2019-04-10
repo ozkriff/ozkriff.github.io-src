@@ -1,9 +1,6 @@
 +++
 title = "This Month in ZoC - 2016.08.22"
 slug = "2016-08-22--devlog"
-
-[taxonomies]
-tags = ["devlog", "zoc"]
 +++
 
 (Repost from <https://users.rust-lang.org/t/this-month-in-zone-of-control/6993>)
@@ -125,4 +122,3 @@ Weekly links:
 [4](https://www.reddit.com/r/rust/comments/4yzx43/whats_everyone_working_on_this_week_342016/d6rp869).
 
 <https://github.com/ozkriff/zoc>, [@ozkriff on Twitter](https://twitter.com/ozkriff)
-

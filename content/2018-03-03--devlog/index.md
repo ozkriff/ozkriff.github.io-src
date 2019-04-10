@@ -1,15 +1,11 @@
 +++
 title = "Zemeroth v0.4: Abilities, Lasting Effects and New Unit Types"
 slug = "2018-03-03--devlog"
-
-[taxonomies]
-tags = ["devlog", "zemeroth"]
 +++
 
 Hi, comrades! I'm happy to announce Zemeroth v0.4.
 
 [Zemeroth] is a turn-based hexagonal tactical game written in Rust.
-
 
 You can **download precompiled binaries** for Windows, Linux, macOS and android here:
 <https://github.com/ozkriff/zemeroth/releases/tag/v0.4.0>

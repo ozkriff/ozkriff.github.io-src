@@ -1,9 +1,6 @@
 +++
 title = "ZoC is dead. Long life Zemeroth."
 slug = "2017-08-17--devlog"
-
-[taxonomies]
-tags = ["devlog", "zoc, zemeroth"]
 +++
 
 Soo, yeah, [Zone of Control](https://github.com/ozkriff/zoc) project is

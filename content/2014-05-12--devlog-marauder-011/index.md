@@ -2,9 +2,6 @@
 title = "Разработка Мародера - 2014.05.11"
 slug = "2014-05-12--devlog-marauder-011"
 description = "Макросы, опять error_context, кнопки"
-
-[taxonomies]
-tags = ["devlog", "marauder"]
 +++
 
 Тревис все так и сломан.
@@ -21,4 +18,3 @@ tags = ["devlog", "marauder"]
 хода".
 
 Перевел свои библиотечки и библиотеки bjz на rustc от rust-lang.org
-

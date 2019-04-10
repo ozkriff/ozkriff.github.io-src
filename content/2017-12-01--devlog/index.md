@@ -1,9 +1,6 @@
 +++
 title = "Jokers, Rancor, Blood and more"
 slug = "2017-12-01--devlog"
-
-[taxonomies]
-tags = ["devlog", "zemeroth"]
 +++
 
 Hi, comrades! Welcome to the second issue of Zemeroth's devlog.
