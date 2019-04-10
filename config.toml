@@ -1,6 +1,5 @@
 base_url = "https://ozkriff.github.io"
 title = "ozkriff's devlog"
-description = "rusty gamedev notes"
 generate_rss = true
 highlight_code = true
 theme = "hyde"
