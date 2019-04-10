@@ -1,0 +1,15 @@
+base_url = "ozkriff.github.io"
+title = "ozkriff's devlog"
+description = "rusty gamedev notes"
+generate_rss = true
+highlight_code = true
+theme = "hyde"
+
+[extra]
+hyde_links = [
+    {name = "about", url = "/about"},
+    {name = "github", url = "https://github.com/ozkriff"},
+    {name = "twitter", url = "https://twitter.com/ozkriff"},
+    {name = "linkedin", url = "https://www.linkedin.com/in/андрей-лесников-041133b2"},
+    {name = "rss", url = "/rss.xml"},
+]
