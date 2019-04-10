@@ -1,4 +1,4 @@
-base_url = "ozkriff.github.io"
+base_url = "https://ozkriff.github.io"
 title = "ozkriff's devlog"
 description = "rusty gamedev notes"
 generate_rss = true
@@ -7,9 +7,9 @@ theme = "hyde"
 
 [extra]
 hyde_links = [
-    {name = "about", url = "/about"},
-    {name = "github", url = "https://github.com/ozkriff"},
+    {name = "about", url = "/pages/about"},
     {name = "twitter", url = "https://twitter.com/ozkriff"},
+    {name = "github", url = "https://github.com/ozkriff"},
     {name = "linkedin", url = "https://www.linkedin.com/in/андрей-лесников-041133b2"},
     {name = "rss", url = "/rss.xml"},
 ]
