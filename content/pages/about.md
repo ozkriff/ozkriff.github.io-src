@@ -1,7 +1,5 @@
 +++
 title = "About"
-date = 2019-04-10
-slog = "about"
 +++
 
 Hi, my name is Andrey Lesnikov (@ozkriff).
