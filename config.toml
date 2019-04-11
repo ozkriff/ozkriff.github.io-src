@@ -6,6 +6,7 @@ theme = "hyde"
 
 [extra]
 hyde_sticky = false
+hyde_favicon = true
 hyde_links = [
     {name = "about", url = "/pages/about"},
     {name = "twitter", url = "https://twitter.com/ozkriff"},
