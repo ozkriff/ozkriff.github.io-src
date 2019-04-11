@@ -10,5 +10,4 @@ hyde_links = [
     {name = "about", url = "/pages/about"},
     {name = "twitter", url = "https://twitter.com/ozkriff"},
     {name = "github", url = "https://github.com/ozkriff"},
-    {name = "linkedin", url = "https://www.linkedin.com/in/андрей-лесников-041133b2"},
 ]
