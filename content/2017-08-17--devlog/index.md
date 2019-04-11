@@ -57,9 +57,7 @@ Zemeroth
 ========
 
 There’s one great article:
-
-<http://makegames.tumblr.com/post/1136623767/finishing-a-game>
-
+["Finishing a Game"](http://makegames.tumblr.com/post/1136623767/finishing-a-game).
 I have re-read it a dozen times in the last few years. In the context of
 ZoC’s fail the most important part of that article is:
 

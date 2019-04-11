@@ -8,7 +8,7 @@ Hi, comrades! I'm happy to announce Zemeroth v0.4.
 [Zemeroth] is a turn-based hexagonal tactical game written in Rust.
 
 You can **download precompiled binaries** for Windows, Linux, macOS and android here:
-<https://github.com/ozkriff/zemeroth/releases/tag/v0.4.0>
+[releases/tag/v0.4.0](https://github.com/ozkriff/zemeroth/releases/tag/v0.4.0)
 
 This release adds [~2k lines of code][tokei] - a lot of new features!
 And it's hard to describe all the stuff only with words and static images

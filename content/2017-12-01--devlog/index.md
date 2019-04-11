@@ -30,7 +30,7 @@ and don't want to compile it from the source
 is auto-deployed pre-built binaries.
 
 **You can download them here:**
-**<https://github.com/ozkriff/zemeroth/releases>**
+**[zemeroth/releases](https://github.com/ozkriff/zemeroth/releases)**
 
 They are compiled and deployed to Github's releases
 by CI servers (Travis, Appveyor and CircleCI) on every tag.
@@ -52,7 +52,7 @@ Deploying `apk`s is harder:
 circle-ci doesn't provide a built-in convenient way of deploying to Github,
 so you have to wield some curl/github_api magic.
 
-[All the magic is packed in `.circleci/upload_apk_to_github_releases.sh` script][upload_script]
+[All the magic is packed in ".circleci/upload_apk_to_github_releases.sh" script][upload_script]
 (which is based on [this gist]).
 
 Also, some [strange branch magic is required][branch magic]
@@ -155,7 +155,7 @@ The current legend is:
 > you should try it with a Deuteranopia filter!
 
 I've googled a simulator:
-<https://www.etre.com/tools/colourblindsimulator>.
+[etre.com/tools/colourblindsimulator](https://www.etre.com/tools/colourblindsimulator).
 Here's an example of its output:
 
 ![Example of output. Dots are hard to read now](color-issue.png)
