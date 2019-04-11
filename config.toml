@@ -5,6 +5,7 @@ highlight_code = true
 theme = "hyde"
 
 [extra]
+hyde_sticky = false
 hyde_links = [
     {name = "about", url = "/pages/about"},
     {name = "twitter", url = "https://twitter.com/ozkriff"},
