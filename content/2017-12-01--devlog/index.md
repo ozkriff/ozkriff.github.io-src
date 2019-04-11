@@ -1,5 +1,5 @@
 +++
-title = "Jokers, Rancor, Blood and more"
+title = "Zemeroth v0.0.3: Jokers, Rancor, Blood and more"
 slug = "2017-12-01--devlog"
 +++
 
@@ -52,7 +52,7 @@ Deploying `apk`s is harder:
 circle-ci doesn't provide a built-in convenient way of deploying to Github,
 so you have to wield some curl/github_api magic.
 
-[All the magic is packed in ".circleci/upload_apk_to_github_releases.sh" script][upload_script]
+[All the magic is packed in .circleci/upload_apk_to_github_releases.sh script][upload_script]
 (which is based on [this gist]).
 
 Also, some [strange branch magic is required][branch magic]
@@ -465,5 +465,6 @@ _Whew! That was the longest piece of text in English that I've ever written O.o.
 
 That's all for today! :)
 
-**News**: [@ozkriff on twitter](https://twitter.com/ozkriff),
-[imgur devlog](imgur.com/a/SMVqO)
+**Discussions**:
+[/r/rust](https://www.reddit.com/r/rust/comments/7gy3wx/zemeroths_devlog_2_jokers_rancor_blood_and_more/),
+[twitter](https://twitter.com/ozkriff/status/936708540168884224).

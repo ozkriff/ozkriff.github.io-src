@@ -232,8 +232,9 @@ Thanks, @Torkleyy!
 
 That's all for today, I have to go play [Into the Breach][itb]! :)
 
-**News**: [@ozkriff on twitter](https://twitter.com/ozkriff),
-[imgur devlog](imgur.com/a/SMVqO)
+**Discussions**:
+[/r/rust](https://www.reddit.com/r/rust/comments/81s7va/zemeroth_v04_abilities_lasting_effects_and_new),
+[twitter](https://twitter.com/ozkriff/status/970017320637747200).
 
 [Zemeroth]: https://github.com/ozkriff/zemeroth
 [tokei]: https://github.com/Aaronepower/tokei

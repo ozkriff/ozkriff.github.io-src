@@ -199,5 +199,6 @@ That’s all for today :)
 In case you're wondering, here's full Imgur-devlog which I'm trying to
 keep updated: <http://imgur.com/a/SMVqO>
 
-And you can subscribe to instant updates on twitter:
-<https://twitter.com/ozkriff> ;-)
+**Discussions**:
+[/r/rust](https://www.reddit.com/r/rust/comments/6uar27/zoc_is_dead_long_life_zemeroth),
+[twitter](https://twitter.com/ozkriff/status/898207059862319104).
