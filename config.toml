@@ -11,3 +11,4 @@ hyde_links = [
     {name = "twitter", url = "https://twitter.com/ozkriff"},
     {name = "github", url = "https://github.com/ozkriff"},
 ]
+hyde_google_analytics_account = "UA-70829739-1"
