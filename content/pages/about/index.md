@@ -15,10 +15,9 @@ My main hobby project at the moment is a turn-based tactical game
 
 Links:
 
-- Twitter:
-  - [@ozkriff](https://twitter.com/ozkriff)
-  - [@ozkriff_ru](https://twitter.com/ozkriff_ru)
-  - [@rust_gamedev](https://twitter.com/rust_gamedev)
+- Twitter: [@ozkriff](https://twitter.com/ozkriff),
+  [@ozkriff_ru](https://twitter.com/ozkriff_ru),
+  [@rust_gamedev](https://twitter.com/rust_gamedev)
 - [Github](https://github.com/ozkriff)
 - [itch.io](https://ozkriff.itch.io)
 - [LinkedIn](https://www.linkedin.com/in/андрей-лесников-041133b2)
