@@ -20,6 +20,7 @@ Links:
   [@rust_gamedev](https://twitter.com/rust_gamedev)
 - [Github](https://github.com/ozkriff)
 - [itch.io](https://ozkriff.itch.io)
+- [YouTube](https://www.youtube.com/user/ozkriff619/videos)
 - [LinkedIn](https://www.linkedin.com/in/андрей-лесников-041133b2)
 - [Reddit](https://www.reddit.com/user/ozkriff)
 - [vk.com](https://vk.com/ozkriff)
