@@ -35,12 +35,21 @@ No native Android version, but the web port works fine on mobile.
 Debug builds are super-slow now.
 I'm using nightly cargo feature to hack around this when I really need a debug build.
 
+> RIP [Häte2d](https://docs.rs/hate), you were a fun experiment,
+> but using ggez is much more practical.
+>
+> The most serious downside of the engine switch,
+> [though temporary](https://github.com/ggez/ggez/issues/70),
+> is that there's no Android version of the game for now.
+> And I don't like that much
+> [SDL2 native dependency](https://github.com/ozkriff/zemeroth/blob/d36340e17/.travis.yml#L29-L40).
+
 cgmath -> nalgebra
 (see [this](https://users.rust-lang.org/t/cgmath-looking-for-new-maintainers/20406))
 
 This PR:
 
-> - kills `häte` crate :cry: 
+> - kills `häte` crate :cry:
 > - renames `rancor` crate to `zcomponents`
 > - extracts `ggwp-zgui` and `ggwp-zscene` crates from `häte`'s dead body
 > - updates some deps
@@ -56,6 +65,16 @@ This PR:
 > The most serious downside of the engine switch, though temporary,
 > is that there's no Android version of the game now.
 
+ggwp?
+
+> ## What `ggwp-` prefix means?
+>
+> As Icefoxen asked to [not use `ggez-` prefix][ggwp]
+> I use `ggwp-` ("good game, well played!") to denote that the crate
+> belongs to ggez ecosystem, but is not official.
+
+[ggwp]: https://github.com/ggez/ggez/issues/373#issuecomment-390461696
+
 old note:
 
 > но в целом я 90% hate'а поверх ggez просто реализовал,
@@ -64,6 +83,17 @@ old note:
 > геморроя из-за перехода с cgmath на nalgebra :-\
 
 __TODO__: [Drawable::dimensions() #567](https://github.com/ggez/ggez/pull/567)
+
+> [Ported Zemeroth to ggez v0.5.0-rc.0](https://github.com/ozkriff/zemeroth/pull/426),
+> filed [a bunch of mostly text-related issues in the process](https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01)
+> (sorry, /u/icefoxen!) and tried to fix the most critical ones for Zemeroth:
+> ["Remove the generic argument from Drawable::draw"](https://github.com/ggez/ggez/pull/559),
+> ["Drawable::dimensions()"](https://github.com/ggez/ggez/pull/567) (big one!) and
+> ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
+>
+> Now, [when GGEZ v0.5.0-rc.1 is out](https://www.reddit.com/r/rust_gamedev/comments/auexbj/ggez_050rc1_released),
+> I can switch to it and try to
+> [merge a WASM version of Zemeroth into master](https://github.com/ozkriff/zemeroth/issues/178).
 
 ## WASM
 
@@ -118,6 +148,15 @@ __TODO__: Add a photo from the Indikator
 I've created a page for Zemeroth on itch.io:
 [ozkriff.itch.io/zemeroth](https://ozkriff.itch.io/zemeroth)
 
+> Created [an itch.io list of Rust games](https://www.reddit.com/r/rust/comments/arm9dr/a_list_of_itchio_games_written_in_rust).
+>
+> Also, I've sent a request to itch.io folks to add Rust as an instrument,
+> so now a more official list is available:
+> [itch.io/games/made-with-rust](https://itch.io/games/made-with-rust).
+> Looks like my original list will be deprecated with time but
+> it's still useful for now because only authors of the games can add
+> an instrument to the metadata.
+
 ## Simple campaign mode
 
 Win and Loose screens.
@@ -126,6 +165,8 @@ Win and Loose screens.
 
 > Still working on a campaign mode with a carryover of the fighters
 > from one battle to the next.
+
+[campaign_01.ron](https://github.com/ozkriff/zemeroth_assets/blob/acd9fe9ef/campaign_01.ron)
 
 ## Hit chances
 
@@ -142,6 +183,8 @@ Wounded agents become less accurate.
 
 ![Hit chances demo](2018-09-29--old-hit-chances-demo.gif)
 (__TODO__: needs an update)
+
+[Show missing strength points as transparent dots](https://github.com/ozkriff/zemeroth/pull/343)
 
 ## Armor
 
@@ -173,7 +216,7 @@ slowly dissapear in three turns.
 
 ![__TODO__: description](agents-inkscape-mockup.jpeg)
 
-_Shadows_
+_Shadows_?
 
 > На макетах выше видно много градиентов. В текущей версии решил отказаться
 > от градиентов и всех округлостей, делая акцент на “типа-низкополигональном”
@@ -182,6 +225,10 @@ _Shadows_
 ## SVG Atlas
 
 ![TODO](2018-07-16--svg-atlas-test.png)
+
+[svg atlas](https://github.com/ozkriff/zemeroth_assets_src/blob/846a45b7c/atlas.svg)
+
+[export.py](https://github.com/ozkriff/zemeroth_assets_src/blob/846a45b7c/export.py)
 
 > 2018.07.16: Testing a simple python export script that extracts named objects
 > from an `.svg` atlas. Colored backgrounds are for debug purposes.
@@ -207,6 +254,11 @@ Resource hashes - md5. Travis check.
 > и не люблю git submodules. :-p
 
 ## Tests
+
+> it can be mitigated with special unit types with unrealistic stats
+> (for example, accuracy = 999, strength = 1) that allows them to always pass required tests (for example, always hits or always dies).
+>
+> and an additional `no_random` flag in the game state, that causes a panic if agent's stats during the "dice roll" may result in non-determined results (basically, it checks that the coefficients are large or low enough to shut off any dice value fluctuations).
 
 Woo-hoo
 
@@ -250,6 +302,11 @@ Woo-hoo
 
 ------
 
+> started [@rust_gamedev](http://twitter.com/rust_gamedev) twitter account in
+> an attempt to create some central point for #rustlang #gamedev stuff on twitter;
+
+------
+
 ## Devlog migrated from Pelican to Zola
 
 __TODO__: ...
@@ -258,9 +315,27 @@ __TODO__: ...
 
 ------
 
+[gave a presentation about Zemeroth project at 8th Indie-StandUp](https://twitter.com/ozkriff/status/1058359693503070208).
+
+------
+
 [Zemeroth is mentioned on Amit's page about hex math][amit].
 
 [amit]: https://www.redblobgames.com/grids/hexagons/implementation.html
+
+------
+
+## Roadmap
+
+What's next?
+
+You can find the roadmap [in the README](__TODO__);
+
+Short-term plans are:
+
+- GUI improvements
+- xxx
+- __TODO__;
 
 ------
 
