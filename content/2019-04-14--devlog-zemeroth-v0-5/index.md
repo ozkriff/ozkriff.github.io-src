@@ -18,6 +18,10 @@ Lot's of changes.
 
 ## Häte2d -> GGEZ
 
+> [Ported Zemeroth to ggez v0.5.0-rc.0](https://github.com/ozkriff/zemeroth/pull/426), filed [a bunch of mostly text-related issues in the process](https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01) (sorry, /u/icefoxen!) and tried to fix the most critical ones for Zemeroth: ["Remove the generic argument from Drawable::draw"](https://github.com/ggez/ggez/pull/559), ["Drawable::dimensions()"](https://github.com/ggez/ggez/pull/567) (big one!) and ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
+>
+>  Now, [when GGEZ v0.5.0-rc.1 is out](https://www.reddit.com/r/rust_gamedev/comments/auexbj/ggez_050rc1_released/), I can switch to it and try to [merge a WASM version of Zemeroth into master](https://github.com/ozkriff/zemeroth/issues/178).
+
 <https://github.com/ozkriff/zemeroth/pull/247>
 
 Maintaining your own engine isn't that fan in practice.
@@ -67,7 +71,7 @@ This PR:
 
 ggwp?
 
-> ## What `ggwp-` prefix means?
+> "__What does `ggwp-` prefix mean?__"
 >
 > As Icefoxen asked to [not use `ggez-` prefix][ggwp]
 > I use `ggwp-` ("good game, well played!") to denote that the crate
@@ -148,6 +152,8 @@ __TODO__: Add a photo from the Indikator
 I've created a page for Zemeroth on itch.io:
 [ozkriff.itch.io/zemeroth](https://ozkriff.itch.io/zemeroth)
 
+<https://twitter.com/ozkriff/status/1090615410242785280>
+
 > Created [an itch.io list of Rust games](https://www.reddit.com/r/rust/comments/arm9dr/a_list_of_itchio_games_written_in_rust).
 >
 > Also, I've sent a request to itch.io folks to add Rust as an instrument,
@@ -157,7 +163,36 @@ I've created a page for Zemeroth on itch.io:
 > it's still useful for now because only authors of the games can add
 > an instrument to the metadata.
 
+Lot's of feedback.
+
+> Обратной связи целый вагон, тут расписывать подробно поленюсь,
+> но чаще всего повторялось, что нужен более человечный GUI,
+> хоть какое-то руководство как в это играть и слишком сильный рандом -
+> главное направление действий после окончания миграции на ggez 0.5 ясно.
+>
+> Отдельно отмечу, что отхватил на итче [огромный отзыв](https://itch.io/post/660275).
+> Прям очень круто, что кто-то незнакомый продрался через супер-сырой интерфейс,
+> позалипал в игру, разобрался в большей части механик,
+> и не поленился написать развернутую и мотивирующую конструктивную критику.
+
 ## Simple campaign mode
+
+"Basic campaign mode with a carryover of the survivor fighters"
+
+> Представляет из себя просто цепочку боев с заранее заданными сценариями.
+> Если проигрываешь в бою - все, кампания для тебя закончилась, начинай сначала.
+> Если выигрываешь, то тебе показывается переходный экран со списком погибших,
+> текущим составом группы и вариантами кого ты можешь “докупить” в награду.
+>
+> Поскольку экран боя создается в экране главного меню или экране кампании,
+> а затем складывается в виде типаж-объекта на стек экранов,
+> возврат результата боя получилось организовать только через [канал](__TODO__).
+> Немного костыльно, но сойдет.
+>
+> Сейчас есть косяк с тем что если бой пошел неудачно,
+> то можно в любой момент выйти из него в меню кампании и начать бой заново.
+> Уже завел [задачу](https://github.com/ozkriff/zemeroth/issues/387)
+> на то, что бы пресечь это безобразие - “вечная смерть” наше все.
 
 Win and Loose screens.
 
@@ -167,6 +202,33 @@ Win and Loose screens.
 > from one battle to the next.
 
 [campaign_01.ron](https://github.com/ozkriff/zemeroth_assets/blob/acd9fe9ef/campaign_01.ron)
+
+------
+
+__TODO__: Not sure if this piece belongs to this section:
+
+> <https://github.com/ozkriff/zemeroth/pull/360>
+>
+> <https://github.com/ozkriff/zemeroth/pull/369>
+>
+> Добавлены зоны начального построения (lines) и генератор
+> больше не создает агентов в упор к врагам.
+>
+> С последним все просто - если рядом с клеткой стоит враг,
+> то она считается непригодной для начальной позиции.
+> Это помогает избежать дурацких ситуаций на первом ходу,
+> например когда важный дальнобойный боец оказывается по случайности
+> связан рукопашныи боем - теперь всегда есть возможность его отвести
+> куда-то и перегруппироваться.
+>
+> А насчет зон, добавлено перечисление
+> `pub enum Line { Any, Front, Middle, Back },`
+> позволяющее указывать в сценарии где мы какие виды агентов хотим видить.
+> Теперь демоны-вызываетли всегда сощдаются в дальнем конце карты за жвым щитом,
+> т.е. застрахованы от быстрой расправы на первом ходу.
+>
+> Снимок тестовой карты, в которую специально нагнана прям куча демонов что бы
+> четко были видны зоны и отступы: ...
 
 ## Hit chances
 
@@ -183,6 +245,32 @@ Wounded agents become less accurate.
 
 ![Hit chances demo](2018-09-29--old-hit-chances-demo.gif)
 (__TODO__: needs an update)
+
+> Из визуала:
+>
+> - При выделении готового к атаке бойца поверх врагов
+>   показываются шансы попасть по ним;
+> - Во время атаки под атакующим ненадолго появляется вероятность успеха атаки.
+>   Нужно, в первую очередь, что бы было понятнее насколько враги опасны.
+>
+> Пока я два недостатка описанной выше схемы знаю:
+>
+> - Сходу в ней не показать оружие, у которого нет градации урона.
+>   Хз что это именно за оружие должно быть и нужно ли оно мне (вряд ли),
+>   но штуки вида “или попал и нанес 4 урона, или не попал совсем”
+>   непредставимы без дополнительных костылей.
+> - Отравляющий демон наносит 0 урона при атках - т.е. его шанс попасть
+>   ниже остальных демонов.
+>   Тут вбил костыль в виде повышения его точности атаки.
+>
+> Какие изменния случились с балансом:
+>
+> - Теперь первоочередная цель это ранить врага,
+>   добивать уже может быть меньшим приоритетом - иногда удобно,
+>   что бы практически неспособный попасть по твоим бойцам враг
+>   занимал клетку и не давал его более здоровым друзьям подойти;
+> - Важность способности лечения у алхимика возросла, потому что толку
+>   от своих раненных бойцов становится сильно меньше.
 
 [Show missing strength points as transparent dots](https://github.com/ozkriff/zemeroth/pull/343)
 
@@ -209,7 +297,22 @@ Keep distance in the range.
 
 > flatten map a little bit and added some shadows
 
-Dust effect (jumps)
+Dust effect (jumps) - <https://github.com/ozkriff/zemeroth/pull/390>
+
+> пыль создается одной не очень большой функцией, которая просто создает
+> пачку спрайтов и навешивает на них цепочки простых действий перемещения
+> и изменения цвета.
+
+------
+
+> Добавил бойцам параметр WeaponType.
+> Пока есть четыре вида: smash, slash, pierce и claw
+> и они чисто визуальные - для выбора подходящей текстурки.
+> Некоторые спрайты атаки под углами смотрятся странно
+> (копейщик, я на тебя смотрю) надо будет потом дополнительные варианты
+> добавить и зеркалировать все это хозяйство по ситуации.
+
+------
 
 Blood splatters.
 slowly dissapear in three turns.
@@ -232,6 +335,8 @@ _Shadows_?
 
 > 2018.07.16: Testing a simple python export script that extracts named objects
 > from an `.svg` atlas. Colored backgrounds are for debug purposes.
+
+...
 
 > При реализации атласа пришлось вставить костыль для регулировки размера
 > экспортируемых спрайтов: в каждой именнованной группе объектов находится
@@ -256,9 +361,13 @@ Resource hashes - md5. Travis check.
 ## Tests
 
 > it can be mitigated with special unit types with unrealistic stats
-> (for example, accuracy = 999, strength = 1) that allows them to always pass required tests (for example, always hits or always dies).
+> (for example, accuracy = 999, strength = 1) that allows them
+> to always pass required tests (for example, always hits or always dies).
 >
-> and an additional `no_random` flag in the game state, that causes a panic if agent's stats during the "dice roll" may result in non-determined results (basically, it checks that the coefficients are large or low enough to shut off any dice value fluctuations).
+> and an additional `no_random` flag in the game state, that causes a panic
+> if agent's stats during the "dice roll" may result in non-determined results
+> (basically, it checks that the coefficients are large or low enough
+> to shut off any dice value fluctuations).
 
 Woo-hoo
 
@@ -299,6 +408,7 @@ Woo-hoo
 - [Fix panic when boulder is pushed into fire/spikes](https://github.com/ozkriff/zemeroth/pull/233);
 - [Merge all 'line_height' consts and funcs](https://github.com/ozkriff/zemeroth/pull/431)
 - `derive_more::From` for enums and errors;
+- [Removed data duplication from `objects.ron`](https://github.com/ozkriff/zemeroth/pull/365)
 
 ------
 
