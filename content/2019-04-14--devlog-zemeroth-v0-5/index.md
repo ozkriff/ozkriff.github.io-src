@@ -18,9 +18,15 @@ Lot's of changes.
 
 ## Häte2d -> GGEZ
 
-> [Ported Zemeroth to ggez v0.5.0-rc.0](https://github.com/ozkriff/zemeroth/pull/426), filed [a bunch of mostly text-related issues in the process](https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01) (sorry, /u/icefoxen!) and tried to fix the most critical ones for Zemeroth: ["Remove the generic argument from Drawable::draw"](https://github.com/ggez/ggez/pull/559), ["Drawable::dimensions()"](https://github.com/ggez/ggez/pull/567) (big one!) and ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
+> [Ported Zemeroth to ggez v0.5.0-rc.0](https://github.com/ozkriff/zemeroth/pull/426),
+> filed [a bunch of mostly text-related issues in the process](https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01)
+> (sorry, /u/icefoxen!) and tried to fix the most critical ones for Zemeroth:
+> ["Remove the generic argument from Drawable::draw"](https://github.com/ggez/ggez/pull/559),
+> ["Drawable::dimensions()"](https://github.com/ggez/ggez/pull/567) (big one!)
+> and ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
 >
->  Now, [when GGEZ v0.5.0-rc.1 is out](https://www.reddit.com/r/rust_gamedev/comments/auexbj/ggez_050rc1_released/), I can switch to it and try to [merge a WASM version of Zemeroth into master](https://github.com/ozkriff/zemeroth/issues/178).
+> Now, [when GGEZ v0.5.0-rc.1 is out](https://www.reddit.com/r/rust_gamedev/comments/auexbj/ggez_050rc1_released/),
+> I can switch to it and try to [merge a WASM version of Zemeroth into master](https://github.com/ozkriff/zemeroth/issues/178).
 
 <https://github.com/ozkriff/zemeroth/pull/247>
 
@@ -147,6 +153,8 @@ __TODO__: ...
 
 __TODO__: Add a photo from the Indikator
 
+![me presenting Zemeorth at Indikator](2018-11-03--indikator.jpg)
+
 ## itch.io
 
 I've created a page for Zemeroth on itch.io:
@@ -243,6 +251,9 @@ Attacks with strength > 1 have additional hit chances - with reduced damage
 
 Wounded agents become less accurate.
 
+In the current implementation, it's based on attacker's accuracy and target's
+dodge stats. The hit chance is reduced when attacker is wounded.
+
 ![Hit chances demo](2018-09-29--old-hit-chances-demo.gif)
 (__TODO__: needs an update)
 
@@ -305,6 +316,13 @@ Dust effect (jumps) - <https://github.com/ozkriff/zemeroth/pull/390>
 
 ------
 
+blood splatters and weapon flashes - <https://github.com/ozkriff/zemeroth/pull/401>
+
+Adds weapon flashes of four types: slash, smash, pierce and claw;
+Adds directed dynamic blood splatters.
+
+------
+
 > Добавил бойцам параметр WeaponType.
 > Пока есть четыре вида: smash, slash, pierce и claw
 > и они чисто визуальные - для выбора подходящей текстурки.
@@ -360,6 +378,10 @@ Resource hashes - md5. Travis check.
 
 ## Tests
 
+Test scenarios are completely deterministic.
+Randomness is canceled out with special agent types + special debug flag in
+game's state that causes a panic if you try to do anything with uncertain results
+
 > it can be mitigated with special unit types with unrealistic stats
 > (for example, accuracy = 999, strength = 1) that allows them
 > to always pass required tests (for example, always hits or always dies).
@@ -369,7 +391,18 @@ Resource hashes - md5. Travis check.
 > (basically, it checks that the coefficients are large or low enough
 > to shut off any dice value fluctuations).
 
+`pretty_assertions` crate is super-useful when you need to debug
+failing assert comparisons of big hierarchical objects
+(some of which may be many screens long in my case)
+
+<https://github.com/colin-kiegel/rust-pretty-assertions>
+
 Woo-hoo
+
+One of the benefits of making a turn-based game is that you can relatively easy
+separate the logic from the visuals and cover the former with tests.
+
+Added basic tests scenarios to #Zemeroth and refactored state mutations:
 
 ## Game Rules Changes
 
@@ -391,7 +424,15 @@ Woo-hoo
   on the map, not just random ones](https://twitter.com/ozkriff/status/1040321852495863808).
   Seems to work fine now - even with increased summon rate imp types
   are balanced in count:
+
   [img](2018-09-14--map-lines.png)
+
+  This prevents Imp Summoners from being created only a tile away from enemies
+  and thus not having any chances to survive.
+
+- Teach AI to move closer to targets even if there's no direct path to them
+
+  <https://github.com/ozkriff/zemeroth/pull/308>
 
 ## Other Changes
 
@@ -435,15 +476,22 @@ __TODO__: ...
 
 ------
 
+__TODO__: Bonus: stress testing screenshots? Not sure the post really needs them.
+
+------
+
 ## Roadmap
 
 What's next?
 
 You can find the roadmap [in the README](__TODO__);
 
+> I want reactions system to be the core of the game. Atm, only basic reactions (attacking) is implemented, but I hope to add more interesting behaviors: auto-jumping away when an enemy approaches or something more aggressive auto-movement (like Muton Berserker from the X-Com).
+
 Short-term plans are:
 
 - GUI improvements
+- [Reduce text overlapping](https://github.com/ozkriff/zemeroth/issues/214)
 - xxx
 - __TODO__;
 
