@@ -1,5 +1,5 @@
 +++
-title = "Zemeroth v0.5: GGEZ and WASM"
+title = "Zemeroth v0.5: GGEZ, WASM, itch.io"
 +++
 
 Hi, comrades! I'm happy to announce Zemeroth v0.5.
@@ -18,15 +18,7 @@ Lot's of changes.
 
 ## Häte2d -> GGEZ
 
-> [Ported Zemeroth to ggez v0.5.0-rc.0](https://github.com/ozkriff/zemeroth/pull/426),
-> filed [a bunch of mostly text-related issues in the process](https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01)
-> (sorry, /u/icefoxen!) and tried to fix the most critical ones for Zemeroth:
-> ["Remove the generic argument from Drawable::draw"](https://github.com/ggez/ggez/pull/559),
-> ["Drawable::dimensions()"](https://github.com/ggez/ggez/pull/567) (big one!)
-> and ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
->
-> Now, [when GGEZ v0.5.0-rc.1 is out](https://www.reddit.com/r/rust_gamedev/comments/auexbj/ggez_050rc1_released/),
-> I can switch to it and try to [merge a WASM version of Zemeroth into master](https://github.com/ozkriff/zemeroth/issues/178).
+__TODO__: More descriptive section title
 
 <https://github.com/ozkriff/zemeroth/pull/247>
 
@@ -95,15 +87,17 @@ old note:
 __TODO__: [Drawable::dimensions() #567](https://github.com/ggez/ggez/pull/567)
 
 > [Ported Zemeroth to ggez v0.5.0-rc.0](https://github.com/ozkriff/zemeroth/pull/426),
-> filed [a bunch of mostly text-related issues in the process](https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01)
+> filed [a bunch of mostly text-related issues in the process][ggez-text-issues]
 > (sorry, /u/icefoxen!) and tried to fix the most critical ones for Zemeroth:
 > ["Remove the generic argument from Drawable::draw"](https://github.com/ggez/ggez/pull/559),
-> ["Drawable::dimensions()"](https://github.com/ggez/ggez/pull/567) (big one!) and
-> ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
+> ["Drawable::dimensions()"](https://github.com/ggez/ggez/pull/567) (big one!)
+> and ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
 >
 > Now, [when GGEZ v0.5.0-rc.1 is out](https://www.reddit.com/r/rust_gamedev/comments/auexbj/ggez_050rc1_released),
 > I can switch to it and try to
 > [merge a WASM version of Zemeroth into master](https://github.com/ozkriff/zemeroth/issues/178).
+
+[ggez-text-issues]: https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01
 
 ## WASM
 
@@ -151,10 +145,6 @@ __TODO__: ...
 
 ![TODO](2019-01-29--web-port-vs-native.jpg)
 
-__TODO__: Add a photo from the Indikator
-
-![me presenting Zemeorth at Indikator](2018-11-03--indikator.jpg)
-
 ## itch.io
 
 I've created a page for Zemeroth on itch.io:
@@ -182,6 +172,45 @@ Lot's of feedback.
 > Прям очень круто, что кто-то незнакомый продрался через супер-сырой интерфейс,
 > позалипал в игру, разобрался в большей части механик,
 > и не поленился написать развернутую и мотивирующую конструктивную критику.
+
+## Graphics
+
+> flatten map a little bit and added some shadows
+
+Dust effect (jumps) - <https://github.com/ozkriff/zemeroth/pull/390>
+
+> пыль создается одной не очень большой функцией, которая просто создает
+> пачку спрайтов и навешивает на них цепочки простых действий перемещения
+> и изменения цвета.
+
+------
+
+blood splatters and weapon flashes - <https://github.com/ozkriff/zemeroth/pull/401>
+
+Adds weapon flashes of four types: slash, smash, pierce and claw;
+Adds directed dynamic blood splatters.
+
+------
+
+> Добавил бойцам параметр WeaponType.
+> Пока есть четыре вида: smash, slash, pierce и claw
+> и они чисто визуальные - для выбора подходящей текстурки.
+> Некоторые спрайты атаки под углами смотрятся странно
+> (копейщик, я на тебя смотрю) надо будет потом дополнительные варианты
+> добавить и зеркалировать все это хозяйство по ситуации.
+
+------
+
+Blood splatters.
+slowly dissapear in three turns.
+
+![__TODO__: description](agents-inkscape-mockup.jpeg)
+
+_Shadows_?
+
+> На макетах выше видно много градиентов. В текущей версии решил отказаться
+> от градиентов и всех округлостей, делая акцент на “типа-низкополигональном”
+> угловатом стиле. На данный момент игра выглядит вот так: __TODO__.
 
 ## Simple campaign mode
 
@@ -304,44 +333,41 @@ __TODO__: gifs (record new?)
 
 Keep distance in the range.
 
-## Graphics
+## Game Rules Changes
 
-> flatten map a little bit and added some shadows
+- Spike traps
 
-Dust effect (jumps) - <https://github.com/ozkriff/zemeroth/pull/390>
+- [Updated](https://github.com/ozkriff/zemeroth/pull/351) "Poison" passive ability:
+  it can’t, by itself, kill an agent anymore.
+  “Poisoned” status is removed when a target’s strength is reduced to 1.
+  This should make battles a little bit less frustrating and more dramatic.
 
-> пыль создается одной не очень большой функцией, которая просто создает
-> пачку спрайтов и навешивает на них цепочки простых действий перемещения
-> и изменения цвета.
+- [Updated](https://github.com/ozkriff/zemeroth/pull/349) ‘Summon’ ability:
+  each use of it now creates one more imp (up to 6).
+  It should force the player to be more aggressive.
 
-------
+- __TODO__: Commutative bombs (__TODO__: <https://github.com/ozkriff/zemeroth/pull/296>,
+  <https://github.com/ozkriff/zemeroth/issues/286>)
 
-blood splatters and weapon flashes - <https://github.com/ozkriff/zemeroth/pull/401>
+- [Changed the summoning algorithm to prefer imp types that are under-presented
+  on the map, not just random ones](https://twitter.com/ozkriff/status/1040321852495863808).
+  Seems to work fine now - even with increased summon rate imp types
+  are balanced in count:
 
-Adds weapon flashes of four types: slash, smash, pierce and claw;
-Adds directed dynamic blood splatters.
+  [img](2018-09-14--map-lines.png)
 
-------
+  This prevents Imp Summoners from being created only a tile away from enemies
+  and thus not having any chances to survive.
 
-> Добавил бойцам параметр WeaponType.
-> Пока есть четыре вида: smash, slash, pierce и claw
-> и они чисто визуальные - для выбора подходящей текстурки.
-> Некоторые спрайты атаки под углами смотрятся странно
-> (копейщик, я на тебя смотрю) надо будет потом дополнительные варианты
-> добавить и зеркалировать все это хозяйство по ситуации.
+- Teach AI to move closer to targets even if there's no direct path to them
 
-------
+  <https://github.com/ozkriff/zemeroth/pull/308>
 
-Blood splatters.
-slowly dissapear in three turns.
+## Gameplay Video
 
-![__TODO__: description](agents-inkscape-mockup.jpeg)
+So, putting this all together:
 
-_Shadows_?
-
-> На макетах выше видно много градиентов. В текущей версии решил отказаться
-> от градиентов и всех округлостей, делая акцент на “типа-низкополигональном”
-> угловатом стиле. На данный момент игра выглядит вот так: __TODO__.
+__TODO__: _Record a gameplay video_
 
 ## SVG Atlas
 
@@ -404,37 +430,7 @@ separate the logic from the visuals and cover the former with tests.
 
 Added basic tests scenarios to #Zemeroth and refactored state mutations:
 
-## Game Rules Changes
-
-- Spike traps
-
-- [Updated](https://github.com/ozkriff/zemeroth/pull/351) "Poison" passive ability:
-  it can’t, by itself, kill an agent anymore.
-  “Poisoned” status is removed when a target’s strength is reduced to 1.
-  This should make battles a little bit less frustrating and more dramatic.
-
-- [Updated](https://github.com/ozkriff/zemeroth/pull/349) ‘Summon’ ability:
-  each use of it now creates one more imp (up to 6).
-  It should force the player to be more aggressive.
-
-- __TODO__: Commutative bombs (__TODO__: <https://github.com/ozkriff/zemeroth/pull/296>,
-  <https://github.com/ozkriff/zemeroth/issues/286>)
-
-- [Changed the summoning algorithm to prefer imp types that are under-presented
-  on the map, not just random ones](https://twitter.com/ozkriff/status/1040321852495863808).
-  Seems to work fine now - even with increased summon rate imp types
-  are balanced in count:
-
-  [img](2018-09-14--map-lines.png)
-
-  This prevents Imp Summoners from being created only a tile away from enemies
-  and thus not having any chances to survive.
-
-- Teach AI to move closer to targets even if there's no direct path to them
-
-  <https://github.com/ozkriff/zemeroth/pull/308>
-
-## Other Changes
+## Other Technical Changes
 
 - [Moved all crates to Rust 2018](https://github.com/ozkriff/zemeroth/pull/394);
 - [Added a note about 'help-wanted' issues](https://github.com/ozkriff/zemeroth/pull/226)
@@ -451,6 +447,22 @@ Added basic tests scenarios to #Zemeroth and refactored state mutations:
 - `derive_more::From` for enums and errors;
 - [Removed data duplication from `objects.ron`](https://github.com/ozkriff/zemeroth/pull/365)
 
+## Indikator
+
+[gave a presentation about Zemeroth project at 8th Indie-StandUp][indikator_tw].
+
+[indikator_tw]: https://twitter.com/ozkriff/status/1058359693503070208
+
+Gave a presentation about #Zemeroth project at 8th Indie-StandUp in Indie_Space_SPB.
+
+![me presenting Zemeorth at Indikator](2018-11-03--indikator.jpg)
+
+------
+
+[Zemeroth is mentioned on Amit's page about hex math][amit].
+
+[amit]: https://www.redblobgames.com/grids/hexagons/implementation.html
+
 ------
 
 > started [@rust_gamedev](http://twitter.com/rust_gamedev) twitter account in
@@ -466,27 +478,16 @@ __TODO__: ...
 
 ------
 
-[gave a presentation about Zemeroth project at 8th Indie-StandUp](https://twitter.com/ozkriff/status/1058359693503070208).
-
-------
-
-[Zemeroth is mentioned on Amit's page about hex math][amit].
-
-[amit]: https://www.redblobgames.com/grids/hexagons/implementation.html
-
-------
-
-__TODO__: Bonus: stress testing screenshots? Not sure the post really needs them.
-
-------
-
 ## Roadmap
 
 What's next?
 
 You can find the roadmap [in the README](__TODO__);
 
-> I want reactions system to be the core of the game. Atm, only basic reactions (attacking) is implemented, but I hope to add more interesting behaviors: auto-jumping away when an enemy approaches or something more aggressive auto-movement (like Muton Berserker from the X-Com).
+> I want reactions system to be the core of the game. Atm, only basic reactions
+> (attacking) is implemented, but I hope to add more interesting behaviors:
+> auto-jumping away when an enemy approaches or something
+> more aggressive auto-movement (like Muton Berserker from the X-Com).
 
 Short-term plans are:
 
