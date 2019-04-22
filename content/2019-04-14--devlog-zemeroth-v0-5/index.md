@@ -1,105 +1,57 @@
 +++
-title = "Zemeroth v0.5: GGEZ, WASM, itch.io"
+title = "Zemeroth v0.5: ggez, WASM, itch.io"
+slug = "2019-04-14--devlog-zemeroth-v0-5"
 +++
 
-Hi, comrades! I'm happy to announce Zemeroth v0.5.
-
+Hi, folks! I'm happy to announce Zemeroth v0.5.
 [Zemeroth] is a turn-based hexagonal tactical game written in Rust.
 
-You can **download precompiled binaries** for Windows, Linux, macOS and android here:
+You can **download precompiled binaries** for Windows, Linux, macOS:
 <https://github.com/ozkriff/zemeroth/releases/tag/v0.5.0>
 
-__TODO__: you can play an online version _here_
+(__TODO__: Also, you can play an online version _here_,
+more about the web version in "WASM" section)
+
+Main features of this release are:
+ggez engine, web version, itch.io page, visual updates, campaign mode, and tests.
 
 More than a year of lazy work.
-Забрасывал разработку.
+
+Abandoned the development for whole months.
 
 Lot's of changes.
 
-## Häte2d -> GGEZ
+## Migration to the `ggez` engine
 
-__TODO__: More descriptive section title
+[Häte2d was discontinued](https://github.com/ozkriff/zemeroth/pull/247).
+Because maintaining your own engine isn't that fan in practice.
+(__TODO__: add a link to `ggez`'s maintainance issues)
+<https://github.com/ggez/ggez/labels/bug>
 
-<https://github.com/ozkriff/zemeroth/pull/247>
+...
 
-Maintaining your own engine isn't that fan in practice.
-(__TODO__: add a link to GGEZ's maintainance issues)
+The most serious downside of the engine switch,
+[though temporary](https://github.com/ggez/ggez/issues/70),
+is that there's no native Android version of the game for now.
+But who really needs a native port when you have...
 
-__TODO__: ...
+## WASM port
 
-- ggwp-zgui
-- ggwp-zscene
+`good-web-game` is mostly source compatible with ggez.
 
-Btw, zcomponents crate now lives on crates.io.
-
-No native Android version, but the web port works fine on mobile.
-
-Debug builds are super-slow now.
-I'm using nightly cargo feature to hack around this when I really need a debug build.
-
-> RIP [Häte2d](https://docs.rs/hate), you were a fun experiment,
-> but using ggez is much more practical.
+> Note that good-web-game is not really GGEZ's backend,
+> but a separate web-targeted engine with a similar API
+> that @not-fl3 uses for his prototypes.
 >
-> The most serious downside of the engine switch,
-> [though temporary](https://github.com/ggez/ggez/issues/70),
-> is that there's no Android version of the game for now.
-> And I don't like that much
-> [SDL2 native dependency](https://github.com/ozkriff/zemeroth/blob/d36340e17/.travis.yml#L29-L40).
-
-cgmath -> nalgebra
-(see [this](https://users.rust-lang.org/t/cgmath-looking-for-new-maintainers/20406))
-
-This PR:
-
-> - kills `häte` crate :cry:
-> - renames `rancor` crate to `zcomponents`
-> - extracts `ggwp-zgui` and `ggwp-zscene` crates from `häte`'s dead body
-> - updates some deps
-> - renames `game_view` mod to `battle_view`
-> - removes all android stuff (circleci config, readme info, `do_android` script,
->   Cargo.toml metadata, etc)
-> - install SDL2 on CI
-> - removes deployment step from CI
-> - adds `time_s` helper func
-> - changes bg color
-> - ton of other small tweaks
+> Zemeroth uses good-web-game for its web version as a quick-n-dirty
+> immediate solution until a proper WASM support arrives to GGEZ
+> (there're no plans of making good-web-game some kind of official GGEZ backend).
 >
-> The most serious downside of the engine switch, though temporary,
-> is that there's no Android version of the game now.
+> The currently implemented subset of GGEZ API is quite limited
+> and while it may be used for something else that Zemeroth,
+> it will probably require a lot of work to do (contributions are welcome ;) ).
 
-ggwp?
-
-> "__What does `ggwp-` prefix mean?__"
->
-> As Icefoxen asked to [not use `ggez-` prefix][ggwp]
-> I use `ggwp-` ("good game, well played!") to denote that the crate
-> belongs to ggez ecosystem, but is not official.
-
-[ggwp]: https://github.com/ggez/ggez/issues/373#issuecomment-390461696
-
-old note:
-
-> но в целом я 90% hate'а поверх ggez просто реализовал,
-> так что код самого проекта не так уж и сильно зацепило.
-> ядро с логикой вообще не тронуто, в визуализаторе больше всего
-> геморроя из-за перехода с cgmath на nalgebra :-\
-
-__TODO__: [Drawable::dimensions() #567](https://github.com/ggez/ggez/pull/567)
-
-> [Ported Zemeroth to ggez v0.5.0-rc.0](https://github.com/ozkriff/zemeroth/pull/426),
-> filed [a bunch of mostly text-related issues in the process][ggez-text-issues]
-> (sorry, /u/icefoxen!) and tried to fix the most critical ones for Zemeroth:
-> ["Remove the generic argument from Drawable::draw"](https://github.com/ggez/ggez/pull/559),
-> ["Drawable::dimensions()"](https://github.com/ggez/ggez/pull/567) (big one!)
-> and ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
->
-> Now, [when GGEZ v0.5.0-rc.1 is out](https://www.reddit.com/r/rust_gamedev/comments/auexbj/ggez_050rc1_released),
-> I can switch to it and try to
-> [merge a WASM version of Zemeroth into master](https://github.com/ozkriff/zemeroth/issues/178).
-
-[ggez-text-issues]: https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01
-
-## WASM
+A hack to substitute the crate:
 
 ```rust
 #[cfg(not(target_arch = "wasm32"))]
@@ -108,6 +60,8 @@ extern crate ggez;
 #[cfg(target_arch = "wasm32")]
 extern crate good_web_game as ggez;
 ```
+
+(__TODO__: why can't I do this in `Cargo.toml`?)
 
 ```rust
 #[cfg(target_arch = "wasm32")]
@@ -126,6 +80,8 @@ fn main() -> GameResult {
 }
 ```
 
+A short helper script:
+
 ```sh
 $ cat utils/wasm/build.sh
 #!/bin/sh
@@ -134,6 +90,15 @@ cp utils/wasm/index.html static
 ls static > static/index.txt
 cargo web build
 ```
+
+The script prepares a `static` directory that will be packed by cargo-web.
+
+cargo-web only packs `static` directory, so the script copies the game's assets there.
+
+It also copies the `index.html` template page there.
+
+And adds a good-web-game specific file that lists all resources
+that should be loadable by the engine.
 
 __TODO__: ...
 
@@ -152,7 +117,7 @@ I've created a page for Zemeroth on itch.io:
 
 <https://twitter.com/ozkriff/status/1090615410242785280>
 
-> Created [an itch.io list of Rust games](https://www.reddit.com/r/rust/comments/arm9dr/a_list_of_itchio_games_written_in_rust).
+> Created [an itch.io list of Rust games][itch-rust-list].
 >
 > Also, I've sent a request to itch.io folks to add Rust as an instrument,
 > so now a more official list is available:
@@ -161,19 +126,11 @@ I've created a page for Zemeroth on itch.io:
 > it's still useful for now because only authors of the games can add
 > an instrument to the metadata.
 
+[itch-rust-list]: https://www.reddit.com/r/rust/comments/arm9dr/a_list_of_itchio_games_written_in_rust
+
 Lot's of feedback.
 
-> Обратной связи целый вагон, тут расписывать подробно поленюсь,
-> но чаще всего повторялось, что нужен более человечный GUI,
-> хоть какое-то руководство как в это играть и слишком сильный рандом -
-> главное направление действий после окончания миграции на ggez 0.5 ясно.
->
-> Отдельно отмечу, что отхватил на итче [огромный отзыв](https://itch.io/post/660275).
-> Прям очень круто, что кто-то незнакомый продрался через супер-сырой интерфейс,
-> позалипал в игру, разобрался в большей части механик,
-> и не поленился написать развернутую и мотивирующую конструктивную критику.
-
-## Graphics
+## Visuals
 
 > flatten map a little bit and added some shadows
 
@@ -204,7 +161,11 @@ Adds directed dynamic blood splatters.
 Blood splatters.
 slowly dissapear in three turns.
 
+Initial draft of the new sprites looked like this:
+
 ![__TODO__: description](agents-inkscape-mockup.jpeg)
+
+^ _yeah, Floating Eye and Insecto-snake haven't made it to the master yet._
 
 _Shadows_?
 
@@ -268,8 +229,6 @@ __TODO__: Not sure if this piece belongs to this section:
 > четко были видны зоны и отступы: ...
 
 ## Hit chances
-
-...
 
 [Implemented hit chances](https://github.com/ozkriff/zemeroth/pull/370).
 Added `attack_accuracy`  and  `dodge`  stats to  `Agent`  component
@@ -342,22 +301,26 @@ Keep distance in the range.
   “Poisoned” status is removed when a target’s strength is reduced to 1.
   This should make battles a little bit less frustrating and more dramatic.
 
-- [Updated](https://github.com/ozkriff/zemeroth/pull/349) ‘Summon’ ability:
-  each use of it now creates one more imp (up to 6).
-  It should force the player to be more aggressive.
+- Updates to the "Summon" ability:
+
+  - [Fix 'summon' ability - treat each agent individually](https://github.com/ozkriff/zemeroth/pull/413)
+
+  - [Updated](https://github.com/ozkriff/zemeroth/pull/349) ‘Summon’ ability:
+    each use of it now creates one more imp (up to 6).
+    It should force the player to be more aggressive.
+
+  - [Changed the summoning algorithm to prefer imp types that are under-presented
+    on the map, not just random ones](https://twitter.com/ozkriff/status/1040321852495863808).
+    Seems to work fine now - even with increased summon rate imp types
+    are balanced in count:
+
+    [img](2018-09-14--map-lines.png)
+
+    This prevents Imp Summoners from being created only a tile away from enemies
+    and thus not having any chances to survive.
 
 - __TODO__: Commutative bombs (__TODO__: <https://github.com/ozkriff/zemeroth/pull/296>,
   <https://github.com/ozkriff/zemeroth/issues/286>)
-
-- [Changed the summoning algorithm to prefer imp types that are under-presented
-  on the map, not just random ones](https://twitter.com/ozkriff/status/1040321852495863808).
-  Seems to work fine now - even with increased summon rate imp types
-  are balanced in count:
-
-  [img](2018-09-14--map-lines.png)
-
-  This prevents Imp Summoners from being created only a tile away from enemies
-  and thus not having any chances to survive.
 
 - Teach AI to move closer to targets even if there's no direct path to them
 
@@ -404,6 +367,11 @@ Resource hashes - md5. Travis check.
 
 ## Tests
 
+One of the benefits of making a turn-based game is that you can relatively easy
+separate the logic from the visuals and cover the former with tests.
+
+Added basic tests scenarios to #Zemeroth and refactored state mutations.
+
 Test scenarios are completely deterministic.
 Randomness is canceled out with special agent types + special debug flag in
 game's state that causes a panic if you try to do anything with uncertain results
@@ -424,11 +392,6 @@ failing assert comparisons of big hierarchical objects
 <https://github.com/colin-kiegel/rust-pretty-assertions>
 
 Woo-hoo
-
-One of the benefits of making a turn-based game is that you can relatively easy
-separate the logic from the visuals and cover the former with tests.
-
-Added basic tests scenarios to #Zemeroth and refactored state mutations:
 
 ## Other Technical Changes
 
@@ -465,11 +428,6 @@ Gave a presentation about #Zemeroth project at 8th Indie-StandUp in Indie_Space_
 
 ------
 
-> started [@rust_gamedev](http://twitter.com/rust_gamedev) twitter account in
-> an attempt to create some central point for #rustlang #gamedev stuff on twitter;
-
-------
-
 ## Devlog migrated from Pelican to Zola
 
 __TODO__: ...
@@ -500,8 +458,13 @@ Short-term plans are:
 
 That's all for today, thanks for reading!
 
-**Discussions**:
+__TODO__:
+> I've started a [@rust_gamedev](http://twitter.com/rust_gamedev) twitter account
+> in an attempt to create some central point for #rustlang #gamedev stuff on twitter;
+> Follow.
+
+**Discussions of this post**:
 [/r/rust](__TODO__),
-[twitter](__TODO__) (__TODO__).
+[twitter](__TODO__).
 
 [Zemeroth]: https://github.com/ozkriff/zemeroth
