@@ -4,29 +4,62 @@ slug = "2019-04-14--devlog-zemeroth-v0-5"
 +++
 
 Hi, folks! I'm happy to announce Zemeroth v0.5.
+
 [Zemeroth] is a turn-based hexagonal tactical game written in Rust.
+You can [download precompiled v0.5 binaries][release v0.5]
+for Windows, Linux, and macOS.
+Also, now you can **[play an online version](https://ozkriff.itch.io/zemeroth)**
+(read more about the web version in the "WASM" section below).
 
-You can **download precompiled binaries** for Windows, Linux, macOS:
-<https://github.com/ozkriff/zemeroth/releases/tag/v0.5.0>
+The last release happened about a year ago.
+Since then, development haven't been that active,
+sometimes even completely stalled for weeks.
+But a year is a big period of time anyway, so there're still lots of changes.
 
-(__TODO__: Also, you can play an online version _here_,
-more about the web version in "WASM" section)
+Main features of v0.5 release are:
+migration to ggez engine, web version, itch.io page, visual updates,
+campaign mode, and tests.
 
-Main features of this release are:
-ggez engine, web version, itch.io page, visual updates, campaign mode, and tests.
+[release v0.5]: https://github.com/ozkriff/zemeroth/releases/tag/v0.5.0
 
-More than a year of lazy work.
+## Migration to `ggez` engine
 
-Abandoned the development for whole months.
+Maintaining your own engine (even a simple and minimalistic 2D one)
+turned out to be really not fun for me in practice -
+you have to fight a constant stream of a small corner case issues
+and platform-specific tweaks and hacks.
 
-Lot's of changes.
-
-## Migration to the `ggez` engine
-
-[Häte2d was discontinued](https://github.com/ozkriff/zemeroth/pull/247).
-Because maintaining your own engine isn't that fan in practice.
+So I've surrended: [discontinued my tiny game engine Häte2d][pr247]
+and migrated to [ggez],
+because ???.
+I though that I knew that it's a hard task but it turned out even worse.
+(__TODO__: link to ggez's hidpi issues on macos)
+(__TODO__: на ровном месте возникает огроомное количество всяких мелочей.
+и это даже если делать чисто для себя движок.
+а ведь обидно, что его никто не используется.
+но делать движок общего назначения еще на порядок сложнее.
+это все интересный опыт, но игру я так и за десяток лет не закончил бы).
 (__TODO__: add a link to `ggez`'s maintainance issues)
 <https://github.com/ggez/ggez/labels/bug>
+
+[pr247]: https://github.com/ozkriff/zemeroth/pull/247
+[ggez]: https://github.com/ggez/ggez
+
+It was a long process.
+Initially I migrated to ggez v0.4 that was SDL2-based.
+
+As soon as the first RC for ggez v0.5 became aviable
+I attempted to migrate to it.
+
+ggez v0.5 is still not released atm,
+but the aviable RC2 is stable enough for me.
+
+...
+
+`hate` had a built in basic scene management and GUI systems,
+but `ggez` is a minimalistic engine and
+
+Two helper crates were extracted from Häte2d
 
 ...
 
@@ -36,6 +69,8 @@ is that there's no native Android version of the game for now.
 But who really needs a native port when you have...
 
 ## WASM port
+
+__TODO__: link to Icefoxen's plans about WASM support in ggez
 
 `good-web-game` is mostly source compatible with ggez.
 
@@ -128,11 +163,15 @@ I've created a page for Zemeroth on itch.io:
 
 [itch-rust-list]: https://www.reddit.com/r/rust/comments/arm9dr/a_list_of_itchio_games_written_in_rust
 
-Lot's of feedback.
+Lots of feedback.
 
-## Visuals
+Btw, I've also created an itch.io page for Zone of Control.
 
-> flatten map a little bit and added some shadows
+## Visual Improvements
+
+Flatten map a little bit and added some shadows
+
+------
 
 Dust effect (jumps) - <https://github.com/ozkriff/zemeroth/pull/390>
 
@@ -149,12 +188,24 @@ Adds directed dynamic blood splatters.
 
 ------
 
+Every agent now has `WeaponType`:
+
+- smash
+- slash
+- pierce
+- claw
+
+For now thay are just a visual information.
+They affect only what sprite is used during the attack animation.
+
 > Добавил бойцам параметр WeaponType.
 > Пока есть четыре вида: smash, slash, pierce и claw
 > и они чисто визуальные - для выбора подходящей текстурки.
 > Некоторые спрайты атаки под углами смотрятся странно
 > (копейщик, я на тебя смотрю) надо будет потом дополнительные варианты
 > добавить и зеркалировать все это хозяйство по ситуации.
+
+(__TODO__: это было в реддите или на гитхабе на английском)
 
 ------
 
@@ -401,7 +452,7 @@ Woo-hoo
   and added `time_s` helper function (__TODO__: link and explain).
 - Fixed a fun bug ([taking control of imp summoners](https://github.com/ozkriff/zemeroth/issues/288))
 - [Removed](https://github.com/ozkriff/zemeroth/pull/365) some data duplication
-  from [the `.ron` config with objects descriptions](https://github.com/ozkriff/zemeroth_assets/blob/69e6fb34c/objects.ron)
+  from [the `.ron` config with objects descriptions][objects_ron]
   using serde's default annotations and helper init functions.
 - [Added a `windows_subsystem` attribute](https://github.com/ozkriff/zemeroth/pull/220).
   Don't show cmd window.
@@ -410,13 +461,16 @@ Woo-hoo
 - `derive_more::From` for enums and errors;
 - [Removed data duplication from `objects.ron`](https://github.com/ozkriff/zemeroth/pull/365)
 
+[objects_ron]: https://github.com/ozkriff/zemeroth_assets/blob/69e6fb34c/objects.ron
+
 ## Indikator
 
-[gave a presentation about Zemeroth project at 8th Indie-StandUp][indikator_tw].
+[Gave a presentation about Zemeroth][indikator_twit] at 8th Indie-StandUp
+at Indikator (previousy known as Indie Space).
 
-[indikator_tw]: https://twitter.com/ozkriff/status/1058359693503070208
+__TODO__: What is Indikator? Give a link.
 
-Gave a presentation about #Zemeroth project at 8th Indie-StandUp in Indie_Space_SPB.
+Gave a presentation about Zemeroth at 8th Indie-StandUp in Indie_Space_SPB.
 
 ![me presenting Zemeorth at Indikator](2018-11-03--indikator.jpg)
 
@@ -424,15 +478,24 @@ Gave a presentation about #Zemeroth project at 8th Indie-StandUp in Indie_Space_
 
 [Zemeroth is mentioned on Amit's page about hex math][amit].
 
+[indikator_twit]: https://twitter.com/ozkriff/status/1058359693503070208
 [amit]: https://www.redblobgames.com/grids/hexagons/implementation.html
 
 ------
 
-## Devlog migrated from Pelican to Zola
+## Migrated this devlog from Pelican to Zola
+
+(__TODO__: What is Zola?)
 
 __TODO__: ...
 
-\+ link to twitter posts
+(__TODO__: _link to the twitter thread_)
+
+TLDR:
+
+- Mostly automaticly converted all RestructuredText post sources into Markdown;
+- Hyde theme;
+- No more disqus comments
 
 ------
 
@@ -447,11 +510,12 @@ You can find the roadmap [in the README](__TODO__);
 > auto-jumping away when an enemy approaches or something
 > more aggressive auto-movement (like Muton Berserker from the X-Com).
 
-Short-term plans are:
+__TLDR__: Short-term plan is (aka "things I hope to do for v0.6 release):
 
-- GUI improvements
+- improve the GUI;
 - [Reduce text overlapping](https://github.com/ozkriff/zemeroth/issues/214)
-- xxx
+- ???
+- start maintaining a bupic GDD (game design document);
 - __TODO__;
 
 ------
