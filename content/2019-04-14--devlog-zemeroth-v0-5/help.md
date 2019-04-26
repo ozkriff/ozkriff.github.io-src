@@ -7,59 +7,15 @@ test test
 
 ## Migration to the `ggez` engine
 
-Häte2d was discontinued.
-
 <https://github.com/ozkriff/zemeroth/pull/247>
 
-Maintaining your own engine isn't that fan in practice.
-(__TODO__: add a link to `ggez`'s maintainance issues)
-
-__TODO__: ...
-
-- ggwp-zgui
-- ggwp-zscene
-
-`rancor` was renamed to `zcomponents`.
-Btw, zcomponents crate now lives on crates.io.
-
-No native Android version, but the web port works fine on mobile.
+It was a long process.
 
 Debug builds are super-slow now.
 I'm using nightly cargo feature to hack around this when I really need a debug build.
 
-> RIP [Häte2d](https://docs.rs/hate), you were a fun experiment,
-> but using `ggez` is much more practical.
-
 cgmath -> nalgebra
 (see [this](https://users.rust-lang.org/t/cgmath-looking-for-new-maintainers/20406))
-
-> This PR:
->
-> - kills `häte` crate :cry:
-> - renames `rancor` crate to `zcomponents`
-> - extracts `ggwp-zgui` and `ggwp-zscene` crates from `häte`'s dead body
-> - updates some deps
-> - renames `game_view` mod to `battle_view`
-> - removes all android stuff (circleci config, readme info, `do_android` script,
->   Cargo.toml metadata, etc)
-> - install SDL2 on CI
-> - removes deployment step from CI
-> - adds `time_s` helper func
-> - changes bg color
-> - ton of other small tweaks
->
-> The most serious downside of the engine switch, though temporary,
-> is that there's no Android version of the game now.
-
-ggwp?
-
-> "__What does `ggwp-` prefix mean?__"
->
-> As Icefoxen asked to [not use `ggez-` prefix][ggwp]
-> I use `ggwp-` ("good game, well played!") to denote that the crate
-> belongs to `ggez` ecosystem, but is not official.
-
-[ggwp]: https://github.com/ggez/ggez/issues/373#issuecomment-390461696
 
 old note:
 
@@ -84,11 +40,6 @@ __TODO__: [Drawable::dimensions() #567](https://github.com/ggez/ggez/pull/567)
 > [merge a WASM version of Zemeroth into master](https://github.com/ozkriff/zemeroth/issues/178).
 
 [ggez-text-issues]: https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01
-
-The most serious downside of the engine switch,
-[though temporary](https://github.com/ggez/ggez/issues/70),
-is that there's no Android version of the game for now.
-But...
 
 ## WASM
 

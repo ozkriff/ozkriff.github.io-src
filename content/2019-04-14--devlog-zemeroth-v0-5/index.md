@@ -1,74 +1,111 @@
 +++
-title = "Zemeroth v0.5: ggez, WASM, itch.io"
+title = "Zemeroth v0.5: ggez, WASM, itch.io, visuals, AI, campaign, tests"
 slug = "2019-04-14--devlog-zemeroth-v0-5"
 +++
 
+<!-- TODO: remove this sub-title later -->
+## **Zemeroth v0.5: ggez, WASM, itch.io, visuals, AI, campaign, tests**
+
 Hi, folks! I'm happy to announce Zemeroth v0.5.
+Main features of this release are:
+migration to ggez, web version, itch.io page, campaign mode,
+AI and visual updates, and tests.
+
+(__TODO__: _create a "version picture" and place it here_)
 
 [Zemeroth] is a turn-based hexagonal tactical game written in Rust.
 You can [download precompiled v0.5 binaries][release v0.5]
 for Windows, Linux, and macOS.
-Also, now you can **[play an online version](https://ozkriff.itch.io/zemeroth)**
-(read more about the web version in the "WASM" section below).
+Also, now you can [play an online version][itch_zemeroth]
+(_read more about it in the "WebAssembly version" section below_).
 
 The last release happened about a year ago.
 Since then, development haven't been that active,
 sometimes even completely stalled for weeks.
 But a year is a big period of time anyway, so there're still lots of changes.
 
-Main features of v0.5 release are:
-migration to ggez engine, web version, itch.io page, visual updates,
-campaign mode, and tests.
-
 [release v0.5]: https://github.com/ozkriff/zemeroth/releases/tag/v0.5.0
 
-## Migration to `ggez` engine
+## Migration to ggez
 
-Maintaining your own engine (even a simple and minimalistic 2D one)
-turned out to be really not fun for me in practice -
-you have to fight a constant stream of a small corner case issues
-and platform-specific tweaks and hacks.
+An experiment with maintaining my own engine
+(even a simple and minimalistic 2D one)
+turned out to be too exhausting in practice:
+you have to fight a constant stream of reports about small corner case issues
+and deal with platform-specific tweaks and hacks
+(stuff [like this](https://github.com/ggez/ggez/issues/587), for example).
+I was surprised how much time this can consume.
+But what's is more important for a hobby project,
+it also sucked too much fun out of the development process.
 
-So I've surrended: [discontinued my tiny game engine Häte2d][pr247]
-and migrated to [ggez],
-because ???.
-I though that I knew that it's a hard task but it turned out even worse.
-(__TODO__: link to ggez's hidpi issues on macos)
-(__TODO__: на ровном месте возникает огроомное количество всяких мелочей.
-и это даже если делать чисто для себя движок.
-а ведь обидно, что его никто не используется.
-но делать движок общего назначения еще на порядок сложнее.
-это все интересный опыт, но игру я так и за десяток лет не закончил бы).
-(__TODO__: add a link to `ggez`'s maintainance issues)
-<https://github.com/ggez/ggez/labels/bug>
+And what made it worse in my case is that [Häte2d][docs_hate] intentionally wasn't
+a general-purpose game engine (to reduce the scope of work),
+so it was sad to know that all this work won't be reused by anyone.
+But converting Häte into a real general-purpose engine wasn't an option too,
+because it wouldn't have left any time for Zemeroth's development.
 
-[pr247]: https://github.com/ozkriff/zemeroth/pull/247
-[ggez]: https://github.com/ggez/ggez
+So I've surrended and decided to give away some control over
+low-level parts of Zemeroth:
+[Häte2d was discontinued][pr247] and replaced by [ggez], the most mature and
+actively developed Rust 2d game engne at that time.
 
-It was a long process.
+![ggez's logo](ggez-logo-maroon-full.svg)
+
+------
+
+`häte` had some builtin basic
+[scene management](https://docs.rs/hate/0.1.0/hate/scene/)
+and [GUI](https://docs.rs/hate/0.1.0/hate/gui/) systems,
+but ggez is minimalistic by design.
+So, two helper crates were extracted from Häte2d and rebuilt on top of ggez:
+
+- [ggwp-zscene](https://github.com/ozkriff/zemeroth/tree/721ad06a6/ggwp-zscene)
+  is a simple scene and declarative animation manager. It provides:
+  - Sprites that can be shared;
+  - Scene and Actions to manipulate them;
+  - Simple layers;
+- [ggwp-zgui](https://github.com/ozkriff/zemeroth/tree/721ad06a6/ggwp-zgui)
+  is a tiny and opinionated UI library:
+  - Provides only simple labels, buttons and layouts;
+  - Handles only basic  event;
+  - No custom styles, only the basic one.
+
+Since Icefoxen [asked not to use `ggez-` prefix][ggwp],
+I used `ggwp-` ("good game, well played!") to denote that the crate
+belongs to ggez's ecosystem, but is not official.
+
+These crates are still immature and aren't published on crates.io yet,
+while the `rancor` component library was renamed to `zcomponents` and
+[is published](https://crates.io/crates/zcomponents).
+
+------
+
 Initially I migrated to ggez v0.4 that was SDL2-based.
+But as soon as the first release candidate of winit-based ggez v0.5
+became aviable I attempted to migrate to it.
+I've filed [a bunch of mostly text-related issues in the process][ggez_text_issues]
+and tried to fix the most critical ones for Zemeroth:
+["Remove the generic argument from Drawable::draw"](https://github.com/ggez/ggez/pull/559),
+["Drawable::dimensions()"](https://github.com/ggez/ggez/pull/567) (big one!)
+and ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
+These PRs took some time, but then I relativly easy
+[ported Zemeroth to ggez v0.5.0-rc.0](https://github.com/ozkriff/zemeroth/pull/426).
 
-As soon as the first RC for ggez v0.5 became aviable
-I attempted to migrate to it.
+ggez v0.5 is still not released atm, so atm Zemeroth uses ggez `0.5.0-rc.1`.
+It's stable enough for me.
 
-ggez v0.5 is still not released atm,
-but the aviable RC2 is stable enough for me.
-
-...
-
-`hate` had a built in basic scene management and GUI systems,
-but `ggez` is a minimalistic engine and
-
-Two helper crates were extracted from Häte2d
-
-...
-
-The most serious downside of the engine switch,
+The most serious technical downside of the engine switch,
 [though temporary](https://github.com/ggez/ggez/issues/70),
 is that there's no native Android version of the game for now.
 But who really needs a native port when you have...
 
-## WASM port
+[pr247]: https://github.com/ozkriff/zemeroth/pull/247
+[ggez]: https://github.com/ggez/ggez
+[docs_hate]: https://docs.rs/hate
+[ggwp]: https://github.com/ggez/ggez/issues/373
+[ggez_text_issues]: https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01
+
+## WebAssembly version
 
 __TODO__: link to Icefoxen's plans about WASM support in ggez
 
@@ -145,14 +182,19 @@ __TODO__: ...
 
 ![TODO](2019-01-29--web-port-vs-native.jpg)
 
+Note a "enter fullscreen" button in the bottom right corver
+of the game window:
+
+!["enter fullscreen" button](2019-04-26-wasm-fullscreen-button.png)
+
 ## itch.io
 
 I've created a page for Zemeroth on itch.io:
-[ozkriff.itch.io/zemeroth](https://ozkriff.itch.io/zemeroth)
+[ozkriff.itch.io/zemeroth][itch_zemeroth]
 
 <https://twitter.com/ozkriff/status/1090615410242785280>
 
-> Created [an itch.io list of Rust games][itch-rust-list].
+> Created [an itch.io list of Rust games][itch_rust_list].
 >
 > Also, I've sent a request to itch.io folks to add Rust as an instrument,
 > so now a more official list is available:
@@ -161,11 +203,12 @@ I've created a page for Zemeroth on itch.io:
 > it's still useful for now because only authors of the games can add
 > an instrument to the metadata.
 
-[itch-rust-list]: https://www.reddit.com/r/rust/comments/arm9dr/a_list_of_itchio_games_written_in_rust
-
 Lots of feedback.
 
-Btw, I've also created an itch.io page for Zone of Control.
+Btw, I've also created [an itch.io page for Zone of Control][itch_zoc].
+
+[itch_rust_list]: https://www.reddit.com/r/rust/comments/arm9dr/a_list_of_itchio_games_written_in_rust
+[itch_zoc]: https://ozkriff.itch.io/zoc
 
 ## Visual Improvements
 
@@ -532,3 +575,4 @@ __TODO__:
 [twitter](__TODO__).
 
 [Zemeroth]: https://github.com/ozkriff/zemeroth
+[itch_zemeroth]: https://ozkriff.itch.io/zemeroth
