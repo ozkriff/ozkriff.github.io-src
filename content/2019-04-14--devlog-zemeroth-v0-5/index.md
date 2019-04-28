@@ -3,15 +3,19 @@ title = "Zemeroth v0.5: ggez, WASM, itch.io, visuals, AI, campaign, tests"
 slug = "2019-04-14--devlog-zemeroth-v0-5"
 +++
 
-<!-- TODO: remove this sub-title later -->
-## **Zemeroth v0.5: ggez, WASM, itch.io, visuals, AI, campaign, tests**
+<!-- markdownlint-disable MD013 -->
+<!-- cspell:ignore Berserker Muton -->
 
 Hi, folks! I'm happy to announce Zemeroth v0.5.
 Main features of this release are:
 migration to ggez, web version, itch.io page, campaign mode,
 AI and visual updates, and tests.
 
-(__TODO__: _create a "version picture" and place it here_)
+> (*__TODO__: __record a short staged gif__:
+one or two lines vertically.
+on the left side: a spearman and a knight.
+first, toxic tries to approach the knight, but is killed by reaction attack.
+then, summoner approaches and smashes the knight one tile back.*)
 
 [Zemeroth] is a turn-based hexagonal tactical game written in Rust.
 You can [download precompiled v0.5 binaries][release v0.5]
@@ -19,14 +23,18 @@ for Windows, Linux, and macOS.
 Also, now you can [play an online version][itch_zemeroth]
 (_read more about it in the "WebAssembly version" section below_).
 
+![github commits graph](2019-04-27--github-commits.png)
+
 The last release happened about a year ago.
-Since then, development haven't been that active,
-sometimes even completely stalled for weeks.
+Since then the development mostly happened in irregular bursts,
+sometimes it even was completely stalled for weeks.
 But a year is a big period of time anyway, so there're still lots of changes.
+Lots of text ahead, feel free to skip sections
+that you're not interested in particularry.
 
 [release v0.5]: https://github.com/ozkriff/zemeroth/releases/tag/v0.5.0
 
-## Migration to ggez
+## Migration to the `ggez` game engine
 
 An experiment with maintaining my own engine
 (even a simple and minimalistic 2D one)
@@ -34,9 +42,9 @@ turned out to be too exhausting in practice:
 you have to fight a constant stream of reports about small corner case issues
 and deal with platform-specific tweaks and hacks
 (stuff [like this](https://github.com/ggez/ggez/issues/587), for example).
-I was surprised how much time this can consume.
+It can consume surprisingly large amount of time.
 But what's is more important for a hobby project,
-it also sucked too much fun out of the development process.
+it also sucks too much fun out of the development process.
 
 And what made it worse in my case is that [Häte2d][docs_hate] intentionally wasn't
 a general-purpose game engine (to reduce the scope of work),
@@ -44,35 +52,39 @@ so it was sad to know that all this work won't be reused by anyone.
 But converting Häte into a real general-purpose engine wasn't an option too,
 because it wouldn't have left any time for Zemeroth's development.
 
-So I've surrended and decided to give away some control over
+So I've surrendered and decided to give away some control over
 low-level parts of Zemeroth:
 [Häte2d was discontinued][pr247] and replaced by [ggez], the most mature and
-actively developed Rust 2d game engne at that time.
+actively developed Rust 2d game engine at that time.
 
 ![ggez's logo](ggez-logo-maroon-full.svg)
-
-------
 
 `häte` had some builtin basic
 [scene management](https://docs.rs/hate/0.1.0/hate/scene/)
 and [GUI](https://docs.rs/hate/0.1.0/hate/gui/) systems,
-but ggez is minimalistic by design.
+but ggez is minimalistic by design and has none of this.
+(__TODO__: _what about `ggez-goodies`?_)
 So, two helper crates were extracted from Häte2d and rebuilt on top of ggez:
 
 - [ggwp-zscene](https://github.com/ozkriff/zemeroth/tree/721ad06a6/ggwp-zscene)
-  is a simple scene and declarative animation manager. It provides:
-  - Sprites that can be shared;
-  - Scene and Actions to manipulate them;
+  is a simple scene/declarative animation manager that provides:
+  - Sprites with shared data;
+  - Scene and Actions to manipulate sprites;
   - Simple layers;
 - [ggwp-zgui](https://github.com/ozkriff/zemeroth/tree/721ad06a6/ggwp-zgui)
   is a tiny and opinionated UI library:
   - Provides only simple labels, buttons and layouts;
-  - Handles only basic  event;
+  - Handles only basic click event;
   - No custom styles, only the basic one.
 
 Since Icefoxen [asked not to use `ggez-` prefix][ggwp],
 I used `ggwp-` ("good game, well played!") to denote that the crate
 belongs to ggez's ecosystem, but is not official.
+
+Not sure how helpful these libraries can be for a non-Zemeroth project.
+They're still tied to Zemeroth.
+You probably won't be able to use them without changes in other games.
+For example, scene have no scrolling.
 
 These crates are still immature and aren't published on crates.io yet,
 while the `rancor` component library was renamed to `zcomponents` and
@@ -81,20 +93,45 @@ while the `rancor` component library was renamed to `zcomponents` and
 ------
 
 Initially I migrated to ggez v0.4 that was SDL2-based.
-But as soon as the first release candidate of winit-based ggez v0.5
-became aviable I attempted to migrate to it.
-I've filed [a bunch of mostly text-related issues in the process][ggez_text_issues]
+But as soon as the first release candidate of [winit]-based ggez v0.5
+became available I attempted to migrate to it.
+I've filed [a bunch of mostly text-related issues in the process][ggez_issues]
 and tried to fix the most critical ones for Zemeroth:
 ["Remove the generic argument from Drawable::draw"](https://github.com/ggez/ggez/pull/559),
 ["Drawable::dimensions()"](https://github.com/ggez/ggez/pull/567) (big one!)
 and ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
-These PRs took some time, but then I relativly easy
+These PRs took some time, but then I relatively easy
 [ported Zemeroth to ggez v0.5.0-rc.0](https://github.com/ozkriff/zemeroth/pull/426).
 
-ggez v0.5 is still not released atm, so atm Zemeroth uses ggez `0.5.0-rc.1`.
-It's stable enough for me.
+__TODO__: The most serious issue for me was text/image split
+(__TODO__: _add a few words about it_.)
 
-The most serious technical downside of the engine switch,
+ggez v0.5 is still not released atm, so at the moment
+Zemeroth uses ggez `0.5.0-rc.1`. It's stable enough for me.
+
+Previously I was using cgmath (because it's simple and straightforward).
+ggez's "native" math library is nalgebra.
+even though ggez v0.5 uses `mint` types for all its public API,
+I still migrated to nalgebra, because
+of [this](https://users.rust-lang.org/t/cgmath-looking-for-new-maintainers/20406).
+
+One downside of the migration is that debug builds are much slower now,
+because more code is pure Rust.
+Something like 3-5 FPS on my notebook.
+But it's ok, I don't need debug builds often,
+I prefer debugging through logs anyway.
+And even when I really need a debug build to track down something extremely strange,
+I can use cargo's yet unstable feature
+["profile-overrides" unstable feature][profile_overrides].
+
+```toml
+cargo-features = ["profile-overrides"]
+
+[profile.dev.overrides."*"]
+opt-level = 2
+```
+
+Another serious downside of the engine switch,
 [though temporary](https://github.com/ggez/ggez/issues/70),
 is that there's no native Android version of the game for now.
 But who really needs a native port when you have...
@@ -103,11 +140,35 @@ But who really needs a native port when you have...
 [ggez]: https://github.com/ggez/ggez
 [docs_hate]: https://docs.rs/hate
 [ggwp]: https://github.com/ggez/ggez/issues/373
-[ggez_text_issues]: https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01
+[winit]: https://github.com/rust-windowing/winit
+[mint]: https://github.com/kvark/mint
+[ggez_issues]: https://github.com/ggez/ggez/issues?q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01
+[profile_overrides]: https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#profile-overrides
 
 ## WebAssembly version
 
-__TODO__: link to Icefoxen's plans about WASM support in ggez
+After the first release candidate for ggez v0.5 was published,
+Icefoxen have posted
+["The State Of GGEZ 2019"](https://wiki.alopex.li/TheStateOfGGEZ2019),
+where among other things he wrote there that
+
+it will take long time to do things the right way and port ggez to the web.
+A lot of issues in dependencies need to be fixed.
+
+There're still a lot of issues that needs to be solved before
+the WASM version may be implemented;
+
+It would be relatively easy to write a specialized web backend for ggez,
+but ggez's philosophy is against having multiple backends.
+
+------
+
+And that's where [Fedor @not-fl3](https://twitter.com/notfl3) suddenly comes in
+with his [good-web-game][good_web_game] WASM/WebGL game engine.
+
+![web version vs native](2019-01-29--web-port-vs-native.jpg)
+
+------
 
 `good-web-game` is mostly source compatible with ggez.
 
@@ -123,7 +184,17 @@ __TODO__: link to Icefoxen's plans about WASM support in ggez
 > and while it may be used for something else that Zemeroth,
 > it will probably require a lot of work to do (contributions are welcome ;) ).
 
-A hack to substitute the crate:
+You can't use crate renaming in `Cargo.toml` to
+
+```toml
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+ggez = "0.5.0-rc.1"
+
+[target.wasm32-unknown-unknown.dependencies]
+ggez = { git = "https://github.com/not-fl3/good-web-game", package = "good-web-game" }
+```
+
+A hack to substitute the crate.
 
 ```rust
 #[cfg(not(target_arch = "wasm32"))]
@@ -174,18 +245,16 @@ that should be loadable by the engine.
 
 __TODO__: ...
 
-[not-fl3/good-web-game](https://github.com/not-fl3/good-web-game)
+[not-fl3/good-web-game][good_web_game]
 
 [example](https://github.com/not-fl3/good-web-game/tree/9b362da6d/examples/simple)
 
-???
-
-![TODO](2019-01-29--web-port-vs-native.jpg)
-
-Note a "enter fullscreen" button in the bottom right corver
+Note a "enter fullscreen" button in the bottom right corner
 of the game window:
 
 !["enter fullscreen" button](2019-04-26-wasm-fullscreen-button.png)
+
+[good_web_game]: https://github.com/not-fl3/good-web-game
 
 ## itch.io
 
@@ -218,9 +287,13 @@ Flatten map a little bit and added some shadows
 
 Dust effect (jumps) - <https://github.com/ozkriff/zemeroth/pull/390>
 
+<!-- spell-checker:disable -->
+
 > пыль создается одной не очень большой функцией, которая просто создает
 > пачку спрайтов и навешивает на них цепочки простых действий перемещения
 > и изменения цвета.
+
+<!-- spell-checker:enable -->
 
 ------
 
@@ -238,8 +311,10 @@ Every agent now has `WeaponType`:
 - pierce
 - claw
 
-For now thay are just a visual information.
+For now they are just a visual information.
 They affect only what sprite is used during the attack animation.
+
+<!-- TODO: spell-checker:disable -->
 
 > Добавил бойцам параметр WeaponType.
 > Пока есть четыре вида: smash, slash, pierce и claw
@@ -249,6 +324,8 @@ They affect only what sprite is used during the attack animation.
 > добавить и зеркалировать все это хозяйство по ситуации.
 
 (__TODO__: это было в реддите или на гитхабе на английском)
+
+<!-- TODO: spell-checker:enable -->
 
 ------
 
@@ -263,13 +340,19 @@ Initial draft of the new sprites looked like this:
 
 _Shadows_?
 
+<!-- TODO: spell-checker:disable -->
+
 > На макетах выше видно много градиентов. В текущей версии решил отказаться
 > от градиентов и всех округлостей, делая акцент на “типа-низкополигональном”
 > угловатом стиле. На данный момент игра выглядит вот так: __TODO__.
 
+<!-- TODO: spell-checker:enable -->
+
 ## Simple campaign mode
 
 "Basic campaign mode with a carryover of the survivor fighters"
+
+<!-- TODO: spell-checker:disable -->
 
 > Представляет из себя просто цепочку боев с заранее заданными сценариями.
 > Если проигрываешь в бою - все, кампания для тебя закончилась, начинай сначала.
@@ -286,6 +369,8 @@ _Shadows_?
 > Уже завел [задачу](https://github.com/ozkriff/zemeroth/issues/387)
 > на то, что бы пресечь это безобразие - “вечная смерть” наше все.
 
+<!-- TODO: spell-checker:enable -->
+
 Win and Loose screens.
 
 ![Campaign screen example](2018-11-15--first-iteration-of-a-campaign-mode.png)
@@ -298,6 +383,8 @@ Win and Loose screens.
 ------
 
 __TODO__: Not sure if this piece belongs to this section:
+
+<!-- TODO: spell-checker:disable -->
 
 > <https://github.com/ozkriff/zemeroth/pull/360>
 >
@@ -322,6 +409,8 @@ __TODO__: Not sure if this piece belongs to this section:
 > Снимок тестовой карты, в которую специально нагнана прям куча демонов что бы
 > четко были видны зоны и отступы: ...
 
+<!-- TODO: spell-checker:enable -->
+
 ## Hit chances
 
 [Implemented hit chances](https://github.com/ozkriff/zemeroth/pull/370).
@@ -338,6 +427,8 @@ dodge stats. The hit chance is reduced when attacker is wounded.
 
 ![Hit chances demo](2018-09-29--old-hit-chances-demo.gif)
 (__TODO__: needs an update)
+
+<!-- TODO: spell-checker:disable -->
 
 > Из визуала:
 >
@@ -364,6 +455,8 @@ dodge stats. The hit chance is reduced when attacker is wounded.
 >   занимал клетку и не давал его более здоровым друзьям подойти;
 > - Важность способности лечения у алхимика возросла, потому что толку
 >   от своих раненных бойцов становится сильно меньше.
+
+<!-- TODO: spell-checker:enable -->
 
 [Show missing strength points as transparent dots](https://github.com/ozkriff/zemeroth/pull/343)
 
@@ -439,12 +532,18 @@ __TODO__: _Record a gameplay video_
 
 ...
 
+<!-- TODO: spell-checker:disable -->
+
 > При реализации атласа пришлось вставить костыль для регулировки размера
 > экспортируемых спрайтов: в каждой именнованной группе объектов находится
 > обычно невидимый квадрат (прямоугольник для клеток) нужного количества пикселей.
 > Для отладки их даже можно временно делать видимыми, бывает удобно: ...
 
+<!-- TODO: spell-checker:enable -->
+
 Resource hashes - md5. Travis check.
+
+<!-- TODO: spell-checker:disable -->
 
 > Хэши ресурсов
 >
@@ -458,6 +557,8 @@ Resource hashes - md5. Travis check.
 >
 > Да, вот настолько я хочу хранить ресурсы в отдельном репозитории
 > и не люблю git submodules. :-p
+
+<!-- TODO: spell-checker:enable -->
 
 ## Tests
 
@@ -496,11 +597,11 @@ Woo-hoo
 - Fixed a fun bug ([taking control of imp summoners](https://github.com/ozkriff/zemeroth/issues/288))
 - [Removed](https://github.com/ozkriff/zemeroth/pull/365) some data duplication
   from [the `.ron` config with objects descriptions][objects_ron]
-  using serde's default annotations and helper init functions.
+  using serde\`s default annotations and helper init functions.
 - [Added a `windows_subsystem` attribute](https://github.com/ozkriff/zemeroth/pull/220).
   Don't show cmd window.
 - [Fix panic when boulder is pushed into fire/spikes](https://github.com/ozkriff/zemeroth/pull/233);
-- [Merge all 'line_height' consts and funcs](https://github.com/ozkriff/zemeroth/pull/431)
+- [Merge all 'line_height' consts and functions](https://github.com/ozkriff/zemeroth/pull/431)
 - `derive_more::From` for enums and errors;
 - [Removed data duplication from `objects.ron`](https://github.com/ozkriff/zemeroth/pull/365)
 
@@ -509,13 +610,13 @@ Woo-hoo
 ## Indikator
 
 [Gave a presentation about Zemeroth][indikator_twit] at 8th Indie-StandUp
-at Indikator (previousy known as Indie Space).
+at Indikator (previously known as Indie Space).
 
 __TODO__: What is Indikator? Give a link.
 
 Gave a presentation about Zemeroth at 8th Indie-StandUp in Indie_Space_SPB.
 
-![me presenting Zemeorth at Indikator](2018-11-03--indikator.jpg)
+![me presenting Zemeroth at Indikator](2018-11-03--indikator.jpg)
 
 ------
 
@@ -534,11 +635,13 @@ __TODO__: ...
 
 (__TODO__: _link to the twitter thread_)
 
+[Twitter thread](https://twitter.com/ozkriff/status/1119212330246656002)
+
 TLDR:
 
-- Mostly automaticly converted all RestructuredText post sources into Markdown;
+- Mostly automatically converted all RestructuredText post sources into Markdown;
 - Hyde theme;
-- No more disqus comments
+- No more Disqus comments
 
 ------
 
@@ -558,7 +661,7 @@ __TLDR__: Short-term plan is (aka "things I hope to do for v0.6 release):
 - improve the GUI;
 - [Reduce text overlapping](https://github.com/ozkriff/zemeroth/issues/214)
 - ???
-- start maintaining a bupic GDD (game design document);
+- start maintaining a basic GDD (game design document);
 - __TODO__;
 
 ------

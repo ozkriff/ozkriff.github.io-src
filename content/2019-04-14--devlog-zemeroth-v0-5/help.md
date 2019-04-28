@@ -3,43 +3,9 @@ title = "Zemeroth v0.5: ggez, WASM, itch.io"
 TODO = "delete this file later"
 +++
 
+<!-- TODO: spell-checker:disable -->
+
 test test
-
-## Migration to the `ggez` engine
-
-<https://github.com/ozkriff/zemeroth/pull/247>
-
-It was a long process.
-
-Debug builds are super-slow now.
-I'm using nightly cargo feature to hack around this when I really need a debug build.
-
-cgmath -> nalgebra
-(see [this](https://users.rust-lang.org/t/cgmath-looking-for-new-maintainers/20406))
-
-old note:
-
-> но в целом я 90% hate'а поверх `ggez` просто реализовал,
-> так что код самого проекта не так уж и сильно зацепило.
-> ядро с логикой вообще не тронуто, в визуализаторе больше всего
-> геморроя из-за перехода с cgmath на nalgebra :-\
-
-Most of Hate's code was reimplemented on top of `ggez`
-
-__TODO__: [Drawable::dimensions() #567](https://github.com/ggez/ggez/pull/567)
-
-> [Ported Zemeroth to ggez v0.5.0-rc.0](https://github.com/ozkriff/zemeroth/pull/426),
-> filed [a bunch of mostly text-related issues in the process][ggez-text-issues]
-> (sorry, /u/icefoxen!) and tried to fix the most critical ones for Zemeroth:
-> ["Remove the generic argument from Drawable::draw"](https://github.com/ggez/ggez/pull/559),
-> ["Drawable::dimensions()"](https://github.com/ggez/ggez/pull/567) (big one!)
-> and ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
->
-> Now, [when ggez v0.5.0-rc.1 is out](https://www.reddit.com/r/rust_gamedev/comments/auexbj/ggez_050rc1_released),
-> I can switch to it and try to
-> [merge a WASM version of Zemeroth into master](https://github.com/ozkriff/zemeroth/issues/178).
-
-[ggez-text-issues]: https://github.com/ggez/ggez/issues?utf8=%E2%9C%93&q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01
 
 ## WASM
 
