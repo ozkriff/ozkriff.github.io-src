@@ -11,11 +11,7 @@ Main features of this release are:
 migration to ggez, web version, itch.io page, campaign mode,
 AI and visual updates, and tests.
 
-> (*__TODO__: __record a short staged gif__:
-one or two lines vertically.
-on the left side: a spearman and a knight.
-first, toxic tries to approach the knight, but is killed by reaction attack.
-then, summoner approaches and smashes the knight one tile back.*)
+![demo fight](2019-04-29--title-demo.gif)
 
 [Zemeroth] is a turn-based hexagonal tactical game written in Rust.
 You can [download precompiled v0.5 binaries][release v0.5]
@@ -42,7 +38,7 @@ turned out to be too exhausting in practice:
 you have to fight a constant stream of reports about small corner case issues
 and deal with platform-specific tweaks and hacks
 (stuff [like this](https://github.com/ggez/ggez/issues/587), for example).
-It can consume surprisingly large amount of time.
+It can consume surprisingly large amounts of time.
 But what's is more important for a hobby project,
 it also sucks too much fun out of the development process.
 
@@ -103,10 +99,7 @@ and ["Fix Text::dimensions height"](https://github.com/ggez/ggez/pull/593).
 These PRs took some time, but then I relatively easy
 [ported Zemeroth to ggez v0.5.0-rc.0](https://github.com/ozkriff/zemeroth/pull/426).
 
-__TODO__: The most serious issue for me was text/image split
-(__TODO__: _add a few words about it_.)
-
-ggez v0.5 is still not released atm, so at the moment
+ggez v0.5 isn't released yet, so at the moment
 Zemeroth uses ggez `0.5.0-rc.1`. It's stable enough for me.
 
 Previously I was using cgmath (because it's simple and straightforward).
@@ -147,28 +140,27 @@ But who really needs a native port when you have...
 
 ## WebAssembly version
 
-After the first release candidate for ggez v0.5 was published,
-Icefoxen have posted
+After ggez v0.5-rc.0 was published, Icefoxen have posted
 ["The State Of GGEZ 2019"](https://wiki.alopex.li/TheStateOfGGEZ2019),
-where among other things he wrote there that
-
-it will take long time to do things the right way and port ggez to the web.
-A lot of issues in dependencies need to be fixed.
-
-There're still a lot of issues that needs to be solved before
-the WASM version may be implemented;
-
-It would be relatively easy to write a specialized web backend for ggez,
+where among other things he wrote that
+it will take a long time to port ggez to the web,
+because a lot of issues in dependencies need to be fixed first.
+(__TODO__: "a web port is unlikely to happen soon because ...")
+It could be relatively easy to write a specialized web backend for ggez,
 but ggez's philosophy is against having multiple backends.
-
-------
 
 And that's where [Fedor @not-fl3](https://twitter.com/notfl3) suddenly comes in
 with his [good-web-game][good_web_game] WASM/WebGL game engine.
 
-![web version vs native](2019-01-29--web-port-vs-native.jpg)
+He had been experimenting with 2d web prototypes
+([like this one](https://twitter.com/notfl3/status/1079499336243965952))
+for some time and used a custom 2d web engine for this.
+The API of this engine was heavily inspired by ggez
+so it was relatively easy to create a partly ggez-compatible wrapper.
 
-------
+. . .
+
+[![web version vs native](2019-01-29--web-port-vs-native.jpg)](2019-01-29--web-port-vs-native.jpg)
 
 `good-web-game` is mostly source compatible with ggez.
 
@@ -184,17 +176,25 @@ with his [good-web-game][good_web_game] WASM/WebGL game engine.
 > and while it may be used for something else that Zemeroth,
 > it will probably require a lot of work to do (contributions are welcome ;) ).
 
-You can't use crate renaming in `Cargo.toml` to
+@not-fl3 haven't coded this engine from scratch, of course,
+it's a result of his experiments with 2d web prototypes,
+like [this one](https://twitter.com/notfl3/status/1079499336243965952).
+
+------
+
+You can't use crate renaming in `Cargo.toml` to reuse a name on different platforms,
 
 ```toml
+# Cargo.toml with this dependencies wouldn't build:
+
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 ggez = "0.5.0-rc.1"
 
-[target.wasm32-unknown-unknown.dependencies]
+[target.'cfg(target_arch = "wasm32")'.dependencies]
 ggez = { git = "https://github.com/not-fl3/good-web-game", package = "good-web-game" }
 ```
 
-A hack to substitute the crate.
+So the crate substitution hack is done in `main.rs` using `extern crate` items:
 
 ```rust
 #[cfg(not(target_arch = "wasm32"))]
@@ -204,7 +204,8 @@ extern crate ggez;
 extern crate good_web_game as ggez;
 ```
 
-(__TODO__: why can't I do this in `Cargo.toml`?)
+Also, I had to use a separate main, because good-web-game
+has a different initialization API:
 
 ```rust
 #[cfg(target_arch = "wasm32")]
@@ -223,7 +224,7 @@ fn main() -> GameResult {
 }
 ```
 
-A short helper script:
+A short helper script was added:
 
 ```sh
 $ cat utils/wasm/build.sh
@@ -234,18 +235,14 @@ ls static > static/index.txt
 cargo web build
 ```
 
-The script prepares a `static` directory that will be packed by cargo-web.
-
-cargo-web only packs `static` directory, so the script copies the game's assets there.
-
-It also copies the `index.html` template page there.
-
-And adds a good-web-game specific file that lists all resources
-that should be loadable by the engine.
+- cargo-web only packs `static` directory (it's hardcoded),
+  so the script copies the game's assets there;
+- It also copies the `index.html` template page there;
+- And adds a good-web-game specific file that lists all resources
+  that should be loadable by the engine
+  (`conf::Loading::Embedded` in the code above).
 
 __TODO__: ...
-
-[not-fl3/good-web-game][good_web_game]
 
 [example](https://github.com/not-fl3/good-web-game/tree/9b362da6d/examples/simple)
 
@@ -253,6 +250,11 @@ Note a "enter fullscreen" button in the bottom right corner
 of the game window:
 
 !["enter fullscreen" button](2019-04-26-wasm-fullscreen-button.png)
+
+As I've said, the web version of the game seems to work fine
+on most mobile devices:
+
+(_**TODO: a photo of my phone running a web version of Zemeroth**_)
 
 [good_web_game]: https://github.com/not-fl3/good-web-game
 
@@ -517,11 +519,13 @@ Keep distance in the range.
 
 So, putting this all together:
 
-__TODO__: _Record a gameplay video_
+(**_TODO: Record a gameplay video. A campaign walkthrough maybe?_**)
 
 ## SVG Atlas
 
-![TODO](2018-07-16--svg-atlas-test.png)
+And now back to more technical updates.
+
+[![TODO](2018-07-16--svg-atlas-test.png)](2018-07-16--svg-atlas-test.png)
 
 [svg atlas](https://github.com/ozkriff/zemeroth_assets_src/blob/846a45b7c/atlas.svg)
 
