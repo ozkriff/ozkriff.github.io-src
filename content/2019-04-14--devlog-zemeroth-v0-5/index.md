@@ -4,12 +4,12 @@ slug = "2019-04-14--devlog-zemeroth-v0-5"
 +++
 
 <!-- markdownlint-disable MD013 -->
-<!-- cspell:ignore Berserker Muton -->
+<!-- cspell:ignore Berserker Muton kiegel -->
 
 Hi, folks! I'm happy to announce Zemeroth v0.5.
 Main features of this release are:
 migration to ggez, web version, itch.io page, campaign mode,
-AI and visual updates, and tests.
+AI improvements, visual updates, and tests.
 
 ![demo fight](2019-04-29--title-demo.gif)
 
@@ -102,11 +102,17 @@ These PRs took some time, but then I relatively easy
 ggez v0.5 isn't released yet, so at the moment
 Zemeroth uses ggez `0.5.0-rc.1`. It's stable enough for me.
 
-Previously I was using cgmath (because it's simple and straightforward).
+------
+
+![nalgebra logo](2019-05-03--na.png)
+
+Previously, I was using cgmath (because it's simple and straightforward).
 ggez's "native" math library is nalgebra.
 even though ggez v0.5 uses `mint` types for all its public API,
 I still migrated to nalgebra, because
 of [this](https://users.rust-lang.org/t/cgmath-looking-for-new-maintainers/20406).
+
+------
 
 One downside of the migration is that debug builds are much slower now,
 because more code is pure Rust.
@@ -156,31 +162,21 @@ He had been experimenting with 2d web prototypes
 ([like this one](https://twitter.com/notfl3/status/1079499336243965952))
 for some time and used a custom 2d web engine for this.
 The API of this engine was heavily inspired by ggez
-so it was relatively easy to create a partly ggez-compatible wrapper.
+so he managed to write a partly ggez-compatible wrapper in a weekend.
 
-. . .
+Colors are slightly off and text rendering if a little bit different,
+but otherwise it works nicely and smoothly,
+providing the same experience:
 
 [![web version vs native](2019-01-29--web-port-vs-native.jpg)](2019-01-29--web-port-vs-native.jpg)
 
-`good-web-game` is mostly source compatible with ggez.
-
-> Note that good-web-game is not really GGEZ's backend,
-> but a separate web-targeted engine with a similar API
-> that @not-fl3 uses for his prototypes.
->
-> Zemeroth uses good-web-game for its web version as a quick-n-dirty
-> immediate solution until a proper WASM support arrives to GGEZ
-> (there're no plans of making good-web-game some kind of official GGEZ backend).
->
-> The currently implemented subset of GGEZ API is quite limited
-> and while it may be used for something else that Zemeroth,
-> it will probably require a lot of work to do (contributions are welcome ;) ).
-
-@not-fl3 haven't coded this engine from scratch, of course,
-it's a result of his experiments with 2d web prototypes,
-like [this one](https://twitter.com/notfl3/status/1079499336243965952).
-
-------
+Zemeroth uses good-web-game for its web version as a quick-n-dirty
+immediate solution until a proper WASM support arrives to GGEZ
+(there're no plans of making good-web-game some kind of official GGEZ backend
+or anything like this).
+The currently implemented subset of ggez's API is quite limited
+and while it may be used for something else that Zemeroth,
+it will probably require a lot of work to do.
 
 You can't use crate renaming in `Cargo.toml` to reuse a name on different platforms,
 
@@ -194,7 +190,7 @@ ggez = "0.5.0-rc.1"
 ggez = { git = "https://github.com/not-fl3/good-web-game", package = "good-web-game" }
 ```
 
-So the crate substitution hack is done in `main.rs` using `extern crate` items:
+So the crate substitution hack is done in `main.rs` using `extern crate` items in `main.rs`:
 
 ```rust
 #[cfg(not(target_arch = "wasm32"))]
@@ -204,7 +200,8 @@ extern crate ggez;
 extern crate good_web_game as ggez;
 ```
 
-Also, I had to use a separate main, because good-web-game
+99.9% of code stays the same,
+but I had to use a separate main, because good-web-game
 has a different initialization API:
 
 ```rust
@@ -224,7 +221,7 @@ fn main() -> GameResult {
 }
 ```
 
-A short helper script was added:
+Finally, a short helper script was added:
 
 ```sh
 $ cat utils/wasm/build.sh
@@ -242,42 +239,64 @@ cargo web build
   that should be loadable by the engine
   (`conf::Loading::Embedded` in the code above).
 
-__TODO__: ...
-
-[example](https://github.com/not-fl3/good-web-game/tree/9b362da6d/examples/simple)
-
-Note a "enter fullscreen" button in the bottom right corner
-of the game window:
-
-!["enter fullscreen" button](2019-04-26-wasm-fullscreen-button.png)
-
-As I've said, the web version of the game seems to work fine
-on most mobile devices:
-
-(_**TODO: a photo of my phone running a web version of Zemeroth**_)
+You can find a minimal example of good-web-game
+[here](https://github.com/not-fl3/good-web-game/tree/9b362da6d/examples/simple).
 
 [good_web_game]: https://github.com/not-fl3/good-web-game
 
 ## itch.io
 
-I've created a page for Zemeroth on itch.io:
-[ozkriff.itch.io/zemeroth][itch_zemeroth]
+The web version needs to be hosted somewhere.
+[itch.io](https://itch.io/) is a nice place for this:
+it has a nice and simple UI (for both developers and consumers),
+it's extremely [easy to upload an web game there](https://itch.io/docs/creators/html5)
+and it's a relatively known store for a indie games that can provide
+some exposure by itself.
 
-<https://twitter.com/ozkriff/status/1090615410242785280>
+__[ozkriff.itch.io/zemeroth][itch_zemeroth]__
 
-> Created [an itch.io list of Rust games][itch_rust_list].
->
-> Also, I've sent a request to itch.io folks to add Rust as an instrument,
-> so now a more official list is available:
-> [itch.io/games/made-with-rust](https://itch.io/games/made-with-rust).
-> Looks like my original list will be deprecated with time but
-> it's still useful for now because only authors of the games can add
-> an instrument to the metadata.
+... (__TODO__: write something here to separate the link and the image) ...
+
+![screenshot of the itch.io page](2019-05-02--itch-ozkriff.png)
+
+------
+
+Note an "Enter fullscreen" button in the bottom right corner
+of the game area:
+
+!["enter fullscreen" button](2019-04-26-wasm-fullscreen-button.png)
+
+------
+
+As I've said in the ggez section above,
+the web version of the game seems to work fine on most mobile devices:
+
+(**TODO: a photo of my phone running a web version of Zemeroth**)
+
+------
+
+Created [an itch.io list of Rust games][itch_rust_list].
+
+Also, I've sent a request to itch.io folks to add Rust as an instrument,
+so now a more official list is available:
+[itch.io/games/made-with-rust](https://itch.io/games/made-with-rust).
+Looks like my original list will be deprecated with time but
+it's still useful for now because only authors of the games can add
+an instrument to the metadata.
+
+(__TODO__: where the instruments metadata is set?)
+
+------
 
 Lots of feedback.
 
+(__TODO__: summarize the feedback)
+
+------
+
 Btw, I've also created [an itch.io page for Zone of Control][itch_zoc].
 
+[wasm_twit]: https://twitter.com/ozkriff/status/1090615410242785280
 [itch_rust_list]: https://www.reddit.com/r/rust/comments/arm9dr/a_list_of_itchio_games_written_in_rust
 [itch_zoc]: https://ozkriff.itch.io/zoc
 
@@ -287,7 +306,7 @@ Flatten map a little bit and added some shadows
 
 ------
 
-Dust effect (jumps) - <https://github.com/ozkriff/zemeroth/pull/390>
+[Dust effect (for jumps and throws)](https://github.com/ozkriff/zemeroth/pull/390)
 
 <!-- spell-checker:disable -->
 
@@ -299,7 +318,7 @@ Dust effect (jumps) - <https://github.com/ozkriff/zemeroth/pull/390>
 
 ------
 
-blood splatters and weapon flashes - <https://github.com/ozkriff/zemeroth/pull/401>
+[blood splatters and weapon flashes](https://github.com/ozkriff/zemeroth/pull/401)
 
 Adds weapon flashes of four types: slash, smash, pierce and claw;
 Adds directed dynamic blood splatters.
@@ -508,12 +527,12 @@ Keep distance in the range.
     This prevents Imp Summoners from being created only a tile away from enemies
     and thus not having any chances to survive.
 
-- __TODO__: Commutative bombs (__TODO__: <https://github.com/ozkriff/zemeroth/pull/296>,
-  <https://github.com/ozkriff/zemeroth/issues/286>)
+- __TODO__: Commutative bombs (__TODO__: [PR](https://github.com/ozkriff/zemeroth/pull/296),
+  [issue](https://github.com/ozkriff/zemeroth/issues/286))
 
 - Teach AI to move closer to targets even if there's no direct path to them
 
-  <https://github.com/ozkriff/zemeroth/pull/308>
+  [PR](https://github.com/ozkriff/zemeroth/pull/308)
 
 ## Gameplay Video
 
@@ -588,12 +607,13 @@ game's state that causes a panic if you try to do anything with uncertain result
 failing assert comparisons of big hierarchical objects
 (some of which may be many screens long in my case)
 
-<https://github.com/colin-kiegel/rust-pretty-assertions>
+[colin-kiegel/rust-pretty-assertions](https://github.com/colin-kiegel/rust-pretty-assertions)
 
 Woo-hoo
 
 ## Other Technical Changes
 
+- `derive_more::From` for enums and errors;
 - [Moved all crates to Rust 2018](https://github.com/ozkriff/zemeroth/pull/394);
 - [Added a note about 'help-wanted' issues](https://github.com/ozkriff/zemeroth/pull/226)
 - [Migrated to `std::time::Duration`](https://github.com/ozkriff/zemeroth/pull/229)
@@ -606,7 +626,6 @@ Woo-hoo
   Don't show cmd window.
 - [Fix panic when boulder is pushed into fire/spikes](https://github.com/ozkriff/zemeroth/pull/233);
 - [Merge all 'line_height' consts and functions](https://github.com/ozkriff/zemeroth/pull/431)
-- `derive_more::From` for enums and errors;
 - [Removed data duplication from `objects.ron`](https://github.com/ozkriff/zemeroth/pull/365)
 
 [objects_ron]: https://github.com/ozkriff/zemeroth_assets/blob/69e6fb34c/objects.ron
