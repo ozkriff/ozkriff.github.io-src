@@ -6,7 +6,7 @@ slug = "2019-04-14--devlog-zemeroth-v0-5"
 <!-- markdownlint-disable MD013 -->
 <!-- cspell:ignore Berserker Muton kiegel -->
 
-Hi, folks! I'm happy to announce Zemeroth v0.5.
+Hi, folks! I'm happy to announce **Zemeroth v0.5**.
 Main features of this release are:
 migration to ggez, web version, itch.io page, campaign mode,
 AI improvements, visual updates, and tests.
@@ -16,7 +16,7 @@ AI improvements, visual updates, and tests.
 [Zemeroth] is a turn-based hexagonal tactical game written in Rust.
 You can [download precompiled v0.5 binaries][release v0.5]
 for Windows, Linux, and macOS.
-Also, now you can [play an online version][itch_zemeroth]
+Also, now you can **[play an online version][itch_zemeroth]**
 (_read more about it in the "WebAssembly version" section below_).
 
 ![github commits graph](2019-04-27--github-commits.png)
@@ -59,7 +59,6 @@ actively developed Rust 2d game engine at that time.
 [scene management](https://docs.rs/hate/0.1.0/hate/scene/)
 and [GUI](https://docs.rs/hate/0.1.0/hate/gui/) systems,
 but ggez is minimalistic by design and has none of this.
-(__TODO__: _what about `ggez-goodies`?_)
 So, two helper crates were extracted from Häte2d and rebuilt on top of ggez:
 
 - [ggwp-zscene](https://github.com/ozkriff/zemeroth/tree/721ad06a6/ggwp-zscene)
@@ -106,7 +105,7 @@ Zemeroth uses ggez `0.5.0-rc.1`. It's stable enough for me.
 
 ![nalgebra logo](2019-05-03--na.png)
 
-Previously, I was using cgmath (because it's simple and straightforward).
+Previously, I was using [cgmath] (because it's simple and straightforward).
 ggez's "native" math library is nalgebra.
 even though ggez v0.5 uses `mint` types for all its public API,
 I still migrated to nalgebra, because
@@ -140,6 +139,7 @@ But who really needs a native port when you have...
 [docs_hate]: https://docs.rs/hate
 [ggwp]: https://github.com/ggez/ggez/issues/373
 [winit]: https://github.com/rust-windowing/winit
+[cgmath]: https://github.com/rustgd/cgmath
 [mint]: https://github.com/kvark/mint
 [ggez_issues]: https://github.com/ggez/ggez/issues?q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01
 [profile_overrides]: https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#profile-overrides
@@ -149,9 +149,8 @@ But who really needs a native port when you have...
 After ggez v0.5-rc.0 was published, Icefoxen have posted
 ["The State Of GGEZ 2019"](https://wiki.alopex.li/TheStateOfGGEZ2019),
 where among other things he wrote that
-it will take a long time to port ggez to the web,
-because a lot of issues in dependencies need to be fixed first.
-(__TODO__: "a web port is unlikely to happen soon because ...")
+a web port is unlikely to happen soon because
+a lot of issues in dependencies need to be fixed first.
 It could be relatively easy to write a specialized web backend for ggez,
 but ggez's philosophy is against having multiple backends.
 
@@ -257,7 +256,7 @@ __[ozkriff.itch.io/zemeroth][itch_zemeroth]__
 
 ... (__TODO__: write something here to separate the link and the image) ...
 
-![screenshot of the itch.io page](2019-05-02--itch-ozkriff.png)
+[![screenshot of the itch.io page](2019-05-02--itch-ozkriff.png)](https://ozkriff.itch.io)
 
 ------
 
@@ -271,7 +270,7 @@ of the game area:
 As I've said in the ggez section above,
 the web version of the game seems to work fine on most mobile devices:
 
-(**TODO: a photo of my phone running a web version of Zemeroth**)
+![web version on android device](2019-05-04--android-wasm.jpg)
 
 ------
 
@@ -284,13 +283,34 @@ Looks like my original list will be deprecated with time but
 it's still useful for now because only authors of the games can add
 an instrument to the metadata.
 
-(__TODO__: where the instruments metadata is set?)
+("edit game" -> "Metadata" -> "Engines & tools")
 
 ------
 
 Lots of feedback.
 
 (__TODO__: summarize the feedback)
+
+<!-- TODO: spell-checker:disable -->
+> Твит и реддит пост 2 отлично зашли, прям куча людей,
+> которые до этого скорее пассивно поглядывали за проектом,
+> реально сели и поиграли.
+>
+> Обратной связи целый вагон, тут расписывать подробно поленюсь,
+> но чаще всего повторялось, что нужен более человечный GUI,
+> хоть какое-то руководство как в это играть
+> и слишком сильный рандом - главное направление действий после окончания
+> миграции на ggez 0.5 ясно.
+<!-- TODO: spell-checker:enable -->
+
+[a giant review](https://itch.io/post/660275).
+
+<!-- TODO: spell-checker:disable -->
+> Прям очень круто, что кто-то незнакомый продрался через супер-сырой интерфейс,
+> позалипал в игру, разобрался в большей части механик,
+> и не поленился написать развернутую и мотивирующую конструктивную критику.
+(__TODO__: check not-fl3's twitter, he wrote something about strangers' reviews)
+<!-- TODO: spell-checker:enable -->
 
 ------
 
@@ -302,19 +322,17 @@ Btw, I've also created [an itch.io page for Zone of Control][itch_zoc].
 
 ## Visual Improvements
 
-Flatten map a little bit and added some shadows
+Flatten map a little bit and added some shadows.
+Less schematic.
 
 ------
 
 [Dust effect (for jumps and throws)](https://github.com/ozkriff/zemeroth/pull/390)
 
-<!-- spell-checker:disable -->
-
-> пыль создается одной не очень большой функцией, которая просто создает
-> пачку спрайтов и навешивает на них цепочки простых действий перемещения
-> и изменения цвета.
-
-<!-- spell-checker:enable -->
+The dust effect is created by a simple function
+that just emits a bunch of half-transparent sprites
+and attaches position and color change actions to them.
+Sprites' size, velocity and transparacy is a little bit randomized.
 
 ------
 
@@ -336,16 +354,9 @@ For now they are just a visual information.
 They affect only what sprite is used during the attack animation.
 
 <!-- TODO: spell-checker:disable -->
-
-> Добавил бойцам параметр WeaponType.
-> Пока есть четыре вида: smash, slash, pierce и claw
-> и они чисто визуальные - для выбора подходящей текстурки.
 > Некоторые спрайты атаки под углами смотрятся странно
 > (копейщик, я на тебя смотрю) надо будет потом дополнительные варианты
 > добавить и зеркалировать все это хозяйство по ситуации.
-
-(__TODO__: это было в реддите или на гитхабе на английском)
-
 <!-- TODO: spell-checker:enable -->
 
 ------
@@ -359,15 +370,13 @@ Initial draft of the new sprites looked like this:
 
 ^ _yeah, Floating Eye and Insecto-snake haven't made it to the master yet._
 
-_Shadows_?
+------
 
-<!-- TODO: spell-checker:disable -->
+(__TODO__: _Shadows_?)
 
-> На макетах выше видно много градиентов. В текущей версии решил отказаться
-> от градиентов и всех округлостей, делая акцент на “типа-низкополигональном”
-> угловатом стиле. На данный момент игра выглядит вот так: __TODO__.
-
-<!-- TODO: spell-checker:enable -->
+There're many gradients in the mockup image above.
+Later I decided to get rid of all thegradients and curvy lines
+and stick with "pseudo lowpoly" style.
 
 ## Simple campaign mode
 
@@ -407,9 +416,9 @@ __TODO__: Not sure if this piece belongs to this section:
 
 <!-- TODO: spell-checker:disable -->
 
-> <https://github.com/ozkriff/zemeroth/pull/360>
+> [PR  #360 "Don't create agents near enemies"](https://github.com/ozkriff/zemeroth/pull/360)
 >
-> <https://github.com/ozkriff/zemeroth/pull/369>
+> [PR ##369 "Arrange created objects in 'Line's"](https://github.com/ozkriff/zemeroth/pull/369))
 >
 > Добавлены зоны начального построения (lines) и генератор
 > больше не создает агентов в упор к врагам.
