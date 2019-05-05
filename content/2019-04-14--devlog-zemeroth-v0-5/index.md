@@ -76,10 +76,10 @@ Since Icefoxen [asked not to use `ggez-` prefix][ggwp],
 I used `ggwp-` ("good game, well played!") to denote that the crate
 belongs to ggez's ecosystem, but is not official.
 
-Not sure how helpful these libraries can be for a non-Zemeroth project.
-They're still tied to Zemeroth.
+These libraries are still tied to Zemeroth,
+not sure how helpful these libraries can be for a project that is not Zemeroth.
 You probably won't be able to use them without changes in other games.
-For example, scene have no scrolling.
+But maybe someone will manage ti extract some benefit from them.
 
 These crates are still immature and aren't published on crates.io yet,
 while the `rancor` component library was renamed to `zcomponents` and
@@ -323,6 +323,7 @@ of the new sprites looked like this:
 
 ![New style mockup](agents-inkscape-mockup.jpeg)
 
+Tiles are flatten now.
 It's less a schematic top-down view as it was before.
 "Camera" is moved to the side so the tiles and agents are shown
 using the same projection.
@@ -333,15 +334,15 @@ and stick with "pseudo lowpoly" style.
 
 Floating Eye and Insecto-snake from the mockup haven't made it to the master yet.
 
-Tiles are flatten now.
-
 ------
 
-All objects not have a shadow.
-It make the image a little bit more tangible.
+All objects now have a shadow.
+It makes the image a little bit more tangible.
 Walk and especially throw animations feels better now.
 
 Initially shadow was an ellipse with gradient.
+Later it was replaced by two semi-transparent hexagons
+for style consistency.
 
 ------
 
@@ -380,34 +381,16 @@ it should be rotated.
 
 ## Simple campaign mode
 
-Basic campaign mode with a carryover of the survivor fighters
-A campaign mode was added.
+Basic campaign mod.
 It's just a linear sequence of battles with predefined scenarios.
+After each battle your survived fighters are carried over to the next battle.
+If you loose a battle - campaign is over for you.
+If you win a battle, you're shown a transition screen with a list
+of your dead fighters, your current squad and possible recruits:
 
-<!-- TODO: spell-checker:disable -->
+![Campaign screen example](2018-11-15--first-iteration-of-a-campaign-mode.png)
 
-> Представляет из себя просто цепочку боев с заранее заданными сценариями.
-> Если проигрываешь в бою - все, кампания для тебя закончилась, начинай сначала.
-> Если выигрываешь, то тебе показывается переходный экран со списком погибших,
-> текущим составом группы и вариантами кого ты можешь “докупить” в награду.
-
-...
-
-> Поскольку экран боя создается в экране главного меню или экране кампании,
-> а затем складывается в виде типаж-объекта на стек экранов,
-> возврат результата боя получилось организовать только через [канал](__TODO__).
-> Немного костыльно, но сойдет.
-
-...
-
-> Сейчас есть косяк с тем что если бой пошел неудачно,
-> то можно в любой момент выйти из него в меню кампании и начать бой заново.
-> Уже завел [задачу](https://github.com/ozkriff/zemeroth/issues/387)
-> на то, что бы пресечь это безобразие - “вечная смерть” наше все.
-
-<!-- TODO: spell-checker:enable -->
-
-`test_campaign.ron`:
+Campaign is defined by a [RON][ron] config file with this structure:
 
 ```text
 initial_agents: ["swordsman", "alchemist"],
@@ -444,14 +427,12 @@ nodes: [
 ]
 ```
 
-![Campaign screen example](2018-11-15--first-iteration-of-a-campaign-mode.png)
-
-> Still working on a campaign mode with a carryover of the fighters
-> from one battle to the next.
-
+Here's some real campaign scenario:
 [campaign_01.ron](https://github.com/ozkriff/zemeroth_assets/blob/acd9fe9ef/campaign_01.ron)
 
-(__TODO__: describe the file format.)
+There's a known bug that you can exit from a battle that is not going well
+at any moment to start again.
+This will be forbidden - permadeath is the only way :) .
 
 ## Hit chances
 
@@ -463,9 +444,6 @@ Attacks with strength > 1 have additional hit chances - with reduced damage
 (each strength point gives 10% hit chance improvement).
 
 Wounded agents become less accurate.
-
-In the current implementation, it's based on attacker's accuracy and target's
-dodge stats. The hit chance is reduced when attacker is wounded.
 
 ![Hit chances demo](2018-09-29--old-hit-chances-demo.gif)
 (__TODO__: needs an update)
@@ -786,3 +764,4 @@ __TODO__:
 
 [Zemeroth]: https://github.com/ozkriff/zemeroth
 [itch_zemeroth]: https://ozkriff.itch.io/zemeroth
+[ron]: https://github.com/ron-rs/ron
