@@ -4,7 +4,7 @@ slug = "2019-04-14--devlog-zemeroth-v0-5"
 +++
 
 <!-- markdownlint-disable MD013 -->
-<!-- cspell:ignore Berserker Muton kiegel Yururu ldjam -->
+<!-- cspell:ignore Berserker Muton kiegel Yururu ldjam devs -->
 
 Hi, folks! I'm happy to announce **Zemeroth v0.5**.
 Main features of this release are:
@@ -220,10 +220,9 @@ fn main() -> GameResult {
 }
 ```
 
-Finally, a short helper script was added:
+Finally, a short helper script `utils/wasm/build.sh` was added:
 
 ```sh
-$ cat utils/wasm/build.sh
 #!/bin/sh
 cp -r assets static
 cp utils/wasm/index.html static
@@ -231,17 +230,17 @@ ls static > static/index.txt
 cargo web build
 ```
 
-- cargo-web only packs `static` directory (it's hardcoded),
+- [cargo-web] only packs a `static` directory (it's hardcoded),
   so the script copies the game's assets there;
-- It also copies the `index.html` template page there;
-- And adds a good-web-game specific file that lists all resources
-  that should be loadable by the engine
-  (`conf::Loading::Embedded` in the code above).
+- the `index.html` template page is also copied there;
+- all assets should be listed in `index.txt` for good-web-game to be able
+  to load them, so this file is created;
 
 You can find a minimal example of good-web-game
 [here](https://github.com/not-fl3/good-web-game/tree/9b362da6d/examples/simple).
 
 [good_web_game]: https://github.com/not-fl3/good-web-game
+[cargo-web]: https://github.com/koute/cargo-web
 
 ## itch.io
 
@@ -318,6 +317,33 @@ Btw, I've also created [an itch.io page for Zone of Control][itch_zoc].
 
 ## Visual Improvements
 
+[Initial draft](https://twitter.com/ozkriff/status/975827153056075776)
+of the new sprites looked like this:
+
+![__TODO__: description](agents-inkscape-mockup.jpeg)
+
+It's less a schematic top-down view as it was before.
+"Camera" is moved to the side so the tiles and agents are shown
+using the same projection.
+
+There're many gradients in the mockup image above.
+Later I decided to get rid of all thegradients and curvy lines
+and stick with "pseudo lowpoly" style.
+
+Floating Eye and Insecto-snake from the mockup haven't made it to the master yet.
+
+Tiles are flatten now.
+
+------
+
+All objects not have a shadow.
+It make the image a little bit more tangible.
+Walk and especially throw animations feels better now.
+
+Initially shadow was an ellipse with gradient.
+
+------
+
 Flatten map a little bit and added some shadows.
 Less schematic.
 
@@ -346,14 +372,6 @@ Every agent now has `WeaponType`: "smash", "slash", "pierce", and "claw".
 For now they are just a visual information.
 They affect only what sprite is used during the attack animation.
 
-<!-- TODO: spell-checker:disable -->
-> Некоторые спрайты атаки под углами смотрятся странно
-> (копейщик, я на тебя смотрю) надо будет потом дополнительные варианты
-> добавить и зеркалировать все это хозяйство по ситуации.
-<!-- TODO: spell-checker:enable -->
-
-(__TODO__: demo gif)
-
 Same as agent sprites, weapon flash sprites are not yet mirrored horizontally.
 That is mostly noticeable with curvy smash sprite.
 
@@ -365,21 +383,8 @@ it should be rotated.
 ------
 
 Blood splatters.
+To make attacks more dramatic.
 slowly dissapear in three turns.
-
-Initial draft of the new sprites looked like this:
-
-![__TODO__: description](agents-inkscape-mockup.jpeg)
-
-^ _yeah, Floating Eye and Insecto-snake haven't made it to the master yet._
-
-------
-
-(__TODO__: _Shadows_?)
-
-There're many gradients in the mockup image above.
-Later I decided to get rid of all thegradients and curvy lines
-and stick with "pseudo lowpoly" style.
 
 ## Simple campaign mode
 
@@ -391,12 +396,16 @@ and stick with "pseudo lowpoly" style.
 > Если проигрываешь в бою - все, кампания для тебя закончилась, начинай сначала.
 > Если выигрываешь, то тебе показывается переходный экран со списком погибших,
 > текущим составом группы и вариантами кого ты можешь “докупить” в награду.
->
+
+...
+
 > Поскольку экран боя создается в экране главного меню или экране кампании,
 > а затем складывается в виде типаж-объекта на стек экранов,
 > возврат результата боя получилось организовать только через [канал](__TODO__).
 > Немного костыльно, но сойдет.
->
+
+...
+
 > Сейчас есть косяк с тем что если бой пошел неудачно,
 > то можно в любой момент выйти из него в меню кампании и начать бой заново.
 > Уже завел [задачу](https://github.com/ozkriff/zemeroth/issues/387)
@@ -404,7 +413,44 @@ and stick with "pseudo lowpoly" style.
 
 <!-- TODO: spell-checker:enable -->
 
-Win and Loose screens.
+```text
+initial_agents: ["swordsman", "alchemist"],
+nodes: [
+    (
+        scenario: (
+            map_radius: (4),
+            rocky_tiles_count: 8,
+            objects: [
+                (owner: Some((1)), typename: "imp", line: Front, count: 3),
+                (owner: Some((1)), typename: "imp_bomber", line: Middle, count: 2),
+            ],
+        ),
+        award: (
+            recruits: ["hammerman", "alchemist"],
+        ),
+    ),
+    (
+        scenario: (
+            rocky_tiles_count: 10,
+            objects: [
+                (owner: None, typename: "boulder", line: Any, count: 3),
+                (owner: None, typename: "spike_trap", line: Any, count: 3),
+                (owner: Some((1)), typename: "imp", line: Front, count: 4),
+                (owner: Some((1)), typename: "imp_toxic", line: Middle, count: 2),
+                (owner: Some((1)), typename: "imp_bomber", line: Back, count: 1),
+                (owner: Some((1)), typename: "imp_summoner", line: Back, count: 2),
+            ],
+        ),
+        award: (
+            recruits: ["swordsman", "spearman", "hammerman"],
+        ),
+    ),
+]
+```
+
+__TODO__: Win and Loose screens were added.
+
+__TODO__: more images?
 
 ![Campaign screen example](2018-11-15--first-iteration-of-a-campaign-mode.png)
 
@@ -412,6 +458,8 @@ Win and Loose screens.
 > from one battle to the next.
 
 [campaign_01.ron](https://github.com/ozkriff/zemeroth_assets/blob/acd9fe9ef/campaign_01.ron)
+
+(__TODO__: describe the file format.)
 
 ------
 
@@ -500,17 +548,29 @@ Each armor point deflects one damage point.
 Some weapons can break armor.
 Fire and poison ignore armor.
 
-> Each armor point deflects one damage point.
-> Some weapons can break armor and fire/poison/etc ignore armor.
+Each armor point deflects one damage point.
+Some weapons can break armor and fire/poison/etc ignore armor.
 
 ![old armor demo](2018-09-16--old-armor-demo.gif)
 (__TODO__: replace with a local image. and update?)
 
 ## AI updates
 
-__TODO__: gifs (record new?)
+__TODO__: gifs
 
 Keep distance in the range.
+
+Summoner have a different min/max range than bombers.
+
+If AI can't find any direct path to a target
+it will now try to find ...
+Find a path to the closest tile
+
+Helper function to dump some map state to the console.
+
+------
+
+> Wrote a simple helper function `dump_map` that takes a closure and dumps required map data as an ascii. In this case, pic 1 shows objects and pic 2 shows available positions.
 
 ## Game Rules Changes
 
@@ -564,6 +624,11 @@ And now back to more technical updates.
 
 > 2018.07.16: Testing a simple python export script that extracts named objects
 > from an `.svg` atlas. Colored backgrounds are for debug purposes.
+
+...
+
+> Atlas is the "original file" now, so I just edit the sprite here.
+> Linking external svg files is surprisingly difficult in inkscape (or svg in general? not sure).
 
 ...
 
@@ -645,11 +710,18 @@ Woo-hoo
 ## Indikator
 
 [Gave a presentation about Zemeroth][indikator_twit] at 8th Indie-StandUp
-at Indikator (previously known as Indie Space).
+at Indikator (Indie Space).
 
 __TODO__: What is Indikator? Give a link.
 
+[Indikator](http://indierocket.ru) is a local 
+
 Gave a presentation about Zemeroth at 8th Indie-StandUp in Indie_Space_SPB.
+
+Presentation went pretty good,
+local devs seemed to like the project and my development plan,
+especially considering that it's opensource and uses an interesting tech
+(at least one of the programmers has visited out local rustlang meetup afterward).
 
 ![me presenting Zemeroth at Indikator](2018-11-03--indikator.jpg)
 
