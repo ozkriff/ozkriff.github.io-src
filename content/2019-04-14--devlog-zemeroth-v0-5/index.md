@@ -189,7 +189,8 @@ ggez = "0.5.0-rc.1"
 ggez = { git = "https://github.com/not-fl3/good-web-game", package = "good-web-game" }
 ```
 
-So the crate substitution hack is done in `main.rs` using `extern crate` items in `main.rs`:
+So the crate substitution hack is done in `main.rs`
+using `extern crate` items in `main.rs`:
 
 ```rust
 #[cfg(not(target_arch = "wasm32"))]
@@ -320,7 +321,7 @@ Btw, I've also created [an itch.io page for Zone of Control][itch_zoc].
 [Initial draft](https://twitter.com/ozkriff/status/975827153056075776)
 of the new sprites looked like this:
 
-![__TODO__: description](agents-inkscape-mockup.jpeg)
+![New style mockup](agents-inkscape-mockup.jpeg)
 
 It's less a schematic top-down view as it was before.
 "Camera" is moved to the side so the tiles and agents are shown
@@ -344,31 +345,28 @@ Initially shadow was an ellipse with gradient.
 
 ------
 
-Flatten map a little bit and added some shadows.
-Less schematic.
-
-------
+(__TODO__: demo gif)
 
 [Dust effect (for jumps and throws)](https://github.com/ozkriff/zemeroth/pull/390)
-
 The dust effect is created by a simple function
 that just emits a bunch of half-transparent sprites
 and attaches position and color change actions to them.
 Sprites' size, velocity and transparacy is a little bit randomized.
 
-(__TODO__: demo gif)
-
 ------
 
-[blood splatters and weapon flashes](https://github.com/ozkriff/zemeroth/pull/401)
+[Added blood splatters and weapon flashes](https://github.com/ozkriff/zemeroth/pull/401)
+to make attacks more dramatic:
+
+(__TODO__: demo gif - _use github's title gif for this_?)
+
+Direction of the blood splatter is opposite of attack's direction.
+Number of drops depends on the attack's damage.
+Blood slowly disappears into transparency in three turns,
+otherwise the battlefield would become a complete and unreadable mess.
 
 Adds weapon flashes of four types: slash, smash, pierce and claw;
-Adds directed dynamic blood splatters.
-
-(__TODO__: demo gif)
-
 Every agent now has `WeaponType`: "smash", "slash", "pierce", and "claw".
-
 For now they are just a visual information.
 They affect only what sprite is used during the attack animation.
 
@@ -380,15 +378,11 @@ during vertical attacks.
 Either multiple sprites are need or
 it should be rotated.
 
-------
-
-Blood splatters.
-To make attacks more dramatic.
-slowly dissapear in three turns.
-
 ## Simple campaign mode
 
-"Basic campaign mode with a carryover of the survivor fighters"
+Basic campaign mode with a carryover of the survivor fighters
+A campaign mode was added.
+It's just a linear sequence of battles with predefined scenarios.
 
 <!-- TODO: spell-checker:disable -->
 
@@ -412,6 +406,8 @@ slowly dissapear in three turns.
 > на то, что бы пресечь это безобразие - “вечная смерть” наше все.
 
 <!-- TODO: spell-checker:enable -->
+
+`test_campaign.ron`:
 
 ```text
 initial_agents: ["swordsman", "alchemist"],
@@ -448,10 +444,6 @@ nodes: [
 ]
 ```
 
-__TODO__: Win and Loose screens were added.
-
-__TODO__: more images?
-
 ![Campaign screen example](2018-11-15--first-iteration-of-a-campaign-mode.png)
 
 > Still working on a campaign mode with a carryover of the fighters
@@ -460,37 +452,6 @@ __TODO__: more images?
 [campaign_01.ron](https://github.com/ozkriff/zemeroth_assets/blob/acd9fe9ef/campaign_01.ron)
 
 (__TODO__: describe the file format.)
-
-------
-
-__TODO__: Not sure if this piece belongs to this section:
-
-<!-- TODO: spell-checker:disable -->
-
-> [PR  #360 "Don't create agents near enemies"](https://github.com/ozkriff/zemeroth/pull/360)
->
-> [PR ##369 "Arrange created objects in 'Line's"](https://github.com/ozkriff/zemeroth/pull/369))
->
-> Добавлены зоны начального построения (lines) и генератор
-> больше не создает агентов в упор к врагам.
->
-> С последним все просто - если рядом с клеткой стоит враг,
-> то она считается непригодной для начальной позиции.
-> Это помогает избежать дурацких ситуаций на первом ходу,
-> например когда важный дальнобойный боец оказывается по случайности
-> связан рукопашныи боем - теперь всегда есть возможность его отвести
-> куда-то и перегруппироваться.
->
-> А насчет зон, добавлено перечисление
-> `pub enum Line { Any, Front, Middle, Back },`
-> позволяющее указывать в сценарии где мы какие виды агентов хотим видить.
-> Теперь демоны-вызываетли всегда сощдаются в дальнем конце карты за жвым щитом,
-> т.е. застрахованы от быстрой расправы на первом ходу.
->
-> Снимок тестовой карты, в которую специально нагнана прям куча демонов что бы
-> четко были видны зоны и отступы: ...
-
-<!-- TODO: spell-checker:enable -->
 
 ## Hit chances
 
@@ -543,16 +504,23 @@ dodge stats. The hit chance is reduced when attacker is wounded.
 
 ## Armor
 
-Implemented basic armor system.
-Each armor point deflects one damage point.
-Some weapons can break armor.
+Implemented a basic armor system.
+Armor points is shown above the agent in one line with strength points
+using the yellow dots.
+Each armor point deflects one damage point on each attack.
+Some weapons can break armor (the `attack_break` parameter).
 Fire and poison ignore armor.
 
-Each armor point deflects one damage point.
-Some weapons can break armor and fire/poison/etc ignore armor.
+Here's a little demo:
+
+- an imp can't break armor so he can't deal any damage to the heavy swordsman
+- toxic imp can't deal any direct damage but he poisons the swordsman
+  ignoring the armor
+- insecto-snake destroys the armor with a powerful attack
 
 ![old armor demo](2018-09-16--old-armor-demo.gif)
-(__TODO__: replace with a local image. and update?)
+
+In the current version of the game only the imp summoner has the armor.
 
 ## AI updates
 
@@ -570,9 +538,11 @@ Helper function to dump some map state to the console.
 
 ------
 
-> Wrote a simple helper function `dump_map` that takes a closure and dumps required map data as an ascii. In this case, pic 1 shows objects and pic 2 shows available positions.
+> Wrote a simple helper function `dump_map` that takes a closure
+> and dumps required map data as an ascii.
+> In this case, pic 1 shows objects and pic 2 shows available positions.
 
-## Game Rules Changes
+## Other Game Rules Changes
 
 - Spike traps
 
@@ -606,9 +576,36 @@ Helper function to dump some map state to the console.
 
   [PR](https://github.com/ozkriff/zemeroth/pull/308)
 
+<!-- TODO: spell-checker:disable -->
+
+> [PR  #360 "Don't create agents near enemies"](https://github.com/ozkriff/zemeroth/pull/360)
+>
+> [PR ##369 "Arrange created objects in 'Line's"](https://github.com/ozkriff/zemeroth/pull/369))
+>
+> Добавлены зоны начального построения (lines) и генератор
+> больше не создает агентов в упор к врагам.
+>
+> С последним все просто - если рядом с клеткой стоит враг,
+> то она считается непригодной для начальной позиции.
+> Это помогает избежать дурацких ситуаций на первом ходу,
+> например когда важный дальнобойный боец оказывается по случайности
+> связан рукопашныи боем - теперь всегда есть возможность его отвести
+> куда-то и перегруппироваться.
+>
+> А насчет зон, добавлено перечисление
+> `pub enum Line { Any, Front, Middle, Back },`
+> позволяющее указывать в сценарии где мы какие виды агентов хотим видить.
+> Теперь демоны-вызываетли всегда сощдаются в дальнем конце карты за жвым щитом,
+> т.е. застрахованы от быстрой расправы на первом ходу.
+>
+> Снимок тестовой карты, в которую специально нагнана прям куча демонов что бы
+> четко были видны зоны и отступы: ...
+
+<!-- TODO: spell-checker:enable -->
+
 ## Gameplay Video
 
-So, putting this all together:
+So, putting these gameplay changes together:
 
 (**_TODO: Record a gameplay video. A campaign walkthrough maybe?_**)
 
@@ -714,7 +711,7 @@ at Indikator (Indie Space).
 
 __TODO__: What is Indikator? Give a link.
 
-[Indikator](http://indierocket.ru) is a local 
+[Indikator](http://indierocket.ru) is a local (__TODO__).
 
 Gave a presentation about Zemeroth at 8th Indie-StandUp in Indie_Space_SPB.
 
@@ -739,8 +736,6 @@ especially considering that it's opensource and uses an interesting tech
 (__TODO__: What is Zola?)
 
 __TODO__: ...
-
-(__TODO__: _link to the twitter thread_)
 
 [Twitter thread](https://twitter.com/ozkriff/status/1119212330246656002)
 
@@ -767,10 +762,11 @@ You can find the roadmap [in the README](__TODO__);
 
 __TLDR__: Short-term plan is (aka "things I hope to do for v0.6 release):
 
-- improve the GUI;
+- improve the GUI: replace text buttons with icons (__TODO__: link to an issue);
 - [Reduce text overlapping](https://github.com/ozkriff/zemeroth/issues/214)
 - ???
 - start maintaining a basic GDD (game design document);
+- agent upgrade trees (__TODO__: link to an issue);
 - __TODO__;
 
 -->
