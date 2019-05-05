@@ -4,7 +4,7 @@ slug = "2019-04-14--devlog-zemeroth-v0-5"
 +++
 
 <!-- markdownlint-disable MD013 -->
-<!-- cspell:ignore Berserker Muton kiegel -->
+<!-- cspell:ignore Berserker Muton kiegel Yururu ldjam -->
 
 Hi, folks! I'm happy to announce **Zemeroth v0.5**.
 Main features of this release are:
@@ -247,14 +247,13 @@ You can find a minimal example of good-web-game
 
 The web version needs to be hosted somewhere.
 [itch.io](https://itch.io/) is a nice place for this:
+
+__[ozkriff.itch.io/zemeroth][itch_zemeroth]__
+
 it has a nice and simple UI (for both developers and consumers),
 it's extremely [easy to upload an web game there](https://itch.io/docs/creators/html5)
 and it's a relatively known store for a indie games that can provide
 some exposure by itself.
-
-__[ozkriff.itch.io/zemeroth][itch_zemeroth]__
-
-... (__TODO__: write something here to separate the link and the image) ...
 
 [![screenshot of the itch.io page](2019-05-02--itch-ozkriff.png)](https://ozkriff.itch.io)
 
@@ -275,42 +274,39 @@ the web version of the game seems to work fine on most mobile devices:
 ------
 
 Created [an itch.io list of Rust games][itch_rust_list].
+When I find a Rust game on itch.io I add it there.
 
 Also, I've sent a request to itch.io folks to add Rust as an instrument,
 so now a more official list is available:
-[itch.io/games/made-with-rust](https://itch.io/games/made-with-rust).
+[itch.io/games/made-with-rust](https://itch.io/games/made-with-rust)
+(you can edit a game's instruments here: "edit game" -> "metadata" -> "engines & tools").
 Looks like my original list will be deprecated with time but
 it's still useful for now because only authors of the games can add
 an instrument to the metadata.
 
-("edit game" -> "Metadata" -> "Engines & tools")
+------
+
+With a playable version only a click away
+I received a lot of fresh feedback:
+a lot of people that previously were only following the development
+now actually tried to play the game.
+
+The most important things people want to see improved are:
+
+- Improve the GUI: Replace text buttons with icons, show some tooltips, etc;
+- Add a tutorial or at least a short guide;
+- Randomness is too frustrating: missed attacks should result in some
+  little positive effect, like pushing enemies back or reducing their stamina;
+- Game lacks ranged attack units, like archers or knife throwers.
 
 ------
 
-Lots of feedback.
-
-(__TODO__: summarize the feedback)
-
-<!-- TODO: spell-checker:disable -->
-> Твит и реддит пост 2 отлично зашли, прям куча людей,
-> которые до этого скорее пассивно поглядывали за проектом,
-> реально сели и поиграли.
->
-> Обратной связи целый вагон, тут расписывать подробно поленюсь,
-> но чаще всего повторялось, что нужен более человечный GUI,
-> хоть какое-то руководство как в это играть
-> и слишком сильный рандом - главное направление действий после окончания
-> миграции на ggez 0.5 ясно.
-<!-- TODO: spell-checker:enable -->
-
-[a giant review](https://itch.io/post/660275).
-
-<!-- TODO: spell-checker:disable -->
-> Прям очень круто, что кто-то незнакомый продрался через супер-сырой интерфейс,
-> позалипал в игру, разобрался в большей части механик,
-> и не поленился написать развернутую и мотивирующую конструктивную критику.
-(__TODO__: check not-fl3's twitter, he wrote something about strangers' reviews)
-<!-- TODO: spell-checker:enable -->
+@Yururu even wrote
+[a giant comment](https://itch.io/post/660275) on the itch page!
+It's inspiring when
+a stranger from the internet breaks through the crude primitive interface,
+figures out game mechanics on a quite deep level,
+and writes a detailed review of their experience and thoughts.
 
 ------
 
@@ -334,6 +330,8 @@ that just emits a bunch of half-transparent sprites
 and attaches position and color change actions to them.
 Sprites' size, velocity and transparacy is a little bit randomized.
 
+(__TODO__: demo gif)
+
 ------
 
 [blood splatters and weapon flashes](https://github.com/ozkriff/zemeroth/pull/401)
@@ -341,14 +339,9 @@ Sprites' size, velocity and transparacy is a little bit randomized.
 Adds weapon flashes of four types: slash, smash, pierce and claw;
 Adds directed dynamic blood splatters.
 
-------
+(__TODO__: demo gif)
 
-Every agent now has `WeaponType`:
-
-- smash
-- slash
-- pierce
-- claw
+Every agent now has `WeaponType`: "smash", "slash", "pierce", and "claw".
 
 For now they are just a visual information.
 They affect only what sprite is used during the attack animation.
@@ -358,6 +351,16 @@ They affect only what sprite is used during the attack animation.
 > (копейщик, я на тебя смотрю) надо будет потом дополнительные варианты
 > добавить и зеркалировать все это хозяйство по ситуации.
 <!-- TODO: spell-checker:enable -->
+
+(__TODO__: demo gif)
+
+Same as agent sprites, weapon flash sprites are not yet mirrored horizontally.
+That is mostly noticeable with curvy smash sprite.
+
+Also, spearman's "pierce" weapon sprite is horizontal and it looks weird
+during vertical attacks.
+Either multiple sprites are need or
+it should be rotated.
 
 ------
 
@@ -677,6 +680,8 @@ TLDR:
 
 ------
 
+<!--
+
 ## Roadmap
 
 What's next?
@@ -695,6 +700,8 @@ __TLDR__: Short-term plan is (aka "things I hope to do for v0.6 release):
 - ???
 - start maintaining a basic GDD (game design document);
 - __TODO__;
+
+-->
 
 ------
 
