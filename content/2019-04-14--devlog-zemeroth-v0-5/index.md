@@ -436,49 +436,43 @@ This will be forbidden - permadeath is the only way :) .
 
 ## Hit chances
 
-[Implemented hit chances](https://github.com/ozkriff/zemeroth/pull/370).
-Added `attack_accuracy`  and  `dodge`  stats to  `Agent`  component
-and used these fields for some basic hit chances math.
+I've added `attack_accuracy` and `dodge` stats to the `Agent` component and
+[used these fields for some basic hit chances math](https://github.com/ozkriff/zemeroth/pull/370).
 
-Attacks with strength > 1 have additional hit chances - with reduced damage
-(each strength point gives 10% hit chance improvement).
+When you select an agent that can attack
+(has an attack point and enemies in range)
+a hit chance is shown over all aviable targets.
 
-Wounded agents become less accurate.
+During the attack animation a hit chance is shown near
+the attacker with a smaller font.
+This was added in order for player to see how dangerous enemy attacks are.
 
 ![Hit chances demo](2018-09-29--old-hit-chances-demo.gif)
-(__TODO__: needs an update)
 
-<!-- TODO: spell-checker:disable -->
+^ __TODO__: _this gif needs to be updated!_
 
-> Из визуала:
->
-> - При выделении готового к атаке бойца поверх врагов
->   показываются шансы попасть по ним;
-> - Во время атаки под атакующим ненадолго появляется вероятность успеха атаки.
->   Нужно, в первую очередь, что бы было понятнее насколько враги опасны.
->
-> Пока я два недостатка описанной выше схемы знаю:
->
-> - Сходу в ней не показать оружие, у которого нет градации урона.
->   Хз что это именно за оружие должно быть и нужно ли оно мне (вряд ли),
->   но штуки вида “или попал и нанес 4 урона, или не попал совсем”
->   непредставимы без дополнительных костылей.
-> - Отравляющий демон наносит 0 урона при атках - т.е. его шанс попасть
->   ниже остальных демонов.
->   Тут вбил костыль в виде повышения его точности атаки.
->
-> Какие изменния случились с балансом:
->
-> - Теперь первоочередная цель это ранить врага,
->   добивать уже может быть меньшим приоритетом - иногда удобно,
->   что бы практически неспособный попасть по твоим бойцам враг
->   занимал клетку и не давал его более здоровым друзьям подойти;
-> - Важность способности лечения у алхимика возросла, потому что толку
->   от своих раненных бойцов становится сильно меньше.
+------
 
-<!-- TODO: spell-checker:enable -->
+Also, wounded agents now become less accurate.
+Each lost strength point results in -10% hit chance penalty (up to -30%).
 
-[Show missing strength points as transparent dots](https://github.com/ozkriff/zemeroth/pull/343)
+Missing strength points (wounds) are shown by almost transparent green dots:
+![demo of transparent strength points](2018-10-04--transparent-dots.png)
+
+This gameplay change has two game balance consequences:
+
+- Now it's more important to wound enemies,
+  finishing them off is a lower priority most of the time.
+  Sometimes wounded enemies even can be helpful to the player,
+  because they are not a real threat to player's fighters,
+  but can block the path for other enemies;
+- Alchemist's "heal" ability become important
+  because your agents are less useful when wounded too.
+
+Also, attacks with strength > 1 have additional hit chances - with reduced damage
+(each attack strength point gives 10% hit chance improvement).
+This emulates the situation when an attacker barely touches their target
+but still manages to make some damage to it.
 
 ## Armor
 
@@ -491,14 +485,15 @@ Fire and poison ignore armor.
 
 Here's a little demo:
 
-- an imp can't break armor so he can't deal any damage to the heavy swordsman
-- toxic imp can't deal any direct damage but he poisons the swordsman
-  ignoring the armor
-- insecto-snake destroys the armor with a powerful attack
-
 ![old armor demo](2018-09-16--old-armor-demo.gif)
 
-In the current version of the game only the imp summoner has the armor.
+- an imp can't break armor so he can't deal any damage to the heavy swordsman;
+- toxic imp can't deal any direct damage but he poisons the swordsman
+  ignoring the armor;
+- insecto-snake destroys the armor with a powerful attack.
+
+In the current version of the game only the imp summoner has the armor,
+so be carefull with them.
 
 ## AI updates
 
@@ -685,29 +680,18 @@ Woo-hoo
 ## Indikator
 
 [Gave a presentation about Zemeroth][indikator_twit] at 8th Indie-StandUp
-at Indikator (Indie Space).
-
-__TODO__: What is Indikator? Give a link.
-
-[Indikator](http://indierocket.ru) is a local (__TODO__).
-
-Gave a presentation about Zemeroth at 8th Indie-StandUp in Indie_Space_SPB.
-
-Presentation went pretty good,
-local devs seemed to like the project and my development plan,
-especially considering that it's opensource and uses an interesting tech
-(at least one of the programmers has visited out local rustlang meetup afterward).
+at [Indikator](http://indierocket.ru).
+It went pretty good, local indie devs seemed to like the project,
+especially considering that it's opensource and uses an interesting tech.
+At least one of the devs has visited
+[our local rustlang meetup](https://www.meetup.com/spbrust) afterwards. 🦀
 
 ![me presenting Zemeroth at Indikator](2018-11-03--indikator.jpg)
 
-------
-
-[Zemeroth is mentioned on Amit's page about hex math][amit].
+Also, [Zemeroth was mentioned on Amit's page about hex math][amit].
 
 [indikator_twit]: https://twitter.com/ozkriff/status/1058359693503070208
 [amit]: https://www.redblobgames.com/grids/hexagons/implementation.html
-
-------
 
 ## Migrated this devlog from Pelican to Zola
 
