@@ -4,7 +4,7 @@ slug = "2019-04-14--devlog-zemeroth-v0-5"
 +++
 
 <!-- markdownlint-disable MD013 -->
-<!-- cspell:ignore Berserker Muton kiegel Yururu ldjam devs -->
+<!-- cspell:ignore Berserker Muton kiegel Yururu ldjam devs itchio -->
 
 Hi, folks! I'm happy to announce **Zemeroth v0.5**.
 Main features of this release are:
@@ -25,8 +25,27 @@ The last release happened about a year ago.
 Since then the development mostly happened in irregular bursts,
 sometimes it even was completely stalled for weeks.
 But a year is a big period of time anyway, so there're still lots of changes.
+
 Lots of text ahead, feel free to skip sections
 that you're not interested in particularry.
+Here's a table of contents:
+
+- [Migration to the `ggez` game engine](#migration-to-the-ggez-game-engine)
+- [WebAssembly version](#webassembly-version)
+- [itch.io](#itchio)
+- [Visual Improvements](#visual-improvements)
+- [Simple campaign mode](#simple-campaign-mode)
+- [Hit chances](#hit-chances)
+- [Armor](#armor)
+- [AI updates](#ai-updates)
+- [Other Game Rules Changes](#other-game-rules-changes)
+- [Gameplay Video](#gameplay-video)
+- [SVG Atlas](#svg-atlas)
+- [Tests](#tests)
+- [Other Technical Changes](#other-technical-changes)
+- [Indikator](#indikator)
+- [Migrated this devlog to Zola](#migrated-this-devlog-to-zola)
+- [Roadmap](#roadmap)
 
 [release v0.5]: https://github.com/ozkriff/zemeroth/releases/tag/v0.5.0
 
@@ -497,19 +516,33 @@ so be carefull with them.
 
 ## AI updates
 
-__TODO__: gifs
+Now, enemies always act in order of remoteness from a player's fighters.
+This way melee imps don't trip over each other too much.
 
-Keep distance in the range.
+------
+
+Non-melee imps (bombers and summoners) are now trying to keep
+distance in range.
 
 Summoner have a different min/max range than bombers.
 
-If AI can't find any direct path to a target
-it will now try to find ...
-Find a path to the closest tile
-
-Helper function to dump some map state to the console.
+(__TODO__: add demo gif)
 
 ------
+
+If AI can't find any direct path to a target
+it will now try to find ...
+Find a path to the closest tile.
+
+Teach AI to move closer to targets even if there's no direct path to them:
+
+[![new pathfinding demo](2018-06-04--ai-pathfinding-demo.gif)](https://youtu.be/09ODLL_Nu8w)
+
+^ _click on the image to see the full demo_
+
+------
+
+Helper function to dump some map state to the console.
 
 > Wrote a simple helper function `dump_map` that takes a closure
 > and dumps required map data as an ascii.
@@ -544,10 +577,6 @@ Helper function to dump some map state to the console.
 
 - __TODO__: Commutative bombs (__TODO__: [PR](https://github.com/ozkriff/zemeroth/pull/296),
   [issue](https://github.com/ozkriff/zemeroth/issues/286))
-
-- Teach AI to move closer to targets even if there's no direct path to them
-
-  [PR](https://github.com/ozkriff/zemeroth/pull/308)
 
 <!-- TODO: spell-checker:disable -->
 
@@ -641,6 +670,8 @@ Test scenarios are completely deterministic.
 Randomness is canceled out with special agent types + special debug flag in
 game's state that causes a panic if you try to do anything with uncertain results
 
+Main issue is randomness.
+
 > it can be mitigated with special unit types with unrealistic stats
 > (for example, accuracy = 999, strength = 1) that allows them
 > to always pass required tests (for example, always hits or always dies).
@@ -693,7 +724,9 @@ Also, [Zemeroth was mentioned on Amit's page about hex math][amit].
 [indikator_twit]: https://twitter.com/ozkriff/status/1058359693503070208
 [amit]: https://www.redblobgames.com/grids/hexagons/implementation.html
 
-## Migrated this devlog from Pelican to Zola
+## Migrated this devlog to Zola
+
+Migrated this devlog from Pelican to Zola
 
 (__TODO__: What is Zola?)
 
