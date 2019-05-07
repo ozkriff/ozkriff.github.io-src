@@ -523,18 +523,15 @@ This way melee imps don't trip over each other too much.
 
 Non-melee imps (bombers and summoners) are now trying to keep
 distance in range.
-
-Summoner have a different min/max range than bombers.
+They need to avoid melee fights but still be able to throw bombs
+at a player's fighters or summon new imps nears the frontline.
+Summoner have a greater min/max range than bombers.
 
 (__TODO__: add demo gif)
 
 ------
 
-If AI can't find any direct path to a target
-it will now try to find ...
-Find a path to the closest tile.
-
-Teach AI to move closer to targets even if there's no direct path to them:
+AI now moves closer to its targets even if there's no direct path to them:
 
 [![new pathfinding demo](2018-06-04--ai-pathfinding-demo.gif)](https://youtu.be/09ODLL_Nu8w)
 
@@ -542,15 +539,20 @@ Teach AI to move closer to targets even if there's no direct path to them:
 
 ------
 
-Helper function to dump some map state to the console.
+During the debugging of the abovementioned features
+I also wrote a simple helper function `dump_map` that takes a closure
+and dumps required map data as an ascii.
+In this case, pic 1 shows objects and pic 2 shows available positions:
 
-> Wrote a simple helper function `dump_map` that takes a closure
-> and dumps required map data as an ascii.
-> In this case, pic 1 shows objects and pic 2 shows available positions.
+(__TODO__: gif demo from imgur)
 
 ## Other Game Rules Changes
 
-- Spike traps
+- Spike traps were added.
+
+  (__TODO__: describe how they work)
+
+  (__TODO__: add an image)
 
 - [Updated](https://github.com/ozkriff/zemeroth/pull/351) "Poison" passive ability:
   it can’t, by itself, kill an agent anymore.
@@ -559,21 +561,18 @@ Helper function to dump some map state to the console.
 
 - Updates to the "Summon" ability:
 
-  - [Fix 'summon' ability - treat each agent individually](https://github.com/ozkriff/zemeroth/pull/413)
+  [Fixed 'summon' ability - treat each agent individually](https://github.com/ozkriff/zemeroth/pull/413)
 
-  - [Updated](https://github.com/ozkriff/zemeroth/pull/349) ‘Summon’ ability:
-    each use of it now creates one more imp (up to 6).
-    It should force the player to be more aggressive.
+  [Updated](https://github.com/ozkriff/zemeroth/pull/349) ‘Summon’ ability:
+  each use of it now creates one more imp (up to 6).
+  It should force the player to be more aggressive.
 
-  - [Changed the summoning algorithm to prefer imp types that are under-presented
-    on the map, not just random ones](https://twitter.com/ozkriff/status/1040321852495863808).
-    Seems to work fine now - even with increased summon rate imp types
-    are balanced in count:
-
-    [img](2018-09-14--map-lines.png)
-
-    This prevents Imp Summoners from being created only a tile away from enemies
-    and thus not having any chances to survive.
+  [Changed the summoning algorithm to prefer imp types that are under-presented
+  on the map, not just random ones](https://twitter.com/ozkriff/status/1040321852495863808).
+  Seems to work fine now - even with increased summon rate imp types
+  are balanced in count: [img](2018-09-14--map-lines.png).
+  This prevents Imp Summoners from being created only a tile away from enemies
+  and thus not having any chances to survive.
 
 - __TODO__: Commutative bombs (__TODO__: [PR](https://github.com/ozkriff/zemeroth/pull/296),
   [issue](https://github.com/ozkriff/zemeroth/issues/286))
