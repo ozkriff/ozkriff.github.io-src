@@ -40,7 +40,7 @@ Here's a table of contents:
 - [AI updates](#ai-updates)
 - [Other Game Rules Changes](#other-game-rules-changes)
 - [Gameplay Video](#gameplay-video)
-- [SVG Atlas](#svg-atlas)
+- [SVG Atlas and assets hash](#svg-atlas-and-assets-hash)
 - [Tests](#tests)
 - [Other Technical Changes](#other-technical-changes)
 - [Indikator](#indikator)
@@ -516,28 +516,24 @@ so be carefull with them.
 
 ## AI updates
 
-Now, enemies always act in order of remoteness from a player's fighters.
-This way melee imps don't trip over each other too much.
+- Now, enemies always act in order of remoteness from a player's fighters.
+  This way melee imps don't trip over each other too much.
 
-------
+- AI learned to avoid walking into spikes, fire and poison clouds.
 
-Non-melee imps (bombers and summoners) are now trying to keep
-distance in range.
-They need to avoid melee fights but still be able to throw bombs
-at a player's fighters or summon new imps nears the frontline.
-Summoner have a greater min/max range than bombers.
+- AI now moves closer to its targets even if there's no direct path to them:
 
-(__TODO__: add demo gif)
+  [![new pathfinding demo](2018-06-04--ai-pathfinding-demo.gif)](https://youtu.be/09ODLL_Nu8w)
 
-------
+  ^ _click on the image to see the full demo_
 
-AI now moves closer to its targets even if there's no direct path to them:
+- Non-melee imps (bombers and summoners) are now trying to keep
+  distance in range.
+  They need to avoid melee fights but still be able to throw bombs
+  at a player's fighters or summon new imps nears the frontline.
+  Summoner have a greater min/max range than bombers.
 
-[![new pathfinding demo](2018-06-04--ai-pathfinding-demo.gif)](https://youtu.be/09ODLL_Nu8w)
-
-^ _click on the image to see the full demo_
-
-------
+  (__TODO__: add demo gif)
 
 During the debugging of the abovementioned features
 I also wrote a simple helper function `dump_map` that takes a closure
@@ -548,10 +544,7 @@ In this case, pic 1 shows objects and pic 2 shows available positions:
 
 ## Other Game Rules Changes
 
-- Spike traps were added.
-
-  (__TODO__: describe how they work)
-
+- Spike traps were added. They're almost like a fire tiles, but permanent.
   (__TODO__: add an image)
 
 - [Updated](https://github.com/ozkriff/zemeroth/pull/351) "Poison" passive ability:
@@ -559,12 +552,11 @@ In this case, pic 1 shows objects and pic 2 shows available positions:
   “Poisoned” status is removed when a target’s strength is reduced to 1.
   This should make battles a little bit less frustrating and more dramatic.
 
-- Updates to the "Summon" ability:
+- Updated to the "Summon" ability:
 
-  [Fixed 'summon' ability - treat each agent individually](https://github.com/ozkriff/zemeroth/pull/413)
+  [each agent is now treated individually](https://github.com/ozkriff/zemeroth/pull/413)
 
-  [Updated](https://github.com/ozkriff/zemeroth/pull/349) ‘Summon’ ability:
-  each use of it now creates one more imp (up to 6).
+  [each use of it now creates one more imp (up to 6)](https://github.com/ozkriff/zemeroth/pull/349).
   It should force the player to be more aggressive.
 
   [Changed the summoning algorithm to prefer imp types that are under-presented
@@ -579,28 +571,28 @@ In this case, pic 1 shows objects and pic 2 shows available positions:
 
 <!-- TODO: spell-checker:disable -->
 
-> [PR  #360 "Don't create agents near enemies"](https://github.com/ozkriff/zemeroth/pull/360)
->
-> [PR ##369 "Arrange created objects in 'Line's"](https://github.com/ozkriff/zemeroth/pull/369))
->
-> Добавлены зоны начального построения (lines) и генератор
-> больше не создает агентов в упор к врагам.
->
-> С последним все просто - если рядом с клеткой стоит враг,
-> то она считается непригодной для начальной позиции.
-> Это помогает избежать дурацких ситуаций на первом ходу,
-> например когда важный дальнобойный боец оказывается по случайности
-> связан рукопашныи боем - теперь всегда есть возможность его отвести
-> куда-то и перегруппироваться.
->
-> А насчет зон, добавлено перечисление
-> `pub enum Line { Any, Front, Middle, Back },`
-> позволяющее указывать в сценарии где мы какие виды агентов хотим видить.
-> Теперь демоны-вызываетли всегда сощдаются в дальнем конце карты за жвым щитом,
-> т.е. застрахованы от быстрой расправы на первом ходу.
->
-> Снимок тестовой карты, в которую специально нагнана прям куча демонов что бы
-> четко были видны зоны и отступы: ...
+- [PR  #360 "Don't create agents near enemies"](https://github.com/ozkriff/zemeroth/pull/360)
+
+- [PR ##369 "Arrange created objects in 'Line's"](https://github.com/ozkriff/zemeroth/pull/369))
+
+  > Добавлены зоны начального построения (lines) и генератор
+  > больше не создает агентов в упор к врагам.
+  >
+  > С последним все просто - если рядом с клеткой стоит враг,
+  > то она считается непригодной для начальной позиции.
+  > Это помогает избежать дурацких ситуаций на первом ходу,
+  > например когда важный дальнобойный боец оказывается по случайности
+  > связан рукопашныи боем - теперь всегда есть возможность его отвести
+  > куда-то и перегруппироваться.
+  >
+  > А насчет зон, добавлено перечисление
+  > `pub enum Line { Any, Front, Middle, Back },`
+  > позволяющее указывать в сценарии где мы какие виды агентов хотим видить.
+  > Теперь демоны-вызываетли всегда сощдаются в дальнем конце карты за жвым щитом,
+  > т.е. застрахованы от быстрой расправы на первом ходу.
+  >
+  > Снимок тестовой карты, в которую специально нагнана прям куча демонов что бы
+  > четко были видны зоны и отступы: ...
 
 <!-- TODO: spell-checker:enable -->
 
@@ -608,27 +600,44 @@ In this case, pic 1 shows objects and pic 2 shows available positions:
 
 So, putting these gameplay changes together:
 
-(**_TODO: Record a gameplay video. A campaign walkthrough maybe?_**)
+(**_TODO: Record a gameplay video. A campaign walkthrough_**)
 
-## SVG Atlas
+This is a piece of a failed campiang's walkthrough.
+Battles 4, 5, and 6.
+
+## SVG Atlas and assets hash
 
 And now back to more technical updates.
 
-[![TODO](2018-07-16--svg-atlas-test.png)](2018-07-16--svg-atlas-test.png)
-
-[svg atlas](https://github.com/ozkriff/zemeroth_assets_src/blob/846a45b7c/atlas.svg)
-
-[export.py](https://github.com/ozkriff/zemeroth_assets_src/blob/846a45b7c/export.py)
+[atlas.svg]
+[export.py]
 
 > 2018.07.16: Testing a simple python export script that extracts named objects
 > from an `.svg` atlas. Colored backgrounds are for debug purposes.
 
 ...
 
+Usually, atlases in gamedev are created programmically
+from smaller singular image files.
+It's reverse in Zemeroth.
+
 > Atlas is the "original file" now, so I just edit the sprite here.
-> Linking external svg files is surprisingly difficult in inkscape (or svg in general? not sure).
+
+Linking external svg files is surprisingly difficult in inkscape
+(or svg in general? not sure).
 
 ...
+
+Sprites are exported by symbol name.
+Just a list on strings in python file.
+
+There's a hack to define the size of generated images:
+each named group contains an invisible rectangle
+(a square for normal sprites and a rectangle for terrain tiles).
+
+It can be temporary made slightly visible for debugging purposes:
+
+[![console, svg atlas and sprites in the debug mode](2018-07-16--svg-atlas-test.png)](2018-07-16--svg-atlas-test.png)
 
 <!-- TODO: spell-checker:disable -->
 
@@ -639,13 +648,17 @@ And now back to more technical updates.
 
 <!-- TODO: spell-checker:enable -->
 
+------
+
 Resource hashes - md5. Travis check.
+
+This should help to detect when someone who is building from source forgets to update the assets.
 
 <!-- TODO: spell-checker:disable -->
 
 > Хэши ресурсов
 >
-> После очередного #310 2 добавил таки в ресурсы подсчет md5 хэша.
+> После очередного #310 добавил таки в ресурсы подсчет md5 хэша.
 > Нужный хэш хардкодится прямо в исходник игры,
 > что бы при запуске с другой версией все грохалось с понятным сообщением.
 >
@@ -657,6 +670,21 @@ Resource hashes - md5. Travis check.
 > и не люблю git submodules. :-p
 
 <!-- TODO: spell-checker:enable -->
+
+> I can just move these .ron files to this repo,
+> but it won't solve the same issue with fonts or audio files -
+> they are not generated from an .svg atlas too.
+>
+> (And I definitely hate the idea of using git submodules for this.)
+>
+> The better solution might be a small python script inside the zemeroth_assets
+> repo that will hash all the non-hidden files.
+> I should run it before every commit,
+> but it can be easily backed up by a master branch protection
+> and CI re-check of this hash.
+
+[atlas.svg]: https://github.com/ozkriff/zemeroth_assets_src/blob/846a45b7c/atlas.svg
+[export.py]: https://github.com/ozkriff/zemeroth_assets_src/blob/846a45b7c/export.py
 
 ## Tests
 
@@ -680,30 +708,30 @@ Main issue is randomness.
 > (basically, it checks that the coefficients are large or low enough
 > to shut off any dice value fluctuations).
 
+------
+
 `pretty_assertions` crate is super-useful when you need to debug
 failing assert comparisons of big hierarchical objects
 (some of which may be many screens long in my case)
 
 [colin-kiegel/rust-pretty-assertions](https://github.com/colin-kiegel/rust-pretty-assertions)
 
-Woo-hoo
-
 ## Other Technical Changes
 
 - `derive_more::From` for enums and errors;
 - [Moved all crates to Rust 2018](https://github.com/ozkriff/zemeroth/pull/394);
-- [Added a note about 'help-wanted' issues](https://github.com/ozkriff/zemeroth/pull/226)
+- [Added a note about 'help-wanted' issues](https://github.com/ozkriff/zemeroth/pull/226);
 - [Migrated to `std::time::Duration`](https://github.com/ozkriff/zemeroth/pull/229)
-  and added `time_s` helper function (__TODO__: link and explain).
-- Fixed a fun bug ([taking control of imp summoners](https://github.com/ozkriff/zemeroth/issues/288))
+  and added `time_s` shortcut/helper function;
+- Fixed a fun bug ([taking control of imp summoners](https://github.com/ozkriff/zemeroth/issues/288));
 - [Removed](https://github.com/ozkriff/zemeroth/pull/365) some data duplication
   from [the `.ron` config with objects descriptions][objects_ron]
-  using serde\`s default annotations and helper init functions.
+  using serde\`s default annotations and helper init functions;
 - [Added a `windows_subsystem` attribute](https://github.com/ozkriff/zemeroth/pull/220).
-  Don't show cmd window.
+  Don't show cmd window;
 - [Fix panic when boulder is pushed into fire/spikes](https://github.com/ozkriff/zemeroth/pull/233);
-- [Merge all 'line_height' consts and functions](https://github.com/ozkriff/zemeroth/pull/431)
-- [Removed data duplication from `objects.ron`](https://github.com/ozkriff/zemeroth/pull/365)
+- [Merge all 'line_height' consts and functions](https://github.com/ozkriff/zemeroth/pull/431);
+- [Removed data duplication from `objects.ron`](https://github.com/ozkriff/zemeroth/pull/365).
 
 [objects_ron]: https://github.com/ozkriff/zemeroth_assets/blob/69e6fb34c/objects.ron
 
@@ -725,13 +753,12 @@ Also, [Zemeroth was mentioned on Amit's page about hex math][amit].
 
 ## Migrated this devlog to Zola
 
-Migrated this devlog from Pelican to Zola
+During the preparation for this Zemeroth release I've [finally][md_to_rst_plans]
+switched the static site generator behind this devlog
+from python-based [Pelican](https://getpelican.com) to rustlang-based [Zola].
 
-(__TODO__: What is Zola?)
-
-__TODO__: ...
-
-[Twitter thread](https://twitter.com/ozkriff/status/1119212330246656002)
+[Here's a twitter thread](https://twitter.com/ozkriff/status/1119212330246656002)
+with some migration notes.
 
 TLDR:
 
@@ -739,40 +766,30 @@ TLDR:
 - Hyde theme;
 - No more Disqus comments
 
-------
-
-<!--
+[Zola]: http://getzola.org
+[md_to_rst_plans]: https://ozkriff.github.io/2017-12-01--devlog/index.html#restructuredtext-markdown
 
 ## Roadmap
 
-What's next?
+What's next? Some things I _hope_ to implement for v0.6 release are:
 
-You can find the roadmap [in the README](__TODO__);
-
-> I want reactions system to be the core of the game. Atm, only basic reactions
-> (attacking) is implemented, but I hope to add more interesting behaviors:
-> auto-jumping away when an enemy approaches or something
-> more aggressive auto-movement (like Muton Berserker from the X-Com).
-
-__TLDR__: Short-term plan is (aka "things I hope to do for v0.6 release):
-
-- improve the GUI: replace text buttons with icons (__TODO__: link to an issue);
+- improve the GUI: [replace text buttons with icons](https://github.com/ozkriff/zemeroth/issues/276);
 - [Reduce text overlapping](https://github.com/ozkriff/zemeroth/issues/214)
-- ???
-- start maintaining a basic GDD (game design document);
-- agent upgrade trees (__TODO__: link to an issue);
-- __TODO__;
+- [Add sound and music](https://github.com/ozkriff/zemeroth/issues/221);
+- [Add fighters upgrade trees](https://github.com/ozkriff/zemeroth/issues/399);
 
--->
+You can find a more detailed roadmap [in the README](__TODO__).
 
 ------
 
 That's all for today, thanks for reading!
 
+(__TODO__: __Fresh news on @ozkriff twitter__)
+
 __TODO__:
+> Also,
 > I've started a [@rust_gamedev](http://twitter.com/rust_gamedev) twitter account
 > in an attempt to create some central point for #rustlang #gamedev stuff on twitter;
-> Follow.
 
 **Discussions of this post**:
 [/r/rust](__TODO__),
