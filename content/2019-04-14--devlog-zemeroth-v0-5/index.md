@@ -30,14 +30,15 @@ Lots of text ahead, feel free to skip sections
 that you're not interested in particularry.
 Here's a table of contents:
 
-- [Migration to the `ggez` game engine](#migration-to-the-ggez-game-engine)
-- [WebAssembly version](#webassembly-version)
+- [Migration to the `ggez` Game Engine](#migration-to-the-ggez-game-engine)
+- [WebAssembly Version](#webassembly-version)
 - [itch.io](#itchio)
 - [Visual Improvements](#visual-improvements)
-- [Simple campaign mode](#simple-campaign-mode)
-- [Hit chances](#hit-chances)
+- [Simple Campaign Mode](#simple-campaign-mode)
+- [Hit Chances](#hit-chances)
 - [Armor](#armor)
 - [AI updates](#ai-updates)
+- [Bombs and Commutative Effects](#bombs-and-commutative-effects)
 - [Other Game Rules Changes](#other-game-rules-changes)
 - [Gameplay Video](#gameplay-video)
 - [SVG Atlas and assets hash](#svg-atlas-and-assets-hash)
@@ -49,7 +50,7 @@ Here's a table of contents:
 
 [release v0.5]: https://github.com/ozkriff/zemeroth/releases/tag/v0.5.0
 
-## Migration to the `ggez` game engine
+## Migration to the `ggez` Game Engine
 
 An experiment with maintaining my own engine
 (even a simple and minimalistic 2D one)
@@ -163,7 +164,7 @@ But who really needs a native port when you have...
 [ggez_issues]: https://github.com/ggez/ggez/issues?q=is%3Aissue+author%3Aozkriff+created%3A%3E2019-01-01
 [profile_overrides]: https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#profile-overrides
 
-## WebAssembly version
+## WebAssembly Version
 
 After ggez v0.5-rc.0 was published, Icefoxen have posted
 ["The State Of GGEZ 2019"](https://wiki.alopex.li/TheStateOfGGEZ2019),
@@ -298,7 +299,8 @@ When I find a Rust game on itch.io I add it there.
 Also, I've sent a request to itch.io folks to add Rust as an instrument,
 so now a more official list is available:
 [itch.io/games/made-with-rust](https://itch.io/games/made-with-rust)
-(you can edit a game's instruments here: "edit game" -> "metadata" -> "engines & tools").
+(you can edit a game's instruments here:
+"edit game" -> "metadata" -> "engines & tools").
 Looks like my original list will be deprecated with time but
 it's still useful for now because only authors of the games can add
 an instrument to the metadata.
@@ -398,7 +400,7 @@ during vertical attacks.
 Either multiple sprites are need or
 it should be rotated.
 
-## Simple campaign mode
+## Simple Campaign Mode
 
 Basic campaign mod.
 It's just a linear sequence of battles with predefined scenarios.
@@ -453,7 +455,7 @@ There's a known bug that you can exit from a battle that is not going well
 at any moment to start again.
 This will be forbidden - permadeath is the only way :) .
 
-## Hit chances
+## Hit Chances
 
 I've added `attack_accuracy` and `dodge` stats to the `Agent` component and
 [used these fields for some basic hit chances math](https://github.com/ozkriff/zemeroth/pull/370).
@@ -542,6 +544,51 @@ In this case, pic 1 shows objects and pic 2 shows available positions:
 
 (__TODO__: gif demo from imgur)
 
+## Bombs and Commutative Effects
+
+![Illustration with multiple bombs](2018-06-04--bombs-issue.png)
+
+^ In previous version of Zemeroth,
+each of these bombs would have explode at the beginning of the next turn
+in order of their creation.
+But this order is hard to remember and it's not clear from the picture at all.
+
+The order is very important as the explosions push back objects - if the first
+explosion is on the left, an agent will be damaged by the right bomb too.
+
+Pushback is not the only possible effect suffering from this.
+Other possible examples of non-commutative effects:
+teleportation, armor-breaking acid, immunity to damage, etc.
+Anything where changing the order of application can change the final state.
+
+I see two possible ways to solve this:
+
+1) "Into the Breach"-like approach with explicit numbers;
+2) Forbid non-commutative delayed effects.
+
+ItB's approach means just adding this order information
+explicit in the game's interface.
+It looks like this:
+
+[![Into the breach screenshot](2018-06-22-into-the-breach-mini.png)](2018-06-22-into-the-breach.png)
+
+Technically it's possible, but I don't think that it fits for Zemeroth
+because it's an extremely noisy interface feature,
+but it's not really a core mechanic.
+
+So, [I've took the latter way][pr296]:
+the "Bomb" ability was split into two abilities: instant "BombPush"
+and delayed "BombDamage".
+
+The plan is to have three groups of objects with effects:
+
+- Objects with immediate effects - can have non-commutative effects;
+- General objects with timed effects - only commutative effects allowed;
+- Special rare timed objects - can do whatever they want,
+  only allowed as unique boss abilities, work in their own special phase.
+
+    [pr296]: https://github.com/ozkriff/zemeroth/pull/296
+
 ## Other Game Rules Changes
 
 - Spike traps were added. They're almost like a fire tiles, but permanent.
@@ -554,47 +601,37 @@ In this case, pic 1 shows objects and pic 2 shows available positions:
 
 - Updated to the "Summon" ability:
 
-  [each agent is now treated individually](https://github.com/ozkriff/zemeroth/pull/413)
+  [Each agent is now treated individually](https://github.com/ozkriff/zemeroth/pull/413).
+  The new code treats each summoned agent individually
+  thus preventing summoning packs of same unit types.
 
-  [each use of it now creates one more imp (up to 6)](https://github.com/ozkriff/zemeroth/pull/349).
+  [Each use of the "Summon" ability now creates one more imp (up to 6)](https://github.com/ozkriff/zemeroth/pull/349).
   It should force the player to be more aggressive.
 
   [Changed the summoning algorithm to prefer imp types that are under-presented
   on the map, not just random ones](https://twitter.com/ozkriff/status/1040321852495863808).
   Seems to work fine now - even with increased summon rate imp types
-  are balanced in count: [img](2018-09-14--map-lines.png).
+  are balanced in count.: [img](2018-09-14--fixed-summoning.png).
   This prevents Imp Summoners from being created only a tile away from enemies
   and thus not having any chances to survive.
 
-- __TODO__: Commutative bombs (__TODO__: [PR](https://github.com/ozkriff/zemeroth/pull/296),
-  [issue](https://github.com/ozkriff/zemeroth/issues/286))
+- [Randomly-placed agents are not created point-blank to their enemies anymore][pr360].
 
-<!-- TODO: spell-checker:disable -->
+- Also, [randomly-placed objects are now created on the different `Line`s][pr369].
+  This prevents Imp Summoners from being created only a tile away from enemies
+  and thus not having any chances to survive.
+  Or Imp Bombers being instantly tied with a melee fight.
 
-- [PR  #360 "Don't create agents near enemies"](https://github.com/ozkriff/zemeroth/pull/360)
+  A line is defind in the scenario files:
 
-- [PR ##369 "Arrange created objects in 'Line's"](https://github.com/ozkriff/zemeroth/pull/369))
+  `(owner: Some((1)), typename: "imp", line: Front, count: 4),`
 
-  > Добавлены зоны начального построения (lines) и генератор
-  > больше не создает агентов в упор к врагам.
-  >
-  > С последним все просто - если рядом с клеткой стоит враг,
-  > то она считается непригодной для начальной позиции.
-  > Это помогает избежать дурацких ситуаций на первом ходу,
-  > например когда важный дальнобойный боец оказывается по случайности
-  > связан рукопашныи боем - теперь всегда есть возможность его отвести
-  > куда-то и перегруппироваться.
-  >
-  > А насчет зон, добавлено перечисление
-  > `pub enum Line { Any, Front, Middle, Back },`
-  > позволяющее указывать в сценарии где мы какие виды агентов хотим видить.
-  > Теперь демоны-вызываетли всегда сощдаются в дальнем конце карты за жвым щитом,
-  > т.е. застрахованы от быстрой расправы на первом ходу.
-  >
-  > Снимок тестовой карты, в которую специально нагнана прям куча демонов что бы
-  > четко были видны зоны и отступы: ...
+  There're four possible values:
 
-<!-- TODO: spell-checker:enable -->
+  `pub enum Line { Any, Front, Middle, Back }`
+
+[pr360]: https://github.com/ozkriff/zemeroth/pull/360
+[pr369]: https://github.com/ozkriff/zemeroth/pull/369
 
 ## Gameplay Video
 
@@ -652,7 +689,8 @@ It can be temporary made slightly visible for debugging purposes:
 
 Resource hashes - md5. Travis check.
 
-This should help to detect when someone who is building from source forgets to update the assets.
+This should help to detect when someone who is building from source
+forgets to update the assets.
 
 <!-- TODO: spell-checker:disable -->
 
@@ -765,6 +803,7 @@ TLDR:
 - Mostly automatically converted all RestructuredText post sources into Markdown;
 - Hyde theme;
 - No more Disqus comments
+- __TODO__: check this list
 
 [Zola]: http://getzola.org
 [md_to_rst_plans]: https://ozkriff.github.io/2017-12-01--devlog/index.html#restructuredtext-markdown
@@ -773,9 +812,9 @@ TLDR:
 
 What's next? Some things I _hope_ to implement for v0.6 release are:
 
-- improve the GUI: [replace text buttons with icons](https://github.com/ozkriff/zemeroth/issues/276);
-- [Reduce text overlapping](https://github.com/ozkriff/zemeroth/issues/214)
-- [Add sound and music](https://github.com/ozkriff/zemeroth/issues/221);
+- [Replace the text buttons with icons](https://github.com/ozkriff/zemeroth/issues/276);
+- [Reduce text overlapping](https://github.com/ozkriff/zemeroth/issues/214);
+- [Add sound effects and music](https://github.com/ozkriff/zemeroth/issues/221);
 - [Add fighters upgrade trees](https://github.com/ozkriff/zemeroth/issues/399);
 
 You can find a more detailed roadmap [in the README](__TODO__).
@@ -791,9 +830,11 @@ __TODO__:
 > I've started a [@rust_gamedev](http://twitter.com/rust_gamedev) twitter account
 > in an attempt to create some central point for #rustlang #gamedev stuff on twitter;
 
+<!--
 **Discussions of this post**:
 [/r/rust](__TODO__),
 [twitter](__TODO__).
+ -->
 
 [Zemeroth]: https://github.com/ozkriff/zemeroth
 [itch_zemeroth]: https://ozkriff.itch.io/zemeroth
