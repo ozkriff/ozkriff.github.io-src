@@ -19,7 +19,7 @@ for Windows, Linux, and macOS.
 Also, now you can **[play an online version][itch_zemeroth]**
 (_read more about it in the "WebAssembly version" section below_).
 
-![github commits graph](2019-04-27--github-commits.png)
+> ![github commits graph](2019-04-27--github-commits.png)
 
 The last release happened about a year ago.
 Since then the development mostly happened in irregular bursts,
@@ -535,7 +535,7 @@ so be carefull with them.
   at a player's fighters or summon new imps nears the frontline.
   Summoner have a greater min/max range than bombers.
 
-  (__TODO__: add demo gif)
+  (__TODO__: add a demo gif)
 
 During the debugging of the abovementioned features
 I also wrote a simple helper function `dump_map` that takes a closure
@@ -644,9 +644,10 @@ Battles 4, 5, and 6.
 
 ## SVG Atlas and assets hash
 
-And now back to more technical updates.
+Back to more technical updates.
 
 [atlas.svg]
+
 [export.py]
 
 > 2018.07.16: Testing a simple python export script that extracts named objects
@@ -654,9 +655,10 @@ And now back to more technical updates.
 
 ...
 
+<!--
 Usually, atlases in gamedev are created programmically
-from smaller singular image files.
-It's reverse in Zemeroth.
+from smaller singular image files. It's reverse in Zemeroth.
+-->
 
 > Atlas is the "original file" now, so I just edit the sprite here.
 
@@ -668,22 +670,13 @@ Linking external svg files is surprisingly difficult in inkscape
 Sprites are exported by symbol name.
 Just a list on strings in python file.
 
-There's a hack to define the size of generated images:
-each named group contains an invisible rectangle
-(a square for normal sprites and a rectangle for terrain tiles).
+There's a hack to define the size of exported images:
+each named group contains an invisible square
+(a rectangle for terrain tiles).
 
 It can be temporary made slightly visible for debugging purposes:
 
-[![console, svg atlas and sprites in the debug mode](2018-07-16--svg-atlas-test.png)](2018-07-16--svg-atlas-test.png)
-
-<!-- TODO: spell-checker:disable -->
-
-> При реализации атласа пришлось вставить костыль для регулировки размера
-> экспортируемых спрайтов: в каждой именнованной группе объектов находится
-> обычно невидимый квадрат (прямоугольник для клеток) нужного количества пикселей.
-> Для отладки их даже можно временно делать видимыми, бывает удобно: ...
-
-<!-- TODO: spell-checker:enable -->
+[![sprites in the debug mode](2018-07-16--svg-atlas-test.png)](2018-07-16--svg-atlas-test.png)
 
 ------
 
@@ -726,39 +719,98 @@ forgets to update the assets.
 
 ## Tests
 
+[Added a few test scenarios](https://github.com/ozkriff/zemeroth/pull/439).
+
 One of the benefits of making a turn-based game is that you can relatively easy
 separate the logic from the visuals and cover the former with tests.
 
-Added basic tests scenarios to #Zemeroth and refactored state mutations.
-
 Test scenarios are completely deterministic.
-Randomness is canceled out with special agent types + special debug flag in
-game's state that causes a panic if you try to do anything with uncertain results
+Randomness is mitigated with special agent types with unrealistic stats
+(for example, accuracy = 999, strength = 1), that allows them
+to always pass required tests (for example, always hits or always dies),
+and an additional `no_random` flag in the game state, that causes a panic
+if agent's stats during the "dice roll" may result in non-determined results
+(basically, it checks that the coefficients are large or low enough
+to shut off any dice value fluctuations).
 
-Main issue is randomness.
+"Exact objects" were added to the scenarios.
+Test scenarios mustn't contain any randomly-placed objects,
+otherwise the `no_random` debug flag will cause a panic.
 
-> it can be mitigated with special unit types with unrealistic stats
-> (for example, accuracy = 999, strength = 1) that allows them
-> to always pass required tests (for example, always hits or always dies).
->
-> and an additional `no_random` flag in the game state, that causes a panic
-> if agent's stats during the "dice roll" may result in non-determined results
-> (basically, it checks that the coefficients are large or low enough
-> to shut off any dice value fluctuations).
+Basic test looks like this:
+
+```rust
+#[test]
+fn basic_move() {
+    let prototypes = prototypes(&[
+        ("mover", [component_agent_move_basic()].to_vec()),
+        ("dull", [component_agent_dull()].to_vec()),
+    ]);
+    let scenario = scenario::default()
+        .object(P0, "mover", PosHex { q: 0, r: 0 })
+        .object(P1, "dull", PosHex { q: 0, r: 2 });
+    let mut state = debug_state(prototypes, scenario);
+    let path = Path::new(vec![
+        PosHex { q: 0, r: 0 },
+        PosHex { q: 0, r: 1 },
+    ]);
+    exec_and_check(
+        &mut state,
+        command::MoveTo {
+            id: ObjId(0),
+            path: path.clone(),
+        },
+        &[Event {
+            active_event: event::MoveTo {
+                id: ObjId(0),
+                path,
+                cost: Moves(1),
+            }.into(),
+            actor_ids: vec![ObjId(0)],
+            instant_effects: Vec::new(),
+            timed_effects: Vec::new(),
+            scheduled_abilities: Vec::new(),
+        }],
+    );
+}
+```
+
+Test scenario consists of list of commands and a list of expected events.
+Occasionally, it can check some parts of the state.
+
+A prototypes list and a scenario is created from scratch
+(though, with some helper functions) for each test.
+It takes more lines of code that reusing a small set of multicases scenarios,
+but the idea is that this way the amount of objects and components in each test
+is minimized.
+This way it's easier to diagnose the bug
+and makes tests less likely to break on unrelated game logic change.
+
+A "dull" enemy agent is required only for the scenario not to end instantly.
+Because the win condition is when no enemy agents is alive.
 
 ------
 
-`pretty_assertions` crate is super-useful when you need to debug
-failing assert comparisons of big hierarchical objects
-(some of which may be many screens long in my case)
-
 [colin-kiegel/rust-pretty-assertions](https://github.com/colin-kiegel/rust-pretty-assertions)
+is a is super-useful crate when you need to debug
+failing assert comparisons of big hierarchical objects
+(some of which may be many screens long in my case).
+
+One note is that I had to replace all `HashMap<ObjId, Vec<Foo>>` in events
+with `Vec<(ObjId, Vec<Foo>)>` to preserve the order.
+Otherwise pretty-assertion were exploding.
+
+------
+
+[I've faced some formatting issues with method chains][fmt_issue]
+
+[fmt_issue]: https://github.com/rust-lang/rustfmt/issues/3157#issuecomment-472718887
 
 ## Other Technical Changes
 
-- `derive_more::From` for enums and errors;
 - [Moved all crates to Rust 2018](https://github.com/ozkriff/zemeroth/pull/394);
 - [Added a note about 'help-wanted' issues](https://github.com/ozkriff/zemeroth/pull/226);
+- Used `derive_more::From` for enums and errors;
 - [Migrated to `std::time::Duration`](https://github.com/ozkriff/zemeroth/pull/229)
   and added `time_s` shortcut/helper function;
 - Fixed a fun bug ([taking control of imp summoners](https://github.com/ozkriff/zemeroth/issues/288));
@@ -798,12 +850,10 @@ from python-based [Pelican](https://getpelican.com) to rustlang-based [Zola].
 [Here's a twitter thread](https://twitter.com/ozkriff/status/1119212330246656002)
 with some migration notes.
 
-TLDR:
-
-- Mostly automatically converted all RestructuredText post sources into Markdown;
-- Hyde theme;
-- No more Disqus comments
-- __TODO__: check this list
+TLDR is that
+I've mostly automatically converted all RestructuredText post sources into Markdown,
+replaced [Disqus comments](http://disqus.com) with direct links to reddit/twitter/etc,
+and migration went quite nice.
 
 [Zola]: http://getzola.org
 [md_to_rst_plans]: https://ozkriff.github.io/2017-12-01--devlog/index.html#restructuredtext-markdown
