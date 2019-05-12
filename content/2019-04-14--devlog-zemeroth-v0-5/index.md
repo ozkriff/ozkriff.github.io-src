@@ -351,7 +351,7 @@ It's less a schematic top-down view as it was before.
 using the same projection.
 
 There're many gradients in the mockup image above.
-Later I decided to get rid of all thegradients and curvy lines
+Later I decided to get rid of all the gradients and curvy lines
 and stick with "pseudo lowpoly" style.
 
 Floating Eye and Insecto-snake from the mockup haven't made it to the master yet.
@@ -402,14 +402,14 @@ it should be rotated.
 It is created by a simple function
 that just emits a bunch of half-transparent sprites
 and attaches position and color change actions to them.
-Sprites' size, velocity and transparacy is a little bit randomized.
+Sprites' size, velocity and transparency is a little bit randomized.
 
 ## Simple Campaign Mode
 
 Basic campaign mod.
 It's just a linear sequence of battles with predefined scenarios.
 After each battle your survived fighters are carried over to the next battle.
-If you loose a battle - campaign is over for you.
+If you lose a battle - campaign is over for you.
 If you win a battle, you're shown a transition screen with a list
 of your dead fighters, your current squad and possible recruits:
 
@@ -466,7 +466,7 @@ I've added `attack_accuracy` and `dodge` stats to the `Agent` component and
 
 When you select an agent that can attack
 (has an attack point and enemies in range)
-a hit chance is shown over all aviable targets:
+a hit chance is shown over all available targets:
 
 ![Hit chances screenshot](2018-05-12--hit-chances-1.png)
 
@@ -520,7 +520,7 @@ Here's a little demo:
 - insecto-snake destroys the armor with a powerful attack.
 
 In the current version of the game only the imp summoner has the armor,
-so be carefull with them.
+so be careful with them.
 
 ## AI updates
 
@@ -542,7 +542,7 @@ so be carefull with them.
 
   ![ai distance demo](2018-07-02--ai-distance.gif)
 
-During the debugging of the abovementioned features
+During the debugging of the above-mentioned features
 I also wrote a simple helper function `dump_map` that takes a closure
 and dumps required map data as an ascii.
 In the above GIF, pic 1 shows objects (`A` - an agent, `O` - a non-agent object)
@@ -627,7 +627,7 @@ The plan is to have three groups of objects with effects:
   and thus not having any chances to survive.
   Or Imp Bombers being instantly tied with a melee fight.
 
-  A line is defind in the scenario files:
+  A line is defined in the scenario files:
 
   `(owner: Some((1)), typename: "imp", line: Front, count: 4),`
 
@@ -653,7 +653,7 @@ Back to more technical updates.
 
 As git is bad at storing non-text files and
 it's practically impossible to use [Git LFS] with a free GitHub plan
-(because of [the bandwith limitations][github_lfs_bandwith]),
+(because of [the bandwidth limitations][github_lfs_bandwith]),
 it looks like a good idea to keep text source files, assets source files,
 and built assets in separate repositories
 to make "optimization history editing" (removing old commits) easier.
@@ -663,7 +663,7 @@ and [the assets repo](https://github.com/ozkriff/zemeroth_assets)
 already existed,
 but I wasn't storing assets source files in any VCS.
 
-So, during v0.5 development I've crated another repo for assets sources:
+So, during v0.5 development I've created another repo for assets sources:
 [ozkriff/zemeroth_assets_src](https://github.com/ozkriff/zemeroth_assets_src).
 The two key files of this repo are: [atlas.svg] and [export.py].
 
@@ -785,7 +785,7 @@ fn basic_move() {
 }
 ```
 
-(_I didn't use the builder patter for event construction,
+(_I didn't use the builder pattern for event construction,
 even though most of the time two or three it's fields are empty vectors,
 because I've faced some [method chains formatting issues][fmt_issue]_)
 
