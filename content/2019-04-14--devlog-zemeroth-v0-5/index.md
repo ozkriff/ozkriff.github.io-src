@@ -483,6 +483,7 @@ Also, wounded agents now become less accurate.
 Each lost strength point results in -10% hit chance penalty (up to -30%).
 
 Missing strength points (wounds) are shown by almost transparent green dots:
+
 ![demo of transparent strength points](2018-10-04--transparent-dots.png)
 
 This gameplay change has two game balance consequences:
