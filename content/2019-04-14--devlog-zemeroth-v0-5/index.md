@@ -368,20 +368,10 @@ for style consistency.
 
 ------
 
-(__TODO__: demo gif)
-
-[Dust effect (for jumps and throws)](https://github.com/ozkriff/zemeroth/pull/390)
-The dust effect is created by a simple function
-that just emits a bunch of half-transparent sprites
-and attaches position and color change actions to them.
-Sprites' size, velocity and transparacy is a little bit randomized.
-
-------
-
 [Added blood splatters and weapon flashes](https://github.com/ozkriff/zemeroth/pull/401)
 to make attacks more dramatic:
 
-(__TODO__: demo gif - _use github's title gif for this_?)
+![blood drops and weapon flashes demo](2018-12-22--blood-splatters-and-weapon-flashes-demo-2.gif)
 
 Direction of the blood splatter is opposite of attack's direction.
 Number of drops depends on the attack's damage.
@@ -400,6 +390,19 @@ Also, spearman's "pierce" weapon sprite is horizontal and it looks weird
 during vertical attacks.
 Either multiple sprites are need or
 it should be rotated.
+
+------
+
+[Added a Dust effect][pr390] (for jumps and throws):
+
+[pr390]: https://github.com/ozkriff/zemeroth/pull/390
+
+![dust demo](2019-05-12--dust-clouds.gif)
+
+It is created by a simple function
+that just emits a bunch of half-transparent sprites
+and attaches position and color change actions to them.
+Sprites' size, velocity and transparacy is a little bit randomized.
 
 ## Simple Campaign Mode
 
@@ -463,15 +466,16 @@ I've added `attack_accuracy` and `dodge` stats to the `Agent` component and
 
 When you select an agent that can attack
 (has an attack point and enemies in range)
-a hit chance is shown over all aviable targets.
+a hit chance is shown over all aviable targets:
+
+![Hit chances screenshot](2018-05-12--hit-chances-1.png)
 
 During the attack animation a hit chance is shown near
 the attacker with a smaller font.
+
+![Hit chance during the attack animation](2019-05-12--attack-hit-chances.gif)
+
 This was added in order for player to see how dangerous enemy attacks are.
-
-![Hit chances demo](2018-09-29--old-hit-chances-demo.gif)
-
-^ __TODO__: _this gif needs to be updated!_
 
 ------
 
@@ -525,24 +529,23 @@ so be carefull with them.
 - AI learned to avoid walking into spikes, fire and poison clouds.
 
 - AI now moves closer to its targets even if there's no direct path to them
-  ([full demo video](https://youtu.be/09ODLL_Nu8w)]):
+  ([full demo video](https://youtu.be/09ODLL_Nu8w)):
 
   [![new pathfinding demo](2018-06-04--ai-pathfinding-demo.gif)](https://youtu.be/09ODLL_Nu8w)
 
-- Non-melee imps (bombers and summoners) are now trying to keep
-  distance in range.
+- Non-melee imps (bombers and summoners) are now
+  [trying to keep distance in range](https://github.com/ozkriff/zemeroth/pull/298).
   They need to avoid melee fights but still be able to throw bombs
   at a player's fighters or summon new imps nears the frontline.
   Summoner have a greater min/max range than bombers.
 
-  (__TODO__: add a demo gif or image)
+  ![ai distance demo](2018-07-02--ai-distance.gif)
 
 During the debugging of the abovementioned features
 I also wrote a simple helper function `dump_map` that takes a closure
 and dumps required map data as an ascii.
-In this case, pic 1 shows objects and pic 2 shows available positions:
-
-(__TODO__: gif demo from imgur)
+In the above GIF, pic 1 shows objects (`A` - an agent, `O` - a non-agent object)
+and pic 2 shows available positions (`X`).
 
 ## Bombs and Commutative Effects
 
@@ -592,7 +595,8 @@ The plan is to have three groups of objects with effects:
 ## Other Game Rules Changes
 
 - Spike traps were added. They're almost like a fire tiles, but permanent.
-  (__TODO__: add an image)
+
+  ![spike trap](2019-05-12--spikes.png)
 
 - [Updated](https://github.com/ozkriff/zemeroth/pull/351) "Poison" passive ability:
   it can’t, by itself, kill an agent anymore.
