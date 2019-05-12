@@ -4,7 +4,7 @@ slug = "2019-04-14--devlog-zemeroth-v0-5"
 +++
 
 <!-- markdownlint-disable MD013 -->
-<!-- cspell:ignore Berserker Muton kiegel Yururu ldjam devs itchio -->
+<!-- cspell:ignore Berserker Muton kiegel Yururu ldjam devs itchio PNGs -->
 
 Hi, folks! I'm happy to announce **Zemeroth v0.5**.
 Main features of this release are:
@@ -41,7 +41,8 @@ Here's a table of contents:
 - [Bombs and Commutative Effects](#bombs-and-commutative-effects)
 - [Other Game Rules Changes](#other-game-rules-changes)
 - [Gameplay Video](#gameplay-video)
-- [SVG Atlas and assets hash](#svg-atlas-and-assets-hash)
+- [SVG Atlas](#svg-atlas)
+- [Assets Hash](#assets-hash)
 - [Tests](#tests)
 - [Other Technical Changes](#other-technical-changes)
 - [Indikator](#indikator)
@@ -523,11 +524,10 @@ so be carefull with them.
 
 - AI learned to avoid walking into spikes, fire and poison clouds.
 
-- AI now moves closer to its targets even if there's no direct path to them:
+- AI now moves closer to its targets even if there's no direct path to them
+  ([full demo video](https://youtu.be/09ODLL_Nu8w)]):
 
   [![new pathfinding demo](2018-06-04--ai-pathfinding-demo.gif)](https://youtu.be/09ODLL_Nu8w)
-
-  ^ _click on the image to see the full demo_
 
 - Non-melee imps (bombers and summoners) are now trying to keep
   distance in range.
@@ -535,7 +535,7 @@ so be carefull with them.
   at a player's fighters or summon new imps nears the frontline.
   Summoner have a greater min/max range than bombers.
 
-  (__TODO__: add a demo gif)
+  (__TODO__: add a demo gif or image)
 
 During the debugging of the abovementioned features
 I also wrote a simple helper function `dump_map` that takes a closure
@@ -642,87 +642,91 @@ So, putting these gameplay changes together:
 This is a piece of a failed campiang's walkthrough.
 Battles 4, 5, and 6.
 
-## SVG Atlas and assets hash
+## SVG Atlas
 
 Back to more technical updates.
 
-[atlas.svg]
+As git is bad at storing non-text files and
+it's practically impossible to use [Git LFS] with a free GitHub plan
+(because of [the bandwith limitations][github_lfs_bandwith]),
+it looks like a good idea to keep text source files, assets source files,
+and built assets in separate repositories
+to make "optimization history editing" (removing old commits) easier.
 
-[export.py]
+[The main repo](https://github.com/ozkriff/zemeroth)
+and [the assets repo](https://github.com/ozkriff/zemeroth_assets)
+already existed,
+but I wasn't storing assets source files in any VCS.
 
-> 2018.07.16: Testing a simple python export script that extracts named objects
-> from an `.svg` atlas. Colored backgrounds are for debug purposes.
+So, during v0.5 development I've crated another repo for assets sources:
+[ozkriff/zemeroth_assets_src](https://github.com/ozkriff/zemeroth_assets_src).
+The two key files of this repo are: [atlas.svg] and [export.py].
 
-...
+The atlas contains all sprites in one file.
+Each sprite is stored as a named group.
+As the game isn't that much art heavy, using one file for all visual assets
+looks fitting, because it:
 
-<!--
-Usually, atlases in gamedev are created programmically
-from smaller singular image files. It's reverse in Zemeroth.
--->
+- simplifies sharing parts of sprites and mockups creation;
+- avoids complications of linking/embedding multiple svg files together
+  (you need to manually edit xml do to this properly as far as I know).
 
-> Atlas is the "original file" now, so I just edit the sprite here.
+The export script is quite simple, it just calls inkscape using its CLI
+interface and tells what named group needs to be exported to PNGs.
+It boils down to:
 
-Linking external svg files is surprisingly difficult in inkscape
-(or svg in general? not sure).
+```python
+for id in ['imp', 'imp_toxic', 'grass', ...]:
+    subprocess.run([
+        'inkscape',
+        input_file_name,
+        f'--export-id={id}',
+        f'--export-png={out_dir_name}/{id}.png',
+    ], check=True)
+```
 
-...
-
-Sprites are exported by symbol name.
-Just a list on strings in python file.
-
-There's a hack to define the size of exported images:
-each named group contains an invisible square
-(a rectangle for terrain tiles).
-
+There's also a hack to avoid specifying exact sprite PNG sizes
+as raw numbers in the export script:
+each named group contains an invisible square (a rectangle for terrain tiles).
 It can be temporary made slightly visible for debugging purposes:
 
 [![sprites in the debug mode](2018-07-16--svg-atlas-test.png)](2018-07-16--svg-atlas-test.png)
 
-------
+[atlas.svg]: https://github.com/ozkriff/zemeroth_assets_src/blob/1f1813eff/atlas.svg
+[export.py]: https://github.com/ozkriff/zemeroth_assets_src/blob/1f1813eff/export.py
+[Git LFS]: https://git-lfs.github.com
+[github_lfs_bandwith]: https://help.github.com/en/articles/about-storage-and-bandwidth-usage
 
-Resource hashes - md5. Travis check.
+## Assets Hash
 
+Another technical assets-related update is that a md5 hash check was added.
 This should help to detect when someone who is building from source
 forgets to update the assets.
 
-<!-- TODO: spell-checker:disable -->
+A small [checksum.py] python script is used to calculate the hash
+of all non-hidden files in the repo.
+[CI uses it to check][assets_travis_yml]
+that the committed hashsum really corresponds to the committed assets.
 
-> Хэши ресурсов
->
-> После очередного #310 добавил таки в ресурсы подсчет md5 хэша.
-> Нужный хэш хардкодится прямо в исходник игры,
-> что бы при запуске с другой версией все грохалось с понятным сообщением.
->
-> В CI хранилища исходников хэш персчитывается и сверяется с записанным в файл,
-> а в CI самого Земерота проверяется что в исходниках захардкожен
-> самый последний хэш ресурсов.
->
-> Да, вот настолько я хочу хранить ресурсы в отдельном репозитории
-> и не люблю git submodules. :-p
+The expected hash is [hardcoded directly into main.rs][hardcoded_hashsum].
 
-<!-- TODO: spell-checker:enable -->
+If the game is run with a wrong version of assets,
+not you get a clear error message about that:
 
-> I can just move these .ron files to this repo,
-> but it won't solve the same issue with fonts or audio files -
-> they are not generated from an .svg atlas too.
->
-> (And I definitely hate the idea of using git submodules for this.)
->
-> The better solution might be a small python script inside the zemeroth_assets
-> repo that will hash all the non-hidden files.
-> I should run it before every commit,
-> but it can be easily backed up by a master branch protection
-> and CI re-check of this hash.
+```text
+Bad assets checksum abcdeabcdeabcdeabcdeabcdeabcdeab (expected 18e7de361e74471aeaec3f209ef63c3e)
+```
 
-[atlas.svg]: https://github.com/ozkriff/zemeroth_assets_src/blob/846a45b7c/atlas.svg
-[export.py]: https://github.com/ozkriff/zemeroth_assets_src/blob/846a45b7c/export.py
+[assets_travis_yml]: https://github.com/ozkriff/zemeroth_assets/blob/acd9fe9ef/travis.yml
+[checksum.py]: https://github.com/ozkriff/zemeroth_assets/blob/acd9fe9ef/checksum.py
+[hardcoded_hashsum]: https://github.com/ozkriff/zemeroth/blob/721ad06a6src/main.rs#L92
 
 ## Tests
 
-[Added a few test scenarios](https://github.com/ozkriff/zemeroth/pull/439).
-
 One of the benefits of making a turn-based game is that you can relatively easy
 separate the logic from the visuals and cover the former with tests.
+
+[A few test scenarios were added](https://github.com/ozkriff/zemeroth/pull/439).
 
 Test scenarios are completely deterministic.
 Randomness is mitigated with special agent types with unrealistic stats
@@ -765,7 +769,8 @@ fn basic_move() {
                 id: ObjId(0),
                 path,
                 cost: Moves(1),
-            }.into(),
+            }
+            .into(),
             actor_ids: vec![ObjId(0)],
             instant_effects: Vec::new(),
             timed_effects: Vec::new(),
@@ -774,6 +779,10 @@ fn basic_move() {
     );
 }
 ```
+
+(_I didn't use the builder patter for event construction,
+even though most of the time two or three it's fields are empty vectors,
+because I've faced some [method chains formatting issues][fmt_issue]_)
 
 Test scenario consists of list of commands and a list of expected events.
 Occasionally, it can check some parts of the state.
@@ -796,13 +805,11 @@ is a is super-useful crate when you need to debug
 failing assert comparisons of big hierarchical objects
 (some of which may be many screens long in my case).
 
-One note is that I had to replace all `HashMap<ObjId, Vec<Foo>>` in events
-with `Vec<(ObjId, Vec<Foo>)>` to preserve the order.
-Otherwise pretty-assertion were exploding.
+![a colored assert error](2019-03-20--color-assert.png)
 
-------
-
-[I've faced some formatting issues with method chains][fmt_issue]
+One peculiarity is that I had to replace all `HashMap<ObjId, Vec<Foo>>`
+in events with `Vec<(ObjId, Vec<Foo>)>` to preserve the order.
+Otherwise pretty-assertion have been exploding.
 
 [fmt_issue]: https://github.com/rust-lang/rustfmt/issues/3157#issuecomment-472718887
 
@@ -867,18 +874,19 @@ What's next? Some things I _hope_ to implement for v0.6 release are:
 - [Add sound effects and music](https://github.com/ozkriff/zemeroth/issues/221);
 - [Add fighters upgrade trees](https://github.com/ozkriff/zemeroth/issues/399);
 
-You can find a more detailed roadmap [in the README](__TODO__).
+You can find a slightly more detailed roadmap
+[in the project's README](https://github.com/ozkriff/zemeroth#roadmap).
 
 ------
 
 That's all for today, thanks for reading!
 
-(__TODO__: __Fresh news on @ozkriff twitter__)
+If you're interested in this project you can follow
+[@ozkriff on Twitter](https://twitter.com/ozkriff) for more news.
 
-__TODO__:
-> Also,
-> I've started a [@rust_gamedev](http://twitter.com/rust_gamedev) twitter account
-> in an attempt to create some central point for #rustlang #gamedev stuff on twitter;
+Also, if you're interested in Rust game development in general,
+you may want to check [@rust_gamedev](http://twitter.com/rust_gamedev)
+twitter account that I've started recently.
 
 <!--
 **Discussions of this post**:
