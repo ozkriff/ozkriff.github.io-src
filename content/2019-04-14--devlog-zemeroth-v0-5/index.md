@@ -27,7 +27,7 @@ sometimes it even was completely stalled for weeks.
 But a year is a big period of time anyway, so there're still lots of changes.
 
 Lots of text ahead, feel free to skip sections
-that you're not interested in particularry.
+that you're not interested in particularly.
 Here's a table of contents:
 
 - [Migration to the `ggez` Game Engine](#migration-to-the-ggez-game-engine)
@@ -46,7 +46,7 @@ Here's a table of contents:
 - [Tests](#tests)
 - [Other Technical Changes](#other-technical-changes)
 - [Indikator](#indikator)
-- [Migrated this devlog to Zola](#migrated-this-devlog-to-zola)
+- [Migrated This Devlog to Zola](#migrated-this-devlog-to-zola)
 - [Roadmap](#roadmap)
 
 [release v0.5]: https://github.com/ozkriff/zemeroth/releases/tag/v0.5.0
@@ -100,7 +100,7 @@ belongs to ggez's ecosystem, but is not official.
 These libraries are still tied to Zemeroth,
 not sure how helpful these libraries can be for a project that is not Zemeroth.
 You probably won't be able to use them without changes in other games.
-But maybe someone will manage ti extract some benefit from them.
+But maybe someone will manage to extract some benefit from them.
 
 These crates are still immature and aren't published on crates.io yet,
 while the `rancor` component library was renamed to `zcomponents` and
@@ -642,9 +642,9 @@ The plan is to have three groups of objects with effects:
 
 So, putting these gameplay changes together:
 
-(**_TODO: Record a gameplay video. A campaign walkthrough_**)
+[![youtube video](2019-05-12--playtest-youtube-preview.png)](https://youtu.be/zUVwAFSrh3c)
 
-This is a piece of a failed campiang's walkthrough.
+This is a piece of a campaign mode playtest.
 Battles 4, 5, and 6.
 
 ## SVG Atlas
@@ -853,7 +853,7 @@ Also, [Zemeroth was mentioned on Amit's page about hex math][amit].
 [indikator_twit]: https://twitter.com/ozkriff/status/1058359693503070208
 [amit]: https://www.redblobgames.com/grids/hexagons/implementation.html
 
-## Migrated this devlog to Zola
+## Migrated This Devlog to Zola
 
 During the preparation for this Zemeroth release I've [finally][md_to_rst_plans]
 switched the static site generator behind this devlog
