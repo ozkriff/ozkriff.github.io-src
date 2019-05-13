@@ -12,8 +12,9 @@ Main features of this release are:
 - web version
 - itch.io page
 - campaign mode
-
-AI improvements, visual updates, and tests.
+- AI improvements
+- visual updates
+- tests
 
 ![demo fight](2019-04-29--title-demo.gif)
 
