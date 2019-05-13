@@ -37,7 +37,7 @@ Here's a table of contents:
 - [Campaign Mode](#campaign-mode)
 - [Hit Chances](#hit-chances)
 - [Armor](#armor)
-- [AI updates](#ai-updates)
+- [AI Updates](#ai-updates)
 - [Bombs and Commutative Effects](#bombs-and-commutative-effects)
 - [Other Game Rules Changes](#other-game-rules-changes)
 - [Gameplay Video](#gameplay-video)
@@ -60,7 +60,7 @@ you have to fight a constant stream of reports about small corner case issues
 and deal with platform-specific tweaks and hacks
 (stuff [like this](https://github.com/ggez/ggez/issues/587), for example).
 It can consume surprisingly large amounts of time.
-But what's is more important for a hobby project,
+But what's more important for a hobby project,
 it also sucks too much fun out of the development process.
 
 And what made it worse in my case is that [Häte2d][docs_hate] intentionally wasn't
@@ -135,14 +135,13 @@ of [this](https://users.rust-lang.org/t/cgmath-looking-for-new-maintainers/20406
 
 ------
 
-One downside of the migration is that debug builds are much slower now
+One downside of the migration to ggez is that debug builds are much slower now
 because more code is pure Rust.
 Something like 3-5 FPS on my notebook.
 But it's ok, I don't need debug builds often,
 I prefer debugging through logs anyway.
 And when I really need a debug build to track down something extremely strange,
-I can use cargo's yet unstable feature
-["profile-overrides" unstable feature][profile_overrides].
+I can use cargo's yet unstable feature ["profile-overrides"][profile_overrides].
 
 ```toml
 cargo-features = ["profile-overrides"]
@@ -195,13 +194,15 @@ immediate solution until a proper WASM support arrives to GGEZ
 (there're no plans of making good-web-game some kind of official GGEZ backend
 or anything like this).
 The currently implemented subset of ggez's API is quite limited
-and while it may be used for something else that Zemeroth,
+and while it may be used for other games,
 it will probably require a lot of work to do.
+
+------
 
 You can't use crate renaming in `Cargo.toml` to reuse a name on different platforms,
 
 ```toml
-# Cargo.toml with this dependencies wouldn't build:
+# Cargo.toml with these dependencies wouldn't build:
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 ggez = "0.5.0-rc.1"
@@ -357,7 +358,7 @@ haven't made it to the master yet.
 
 All objects now have a shadow.
 It makes the image a little bit more tangible.
-Walk and especially throw animations feels better now.
+Walk and especially throw animations feel better now.
 
 Initially, shadow was an ellipse with gradient.
 Later it was replaced by two semi-transparent hexagons
@@ -517,10 +518,10 @@ Here's a little demo:
   ignoring the armor;
 - insecto-snake destroys the armor with a powerful attack.
 
-In the current version of the game only the imp summoner has the armor,
+In the current version of the game only imp summoners have armor,
 so be careful with them.
 
-## AI updates
+## AI Updates
 
 - Now, [enemies always act in order of remoteness from a player's fighters][pr306].
   This way melee imps don't trip over each other too much.
@@ -535,7 +536,7 @@ so be careful with them.
 - Non-melee imps (bombers and summoners) are now
   [trying to keep distance from the player's fighters in range][pr298].
   They need to avoid melee fights but still be able to throw bombs
-  at a player's fighters or summon new imps nears the frontline.
+  at a player's fighters or summon new imps near the frontline.
 
   ![ai distance demo](2018-07-02--ai-distance.gif)
 
@@ -544,7 +545,7 @@ so be careful with them.
 During the debugging of the above-mentioned features,
 I also wrote [a simple helper function `dump_map`][fn_dump_map]
 that takes a closure and dumps required map data as a `char`
-In the above GIF, pic 1 shows objects (`A` - an agent, `O` - a non-agent object)
+in the above GIF, pic 1 shows objects (`A` - an agent, `O` - a non-agent object)
 and pic 2 shows available positions (`X`).
 
 [pr306]: https://github.com/ozkriff/zemeroth/pull/306
@@ -613,7 +614,7 @@ The plan is to have three groups of objects with effects:
 - Updated the "Summon" ability:
 
   [Each agent is now treated individually](https://github.com/ozkriff/zemeroth/pull/413).
-  The new code treats each summoned agents individually
+  The new code treats each summoned agent individually
   thus preventing summoning weird packs of same imp types.
 
   [Each use of the "Summon" ability now creates one more imp][pr349].
@@ -724,7 +725,7 @@ that the committed hashsum really corresponds to the committed assets.
 
 The expected hash is [hardcoded directly into main.rs][hardcoded_hashsum].
 If the game is run with a wrong version of assets,
-not you get a clear error message about that:
+now you get a clear error message about that:
 
 ```text
 Bad assets checksum abcdeabcdeabcdeabcdeabcdeabcdeab (expected 18e7de361e74471aeaec3f209ef63c3e)
@@ -815,7 +816,7 @@ Because the win condition is when no enemy agents are alive.
 ------
 
 [colin-kiegel/rust-pretty-assertions](https://github.com/colin-kiegel/rust-pretty-assertions)
-is a is super-useful crate when you need to debug
+is a super-useful crate when you need to debug
 failing assert comparisons of big hierarchical objects
 (some of which may be many screens long in my case).
 
