@@ -904,11 +904,9 @@ Also, if you're interested in Rust game development in general,
 you may want to check [@rust_gamedev](http://twitter.com/rust_gamedev)
 twitter account that I've started recently.
 
-<!--
 **Discussions of this post**:
-[/r/rust](__TODO__),
-[twitter](__TODO__).
--->
+[/r/rust](https://www.reddit.com/r/rust/comments/bo5w0q/zemeroth_v05_ggez_wasm_itchio_visuals_ai_campaign/),
+[twitter](https://twitter.com/ozkriff/status/1127977478746669056).
 
 [Zemeroth]: https://github.com/ozkriff/zemeroth
 [itch_zemeroth]: https://ozkriff.itch.io/zemeroth
