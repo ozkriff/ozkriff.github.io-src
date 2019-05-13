@@ -8,7 +8,11 @@ slug = "2019-04-14--devlog-zemeroth-v0-5"
 
 Hi, folks! I'm happy to announce **Zemeroth v0.5**.
 Main features of this release are:
-migration to ggez, web version, itch.io page, campaign mode,
+- migration to ggez
+- web version
+- itch.io page
+- campaign mode
+
 AI improvements, visual updates, and tests.
 
 ![demo fight](2019-04-29--title-demo.gif)
