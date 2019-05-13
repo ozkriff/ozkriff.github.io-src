@@ -19,7 +19,7 @@ for Windows, Linux, and macOS.
 Also, now you can **[play an online version][itch_zemeroth]**
 (_read more about it in the "WebAssembly version" section below_).
 
-> ![github commits graph](2019-04-27--github-commits.png)
+> ![GitHub commits graph](2019-04-27--github-commits.png)
 
 The last release happened about a year ago.
 Since then the development mostly happened in irregular bursts,
@@ -76,7 +76,7 @@ actively developed Rust 2d game engine at that time.
 
 ![ggez's logo](ggez-logo-maroon-full.svg)
 
-`häte` had some builtin basic
+`häte` had some built-in basic
 [scene management](https://docs.rs/hate/0.1.0/hate/scene/)
 and [GUI](https://docs.rs/hate/0.1.0/hate/gui/) systems,
 but ggez is minimalistic by design and has none of this.
@@ -108,7 +108,7 @@ while the `rancor` component library was renamed to `zcomponents` and
 
 ------
 
-Initially I migrated to ggez v0.4 that was SDL2-based.
+Initially, I migrated to ggez v0.4 that was SDL2-based.
 But as soon as the first release candidate of [winit]-based ggez v0.5
 became available I attempted to migrate to it.
 I've filed [a bunch of mostly text-related issues in the process][ggez_issues]
@@ -126,7 +126,8 @@ Zemeroth uses ggez `0.5.0-rc.1`. It's stable enough for me.
 
 ![nalgebra logo](2019-05-03--na.png)
 
-Previously, I was using [cgmath] (because it's simple and straightforward).
+Before the migration,
+I was using [cgmath], because it's simple and straightforward.
 ggez's "native" math library is nalgebra.
 even though ggez v0.5 uses `mint` types for all its public API,
 I still migrated to nalgebra, because
@@ -134,7 +135,7 @@ of [this](https://users.rust-lang.org/t/cgmath-looking-for-new-maintainers/20406
 
 ------
 
-One downside of the migration is that debug builds are much slower now,
+One downside of the migration is that debug builds are much slower now
 because more code is pure Rust.
 Something like 3-5 FPS on my notebook.
 But it's ok, I don't need debug builds often,
@@ -167,7 +168,7 @@ But who really needs a native port when you have...
 
 ## WebAssembly Version
 
-After ggez v0.5-rc.0 was published, Icefoxen have posted
+After ggez v0.5-rc.0 was published, Icefoxen has posted
 ["The State Of GGEZ 2019"](https://wiki.alopex.li/TheStateOfGGEZ2019),
 where among other things he wrote that
 a web port is unlikely to happen soon because
@@ -185,7 +186,7 @@ The API of this engine was heavily inspired by ggez
 so he managed to write a partly ggez-compatible wrapper in a weekend.
 
 Colors are slightly off and text rendering if a little bit different,
-but otherwise it works nicely and smoothly,
+but otherwise, it works nicely and smoothly,
 providing the same experience:
 
 [![web version vs native](2019-01-29--web-port-vs-native.jpg)](2019-01-29--web-port-vs-native.jpg)
@@ -272,8 +273,8 @@ The web version needs to be hosted somewhere.
 __[ozkriff.itch.io/zemeroth][itch_zemeroth]__
 
 it has a nice and simple UI (for both developers and consumers),
-it's extremely [easy to upload an web game there](https://itch.io/docs/creators/html5)
-and it's a relatively known store for a indie games that can provide
+it's extremely [easy to upload a web game there](https://itch.io/docs/creators/html5)
+and it's a relatively known store for indie games that can provide
 some exposure by itself.
 
 [![screenshot of the itch.io page](2019-05-02--itch-ozkriff.png)](https://ozkriff.itch.io)
@@ -319,7 +320,7 @@ The most important things people want to see improved are:
 - Add a tutorial or at least a short guide;
 - Randomness is too frustrating: missed attacks should result in some
   little positive effect, like pushing enemies back or reducing their stamina;
-- Game lacks ranged attack units, like archers or knife throwers.
+- The game lacks ranged attack units, like archers or knife throwers.
 
 ------
 
@@ -340,12 +341,12 @@ Btw, I've also created [an itch.io page for Zone of Control][itch_zoc].
 
 ## Visual Improvements
 
-[Initial draft](https://twitter.com/ozkriff/status/975827153056075776)
+[The initial draft](https://twitter.com/ozkriff/status/975827153056075776)
 of the new sprites looked like this:
 
 ![New style mockup](agents-inkscape-mockup.jpeg)
 
-Tiles are flatten now.
+Tiles are flattened now.
 It's less a schematic top-down view as it was before.
 "Camera" is moved to the side so the tiles and agents are shown
 using the same projection.
@@ -362,7 +363,7 @@ All objects now have a shadow.
 It makes the image a little bit more tangible.
 Walk and especially throw animations feels better now.
 
-Initially shadow was an ellipse with gradient.
+Initially, shadow was an ellipse with gradient.
 Later it was replaced by two semi-transparent hexagons
 for style consistency.
 
@@ -373,22 +374,22 @@ to make attacks more dramatic:
 
 ![blood drops and weapon flashes demo](2018-12-22--blood-splatters-and-weapon-flashes-demo-2.gif)
 
-Direction of the blood splatter is opposite of attack's direction.
-Number of drops depends on the attack's damage.
+The direction of the blood splatter is opposite of attack's direction.
+The number of drops depends on the attack's damage.
 Blood slowly disappears into transparency in three turns,
-otherwise the battlefield would become a complete and unreadable mess.
+otherwise, the battlefield would become a complete and unreadable mess.
 
 Adds weapon flashes of four types: slash, smash, pierce and claw;
 Every agent now has `WeaponType`: "smash", "slash", "pierce", and "claw".
-For now they are just a visual information.
+For now, they are just visual information.
 They affect only what sprite is used during the attack animation.
 
 Same as agent sprites, weapon flash sprites are not yet mirrored horizontally.
-That is mostly noticeable with curvy smash sprite.
+That is most noticeable with curvy smash sprite.
 
 Also, spearman's "pierce" weapon sprite is horizontal and it looks weird
 during vertical attacks.
-Either multiple sprites are need or
+Either multiple sprites are needed or
 it should be rotated.
 
 ------
@@ -402,20 +403,20 @@ it should be rotated.
 It is created by a simple function
 that just emits a bunch of half-transparent sprites
 and attaches position and color change actions to them.
-Sprites' size, velocity and transparency is a little bit randomized.
+Sprites' size, velocity, and transparency are a little bit randomized.
 
 ## Simple Campaign Mode
 
 Basic campaign mod.
 It's just a linear sequence of battles with predefined scenarios.
-After each battle your survived fighters are carried over to the next battle.
-If you lose a battle - campaign is over for you.
+After each battle, your survived fighters are carried over to the next battle.
+If you lose a battle - the campaign is over for you.
 If you win a battle, you're shown a transition screen with a list
-of your dead fighters, your current squad and possible recruits:
+of your dead fighters, your current squad, and possible recruits:
 
 ![Campaign screen example](2018-11-15--first-iteration-of-a-campaign-mode.png)
 
-Campaign is defined by a [RON][ron] config file with this structure:
+The campaign is defined by a [RON][ron] config file with this structure:
 
 ```text
 initial_agents: ["swordsman", "alchemist"],
@@ -470,12 +471,12 @@ a hit chance is shown over all available targets:
 
 ![Hit chances screenshot](2018-05-12--hit-chances-1.png)
 
-During the attack animation a hit chance is shown near
+During the attack animation, a hit chance is shown near
 the attacker with a smaller font.
 
 ![Hit chance during the attack animation](2019-05-12--attack-hit-chances.gif)
 
-This was added in order for player to see how dangerous enemy attacks are.
+This was added in order for the player to see how dangerous enemy attacks are.
 
 ------
 
@@ -493,7 +494,7 @@ This gameplay change has two game balance consequences:
   Sometimes wounded enemies even can be helpful to the player,
   because they are not a real threat to player's fighters,
   but can block the path for other enemies;
-- Alchemist's "heal" ability become important
+- Alchemist's "heal" ability became important
   because your agents are less useful when wounded too.
 
 Also, attacks with strength > 1 have additional hit chances - with reduced damage
@@ -504,7 +505,7 @@ but still manages to make some damage to it.
 ## Armor
 
 Implemented a basic armor system.
-Armor points is shown above the agent in one line with strength points
+Armor points are shown above the agent in one line with strength points
 using the yellow dots.
 Each armor point deflects one damage point on each attack.
 Some weapons can break armor (the `attack_break` parameter).
@@ -538,11 +539,11 @@ so be careful with them.
   [trying to keep distance in range](https://github.com/ozkriff/zemeroth/pull/298).
   They need to avoid melee fights but still be able to throw bombs
   at a player's fighters or summon new imps nears the frontline.
-  Summoner have a greater min/max range than bombers.
+  Summoner has a greater min/max range than bombers.
 
   ![ai distance demo](2018-07-02--ai-distance.gif)
 
-During the debugging of the above-mentioned features
+During the debugging of the above-mentioned features,
 I also wrote a simple helper function `dump_map` that takes a closure
 and dumps required map data as an ascii.
 In the above GIF, pic 1 shows objects (`A` - an agent, `O` - a non-agent object)
@@ -552,8 +553,8 @@ and pic 2 shows available positions (`X`).
 
 ![Illustration with multiple bombs](2018-06-04--bombs-issue.png)
 
-^ In previous version of Zemeroth,
-each of these bombs would have explode at the beginning of the next turn
+^ In the previous version of Zemeroth,
+each of these bombs would have exploded at the beginning of the next turn
 in order of their creation.
 But this order is hard to remember and it's not clear from the picture at all.
 
@@ -580,7 +581,7 @@ Technically it's possible, but I don't think that it fits for Zemeroth
 because it's an extremely noisy interface feature,
 but it's not really a core mechanic.
 
-So, [I've took the latter way][pr296]:
+So, [I've taken the latter way][pr296]:
 the "Bomb" ability was split into two abilities: instant "BombPush"
 and delayed "BombDamage".
 
@@ -595,7 +596,7 @@ The plan is to have three groups of objects with effects:
 
 ## Other Game Rules Changes
 
-- Spike traps were added. They're almost like a fire tiles, but permanent.
+- Spike traps were added. They're almost like fire tiles, but permanent.
 
   ![spike trap](2019-05-12--spikes.png)
 
@@ -622,7 +623,7 @@ The plan is to have three groups of objects with effects:
 
 - [Randomly-placed agents are not created point-blank to their enemies anymore][pr360].
 
-- Also, [randomly-placed objects are now created on the different `Line`s][pr369].
+- Also, [randomly-placed objects are now created on different `Line`s][pr369].
   This prevents Imp Summoners from being created only a tile away from enemies
   and thus not having any chances to survive.
   Or Imp Bombers being instantly tied with a melee fight.
@@ -663,20 +664,20 @@ and [the assets repo](https://github.com/ozkriff/zemeroth_assets)
 already existed,
 but I wasn't storing assets source files in any VCS.
 
-So, during v0.5 development I've created another repo for assets sources:
+So, during v0.5 development, I've created another repo for assets sources:
 [ozkriff/zemeroth_assets_src](https://github.com/ozkriff/zemeroth_assets_src).
 The two key files of this repo are: [atlas.svg] and [export.py].
 
 The atlas contains all sprites in one file.
 Each sprite is stored as a named group.
 As the game isn't that much art heavy, using one file for all visual assets
-looks fitting, because it:
+looks fitting, because of it:
 
 - simplifies sharing parts of sprites and mockups creation;
-- avoids complications of linking/embedding multiple svg files together
-  (you need to manually edit xml do to this properly as far as I know).
+- avoids complications of linking/embedding multiple SVG files together
+  (you need to manually edit XML do to this properly as far as I know).
 
-The export script is quite simple, it just calls inkscape using its CLI
+The export script is quite simple, it just calls Inkscape using its CLI
 interface and tells what named group needs to be exported to PNGs.
 It boils down to:
 
@@ -789,19 +790,19 @@ fn basic_move() {
 even though most of the time two or three it's fields are empty vectors,
 because I've faced some [method chains formatting issues][fmt_issue]_)
 
-Test scenario consists of list of commands and a list of expected events.
+Test scenario consists of a list of commands and a list of expected events.
 Occasionally, it can check some parts of the state.
 
-A prototypes list and a scenario is created from scratch
+A prototypes list and a scenario are created from scratch
 (though, with some helper functions) for each test.
-It takes more lines of code that reusing a small set of multicases scenarios,
+It takes more lines of code that reusing a small set of multi-cases scenarios,
 but the idea is that this way the amount of objects and components in each test
 is minimized.
 This way it's easier to diagnose the bug
 and makes tests less likely to break on unrelated game logic change.
 
 A "dull" enemy agent is required only for the scenario not to end instantly.
-Because the win condition is when no enemy agents is alive.
+Because the win condition is when no enemy agents are alive.
 
 ------
 
@@ -814,7 +815,7 @@ failing assert comparisons of big hierarchical objects
 
 One peculiarity is that I had to replace all `HashMap<ObjId, Vec<Foo>>`
 in events with `Vec<(ObjId, Vec<Foo>)>` to preserve the order.
-Otherwise pretty-assertion have been exploding.
+Otherwise pretty-assertion has been exploding.
 
 [fmt_issue]: https://github.com/rust-lang/rustfmt/issues/3157#issuecomment-472718887
 
@@ -831,7 +832,7 @@ Otherwise pretty-assertion have been exploding.
   using serde\`s default annotations and helper init functions;
 - [Added a `windows_subsystem` attribute](https://github.com/ozkriff/zemeroth/pull/220).
   Don't show cmd window;
-- [Fix panic when boulder is pushed into fire/spikes](https://github.com/ozkriff/zemeroth/pull/233);
+- [Fix panic when a boulder is pushed into fire/spikes](https://github.com/ozkriff/zemeroth/pull/233);
 - [Merge all 'line_height' consts and functions](https://github.com/ozkriff/zemeroth/pull/431);
 - [Removed data duplication from `objects.ron`](https://github.com/ozkriff/zemeroth/pull/365).
 
@@ -844,7 +845,7 @@ at [Indikator](http://indierocket.ru).
 It went pretty good, local indie devs seemed to like the project,
 especially considering that it's opensource and uses an interesting tech.
 At least one of the devs has visited
-[our local rustlang meetup](https://www.meetup.com/spbrust) afterwards. 🦀
+[our local rustlang meetup](https://www.meetup.com/spbrust) afterward. 🦀
 
 ![me presenting Zemeroth at Indikator](2018-11-03--indikator.jpg)
 
@@ -855,9 +856,9 @@ Also, [Zemeroth was mentioned on Amit's page about hex math][amit].
 
 ## Migrated This Devlog to Zola
 
-During the preparation for this Zemeroth release I've [finally][md_to_rst_plans]
+During the preparation for this Zemeroth release, I've [finally][md_to_rst_plans]
 switched the static site generator behind this devlog
-from python-based [Pelican](https://getpelican.com) to rustlang-based [Zola].
+from Python-based [Pelican](https://getpelican.com) to Rustlang-based [Zola].
 
 [Here's a twitter thread](https://twitter.com/ozkriff/status/1119212330246656002)
 with some migration notes.
