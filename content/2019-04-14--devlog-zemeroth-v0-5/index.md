@@ -66,7 +66,7 @@ it also sucks too much fun out of the development process.
 And what made it worse in my case is that [Häte2d][docs_hate] intentionally wasn't
 a general-purpose game engine (to reduce the scope of work),
 so it was sad to know that all this work won't be reused by anyone.
-But converting Häte into a real general-purpose engine wasn't an option too,
+But converting Häte into a real general-purpose engine wasn't an option either,
 because it wouldn't have left any time for Zemeroth's development.
 
 So I've surrendered and decided to give away some control over
@@ -183,7 +183,7 @@ for some time and used a custom 2d web engine for this.
 The API of this engine was heavily inspired by ggez
 so he managed to write a partly ggez-compatible wrapper in a weekend.
 
-Colors are slightly off and text rendering if a little bit different,
+Colors are slightly off and text rendering is a little bit different,
 but otherwise, it works nicely and smoothly,
 providing the same experience:
 
@@ -796,7 +796,7 @@ fn basic_move() {
 ```
 
 (_I didn't use the builder pattern for event construction,
-even though most of the time two or three it's fields are empty vectors,
+even though most of the time two or three its fields are empty vectors,
 because I've faced some [method chains formatting issues][fmt_issue]_)
 
 Test scenario consists of a list of commands and a list of expected events.
@@ -908,7 +908,7 @@ twitter account that I've started recently.
 **Discussions of this post**:
 [/r/rust](__TODO__),
 [twitter](__TODO__).
- -->
+-->
 
 [Zemeroth]: https://github.com/ozkriff/zemeroth
 [itch_zemeroth]: https://ozkriff.itch.io/zemeroth
