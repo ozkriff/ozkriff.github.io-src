@@ -15,15 +15,22 @@ My main hobby project at the moment is a turn-based tactical game
 
 Links:
 
-- Twitter: [@ozkriff](https://twitter.com/ozkriff),
+- Twitter:
+  [@ozkriff](https://twitter.com/ozkriff),
   [@ozkriff_ru](https://twitter.com/ozkriff_ru),
   [@rust_gamedev](https://twitter.com/rust_gamedev)
-- [Github](https://github.com/ozkriff)
+- VKontakte:
+  [@ozkriff](https://vk.com/ozkriff),
+  [@ozkriff.games](https://vk.com/ozkriff.games)
+- Facebook:
+  [@ozkriff](https://fb.com/ozkriff),
+  [@ozkriff.games](https://fb.com/ozkriff.games)
+- [GitHub](https://github.com/ozkriff)
 - [itch.io](https://ozkriff.itch.io)
-- [YouTube](https://www.youtube.com/user/ozkriff619/videos)
-- [LinkedIn](https://www.linkedin.com/in/андрей-лесников-041133b2)
-- [Reddit](https://www.reddit.com/user/ozkriff)
-- [vk.com](https://vk.com/ozkriff)
+- [YouTube](https://youtube.com/user/ozkriff619/videos)
+- [Patreon](https://patreon.com/ozkriff)
+- [LinkedIn](https://linkedin.com/in/ozkriff)
+- [Reddit](https://reddit.com/user/ozkriff)
 
 This blog is built using [Zola](https://www.getzola.org)
 and uses [a slightly modified version](https://github.com/ozkriff/hyde)
