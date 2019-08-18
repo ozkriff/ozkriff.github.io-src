@@ -1,4 +1,4 @@
-Source code for http://ozkriff.github.io
+Source code for http://ozkriff.games
 
 How to build:
 
