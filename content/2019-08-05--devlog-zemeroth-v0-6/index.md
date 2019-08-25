@@ -1,19 +1,21 @@
 +++
-title = "Zemeroth v0.6: Renown, Upgrades and Effect Icons"
-slug = "2019-08-12--devlog-zemeroth-v0-6"
+title = "Zemeroth v0.6: Renown, Upgrades, Frames, Flipping and Effect Icons"
+slug = "2019-08-26--devlog-zemeroth-v0-6"
 +++
 
-_**TODO**: move all the images to this repository_
+**TODO**: _rename the file to `2019-08-26--devlog-zemeroth-v0-6.md`_
 
-_**TODO**: `.editorconfig`?_
+**TODO**: _move all the images to this repository_
+
+**TODO**: _`.editorconfig`?_
 
 <!-- markdownlint-disable MD013 -->
-<!-- cspell:ignore editorconfig reddit -->
+<!-- cspell:ignore editorconfig reddit playtests indiedb tigsource indistinctly -->
 
 Hi, folks! I'm happy to announce **Zemeroth v0.6**.
 Main features of this release are:
 renown, agent upgrades, visual improvements,
-status effect icons, logo
+status effect icons, logo.
 (**TODO**).
 
 **TODO**: _Title GIF demo (or a video)_
@@ -21,9 +23,12 @@ status effect icons, logo
 [Zemeroth] is my hobby turn-based hexagonal tactics game written in Rust.
 You can [download precompiled v0.6 binaries][release v0.6]
 for Windows, Linux, and macOS
-or [play the online version on itch.io][itch_zemeroth].
+or [play the online version on itch.io][itch_zemeroth]
+(works on mobile browsers too).
 
-**TODO**: some preface
+**TODO**: _video version of the devlog post_
+
+**TODO**: _preface?_
 
 <!-- The last release happened about a year ago.
 Since then the development mostly happened in irregular bursts,
@@ -34,7 +39,7 @@ Lots of text ahead, feel free to skip sections
 that you're not interested in particularly.
 Here's a table of contents: -->
 
-I've experimented with weekly logs,
+<!-- I've experimented with weekly logs,
 but I failed to make them regularly.
 So I decided to at least make releases more often.
 
@@ -45,7 +50,7 @@ so far my plan to make a new devlog video every few weeks totally failed.
 Partly because I was on vacation in Germany for a few weeks,
 but mostly because I just procrastinate a lot.
 
-But the project still moves on.
+But the project still moves on. -->
 
 [Zemeroth]: https://github.com/ozkriff/zemeroth
 [itch_zemeroth]: https://ozkriff.itch.io/zemeroth
@@ -53,7 +58,7 @@ But the project still moves on.
 
 ## Smaller Releases
 
-_**TODO**: Do I need this section? What should be moved here from the preface?_
+**TODO**: _Do I need this section? What should be moved here from the preface?_
 
 readme roadmap removed versions.
 
@@ -78,18 +83,16 @@ It's received when you win battles.
 
 The amount that you receive is encoded in [assets/campaign_0.ron]:
 
-![campaign_0.ron content](https://i.imgur.com/PTpdqgP.png)
+![campaign_0.ron content](campaign-0-ron-content.png)
 
 Recruit options are still hard-coded in the campaign.
 
 Renown is spent between the battles on upgrading your fighters or recruiting new ones.
 
-![TODO](https://i.imgur.com/du8NkAr.png)
+![a screenshot of campaign menu](campaign-menu.png)
 
 Costs and upgrade options are described in a [assets/agent_campaign_info.ron]
 config:
-
-^ **TODO**: upgrade used commit (use v0.6's final commit)
 
 ```ron
 {
@@ -127,7 +130,7 @@ heavy variants move slower (only two move points)
 
 TODO: one upgrade path per agent
 
-![upgrade trees](https://i.imgur.com/MYGESBv.png)
+![upgrade trees](upgrade-trees.png)
 
 TODO: Describe what different properties do they have.
 
@@ -161,19 +164,38 @@ THe idea is that the player should never have enough renown to buy everything.
 [assets/campaign_0.ron]: https://github.com/ozkriff/zemeroth_assets/blob/e3886c064/campaign_01.ron
 [assets/agent_campaign_info.ron]: https://github.com/ozkriff/zemeroth_assets/blob/e3886c064/agent_campaign_info.ron
 
-## Visual Improvements
+<!-- ^ **TODO**: upgrade the commit (use v0.6's final commit) -->
 
-<!-- I've been mostly working on small visual improvements. -->
+## Agent's Info Screen
+
+**TODO**: _This should be explained in terms of upgrades, I guess_
+
+Added a basic agent info screen to Zemeroth.
+Now you can look up some stats before recruiting or upgrading a fighter.
+
+![agent info screen](agent-info-screen.png)
+
+!["i" button in the campaign menu](campaign-menu-2.png)
+
+**TODO**: Small `[i]` buttons.
+
+## Visual Improvements
 
 There're many small visual improvements.
 
-![demo of the tile highlighting](https://i.imgur.com/laN1eaW.gif)
+### Current tile highlighting
+
+![demo of the tile highlighting](tile-highlighting.gif)
 
 First, a tile under the cursor is highlighted now.
 Highlighting is disabled though on touch devices
 (by ignoring an event if its delta movement is zero).
 
-![scene with flipped agents](https://i.imgur.com/JDeOhSK.png)
+Based on feedback from playtests.
+
+### Sprites Flipping
+
+![scene with flipped agents](scene-with-flippend-agents.png)
 
 Next, agents now [can be flipped horizontally][pr473]
 to match their action's direction.
@@ -182,16 +204,22 @@ units were attacking each other backwards and it was weird.
 
 **TODO**: - Small change: Flip weapon flashes horizontally;
 
-![TODO](https://i.imgur.com/XjRMRcd.gif)
+### Dodge Animations
+
+![Dodging animation demo](dodge-demo.gif)
 
 [Added][pr471] simple dodge animations when an attack misses
 
-![TODO](https://i.imgur.com/M0C203X.gif)
+## Move Interruption Message
+
+![Demo of the movement interruption message](move-interrupted-msg-demo.gif)
 
 A helper message is [now shown][pr472]
 when an agent's move is interrupted.
 
-![demo](https://i.imgur.com/LydFrfq.gif)
+### Frames
+
+![frames demo](frames-demo.gif)
 
 Now [agents have special sprite frames for some abilities][pr476].
 It's a compromise between having real animations and only having static pieces.
@@ -205,34 +233,25 @@ and it looks weird with completely static sprite sometimes.
 [pr473]: https://github.com/ozkriff/zemeroth/pull/473
 [pr476]: https://github.com/ozkriff/zemeroth/pull/476
 
-## Agent's Info Screen
-
-Added a basic agent info screen to Zemeroth.
-Now you can look up some stats before recruiting or upgrading a fighter.
-
-![agent info screen](https://i.imgur.com/X8iP7Ww.png)
-
-![TODO: description](https://i.imgur.com/IjSu3Ut.png)
-
-**TODO**: Small `[i]` buttons.
-
-## Explosion Ground Marks
+### Explosion Ground Marks
 
 Decorative explosion ground marks were added:
 
-![explosion ground marks demo](https://i.imgur.com/EauSc3J.gif)
+<!-- TODO: this GIF doesn't work!!! -->
+
+![explosion ground marks demo](explosion-ground-mark-demo.gif)
 
 Same as blood, they're slowly disappearing into transparency in three turns.
 To avoid making the battlefield too noisy and unreadable.
 
-## Status Effect Icons
+### Status Effect Icons
 
 Effect icons were added.
 
 - poisoned (skull)
 - stunned (spiral)
 
-![status effect icons demo](https://i.imgur.com/AOf0E1X.png)
+![status effect icons demo](status-effect-icons.png)
 
 I'm hoping to rework how the brief stats are displayed with dots someday,
 but for now...
@@ -276,40 +295,68 @@ Thanks, folks!
 
 ## Logo
 
-![TODO: err msg](https://i.imgur.com/nKS1fNv.png)
-
 The game now has a text logo.
 It's a manually "low poly vectorized" text written with the Old London font.
+
+![Text logo](text-logo.png)
+
 Not sure if it really fits the game, but it'll do for now.
 
 ## Spreading the Word
 
-There're a couple of non-code updates.
+<!-- There're a couple of non-code updates. -->
 
 I've added [a "Roadmap" section][roadmap] to the readme
 to show in which direction the project moves.
 
-^^^ **TODO**: _this was a part of 0.5 release, isn't it?_
+^^^ **TODO**: _this was a part of 0.5 release, wasn't it?_
+
+Roadmap was extended and reformatted.
 
 I also added [a new "Inspiration" section][inspiration]
 with a list of games that inspire me to work on Zemeroth.
+(**TODO**: name some of them)
 
 I got the [ozkriff.games](https://ozkriff.games) domain
 and move my devlog there.
 
-**TODO**: _actually, I've moved the blo there now_
-
 [fb.com/ozkriff.games] and [vk.com/ozkriff.games] pages were created.
+
+**TODO**: indiedb, tigsource
 
 And I've revived my Patreon page: [patreon.com/ozkriff]
 
-_**TODO**: What I'm going to do with it and what are my expectations?_
+**TODO**: _What I'm going to do with it and what are my expectations?_
 
 [fb.com/ozkriff.games]: https://fb.com/ozkriff.games
 [vk.com/ozkriff.games]: https://vk.com/ozkriff.games
 [patreon.com/ozkriff]: https://patreon.com/ozkriff
 [roadmap]: https://github.com/ozkriff/zemeroth/blob/master/README.md#roadmap
 [inspiration]: https://github.com/ozkriff/zemeroth/blob/0e789a546/README.md#inspiration
+
+## Video (TODO: rename)
+
+It's my first experience of recording video devlogs.
+
+Recording as one piece totally fails for me.
+
+Stressfull.
+
+TODO: Describe how the video is recorded
+
+What app I use to make subtitles?
+
+I'm using Kubuntu as main OS.
+
+KDEnlive.
+
+English subtitles mostly for cases when I'm saying something too indistinctly
+
+Russian subtitles are, obviously, for comrades^W local folks
+who aren't comfortable enough with English.
+
+**TODO**: By the way, for the text version I'm usually use
+[ezgif.com](https://ezgif.com) for converting and tweaking GIFs.
 
 ## Bonus
 
