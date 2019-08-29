@@ -30,14 +30,16 @@ or [play the online version on itch.io][itch_zemeroth]
 I've experimented a little bit with [smaller forum updates](TODO:_URLO_link)
 and [video devlogs](https://youtu.be/EDoxb7vbqgg),
 but I failed to make them regularly.
-So I decided to at least make regular releases more often
-and record videos for them.
-
+Actually, I managed to only publish one such update.
 Drafts for second and third were written, but I haven't finished them.
+So I decided to cancel these experiments and just
+try harder to make a more often and smaller version releases.
+<!-- at least make regular releases more often -->
+and record videos for them.
 
 Here's a video version of this post:
 
-**TODO**: _video version of the devlog post_
+**TODO**: _video version of the devlog post (don't embed html, just use a helper image)_
 
 <!-- I've removed planned versions from the roadmap.
 (TODO: I don't really need to mention this)-->
@@ -59,10 +61,11 @@ I hope to keep these videos short and release them every week or two.
 
 ## Renown and Agent Upgrades
 
-"Renown" is the currency of the campaign mode
-(the term is obviously borrowed from [Banner Saga]).
+"Renown" is a term obviously borrowed from [Banner Saga].
 
-Renown is received when you win battles.
+It's the currency of the campaign mode
+that the player receives with each won battle.
+
 The amount of received renown is encoded in a campaign's nodes.
 
 Renown is spent between the battles on upgrading your fighters or recruiting new ones.
@@ -73,9 +76,43 @@ Recruit options are still hard-coded in campaign's nodes.
 
 A sample from [assets/campaign_0.ron]:
 
-![campaign_0.ron content](campaign-0-ron-content.png)
+```ron
+Plan(
+    initial_agents: [
+        "swordsman",
+        "spearman",
+    ],
+    nodes: [
+        (
+            scenario: (
+                rocky_tiles_count: 0,
+                objects: [
+                    (owner: Some((1)), typename: "imp", line: Some(Front), count: 3),
+                ],
+            ),
+            award: (
+                recruits: ["hammerman", "alchemist"], // possible recruits
+                renown: 17, // renown for the battle
+            ),
+        ),
+        (
+            scenario: (
+                rocky_tiles_count: 5,
+                objects: [
+                    (owner: None, typename: "boulder", line: None, count: 1),
+                    (owner: Some((1)), typename: "imp", line: Some(Front), count: 3),
+                    (owner: Some((1)), typename: "imp_bomber", line: Some(Middle), count: 2),
+                ],
+            ),
+            award: (
+                recruits: ["spearman", "alchemist"],
+                renown: 18,
+            ),
+        ),
+        // etc...
+```
 
-^ _**TODO**: Do I really need this to be an image???_
+(Hmm, I could really use some "implicit_option" attribute (**TODO**))
 
 Costs and upgrade options are described in a [assets/agent_campaign_info.ron]
 config:
@@ -99,7 +136,7 @@ config:
     "elite_spearman": (
         cost: 15,
     ),
-    . . .
+    // etc...
 ```
 
 The expected size of the squad is 4..6 fighters,
@@ -398,7 +435,7 @@ who aren't comfortable enough with English.
 
 ------
 
-(**TODO**: _Don't forget to check that the last image in hte post looks cool: Reddit will use it as a preview._)
+(**TODO**: _Don't forget to check that the last image in the post looks cool: Reddit will use it as a preview._)
 
 That's all for today, thanks for reading!
 
