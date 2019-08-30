@@ -12,34 +12,34 @@ slug = "2019-08-26--devlog-zemeroth-v0-6"
 Hi, folks! I'm happy to announce **Zemeroth v0.6**.
 Main features of this release are:
 renown, agent upgrades, visual improvements,
-status effect icons, logo.
-(**TODO**).
+status effect icons, logo (**TODO**: _check_).
 
-**TODO**: _Title GIF demo (or a video)_
+**TODO**: _Title image with many new agent types, status icons and some explosion/fire decals_
 
 [Zemeroth] is my hobby turn-based hexagonal tactics game written in Rust.
 You can [download precompiled v0.6 binaries][release v0.6]
 for Windows, Linux, and macOS
 or [play the online version on itch.io][itch_zemeroth]
-(works on mobile browsers too).
+(should work on mobile browsers too).
 
 <!-- ------ -->
 
-<!-- **TODO**: _preface?_ -->
-
 I've experimented a little bit with [smaller forum updates](TODO:_URLO_link)
-and [video devlogs](https://youtu.be/EDoxb7vbqgg),
-but I failed to make them regularly.
-Actually, I managed to only publish one such update.
-Drafts for second and third were written, but I haven't finished them.
-So I decided to cancel these experiments and just
-try harder to make a more often and smaller version releases.
-<!-- at least make regular releases more often -->
-and record videos for them.
+and [complimentary video devlogs](https://youtu.be/EDoxb7vbqgg),
+but failed to make them regularly.
+Actually, I only managed to publish one such update -
+drafts for second and third were written, but I haven't finished them.
+So, I decided to cancel the experiment,
+squash all the small posts/drafts together
+into this announcement and
+just try harder to make more often and smaller version releases.
+Video devlogs are delayed.
 
+<!--
 Here's a video version of this post:
 
 **TODO**: _video version of the devlog post (don't embed html, just use a helper image)_
+-->
 
 <!-- I've removed planned versions from the roadmap.
 (TODO: I don't really need to mention this)-->
@@ -61,14 +61,13 @@ I hope to keep these videos short and release them every week or two.
 
 ## Renown and Agent Upgrades
 
-"Renown" is a term obviously borrowed from [Banner Saga].
+"Renown" is the currency of the campaign mode
+that the player receives with each won battle
+and can spend between battles on upgrading their fighters or recruiting new ones.
 
-It's the currency of the campaign mode
-that the player receives with each won battle.
+The term obviously borrowed from [Banner Saga].
 
 The amount of received renown is encoded in a campaign's nodes.
-
-Renown is spent between the battles on upgrading your fighters or recruiting new ones.
 
 ![a screenshot of campaign menu](campaign-menu.png)
 
@@ -222,9 +221,13 @@ There're many small visual improvements.
 
 ![demo of the tile highlighting](tile-highlighting.gif)
 
-First, a tile under the cursor is highlighted now.
-Highlighting is disabled though on touch devices
+A tile under the cursor is highlighted now.
+
+Highlighting is disabled on touch devices.
+
 (by ignoring an event if its delta movement is zero).
+
+**TODO**: _Add a little bit more details (and link to the code?)_
 
 Based on feedback from playtests.
 
@@ -287,6 +290,8 @@ To avoid making the battlefield too noisy and unreadable.
 ### Status Effect Icons
 
 Status effect icons were added.
+
+**TODO**: _What is it? What is a timed effect?_
 
 **TODO**: _Show images_
 
@@ -403,7 +408,10 @@ And I've revived my Patreon page: [patreon.com/ozkriff]
 [roadmap]: https://github.com/ozkriff/zemeroth/blob/master/README.md#roadmap
 [inspiration]: https://github.com/ozkriff/zemeroth/blob/0e789a546/README.md#inspiration
 
+<!--
 ## Video (TODO: rename)
+
+**TODO:** _move this section to the next devlog_
 
 It's my first experience of recording video devlogs.
 
@@ -428,6 +436,7 @@ who aren't comfortable enough with English.
 
 **TODO**: By the way, for the text version I'm usually using
 [ezgif.com](https://ezgif.com) for converting and tweaking gifs.
+-->
 
 <!-- ## Bonus
 **TODO**: {piece of the video from Indikator} - Visited indikator.
