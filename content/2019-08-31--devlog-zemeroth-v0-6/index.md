@@ -1,9 +1,7 @@
 +++
 title = "Zemeroth v0.6: Renown, Upgrades, Frames, Flipping and Effect Icons"
-slug = "2019-08-26--devlog-zemeroth-v0-6"
+slug = "2019-08-31--devlog-zemeroth-v0-6"
 +++
-
-**TODO**: _rename the file to `2019-08-31--devlog-zemeroth-v0-6.md`_
 
 <!-- markdownlint-disable MD013 -->
 <!-- cspell:ignore reddit playtests indiedb tigsource -->
