@@ -9,18 +9,20 @@ slug = "2019-08-31--devlog-zemeroth-v0-6"
 
 Hi, folks! I'm happy to announce **Zemeroth v0.6**.
 Main features of this release are:
-renown, agent upgrades, visual improvements,
-status effect icons, logo (**TODO**: _check_).
+renown and agent upgrades, sprite frames and flips,
+status effect icons (**TODO**: _check_).
 
-**TODO**: _Title image with many new agent types, status icons and some explosion/fire decals_
+<!-- **TODO**: _Title image with many new agent types, status icons and some explosion/fire decals_ -->
+
+![TODO: describe](title-screenshot-1.png)
+
+<!-- ![TODO: describe](title-screenshot-2.png) -->
 
 [Zemeroth] is my hobby turn-based hexagonal tactics game written in Rust.
 You can [download precompiled v0.6 binaries][release v0.6]
 for Windows, Linux, and macOS
 or [play the online version on itch.io][itch_zemeroth]
 (should work on mobile browsers too).
-
-<!-- ------ -->
 
 I've experimented a little bit with [smaller forum updates](TODO:_URLO_link)
 and [complimentary video devlogs](https://youtu.be/EDoxb7vbqgg),
@@ -33,25 +35,7 @@ into this announcement and
 just try harder to make more often and smaller version releases.
 Video devlogs are delayed.
 
-<!--
-Here's a video version of this post:
-
-**TODO**: _video version of the devlog post (don't embed html, just use a helper image)_
--->
-
-<!-- I've removed planned versions from the roadmap.
-(TODO: I don't really need to mention this)-->
-
 <!-- I don't really need all of this, I just need to make smaller releases. -->
-
-<!-- 
-Here's my first video devlog ever (_[/r/rust_gamedev discussion](https://www.reddit.com/r/rust_gamedev/comments/bwquqy/zemeroth_dev_vlog_1/)_):
-
-<https://youtu.be/EDoxb7vbqgg>
-
-I hope to keep these videos short and release them every week or two.
-(**TODO**: Remove this I guess)
--->
 
 [Zemeroth]: https://github.com/ozkriff/zemeroth
 [itch_zemeroth]: https://ozkriff.itch.io/zemeroth
@@ -60,56 +44,41 @@ I hope to keep these videos short and release them every week or two.
 ## Renown and Agent Upgrades
 
 "Renown" is the currency of the campaign mode
-that the player receives with each won battle
-and can spend between battles on upgrading their fighters or recruiting new ones.
-
+that the player receives by winning battles
+and spends on recruiting and upgrading their fighters between battles.
 The term obviously borrowed from [Banner Saga].
 
-The amount of received renown is encoded in a campaign's nodes.
+Updated campaign menu now looks like this:
 
 ![a screenshot of campaign menu](campaign-menu.png)
 
-Recruit options are still hard-coded in campaign's nodes.
-
+Recruit candidates and the amount of received renown
+are encoded in `award` section of campaign's nodes.
 A sample from [assets/campaign_0.ron]:
 
 ```ron
-Plan(
-    initial_agents: [
-        "swordsman",
-        "spearman",
-    ],
-    nodes: [
-        (
-            scenario: (
-                rocky_tiles_count: 0,
-                objects: [
-                    (owner: Some((1)), typename: "imp", line: Some(Front), count: 3),
-                ],
-            ),
-            award: (
-                recruits: ["hammerman", "alchemist"], // possible recruits
-                renown: 17, // renown for the battle
-            ),
+initial_agents: ["swordsman", "spearman"],
+nodes: [
+    // . . .
+    (
+        scenario: (
+            objects: [
+                (owner: None, typename: "boulder", line: None, count: 1),
+                (owner: Some((1)), typename: "imp", line: Some(Front), count: 3),
+                (owner: Some((1)), typename: "imp_bomber", line: Some(Middle), count: 2),
+            ],
         ),
-        (
-            scenario: (
-                rocky_tiles_count: 5,
-                objects: [
-                    (owner: None, typename: "boulder", line: None, count: 1),
-                    (owner: Some((1)), typename: "imp", line: Some(Front), count: 3),
-                    (owner: Some((1)), typename: "imp_bomber", line: Some(Middle), count: 2),
-                ],
-            ),
-            award: (
-                recruits: ["spearman", "alchemist"],
-                renown: 18,
-            ),
+        award: (
+            recruits: ["spearman", "alchemist"],
+            renown: 18,
         ),
-        // etc...
+    ),
+    // . . .
 ```
 
-(Hmm, I could really use some "implicit_option" attribute (**TODO**))
+(Hmm, I could really use some "[implicit_some]" extension to get rid of all these `Some`'s.)
+
+[implicit_some]: https://github.com/ron-rs/ron/blob/master/docs/extensions.md#implicit_some
 
 Costs and upgrade options are described in a [assets/agent_campaign_info.ron]
 config:
@@ -120,20 +89,14 @@ config:
         cost: 10,
         upgrades: ["heavy_swordsman", "elite_swordsman"],
     ),
-    "elite_swordsman": (
-        cost: 15,
-    ),
-    "heavy_swordsman": (
-        cost: 14,
-    ),
+    "elite_swordsman": (cost: 15),
+    "heavy_swordsman": (cost: 14),
     "spearman": (
         cost: 11,
         upgrades: ["heavy_spearman", "elite_spearman"],
     ),
-    "elite_spearman": (
-        cost: 15,
-    ),
-    // etc...
+    "elite_spearman": (cost: 15),
+    // . . .
 ```
 
 The expected size of the squad is 4..6 fighters,
@@ -151,8 +114,6 @@ and use your renown later.
 **TODO**: one upgrade path per agent
 
 ![upgrade trees](upgrade-trees.png)
-
-^ **TODO**: _redraw the image with a non-white background (skin looks bad on white bg), also fix "**heavy** swordsman"_
 
 TODO: Describe what different properties do they have.
 
@@ -192,7 +153,9 @@ THe idea is that the player should never have enough renown to buy everything.
 
 ## Agent's Info Screen
 
-**TODO**: _This should be explained in terms of upgrades, I guess_
+Have you noticed `[i]` buttons on the right from a fighter's type in the campaign menu?
+
+!["i" button in the campaign menu](agent-info-button.png)
 
 Added a basic agent info screen to Zemeroth.
 Now you can look up some stats before recruiting or upgrading a fighter.
@@ -203,8 +166,6 @@ Now you can look up some stats before recruiting or upgrading a fighter.
 
 Opened by pressing on a small `[i]` button near fighter's type in the campaign menu:
 
-!["i" button in the campaign menu](campaign-menu-2.png)
-
 **TODO**: Use smaller image.
 
 This way you can check your current fighter's stats too.
@@ -213,7 +174,7 @@ This way you can check your current fighter's stats too.
 
 ## Visual Improvements
 
-There're many small visual improvements.
+There're many small visual improvements in this release.
 
 ### Current tile highlighting
 
