@@ -1,6 +1,6 @@
 +++
 title = "Zemeroth v0.6: Renown, Upgrades, Frames, Flipping and Effect Icons"
-slug = "2019-08-31--devlog-zemeroth-v0-6"
+slug = "2019-09-04--devlog-zemeroth-v0-6"
 +++
 
 <!-- markdownlint-disable MD013 -->
@@ -12,11 +12,7 @@ Main features of this release are:
 renown and agent upgrades, sprite frames and flips,
 status effect icons (**TODO**: _check_).
 
-<!-- **TODO**: _Title image with many new agent types, status icons and some explosion/fire decals_ -->
-
-![TODO: describe](title-screenshot-1.png)
-
-<!-- ![TODO: describe](title-screenshot-2.png) -->
+![Title image showing new agent types, icons, explosions, etc](title-screenshot.png)
 
 [Zemeroth] is my hobby turn-based hexagonal tactics game written in Rust.
 You can [download precompiled v0.6 binaries][release v0.6]
@@ -34,6 +30,8 @@ squash all the small posts/drafts together
 into this announcement and
 just try harder to make more often and smaller version releases.
 Video devlogs are delayed.
+
+**TODO**: ^^^ _edit stuff about videos._
 
 <!-- I don't really need all of this, I just need to make smaller releases. -->
 
@@ -320,9 +318,20 @@ Thanks, folks!
 
 - **TODO**: check PRs
 
-[pr495]: https://github.com/ozkriff/zemeroth/pull/495
 [i492]: https://github.com/ozkriff/zemeroth/issues/492
+[pr495]: https://github.com/ozkriff/zemeroth/pull/495
 [pr508]: https://github.com/ozkriff/zemeroth/pull/508
+
+## Gameplay Video
+
+**TODO**: _Record a gameplay video_
+
+Putting all these changes together:
+
+[![gameplay](gameplay-video-preview.png)](TODO)
+
+<!-- It starts reminding something like a real game, isn't it? :)
+Though a lot of work is still need to be done. -->
 
 ## Text Logo
 
@@ -367,7 +376,6 @@ And I've revived my Patreon page: [patreon.com/ozkriff]
 [roadmap]: https://github.com/ozkriff/zemeroth/blob/master/README.md#roadmap
 [inspiration]: https://github.com/ozkriff/zemeroth/blob/0e789a546/README.md#inspiration
 
-<!--
 ## Video (TODO: rename)
 
 **TODO:** _move this section to the next devlog_
@@ -386,6 +394,8 @@ I'm using Kubuntu as main OS.
 
 [Kdenlive](https://kdenlive.org).
 
+**TODO**: _Kdenlive screenshot_
+
 English subtitles mostly for cases when I'm saying something too indistinctly
 
 [KDE Subtitle Composer](https://store.kde.org/p/1126783).
@@ -395,7 +405,6 @@ who aren't comfortable enough with English.
 
 **TODO**: By the way, for the text version I'm usually using
 [ezgif.com](https://ezgif.com) for converting and tweaking gifs.
--->
 
 <!-- ## Bonus
 **TODO**: {piece of the video from Indikator} - Visited indikator.
