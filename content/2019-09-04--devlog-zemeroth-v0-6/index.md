@@ -182,20 +182,17 @@ TODO: firer: now explosions destroy armor.
 
 ## Agent's Info Screen
 
-Have you noticed `[i]` buttons on the right from a fighter's type in the campaign menu?
-
-!["i" button in the campaign menu](agent-info-button.png)
-
-Added a basic fighter info screen to Zemeroth.
-Now the player can look up some stats before recruiting or upgrading a fighter.
+A basic fighter info screen was added:
 
 ![agent info screen](agent-info-screen.png)
 
-^ **TODO** _remake this screenshot, because hammerman has changed since then_
+It's opened by clicking on a small `[i]` button
+on the right from a fighter's type in the campaign menu:
 
-Opened by pressing on a small `[i]` button near fighter's type in the campaign menu:
+!["i" button in the campaign menu](agent-info-button.png)
 
-This way the player can check their current fighter's stats too.
+This screen allows the player to look up some stats
+before recruiting or upgrading a fighter.
 
 ## Possession
 
