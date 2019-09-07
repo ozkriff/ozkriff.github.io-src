@@ -9,50 +9,80 @@ slug = "2019-09-04--devlog-zemeroth-v0-6"
 
 Hi, folks! I'm happy to announce **Zemeroth v0.6**.
 Main features of this release are:
-renown and agent upgrades, sprite frames and flips,
-status effect icons (**TODO**: _check_).
+renown and fighter upgrades, possessions, status effect icons,
+and sprite frames and flips.
 
-![Title image showing new agent types, icons, explosions, etc](title-screenshot.png)
+ <!-- **TODO**: ^^^ check the features list ^^^ -->
 
-[Zemeroth] is my hobby turn-based hexagonal tactics game written in Rust.
+![Title image showing new fighter types, icons, explosions, etc](title-screenshot.png)
+
+[Zemeroth] is my hobby turn-based hexagonal tactics game written in [Rust].
 You can [download precompiled v0.6 binaries][release v0.6]
 for Windows, Linux, and macOS
-or [play the online version on itch.io][itch_zemeroth]
+or **[play the online version on itch.io][itch_zemeroth]**
 (should work on mobile browsers too).
 
-I've experimented a little bit with [smaller forum updates](TODO:_URLO_link)
-and [complimentary video devlogs](https://youtu.be/EDoxb7vbqgg),
-but failed to make them regularly.
-Actually, I only managed to publish one such update -
-drafts for second and third were written, but I haven't finished them.
-So, I decided to cancel the experiment,
-squash all the small posts/drafts together
-into this announcement and
-just try harder to make more often and smaller version releases.
-Video devlogs are delayed.
+After 0.5 release, I've experimented a little bit with
+[smaller forum updates][zemeroth weekly]
+and [short complimentary videos](https://youtu.be/EDoxb7vbqgg),
+but I've expectedly failed to make them regularly.
+Actually, I only managed to publish one such update:
+drafts for second and third updates were never finished.
+So, I decided to cancel my attempts at making weeklies and
+squashed all the "weekly" text drafts together
+into this normal announcement post.
 
-**TODO**: ^^^ _edit stuff about videos._
+Video drafts were also squashed into
+**[a video version of this post][YouTube devlog]**,
+check it out:
 
-<!-- I don't really need all of this, I just need to make smaller releases. -->
+<!-- **TODO**: **{YouTube video}** -->
+
+[![TODO](youtube-devlog-screenshot-REPLACE.png)][YouTube devlog] <!--TODO-->
+
+So, what does this release add to the game?
 
 [Zemeroth]: https://github.com/ozkriff/zemeroth
+[Rust]: https://rust-lang.org
 [itch_zemeroth]: https://ozkriff.itch.io/zemeroth
 [release v0.6]: https://github.com/ozkriff/zemeroth/releases/tag/v0.6.0
+[zemeroth weekly]: https://users.rust-lang.org/t/zemeroth-a-2d-turn-based-strategy-game/28311/5
+[YouTube devlog]: https://TODO.todo
 
-## Renown and Agent Upgrades
+## Renown and Fighter Upgrades
+
+The biggest updates of this release are
+the renown system and fighter upgrades.
 
 "Renown" is the currency of the campaign mode
 that the player receives by winning battles
 and spends on recruiting and upgrading their fighters between battles.
 The term obviously borrowed from [Banner Saga].
 
-Updated campaign menu now looks like this:
+Updated campaign menu looks like this:
 
 ![a screenshot of campaign menu](campaign-menu.png)
 
-Recruit candidates and the amount of received renown
-are encoded in `award` section of campaign's nodes.
-A sample from [assets/campaign_0.ron]:
+Now it shows not only the player's last battle casualties
+and theirs current fighters,
+but also theirs current renown and a list of possible actions
+with their costs (in renown).
+
+The player is now free to choose more then one action
+if they have enough renown.
+
+One upgrade option is chosen randomly for up to two upgradable fighters
+in the player's group.
+
+If the player doesn't like provided upgrade options,
+they can skip straight to the next battle
+(that will be a little bit harder)
+and use their renown later.
+
+Recruit candidates (and the amount of received renown after a battle)
+are still encoded in the `award` section of campaign's nodes
+(this is likely to become a little bit more random too in future versions).
+A sample from [assets/campaign_0.ron][campaign_ron]:
 
 ```ron
 initial_agents: ["swordsman", "spearman"],
@@ -74,12 +104,11 @@ nodes: [
     // . . .
 ```
 
-(Hmm, I could really use some "[implicit_some]" extension to get rid of all these `Some`'s.)
+(_Note to myself: Employ an "[implicit_some]" RON extension._)
 
-[implicit_some]: https://github.com/ron-rs/ron/blob/master/docs/extensions.md#implicit_some
-
-Costs and upgrade options are described in a [assets/agent_campaign_info.ron]
-config:
+Fighter costs and upgrade options are described
+in a [assets/agent_campaign_info.ron][agent_campaign_info_ron] config,
+that looks like this:
 
 ```ron
 {
@@ -97,19 +126,22 @@ config:
     // . . .
 ```
 
-The expected size of the squad is 4..6 fighters,
-so each new fighter costs more.
-(**TODO**: _how? why? explain more about it_)
+Recruitment cost consists is a basic type cost
+plus a group size penalty (the player's fighters count).
+Penalty is added because the intended size of the group
+is four to six fighters.
 
-If you don't like upgrade options, you can skip straight to the next battle
-(that will be more hard because you'll foo)
-and use your renown later.
+The upgrade cost is just a difference between original
+and upgraded type costs.
+
+Now the campaign have some level of strategy:
+the player should think if it's better to recruit a new fighter
+or upgrade the existing ones.
+The player should never have enough renown to buy everything they want.
 
 <!-- and only features "heavy" and "elite" (unbalanced) variations of swordsman and spearman for now. -->
 
 **TODO**: heavy_hammerman, healer, firer
-
-**TODO**: one upgrade path per agent
 
 ![upgrade trees](upgrade-trees.png)
 
@@ -141,11 +173,10 @@ New fighters:
 
 TODO: firer: now explosions destroy armor.
 
-THe idea is that the player should never have enough renown to buy everything.
-
 [Banner Saga]: https://bannersaga.gamepedia.com/Renown
-[assets/campaign_0.ron]: https://github.com/ozkriff/zemeroth_assets/blob/e3886c064/campaign_01.ron
-[assets/agent_campaign_info.ron]: https://github.com/ozkriff/zemeroth_assets/blob/e3886c064/agent_campaign_info.ron
+[campaign_ron]: https://github.com/ozkriff/zemeroth_assets/blob/e3886c064/campaign_01.ron
+[agent_campaign_info_ron]: https://github.com/ozkriff/zemeroth_assets/blob/e3886c064/agent_campaign_info.ron
+[implicit_some]: https://github.com/ron-rs/ron/blob/master/docs/extensions.md#implicit_some
 
 <!-- ^ **TODO**: upgrade the commit (use v0.6's final commit) -->
 
@@ -155,8 +186,8 @@ Have you noticed `[i]` buttons on the right from a fighter's type in the campaig
 
 !["i" button in the campaign menu](agent-info-button.png)
 
-Added a basic agent info screen to Zemeroth.
-Now you can look up some stats before recruiting or upgrading a fighter.
+Added a basic fighter info screen to Zemeroth.
+Now the player can look up some stats before recruiting or upgrading a fighter.
 
 ![agent info screen](agent-info-screen.png)
 
@@ -164,17 +195,37 @@ Now you can look up some stats before recruiting or upgrading a fighter.
 
 Opened by pressing on a small `[i]` button near fighter's type in the campaign menu:
 
-**TODO**: Use smaller image.
+This way the player can check their current fighter's stats too.
 
-This way you can check your current fighter's stats too.
+## Possession
 
-**TODO**: Small `[i]` buttons, what are they?
+Imp summoners can now possess imps to give them more action points for a few turns.
+
+It uses a yellow lightning status icon
+(read more about the icons in the "Status Effect Icons" section below).
+
+![TODO: description](possession-demo-1.gif)
+
+Possessed imps can run through the whole map, make a lot of attacks,
+and they won't stop on your reaction attacks.
+
+So the player must look closely for potentially possessed imps and
+be ready to reposition fighters to form a lethal defense line.
+
+The idea is that the player should never be in a situation when
+two possessed imps run towards a lonely and badly positioned fighter.
+
+![TODO: description](possession-demo-2.gif)
+
+_**TODO**: How does this section works with "status effect icons"?_
+
+_**TODO**: maybe this should be renamed?_
 
 ## Visual Improvements
 
 There're many small visual improvements in this release.
 
-### Current tile highlighting
+### Current Tile Highlighting
 
 ![demo of the tile highlighting](tile-highlighting.gif)
 
@@ -192,27 +243,39 @@ Based on feedback from playtests.
 
 ![scene with flipped agents](scene-with-flipped-agents.png)
 
-Next, agents now [can be flipped horizontally][pr473]
+Next, agent sprites now [can be flipped horizontally][pr473]
 to match their action's direction.
 I've wanted to add this for a long time because sometimes
 units were attacking each other backwards and it was weird.
 
-**TODO**: Implementation note: zscene::Action::???
+**TODO**: _Implementation note: zscene::Action::???_
 
 **TODO**: - Small change: Flip weapon flashes horizontally;
+
+**TODO**: _say a few words about the history of this change and the hacks involved._
 
 ### Dodge Animations
 
 ![Dodging animation demo](dodge-demo.gif)
 
-[Added][pr471] simple dodge animations when an attack misses
+[Added][pr471] simple dodge animations when an attack misses.
 
-## Move Interruption Message
+**TODO**: _say a few more words._
+
+(In real life) it's hard to actually miss while attacking
+a static target with a melee weapon.
+99% of the time misses are because of target avoidance attempts.
+
+This is now displayed in the game's animation.
+
+### Move Interruption Message
 
 ![Demo of the movement interruption message](move-interrupted-msg-demo.gif)
 
 A helper message is [now shown][pr472]
 when an agent's move is interrupted.
+
+**TODO**: _explain what movement interruption is and why this message is needed_.
 
 ### Frames
 
@@ -235,11 +298,7 @@ and it looks weird with completely static sprite sometimes (**TODO**: why?).
 
 Decorative explosion ground marks were added:
 
-<!-- TODO: this GIF doesn't work!!! -->
-
 ![explosion ground marks demo](explosion-ground-mark-demo.gif)
-
-_**TODO**: insert "explosion_ground_mark.png" img_
 
 Same as blood, they're slowly disappearing into transparency in three turns.
 To avoid making the battlefield too noisy and unreadable.
@@ -247,6 +306,11 @@ To avoid making the battlefield too noisy and unreadable.
 ### Status Effect Icons
 
 Status effect icons were added.
+
+<!-- ![TODO: description](status-effect-icons-stacked.png) -->
+
+![TODO: description](status-effect-icons-stacked-2.png)
+![TODO: description](status-effect-icons-stacked-3.png)
 
 **TODO**: _What is it? What is a timed effect?_
 
@@ -261,29 +325,6 @@ Status effect icons were added.
 
 I'm hoping to rework how the brief stats are displayed with dots someday,
 but for now...
-
-## Possession
-
-Imp summoners can now possess imps to give them more action points for a few turns.
-
-It uses a yellow lightning status icon.
-
-![TODO: description](possession-demo-1.gif)
-
-Possessed imps can run through the whole map, make a lot of attacks,
-and they won't stop on your reaction attacks.
-
-So the player must look closely for potentially possessed imps and
-be ready to reposition fighters to form a lethal defense line.
-
-The idea is that the player should never be in a situation when
-two possessed imps run towards a lonely and badly positioned fighter.
-
-![TODO: description](possession-demo-2.gif)
-
-_**TODO**: How does this section works with "status effect icons"?_
-
-_**TODO**: maybe this should be renamed?_
 
 ## External Contributions
 
@@ -305,12 +346,14 @@ There were a few PRs from external contributors:
 
 Thanks, folks!
 
-## Other changes
+## Other Changes
 
 - AI of the Summoner and Bomber imps is tweaked to **TODO** smaller distances;
   "Decrease distance ranges for summoners and bombers";
   Chasing summoners through the whole map with slow heavy fighters isn't fun.
   [pr508]
+
+- Bomb explosions now destroy armor. (TODO: link?)
 
 - "Add a mostly empty explicit rustfmt.toml file" - [pr495]
 
@@ -336,7 +379,9 @@ Though a lot of work is still need to be done. -->
 ## Text Logo
 
 The game now has a text logo.
-It's a manually "low poly vectorized" text written with the "Old London" font:
+It's a manually "low poly vectorized" text
+(**TODO**: more details)
+written with the "Old London" font:
 
 ![Text logo](text-logo.png)
 
@@ -373,7 +418,6 @@ And I've revived my Patreon page: [patreon.com/ozkriff]
 [fb.com/ozkriff.games]: https://fb.com/ozkriff.games
 [vk.com/ozkriff.games]: https://vk.com/ozkriff.games
 [patreon.com/ozkriff]: https://patreon.com/ozkriff
-[roadmap]: https://github.com/ozkriff/zemeroth/blob/master/README.md#roadmap
 [inspiration]: https://github.com/ozkriff/zemeroth/blob/0e789a546/README.md#inspiration
 
 ## Video (TODO: rename)
@@ -398,6 +442,8 @@ I'm using Kubuntu as main OS.
 
 English subtitles mostly for cases when I'm saying something too indistinctly
 
+<!-- **TODO**: _is "indistinctly" a real word?_ -->
+
 [KDE Subtitle Composer](https://store.kde.org/p/1126783).
 
 Russian subtitles are, obviously, for comrades^W local folks
@@ -412,14 +458,18 @@ who aren't comfortable enough with English.
 
 ------
 
-(**TODO**: _Don't forget to check that the last image in the post looks cool: Reddit will use it as a preview._)
+<!-- (**TODO**:
+_Don't forget to check that the last image in the post looks cool:_
+_Reddit will use it as a preview._) -->
 
 That's all for today, thanks for reading!
 
-(_**TODO:** link to the roadmap_)
+[Here's Zemeroth's roadmap][roadmap],
+if you want to know on what I'm going to work next.
 
 If you're interested in this project you can follow
-[@ozkriff on Twitter][@ozkriff] for fresh news.
+[@ozkriff on Twitter][@ozkriff] for fresh news
+or subscribe to my [YouTube channel][ozkriff YouTube].
 
 Also, if you're interested in Rust game development in general,
 you may want to check [@rust_gamedev on Twitter][@rust_gamedev].
@@ -431,5 +481,7 @@ TODO: uncomment when the post is published
 [twitter](TODO).
 -->
 
+[roadmap]: https://github.com/ozkriff/zemeroth/blob/master/README.md#roadmap
 [@ozkriff]: https://twitter.com/ozkriff
 [@rust_gamedev]: https://twitter.com/rust_gamedev
+[ozkriff YouTube]: https://youtube.com/user/ozkriff619/videos
