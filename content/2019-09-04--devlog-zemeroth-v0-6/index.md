@@ -3,8 +3,10 @@ title = "Zemeroth v0.6: Renown, Upgrades, Frames, Flipping and Effect Icons"
 slug = "2019-09-04--devlog-zemeroth-v0-6"
 +++
 
+<!-- TODO: update the slug (date) ^^^ -->
+
 <!-- markdownlint-disable MD013 -->
-<!-- cspell:ignore reddit playtests indiedb tigsource -->
+<!-- cspell:ignore reddit playtests indiedb tigsource nerfed -->
 <!-- cspell:ignore indistinctly zscene KDEnlive ezgif Kubuntu -->
 
 Hi, folks! I'm happy to announce **Zemeroth v0.6**.
@@ -21,6 +23,8 @@ You can [download precompiled v0.6 binaries][release v0.6]
 for Windows, Linux, and macOS
 or **[play the online version on itch.io][itch_zemeroth]**
 (should work on mobile browsers too).
+
+------
 
 After 0.5 release, I've experimented a little bit with
 [smaller forum updates][zemeroth weekly]
@@ -139,44 +143,96 @@ the player should think if it's better to recruit a new fighter
 or upgrade the existing ones.
 The player should never have enough renown to buy everything they want.
 
-<!-- and only features "heavy" and "elite" (unbalanced) variations of swordsman and spearman for now. -->
+------
 
-**TODO**: heavy_hammerman, healer, firer
+As for the new fighter types,
+most of the current upgrades can be split into two "kinds":
+
+- "Elite" fighters are generally faster, have more abilities and
+  can use them more often.
+  They feel overpowered at this iteration and most likely will be
+  nerfed in next releases.
+
+- "Heavy" fighters are the opposite:
+  they move slower (two move points instead of three),
+  have less attack points,
+  but deal more damage and have more health points.
+
+  Later I will convert some of their extended health points into armor points,
+  but this doesn't work atm, because there're no enemies, except for Imp Summoners,
+  that can do anything with an armored fighter.
+
+Basic fighter types were nerfed:
+less strength points, accuracy, abilities, etc,
+but are still useful.
+
+The idea is that the player should have fighters from all three groups:
+slow heavies are supposed to be used as devastating "iron fist",
+elites are an avantgarde and flankers (**TODO: is this a correct word?**),
+and basic fighters are used to fight weak enemies or finish off wounded ones.
+
+Here are current "upgrade trees"
+(they have only one level for now, but I'm planning to
+add more nodes in future versions):
 
 ![upgrade trees](upgrade-trees.png)
 
-TODO: Describe what different properties do they have.
+- **spearman** - still has 3 health points, "Jump" ability,
+  and two-tile attack range,
+  but lost one reaction attack, one accuracy and one dodge point.
+  Only useful for defence.
+  - **elite spearman** - has 4 health, one more accuracy and dodge points,
+    and, most importantly, has an additional attack.
+    The latter allows using him as a first fighter in a series of attacks,
+    because he can move closer to enemies
+    and instantly attack one of them from a safe distance,
+    giving the initiative to the player.
+  - **heavy spearman** - moves slowly, can't jump at all,
+    but has 5 health and deals 2 damage
+    (that's a lot, considering his two-tile attack range).
+    Still only useful for defence, but is very effective.
+- **swordsman** - has 3 health points (lost one), lost one accuracy
+    and doesn't have "Dash" and "Rage" abilities anymore (only "Jump").
+  - **elite swordsman** - has the stats of an old swordsman:
+    4 health, more accurate and all three abilities:
+    "Jump", "Dash", and "Rage".
+  - **heavy swordsman** - slow and has no abilities at all,
+    but has 6 health, increased accuracy and greater attack damage (3).
+- **hammerman** - has 4 health points, and low accuracy.
+    Lost "Heavy Strike" passive ability,
+    but still have "Club" and "Knockback" abilities.
+  - **heavy hammerman** - slow, lost one attack point,
+    but deals up to 5 damage, breaks up to 3 armor,
+    has 6 health, a "Heavy Strike" passive ability
+    and both "Club" and "Knockback" abilities.
+    Can slather an imp summoner in a few strikes (**TODO**: is a correct word?) .
+- **alchemist** - lost all bombs except for the Push Bomb.
+  Also, "Heal"'s cooldown in increased to 3 turns.
+  - **healer** - heals more points with a 2 turns cooldown
+    and can throw only Poison Bomb.
+    Also, can do double moves in one turn for cases
+    when the wounded fighter in on the other side of the map.
+  - **firer** - can't heal anyone,
+    but can do a mass destruction by throwing exploding and fire bombs.
 
-Heavy fighter variants are slower .(only two move points)
+(_See [objects.ron] for exact details._)
 
-"elite" variants are generally faster and have more abilities or
-can use them more often.
+<!--
+**TODO**: _mention itch.io feedback about armor jump (I need internet for this)_
 
-"Heavy-*" variants move slower (they have 2 move points instead of 3),
-don't have any additional attacks.
+As a commenter on itch.io (**TODO: or it was on Reddit?**) said,
+it felt weird that a heavy armored fighter can jump. -->
 
-Old fighters:
-
-- "hammerman" - becomes a little bit weaker and loses "heavy strike"
-  passive ability
-- "alchemist" - loses all bombs except for pushing bomb
-
-New fighters:
-
-- "heavy hammerman" - more health, stronger but rarer attacks
-
-    Balance Club ability: reduce duration and remove FlyOff effect
-
-- "healer" - heals better and can throw only poison bomb
-
-- "firer" - can't heal, but can throw bombs & firebombs
-
-TODO: firer: now explosions destroy armor.
+As you can see, sometimes the upgraded versions
+lose some of their abilities.
+These upgrades are more like a specialization, not just an improvement:
+the fighter focuses on a smaller set of skills.
 
 [Banner Saga]: https://bannersaga.gamepedia.com/Renown
 [campaign_ron]: https://github.com/ozkriff/zemeroth_assets/blob/e3886c064/campaign_01.ron
 [agent_campaign_info_ron]: https://github.com/ozkriff/zemeroth_assets/blob/e3886c064/agent_campaign_info.ron
 [implicit_some]: https://github.com/ron-rs/ron/blob/master/docs/extensions.md#implicit_some
+[objects.ron]: https://github.com/ozkriff/zemeroth_assets/blob/master/objects.ron
 
 <!-- ^ **TODO**: upgrade the commit (use v0.6's final commit) -->
 
@@ -191,32 +247,38 @@ on the right from a fighter's type in the campaign menu:
 
 !["i" button in the campaign menu](agent-info-button.png)
 
-This screen allows the player to look up some stats
+This screen allows the player to look up stats and abilities
 before recruiting or upgrading a fighter.
 
 ## Possession
 
-Imp summoners can now possess imps to give them more action points for a few turns.
+Another gameplay change is possessions:
+imp summoners can now possess imps to give them more action points
+for a few turns.
 
-It uses a yellow lightning status icon
-(read more about the icons in the "Status Effect Icons" section below).
+The "Possessed" status is visualized with a yellow lightning status icon
+(read more about the status icons in the "Status Effect Icons" section below).
 
-![TODO: description](possession-demo-1.gif)
+![Possession demo 1: spearman is killed by a possessed imp](possession-demo-1.gif)
+
+On the beginning of their turn,
+possessed imp gets three additional Joker points
+(reminder: Jokers can be used as attack or move points
+and aren't removed when the agent receives damage).
 
 Possessed imps can run through the whole map, make a lot of attacks,
-and they won't stop on your reaction attacks.
-
+and they won't stop on your reaction attacks until they're dead.
 So the player must look closely for potentially possessed imps and
-be ready to reposition fighters to form a lethal defense line.
+be ready to reposition fighters to form a lethal defense line:
+
+![Possession demo 1: possessed imp is killed with reaction attacks](possession-demo-2.gif)
 
 The idea is that the player should never be in a situation when
 two possessed imps run towards a lonely and badly positioned fighter.
 
-![TODO: description](possession-demo-2.gif)
-
-_**TODO**: How does this section works with "status effect icons"?_
-
-_**TODO**: maybe this should be renamed?_
+_Note_: "Possession" looks like to be a bad name
+for one demon forcing a lesser demon to be more performing,
+so this ability and effect will likely be renamed in future version.
 
 ## Visual Improvements
 
@@ -224,32 +286,39 @@ There're many small visual improvements in this release.
 
 ### Current Tile Highlighting
 
+First, a tile under the cursor is highlighted now
+when using a mouse (it was requested by many playtesters).
+It makes no sense do this with touch inputs because
+the user will just constantly see the latest tile he touched,
+so the feature only works when input event's delta movement isn't zero.
+
+A demo of switching between mouse input and touch emulation
+in the web version of the game:
+
 ![demo of the tile highlighting](tile-highlighting.gif)
-
-A tile under the cursor is highlighted now.
-
-Highlighting is disabled on touch devices.
-
-(by ignoring an event if its delta movement is zero).
-
-**TODO**: _Add a little bit more details (and link to the code?)_
-
-Based on feedback from playtests.
 
 ### Sprites Flipping
 
+Next, agent sprites now [are flipped horizontally][pr473]
+to match their action's direction.
+Here's a screenshot that shows agents from both sides faced left and right:
+
 ![scene with flipped agents](scene-with-flipped-agents.png)
 
-Next, agent sprites now [can be flipped horizontally][pr473]
-to match their action's direction.
 I've wanted to add this for a long time because sometimes
-units were attacking each other backwards and it was weird.
+units were attacking each other backwards and it looked weird.
+
+Weapon flashes are also flipped when needed.
 
 **TODO**: _Implementation note: zscene::Action::???_
 
-**TODO**: - Small change: Flip weapon flashes horizontally;
+An additional `zscene::action::SetFacing` (**TODO: link to code**) action was added:
 
-**TODO**: _say a few words about the history of this change and the hacks involved._
+```rust
+pub enum Facing { Left, Right }
+
+pub struct SetFacing { sprite: Sprite, facing: Facing }
+```
 
 ### Dodge Animations
 
@@ -352,6 +421,8 @@ Thanks, folks!
 
 - Bomb explosions now destroy armor. (TODO: link?)
 
+- the "Club" ability was bala: reduce duration and remove FlyOff effect.
+
 - "Add a mostly empty explicit rustfmt.toml file" - [pr495]
 
   [Motivation][i492]
@@ -423,11 +494,13 @@ And I've revived my Patreon page: [patreon.com/ozkriff]
 
 It's my first experience of recording video devlogs.
 
+Amateur stuff.
+
 Recording as one piece totally fails for me.
 
 Stressful.
 
-TODO: Describe how the video is recorded
+TODO: Describe how the video is recorded.
 
 What app I use to make subtitles?
 
@@ -437,6 +510,14 @@ I'm using Kubuntu as main OS.
 
 **TODO**: _Kdenlive screenshot_
 
+I'm not comfortable enough with English to record the audio interactively.
+So I prepare a text (by adapting a text announcement) and read it in a few sections.
+
+Intro and outro are recorded using a phone, because.
+
+Sound is recorded with a Xiaomi headphones (**TODO**: is this a right word? headset?).
+Maybe I'll buy some external mic for the next videos.
+
 English subtitles mostly for cases when I'm saying something too indistinctly
 
 <!-- **TODO**: _is "indistinctly" a real word?_ -->
@@ -445,6 +526,10 @@ English subtitles mostly for cases when I'm saying something too indistinctly
 
 Russian subtitles are, obviously, for comrades^W local folks
 who aren't comfortable enough with English.
+
+The volume level turned out to be a hard thing.
+
+I've used audacity (TODO) filter to remove most noticeable background noises.
 
 **TODO**: By the way, for the text version I'm usually using
 [ezgif.com](https://ezgif.com) for converting and tweaking gifs.
