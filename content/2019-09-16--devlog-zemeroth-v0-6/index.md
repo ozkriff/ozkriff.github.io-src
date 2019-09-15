@@ -1,9 +1,7 @@
 +++
 title = "Zemeroth v0.6: Renown, Upgrades, Frames, Flipping and Effect Icons"
-slug = "2019-09-04--devlog-zemeroth-v0-6"
+slug = "2019-09-16--devlog-zemeroth-v0-6"
 +++
-
-<!-- TODO: update the slug (date) ^^^ -->
 
 <!-- TODO; when the post is finished check it with Grammarly -->
 
@@ -385,15 +383,12 @@ or [blood splatters and dust][blood&dust])
 were implemented in previous versions of the game,
 but all agents still used only one sprite.
 
-<!-- This release finally brings switchable sprite frames
-and employs them in the animation of events. -->
-
 With this release, agents finally
 [get special sprite frames for (some) abilities][pr476]!
 
-![frames demo](frames-demo.gif)
+**TODO**: _re-record the GIF with new agents_:
 
-<!-- ^ **TODO**: re-record the GIF with new agents -->
+![frames demo](frames-demo.gif)
 
 ^ _A demo of special ability frames ("Rage", "Heal", and "Summon")_
 
@@ -409,38 +404,7 @@ because the spear is too far away from its target.
 
 ------
 
-**TODO**: _add some implementation note._
-
-**TODO**: Explain how this is implemented in the visualizer (checks if frame is present and tries to switch to id)
-
-**TODO**: _Show the "sprite sheet" with filenames and the config_
-
-`""` (empty string) is considered the default agent image.
-
-```rust
-drawable: Option<Box<dyn Drawable>>,
-drawables: HashMap<String, Option<Box<dyn Drawable>>>,
-current_frame_name: String,
-```
-
-`ggez::Drawable` (**TODO**: link)
-
-`drawable` is the current frame.
-
-`drawables` store all loaded frames.
-`Option` is used for easy moving the
-
-`drawable` is used to avoid indexing a hashmap with a string every frame.
-
-`Sprite::from_path`
-
-`Sprite::from_paths`
-
-**TODO**: _method to add more frames_
-
-`action::SetFrame`
-
-<https://github.com/ozkriff/zemeroth_assets/blob/56b620664sprites.ron>
+Sprite sets are configured now with a [sprites.ron] config that looks like this:
 
 ```ron
 {
@@ -468,11 +432,37 @@ current_frame_name: String,
 }
 ```
 
+The `""` (empty string) frame is considered the default frame.
+
+As the event visualizers don't know anything about specific agent types,
+the code usually checks if the sprite has some event-specific frame and only then
+adds an action node that will switch the sprite to that frame during its execution:
+
+```rust
+let frame = "jump";
+if sprite_object.has_frame(frame) {
+    actions.push(action::SetFrame::new(&sprite_object, frame).boxed());
+}
+```
+
+Frames are stored inside the `zscene::Sprite` struct like this:
+
+```rust
+drawable: Option<Box<dyn Drawable>>,
+drawables: HashMap<String, Option<Box<dyn Drawable>>>,
+current_frame_name: String,
+```
+
+I didn't want to index a HashMap with a string for every sprite
+on every frame, so the current frame lives in a special field `drawable`
+and everything is stored as options to simplify frame swapping.
+
 [the initial vision]: https://ozkriff.github.io/2017-08-17--devlog/index.html#zemeroth
 [walking-animation]: https://ozkriff.games/2018-03-03--devlog/index.html#simple-walking-animation
 [blood&dust]: https://ozkriff.games/2019-05-13--devlog-zemeroth-v0-5/index.html#visual-improvements
 [pr476]: https://github.com/ozkriff/zemeroth/pull/476
 [i477]: https://github.com/ozkriff/zemeroth/issues/477
+[sprites.ron]: https://github.com/ozkriff/zemeroth_assets/blob/56b620664/sprites.ron
 
 ### Explosion Ground Marks
 
@@ -483,6 +473,12 @@ decorative explosion ground marks were added:
 
 Same as blood, they're slowly disappearing into transparency in three turns
 to avoid making the battlefield too noisy and unreadable.
+
+It looks boring when there're many similar big explosion mark sprites
+on the battlefield, so in future versions there should be
+something like 3-5 randomly chosen versions of this sprite ([#531][i531]).
+
+[i531]: https://github.com/ozkriff/zemeroth/issues/531
 
 ### Status Effect Icons
 
@@ -497,6 +493,8 @@ Stack vertically:
 ![TODO: description](status-effect-icons-stacked.png)
 
 **TODO**: _What is it? What is a timed effect?_
+
+![image files](status-effect-icons-images.png)
 
 **TODO**: _Show images_
 
