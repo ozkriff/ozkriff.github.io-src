@@ -482,31 +482,24 @@ something like 3-5 randomly chosen versions of this sprite ([#531][i531]).
 
 ### Status Effect Icons
 
-Status effect icons were added.
-
-<!-- ![TODO: description](status-effect-icons-stacked.png) -->
-
-Stack vertically:
-
-<!-- ![TODO: description](status-effect-icons-stacked.png) -->
-
-![TODO: description](status-effect-icons-stacked.png)
-
-**TODO**: _What is it? What is a timed effect?_
-
-![image files](status-effect-icons-images.png)
-
-**TODO**: _Show images_
-
-- poisoned (skull)
-- stunned (spiral)
-
-**TODO**: _Possessed?_
+Icons for lasting effects were [added][pr511]
+so the player can quickly see a more detailed game state info:
 
 ![status effect icons demo](status-effect-icons.png)
 
-I'm hoping to rework how the brief stats are displayed with dots someday,
-but for now...
+There're three lasting effects atm:
+
+![image files](status-effect-icons-images.png)
+
+If there're more than one lasting effect applied to one agent,
+icons are stacked vertically:
+
+![stacked icons demo](status-effect-icons-stacked.png)
+
+The icons are twice the size of brief info dots,
+because they're more detailed.
+
+[pr511]: https://github.com/ozkriff/zemeroth/pull/511
 
 ## External Contributions
 
@@ -530,83 +523,97 @@ Thanks, folks!
 
 ## Other Changes
 
-- AI of the Summoner and Bomber imps is tweaked to **TODO** smaller distances;
-  "Decrease distance ranges for summoners and bombers";
-  Chasing summoners through the whole map with slow heavy fighters isn't fun.
-  [pr508]
+- AIs of the Summoner and Bomber imps [were tweaked][pr508]
+  to keep shorter distances,
+  because chasing summoners through the whole map
+  with slow heavy fighters is just boring.
+- The "Explosion Bomb" ability was balanced:
+  explosions [now destroy armor][pr505].
+  This was done to balance this ability with a "Fire Bomb".
+- The "Club" ability [was balanced][pr514]:
+  its duration was educed and the "Fly Off" effect was remove.
+  This was done to better differentiate it with the "Knockback" ability.
+- A mostly empty rustfmt.toml file [was added][pr495] to the repo
+  ([to explicitly document the desired formatting][i492]).
+- I added [a new "Inspiration" section][inspiration]
+  to the README with a list of games that inspire(d) Zemeroth.
 
-- Bomb explosions now destroy armor. (TODO: link?)
-
-- the "Club" ability was bala: reduce duration and remove FlyOff effect.
-
-- "Add a mostly empty explicit rustfmt.toml file" - [pr495]
-
-  [Motivation][i492]
-
-- **TODO: check PRs**
-
-[i492]: https://github.com/ozkriff/zemeroth/issues/492
-[pr495]: https://github.com/ozkriff/zemeroth/pull/495
+[pr505]: https://github.com/ozkriff/zemeroth/pull/505
 [pr508]: https://github.com/ozkriff/zemeroth/pull/508
+[pr495]: https://github.com/ozkriff/zemeroth/pull/495
+[pr514]: https://github.com/ozkriff/zemeroth/pull/514
+[i492]: https://github.com/ozkriff/zemeroth/issues/492
+[inspiration]: https://github.com/ozkriff/zemeroth/blob/0e789a546/README.md#inspiration
 
 ## Gameplay Video
 
-**TODO**: _Record a gameplay video_
+**TODO**: _Record a gameplay video._
 
 Putting all these changes together:
 
 [![gameplay](gameplay-video-preview.png)](TODO)
+
+**TODO**: _Add some short description._
 
 <!-- It starts reminding something like a real game, isn't it? :)
 Though a lot of work is still need to be done. -->
 
 ## Text Logo
 
-The game now has a text logo.
-It's a manually "low poly vectorized" text
-(**TODO**: more clear, add more details)
-written with the "Old London" font:
+The game now has a (temporary?) text logo:
 
 ![Text logo](text-logo.png)
 
-Not sure if it really fits the game, but it'll do for now.
+The image was manually re-drawn
+(in a low-poly style similar to game's angular sprites)
+from a text written in the ["Old London"] font.
 
-(Many people say that it looks like something related to death metal
-for some reason and not just a general medieval font.)
+Not sure if it really fits the game - surprisingly many people say
+that it looks like something related to Death Metal
+and not just a generic medieval font - but it'll do for now.
+
+["Old London"]: https://www.dafont.com/old-london.font
 
 ## Spreading the Word
 
-<!-- There're a couple of non-code updates. -->
+I've got the **[ozkriff.games]** domain
+and [moved my devlog to it][gh pages domain].
+This is my first domain and the buying process turned out to be
+not nearly as scary as I was expecting.
 
-<!-- I've added [a "Roadmap" section][roadmap] to the readme
-to show in which direction the project moves.
+Also, I revived my Patreon page: **[patreon.com/ozkriff]**.
 
-^^^ **TODO**: _this was a part of 0.5 release, wasn't it?_ -->
+And I created new social pages
+(in addition to [twitter][@ozkriff]):
 
-<!-- The roadmap was extended and reformatted. -->
+- [fb.com/ozkriff.games]
+- [vk.com/ozkriff.games] (ru)
 
-I also added [a new "Inspiration" section][inspiration]
-with a list of games that inspire me to work on Zemeroth.
-(**TODO**: name some of them)
+... and a bunch forum threads and database pages
+(in addition to [itch.io][itch_zemeroth]):
 
-I got the [ozkriff.games](https://ozkriff.games) domain
-and moved my devlog there (_**TODO**: link to GitHub Pages' guide_).
+- [tigsource]
+- [indiedb]
+- [users.rust-lang.org]
+- [gamejolt]
+- [gamedev.ru] (ru)
 
-My first domain, btw. The process isn't that scary.
+The initial plan was to post weekly updates to forums and database pages
+but as that experiment was cancelled (see the preface)
+I'm most likely will just post links to new version announces there.
 
-[fb.com/ozkriff.games] and [vk.com/ozkriff.games] pages were created.
-
-**TODO**: indiedb, tigsource
-
-And I've revived my Patreon page: [patreon.com/ozkriff]
-
-**TODO**: _What I'm going to do with it and what are my expectations?_
-
+[ozkriff.games]: https://ozkriff.games
 [fb.com/ozkriff.games]: https://fb.com/ozkriff.games
 [vk.com/ozkriff.games]: https://vk.com/ozkriff.games
 [patreon.com/ozkriff]: https://patreon.com/ozkriff
-[inspiration]: https://github.com/ozkriff/zemeroth/blob/0e789a546/README.md#inspiration
+[gh pages domain]: https://help.github.com/en/articles/using-a-custom-domain-with-github-pages
+[users.rust-lang.org]: https://users.rust-lang.org/t/zemeroth-a-2d-turn-based-strategy-game/28311
+[tigsource]: https://forums.tigsource.com/index.php?topic=67464.0
+[indiedb]: https://indiedb.com/games/zemeroth
+[gamedev.ru]: https://gamedev.ru/projects/forum/?id=244345
+[gamejolt]: https://gamejolt.com/games/zemeroth/414937
 
+<!--
 ## Video (TODO: rename)
 
 **TODO:** _move this section to the next devlog_
@@ -639,7 +646,7 @@ Maybe I'll buy some external mic for the next videos.
 
 English subtitles mostly for cases when I'm saying something too indistinctly
 
-<!-- **TODO**: _is "indistinctly" a real word?_ -->
+(**TODO**: _is "indistinctly" a real word?_)
 
 [KDE Subtitle Composer](https://store.kde.org/p/1126783).
 
@@ -653,9 +660,11 @@ I've used audacity (TODO) filter to remove most noticeable background noises.
 **TODO**: By the way, for the text version I'm usually using
 [ezgif.com](https://ezgif.com) for converting and tweaking gifs.
 
-<!-- ## Bonus
+**TODO**: Bonus section?
 **TODO**: {piece of the video from Indikator} - Visited indikator.
-**TODO**: _also, photos were uploaded_ -->
+**TODO**: _also, photos were uploaded_
+
+-->
 
 ------
 
