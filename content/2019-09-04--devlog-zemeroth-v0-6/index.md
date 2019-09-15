@@ -5,16 +5,16 @@ slug = "2019-09-04--devlog-zemeroth-v0-6"
 
 <!-- TODO: update the slug (date) ^^^ -->
 
+<!-- TODO; when the post is finished check it with Grammarly -->
+
 <!-- markdownlint-disable MD013 -->
-<!-- cspell:ignore reddit playtests indiedb tigsource nerfed -->
-<!-- cspell:ignore indistinctly zscene KDEnlive ezgif Kubuntu -->
+<!-- cspell:ignore reddit playtests indiedb tigsource nerfed Grammarly youtube -->
+<!-- cspell:ignore indistinctly zscene KDEnlive ezgif Kubuntu Knockback -->
 
 Hi, folks! I'm happy to announce **Zemeroth v0.6**.
 Main features of this release are:
 renown and fighter upgrades, possessions, status effect icons,
 and sprite frames and flips.
-
- <!-- **TODO**: ^^^ check the features list ^^^ -->
 
 ![Title image showing new fighter types, icons, explosions, etc](title-screenshot.png)
 
@@ -166,9 +166,9 @@ Basic fighter types were nerfed:
 less strength points, accuracy, abilities, etc,
 but are still useful.
 
-The idea is that the player should have fighters from all three groups:
+The idea is that the player should have fighters from all three types in their group:
 slow heavies are supposed to be used as devastating "iron fist",
-elites are an avantgarde and flankers (**TODO: is this a correct word?**),
+quick and agile elites are used for vanguard and flanks,
 and basic fighters are used to fight weak enemies or finish off wounded ones.
 
 Here are current "upgrade trees"
@@ -205,7 +205,7 @@ add more nodes in future versions):
     but deals up to 5 damage, breaks up to 3 armor,
     has 6 health, a "Heavy Strike" passive ability
     and both "Club" and "Knockback" abilities.
-    Can slather an imp summoner in a few strikes (**TODO**: is a correct word?) .
+    Can slay even a fully fresh imp summoner in a few strikes.
 - **alchemist** - lost all bombs except for the Push Bomb.
   Also, "Heal"'s cooldown in increased to 3 turns.
   - **healer** - heals more points with a 2 turns cooldown
@@ -217,22 +217,23 @@ add more nodes in future versions):
 
 (_See [objects.ron] for exact details._)
 
-<!--
-**TODO**: _mention itch.io feedback about armor jump (I need internet for this)_
-
-As a commenter on itch.io (**TODO: or it was on Reddit?**) said,
-it felt weird that a heavy armored fighter can jump. -->
-
 As you can see, sometimes the upgraded versions
 lose some of their abilities.
 These upgrades are more like a specialization, not just an improvement:
 the fighter focuses on a smaller set of skills.
+
+I also try to make fighter's stats match their visuals
+so the situation described in this [itch.io review] won't repeat:
+
+> ... the most mobile unit in the game is the only one wearing heavy armor.
+> Perhaps it'd be more fitting for the Hammerman to be in plate.
 
 [Banner Saga]: https://bannersaga.gamepedia.com/Renown
 [campaign_ron]: https://github.com/ozkriff/zemeroth_assets/blob/e3886c064/campaign_01.ron
 [agent_campaign_info_ron]: https://github.com/ozkriff/zemeroth_assets/blob/e3886c064/agent_campaign_info.ron
 [implicit_some]: https://github.com/ron-rs/ron/blob/master/docs/extensions.md#implicit_some
 [objects.ron]: https://github.com/ozkriff/zemeroth_assets/blob/master/objects.ron
+[itch.io review]: https://itch.io/post/660275
 
 <!-- ^ **TODO**: upgrade the commit (use v0.6's final commit) -->
 
@@ -273,7 +274,7 @@ be ready to reposition fighters to form a lethal defense line:
 
 ![Possession demo 1: possessed imp is killed with reaction attacks](possession-demo-2.gif)
 
-The idea is that the player should never be in a situation when
+The idea is that the player should never be in a situation like when
 two possessed imps run towards a lonely and badly positioned fighter.
 
 _Note_: "Possession" looks like to be a bad name
@@ -292,82 +293,196 @@ It makes no sense do this with touch inputs because
 the user will just constantly see the latest tile he touched,
 so the feature only works when input event's delta movement isn't zero.
 
-A demo of switching between mouse input and touch emulation
-in the web version of the game:
-
 ![demo of the tile highlighting](tile-highlighting.gif)
+
+^ _Switching between mouse input and touch emulation in the web version_
 
 ### Sprites Flipping
 
-Next, agent sprites now [are flipped horizontally][pr473]
+Next, agent sprites
+[are now flipped horizontally][pr473]
 to match their action's direction.
-Here's a screenshot that shows agents from both sides faced left and right:
+Weapon flashes are also now flipped when needed.
 
 ![scene with flipped agents](scene-with-flipped-agents.png)
 
-I've wanted to add this for a long time because sometimes
-units were attacking each other backwards and it looked weird.
+^ _A screenshot with both imps and humans faced left and right_
 
-Weapon flashes are also flipped when needed.
+I've wanted to add this for a long time because previously
+humans were facing strictly to the right (imps - to the left)
+and sometimes they were attacking each other backwards.
 
-**TODO**: _Implementation note: zscene::Action::???_
+To implement this `enum Facing { Left, Right }`,
+a `Sprite::set_facing` method,
+and a corresponding `action::SetFacing` scene action
+[were added][pr473] to the `zscene` library.
 
-An additional `zscene::action::SetFacing` (**TODO: link to code**) action was added:
+The implementation of `Sprite:set_facing` is a little hacky atm.
+I was hoping to implement this method
+using only ggez's [ggez::DrawParams][draw_param]' `scale` and `offset` fields,
+but because of the [this bug][ggez_i439]
+it doesn't really works with custom screen coordinates that I'm using.
+So the method was implemented on `zscene::Sprite`'s abstraction level using external offset.
 
-```rust
-pub enum Facing { Left, Right }
-
-pub struct SetFacing { sprite: Sprite, facing: Facing }
-```
+[pr473]: https://github.com/ozkriff/zemeroth/pull/473
+[draw_param]: https://docs.rs/ggez/0.5.1/ggez/graphics/struct.DrawParam.html
+[ggez_i439]: https://github.com/ggez/ggez/issues/439
 
 ### Dodge Animations
 
-![Dodging animation demo](dodge-demo.gif)
-
-[Added][pr471] simple dodge animations when an attack misses.
-
-**TODO**: _say a few more words._
-
-(In real life) it's hard to actually miss while attacking
+In real life it's hard to actually miss while attacking
 a static target with a melee weapon.
-99% of the time misses are because of target avoidance attempts.
+Most of the misses are caused by the targets dodging moves.
+Simple target dodge animations when attack misses
+[where added to the game][pr471] to display this.
 
-This is now displayed in the game's animation.
+![Dodge animation demo](dodge-demo.gif)
+
+^ _Dodge animations demo_
+
+[pr471]: https://github.com/ozkriff/zemeroth/pull/471
 
 ### Move Interruption Message
 
+If any tile of a movement path is inside the attack range
+of an enemy agent with attack points, a reaction attack is triggered.
+If this attack succeeds the movement is interrupted.
+
+Move point (or Joker) is spent even if the agent hasn't actually moved anywhere:
+the starting tile is also considered a part of the movement path.
+This prevents agents from exiting a melee too easily
+("Jump" and "Dash" abilities exist to counter this).
+
+I like this mechanic, but sometimes it wasn't clear to playtesters what just happened:
+they clicked on a tile, but were attacked and can't move anymore.
+
+A helper message is [now shown][pr472] when an agent's move is interrupted.
+
 ![Demo of the movement interruption message](move-interrupted-msg-demo.gif)
 
-A helper message is [now shown][pr472]
-when an agent's move is interrupted.
+^ _A demo of a heavy swordsman's failed attempt to move away from an imp_
 
-**TODO**: _explain what movement interruption is and why this message is needed_.
+[pr472]: https://github.com/ozkriff/zemeroth/pull/472
 
 ### Frames
 
-Now [agents have special sprite frames for some abilities][pr476].
+From the beginning of the project I decided that I don't want
+to implement real smooth animations for agents:
+I don't like how 2D skeletal animations look in general
+and per frame animations are too hard to make.
+Quoting from [the initial vision]:
+
+> \* Simple vector 2d graphics with just 3-5 sprites per unit;
+
+So the plan was to have a few situational sprites
+("attacking", "taking damage", etc) per unit
+and use simple procedural animation to make the image more alive.
+It's a compromise between having real animations and only having totally static pieces.
+
+Some procedural animations
+(like ["bumpy" walk][walking-animation]
+or [blood splatters and dust][blood&dust])
+were implemented in previous versions of the game,
+but all agents still used only one sprite.
+
+<!-- This release finally brings switchable sprite frames
+and employs them in the animation of events. -->
+
+With this release, agents finally
+[get special sprite frames for (some) abilities][pr476]!
 
 ![frames demo](frames-demo.gif)
 
-It's a compromise between having real animations and only having static pieces.
+<!-- ^ **TODO**: re-record the GIF with new agents -->
 
-Also, spearman will get special directional attack frames soon (**TODO**: ?),
+^ _A demo of special ability frames ("Rage", "Heal", and "Summon")_
+
+For now, special frames are used only for the visualization of abilities.
+I've tried adding "attack frames", but they conflicted too much with weapon flashes
+and I decided that the game looks better without these frames.
+
+Though, it's likely that spearman will get special directional attack frames
+[in the next versions][i477],
 because he can attack enemies two tiles away from him
-and it looks weird with completely static sprite sometimes (**TODO**: why?).
+and it looks weird with a completely static sprite sometimes
+because the spear is too far away from its target.
 
-[pr471]: https://github.com/ozkriff/zemeroth/pull/471
-[pr472]: https://github.com/ozkriff/zemeroth/pull/472
-[pr473]: https://github.com/ozkriff/zemeroth/pull/473
+------
+
+**TODO**: _add some implementation note._
+
+**TODO**: Explain how this is implemented in the visualizer (checks if frame is present and tries to switch to id)
+
+**TODO**: _Show the "sprite sheet" with filenames and the config_
+
+`""` (empty string) is considered the default agent image.
+
+```rust
+drawable: Option<Box<dyn Drawable>>,
+drawables: HashMap<String, Option<Box<dyn Drawable>>>,
+current_frame_name: String,
+```
+
+`ggez::Drawable` (**TODO**: link)
+
+`drawable` is the current frame.
+
+`drawables` store all loaded frames.
+`Option` is used for easy moving the
+
+`drawable` is used to avoid indexing a hashmap with a string every frame.
+
+`Sprite::from_path`
+
+`Sprite::from_paths`
+
+**TODO**: _method to add more frames_
+
+`action::SetFrame`
+
+<https://github.com/ozkriff/zemeroth_assets/blob/56b620664sprites.ron>
+
+```ron
+{
+    // ...
+    "alchemist": (
+        paths: {
+            "": "/alchemist.png",
+            "throw": "/alchemist_throw.png",
+            "heal": "/alchemist_heal.png",
+        },
+        offset_x: 0.05,
+        offset_y: 0.1,
+        shadow_size_coefficient: 1.0,
+    ),
+    "imp_summoner": (
+        paths: {
+            "": "/imp_summoner.png",
+            "summon": "/imp_summoner_summon.png",
+        },
+        offset_x: 0.0,
+        offset_y: 0.15,
+        shadow_size_coefficient: 1.3,
+    ),
+    // ...
+}
+```
+
+[the initial vision]: https://ozkriff.github.io/2017-08-17--devlog/index.html#zemeroth
+[walking-animation]: https://ozkriff.games/2018-03-03--devlog/index.html#simple-walking-animation
+[blood&dust]: https://ozkriff.games/2019-05-13--devlog-zemeroth-v0-5/index.html#visual-improvements
 [pr476]: https://github.com/ozkriff/zemeroth/pull/476
+[i477]: https://github.com/ozkriff/zemeroth/issues/477
 
 ### Explosion Ground Marks
 
-Decorative explosion ground marks were added:
+To make the battlefield look more interesting
+decorative explosion ground marks were added:
 
 ![explosion ground marks demo](explosion-ground-mark-demo.gif)
 
-Same as blood, they're slowly disappearing into transparency in three turns.
-To avoid making the battlefield too noisy and unreadable.
+Same as blood, they're slowly disappearing into transparency in three turns
+to avoid making the battlefield too noisy and unreadable.
 
 ### Status Effect Icons
 
@@ -375,8 +490,11 @@ Status effect icons were added.
 
 <!-- ![TODO: description](status-effect-icons-stacked.png) -->
 
-![TODO: description](status-effect-icons-stacked-2.png)
-![TODO: description](status-effect-icons-stacked-3.png)
+Stack vertically:
+
+<!-- ![TODO: description](status-effect-icons-stacked.png) -->
+
+![TODO: description](status-effect-icons-stacked.png)
 
 **TODO**: _What is it? What is a timed effect?_
 
@@ -427,7 +545,7 @@ Thanks, folks!
 
   [Motivation][i492]
 
-- **TODO**: check PRs
+- **TODO: check PRs**
 
 [i492]: https://github.com/ozkriff/zemeroth/issues/492
 [pr495]: https://github.com/ozkriff/zemeroth/pull/495
@@ -448,12 +566,15 @@ Though a lot of work is still need to be done. -->
 
 The game now has a text logo.
 It's a manually "low poly vectorized" text
-(**TODO**: more details)
+(**TODO**: more clear, add more details)
 written with the "Old London" font:
 
 ![Text logo](text-logo.png)
 
 Not sure if it really fits the game, but it'll do for now.
+
+(Many people say that it looks like something related to death metal
+for some reason and not just a general medieval font.)
 
 ## Spreading the Word
 
@@ -515,7 +636,7 @@ So I prepare a text (by adapting a text announcement) and read it in a few secti
 
 Intro and outro are recorded using a phone, because.
 
-Sound is recorded with a Xiaomi headphones (**TODO**: is this a right word? headset?).
+Sound is recorded with a Mi headphones (**TODO**: is this a right word? headset?).
 Maybe I'll buy some external mic for the next videos.
 
 English subtitles mostly for cases when I'm saying something too indistinctly
@@ -549,7 +670,7 @@ That's all for today, thanks for reading!
 [Here's Zemeroth's roadmap][roadmap],
 if you want to know on what I'm going to work next.
 
-If you're interested in this project you can follow
+If you're interested in Zemeroth project you can follow
 [@ozkriff on Twitter][@ozkriff] for fresh news
 or subscribe to my [YouTube channel][ozkriff YouTube].
 
