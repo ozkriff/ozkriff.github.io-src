@@ -581,9 +581,7 @@ and [moved my devlog to it][gh pages domain].
 This is my first domain and the buying process turned out to be
 not nearly as scary as I was expecting.
 
-Also, I revived my Patreon page: **[patreon.com/ozkriff]**.
-
-And I created new social pages
+I also created new social pages
 (in addition to [twitter][@ozkriff]):
 
 - [fb.com/ozkriff.games]
@@ -598,9 +596,12 @@ And I created new social pages
 - [gamejolt]
 - [gamedev.ru] (ru)
 
+And I revived my Patreon page: **[patreon.com/ozkriff]**.
+
 The initial plan was to post weekly updates to forums and database pages
 but as that experiment was cancelled (see the preface)
 I'm most likely will just post links to new version announces there.
+Let's hope that this will motivate me to make smaller releases more often. :)
 
 [ozkriff.games]: https://ozkriff.games
 [fb.com/ozkriff.games]: https://fb.com/ozkriff.games
