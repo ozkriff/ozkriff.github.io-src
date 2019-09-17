@@ -3,7 +3,8 @@ title = "Zemeroth v0.6: Renown, Upgrades, Frames, Flipping and Effect Icons"
 slug = "2019-09-16--devlog-zemeroth-v0-6"
 +++
 
-<!-- TODO; when the post is finished check it with Grammarly -->
+<!-- TODO: ^ change date! -->
+<!-- TODO: when the post is finished check it with Grammarly! -->
 
 <!-- markdownlint-disable MD013 -->
 <!-- cspell:ignore reddit playtests indiedb tigsource nerfed Grammarly youtube -->
@@ -576,10 +577,12 @@ and not just a generic medieval font - but it'll do for now.
 
 ## Spreading the Word
 
-I've got the **[ozkriff.games]** domain
+I've got the [ozkriff.games] domain
 and [moved my devlog to it][gh pages domain].
 This is my first domain and the buying process turned out to be
 not nearly as scary as I was expecting.
+
+I revived my Patreon page: [patreon.com/ozkriff].
 
 I also created new social pages
 (in addition to [twitter][@ozkriff]):
@@ -596,11 +599,9 @@ I also created new social pages
 - [gamejolt]
 - [gamedev.ru] (ru)
 
-And I revived my Patreon page: **[patreon.com/ozkriff]**.
-
 The initial plan was to post weekly updates to forums and database pages
 but as that experiment was cancelled (see the preface)
-I'm most likely will just post links to new version announces there.
+I most likely will just post links to new version announces there.
 Let's hope that this will motivate me to make smaller releases more often. :)
 
 [ozkriff.games]: https://ozkriff.games
@@ -614,36 +615,56 @@ Let's hope that this will motivate me to make smaller releases more often. :)
 [gamedev.ru]: https://gamedev.ru/projects/forum/?id=244345
 [gamejolt]: https://gamejolt.com/games/zemeroth/414937
 
+## About Devlog Videos
+
+As written in the preface, new devlog posts
+will be complimented with their video versions for folks
+who prefer consuming information in a more dynamic audio-visual form.
+
+Previously, I've just been recording parts of my screen for gifs and gameplay video
+and I don't have any experience recording such videos.
+
+I didn't have any experience with making of such videos
+(I've been making GIFs with short gameplay samples),
+so here's a few notes about my current setup and the routine
+that I've come up with so far.
+
+Ideally, I'd like to do an interactive demo without a strict script,
+but speaking to the camera is quite stressful and I'm not comfortable enough with English.
+I've tried recording the whole video "live" in one piece and it totally failed for me.
+So now I prepare a script (basically, adapting a little bit the text post)
+and read it (usually, one section at a time).
+
+I don't have any external mic and just use a simple headset
+for now (as clearly can be seen from the video).
+
+First, I record short intro and outro videos using my phone's camera
+(it's not perfect, but still much better the my laptop's webcam).
+
+Than, I use [Audacity][audacity] record how I read through the script
+and to filter out most noticeable background noises.
+
+Next, I go through the script and record the screen with [SimpleScreenRecorder]
+to visualize and demonstrate what is described.
+
+I'm using Kubuntu as my main OS
+and so the natural choice for video editor is
+[Kdenlive][kdenlive]
+UI feels a little bit clunky, but docs are fine
+and it seems to do all the basic stuff that I need.
+
+**TODO**: _Kdenlive screenshot with my stuff on the montage table_
+
+The volume level turned out to be a hard thing.
+
+There're at least three reasons to add subtitles:
+my terrible pronunciation, translation to Russian for some comrades, and accessibility.
+[KDE Subtitle Composer].
+
 <!--
-## Video (TODO: rename)
-
-**TODO:** _move this section to the next devlog_
-
 It's my first experience of recording video devlogs.
 
-Amateur stuff.
-
 Recording as one piece totally fails for me.
-
-Stressful.
-
-TODO: Describe how the video is recorded.
-
-What app I use to make subtitles?
-
-I'm using Kubuntu as main OS.
-
-[Kdenlive](https://kdenlive.org).
-
-**TODO**: _Kdenlive screenshot_
-
-I'm not comfortable enough with English to record the audio interactively.
-So I prepare a text (by adapting a text announcement) and read it in a few sections.
-
-Intro and outro are recorded using a phone, because.
-
-Sound is recorded with a Mi headphones (**TODO**: is this a right word? headset?).
-Maybe I'll buy some external mic for the next videos.
 
 English subtitles mostly for cases when I'm saying something too indistinctly
 
@@ -654,18 +675,12 @@ English subtitles mostly for cases when I'm saying something too indistinctly
 Russian subtitles are, obviously, for comrades^W local folks
 who aren't comfortable enough with English.
 
-The volume level turned out to be a hard thing.
-
-I've used audacity (TODO) filter to remove most noticeable background noises.
-
-**TODO**: By the way, for the text version I'm usually using
-[ezgif.com](https://ezgif.com) for converting and tweaking gifs.
-
-**TODO**: Bonus section?
-**TODO**: {piece of the video from Indikator} - Visited indikator.
-**TODO**: _also, photos were uploaded_
-
 -->
+
+[audacity]: https://audacityteam.org
+[kdenlive]: https://kdenlive.org
+[SimpleScreenRecorder]: https://en.wikipedia.org/wiki/SimpleScreenRecorder
+[KDE Subtitle Composer]: https://store.kde.org/p/1126783
 
 ------
 
