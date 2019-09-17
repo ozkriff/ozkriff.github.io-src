@@ -1,5 +1,5 @@
 +++
-title = "Zemeroth v0.6: Renown, Upgrades, Frames, Flipping and Effect Icons"
+title = "Zemeroth v0.6: Renown, Upgrades, Sprite Frames & Flips, Effect Icons, and Videos"
 slug = "2019-09-16--devlog-zemeroth-v0-6"
 +++
 
@@ -546,6 +546,7 @@ Thanks, folks!
 [i492]: https://github.com/ozkriff/zemeroth/issues/492
 [inspiration]: https://github.com/ozkriff/zemeroth/blob/0e789a546/README.md#inspiration
 
+<!--
 ## Gameplay Video
 
 **TODO**: _Record a gameplay video._
@@ -555,9 +556,7 @@ Putting all these changes together:
 [![gameplay](gameplay-video-preview.png)](TODO)
 
 **TODO**: _Add some short description._
-
-<!-- It starts reminding something like a real game, isn't it? :)
-Though a lot of work is still need to be done. -->
+-->
 
 ## Text Logo
 
@@ -599,7 +598,7 @@ I also created new social pages
 - [gamejolt]
 - [gamedev.ru] (ru)
 
-The initial plan was to post weekly updates to forums and database pages
+The initial plan was to post weekly updates to Patreon, forums, and catalogue pages
 but as that experiment was cancelled (see the preface)
 I most likely will just post links to new version announces there.
 Let's hope that this will motivate me to make smaller releases more often. :)
@@ -617,70 +616,61 @@ Let's hope that this will motivate me to make smaller releases more often. :)
 
 ## About Devlog Videos
 
-As written in the preface, new devlog posts
-will be complimented with their video versions for folks
-who prefer consuming information in a more dynamic audio-visual form.
+As written in the preface, new devlog posts will be complimented
+with their video versions for folks who prefer consuming information
+in a more dynamic audio-visual form.
+I don't have any experience with making of such videos
+(I've been only making GIFs and short gameplay videos)
+so I'm learning this stuff as I go along.
+I see it as a part of game development,
+so it makes sense to add a few notes about my current routine to the devlog.
 
-Previously, I've just been recording parts of my screen for gifs and gameplay video
-and I don't have any experience recording such videos.
+Ideally, I'd like to do record a live demo without a strict script,
+but speaking to the camera when you're not used to it is quite stressful
+and additionally I'm not comfortable enough with English.
+I've tried a few times to record the whole video "live" in one piece
+and it totally failed for me.
 
-I didn't have any experience with making of such videos
-(I've been making GIFs with short gameplay samples),
-so here's a few notes about my current setup and the routine
-that I've come up with so far.
-
-Ideally, I'd like to do an interactive demo without a strict script,
-but speaking to the camera is quite stressful and I'm not comfortable enough with English.
-I've tried recording the whole video "live" in one piece and it totally failed for me.
-So now I prepare a script (basically, adapting a little bit the text post)
-and read it (usually, one section at a time).
-
+So, I prepare a script (by adapting a text post a little bit)
+and read it out (usually, one section at a time).
 I don't have any external mic and just use a simple headset
 for now (as clearly can be seen from the video).
+I use **[Audacity][audacity]** to do the recording
+and to [filter out most noticeable background noises][audacity bg noises].
 
-First, I record short intro and outro videos using my phone's camera
-(it's not perfect, but still much better the my laptop's webcam).
+Then, I record short intro and outro clips using my phone's
+(its camera isn't perfect, but still much better then my laptop's webcam)
+to personalize the voiceover a little bit.
 
-Than, I use [Audacity][audacity] record how I read through the script
-and to filter out most noticeable background noises.
+GIFs from the post can't be reused for the visualization
+because they're too small, so I go through the script
+and use **[SimpleScreenRecorder]** to record a lot of screen clips.
 
-Next, I go through the script and record the screen with [SimpleScreenRecorder]
-to visualize and demonstrate what is described.
+I'm using Kubuntu as my main OS,
+so the natural choice for video editor is **[Kdenlive][kdenlive]**.
+Its UI feels a little bit clunky, but docs are fine
+and it seems to do all the basic stuff that I need:
+cut/match the video clips to the voiceover
+and add some background music.
 
-I'm using Kubuntu as my main OS
-and so the natural choice for video editor is
-[Kdenlive][kdenlive]
-UI feels a little bit clunky, but docs are fine
-and it seems to do all the basic stuff that I need.
+![TODO: UPDATE THIS SCREENSHOT](kdenlive.png)
+<!-- 
+The volume level turned out to be a hard thing. -->
 
-**TODO**: _Kdenlive screenshot with my stuff on the montage table_
+Finally, I prepare and add subtitles.
+There're at least three reasons to do this:
+accessibility, my terrible English pronunciation, and translation (to Russian).
+Again, KDE software seems to do the job fine:
+I just add the script to **[KDE Subtitle Composer]** line by line
+and tweak the timings a little bit.
 
-The volume level turned out to be a hard thing.
-
-There're at least three reasons to add subtitles:
-my terrible pronunciation, translation to Russian for some comrades, and accessibility.
-[KDE Subtitle Composer].
-
-<!--
-It's my first experience of recording video devlogs.
-
-Recording as one piece totally fails for me.
-
-English subtitles mostly for cases when I'm saying something too indistinctly
-
-(**TODO**: _is "indistinctly" a real word?_)
-
-[KDE Subtitle Composer](https://store.kde.org/p/1126783).
-
-Russian subtitles are, obviously, for comrades^W local folks
-who aren't comfortable enough with English.
-
--->
+And that's it, the video is done and can be uploaded to [YouTube][ozkriff YouTube].
 
 [audacity]: https://audacityteam.org
 [kdenlive]: https://kdenlive.org
 [SimpleScreenRecorder]: https://en.wikipedia.org/wiki/SimpleScreenRecorder
 [KDE Subtitle Composer]: https://store.kde.org/p/1126783
+[audacity bg noises]: https://manual.audacityteam.org/man/noise_reduction.html
 
 ------
 
@@ -694,11 +684,10 @@ That's all for today, thanks for reading!
 if you want to know on what I'm going to work next.
 
 If you're interested in Zemeroth project you can follow
-[@ozkriff on Twitter][@ozkriff] for fresh news
-or subscribe to my [YouTube channel][ozkriff YouTube].
-
+**[@ozkriff on Twitter][@ozkriff]** for fresh news
+or subscribe to my **[YouTube channel][ozkriff YouTube]**.
 Also, if you're interested in Rust game development in general,
-you may want to check [@rust_gamedev on Twitter][@rust_gamedev].
+you may want to check **[@rust_gamedev on Twitter][@rust_gamedev]**.
 
 <!--
 TODO: uncomment when the post is published
