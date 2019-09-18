@@ -1,9 +1,7 @@
 +++
 title = "Zemeroth v0.6: Renown, Upgrades, Sprite Frames & Flips, Effect Icons, and Videos"
-slug = "2019-09-16--devlog-zemeroth-v0-6"
+slug = "2019-09-18--devlog-zemeroth-v0-6"
 +++
-
-<!-- TODO: ^ change date! -->
 
 <!-- markdownlint-disable MD013 -->
 <!-- cspell:ignore reddit playtests indiedb tigsource nerfed Grammarly youtube -->
