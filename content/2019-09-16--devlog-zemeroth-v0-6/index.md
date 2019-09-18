@@ -4,7 +4,6 @@ slug = "2019-09-16--devlog-zemeroth-v0-6"
 +++
 
 <!-- TODO: ^ change date! -->
-<!-- TODO: when the post is finished check it with Grammarly! -->
 
 <!-- markdownlint-disable MD013 -->
 <!-- cspell:ignore reddit playtests indiedb tigsource nerfed Grammarly youtube -->
@@ -67,8 +66,8 @@ Updated campaign menu looks like this:
 ![a screenshot of campaign menu](campaign-menu.png)
 
 Now it shows not only the player's last battle casualties
-and theirs current fighters,
-but also theirs current renown and a list of possible actions
+and their current fighters
+but also their current renown and a list of possible actions
 with their costs (in renown).
 
 The player is now free to choose more then one action
@@ -131,13 +130,13 @@ that looks like this:
 
 Recruitment cost consists is a basic type cost
 plus a group size penalty (the player's fighters count).
-Penalty is added because the intended size of the group
+The penalty is added because the intended size of the group
 is four to six fighters.
 
 The upgrade cost is just a difference between original
 and upgraded type costs.
 
-Now the campaign have some level of strategy:
+Now the campaign has some level of strategy:
 the player should think if it's better to recruit a new fighter
 or upgrade the existing ones.
 The player should never have enough renown to buy everything they want.
@@ -154,7 +153,7 @@ most of the current upgrades can be split into two "kinds":
 
 - "Heavy" fighters are the opposite:
   they move slower (two move points instead of three),
-  have less attack points,
+  have fewer attack points,
   but deal more damage and have more health points.
 
   Later I will convert some of their extended health points into armor points,
@@ -162,7 +161,7 @@ most of the current upgrades can be split into two "kinds":
   that can do anything with an armored fighter.
 
 Basic fighter types were nerfed:
-less strength points, accuracy, abilities, etc,
+fewer strength points, accuracy, abilities, etc,
 but are still useful.
 
 The idea is that the player should have fighters from all three types in their group:
@@ -178,26 +177,26 @@ add more nodes in future versions):
 
 - **spearman** - still has 3 health points, "Jump" ability,
   and two-tile attack range,
-  but lost one reaction attack, one accuracy and one dodge point.
-  Only useful for defence.
+  but lost one reaction attack, one accuracy, and one dodge point.
+  Only useful for defense.
   - **elite spearman** - has 4 health, one more accuracy and dodge points,
     and, most importantly, has an additional attack.
-    The latter allows using him as a first fighter in a series of attacks,
+    The latter allows using him as the first fighter in a series of attacks,
     because he can move closer to enemies
     and instantly attack one of them from a safe distance,
     giving the initiative to the player.
-  - **heavy spearman** - moves slowly, can't jump at all,
+  - **heavy spearman** - moves slowly, can't jump at all
     but has 5 health and deals 2 damage
     (that's a lot, considering his two-tile attack range).
-    Still only useful for defence, but is very effective.
+    Still only useful for defense, but is very effective.
 - **swordsman** - has 3 health points (lost one), lost one accuracy
     and doesn't have "Dash" and "Rage" abilities anymore (only "Jump").
   - **elite swordsman** - has the stats of an old swordsman:
     4 health, more accurate and all three abilities:
     "Jump", "Dash", and "Rage".
-  - **heavy swordsman** - slow and has no abilities at all,
+  - **heavy swordsman** - slow and has no abilities at all
     but has 6 health, increased accuracy and greater attack damage (3).
-- **hammerman** - has 4 health points, and low accuracy.
+- **hammerman** - has 4 health points and low accuracy.
     Lost "Heavy Strike" passive ability,
     but still have "Club" and "Knockback" abilities.
   - **heavy hammerman** - slow, lost one attack point,
@@ -206,13 +205,13 @@ add more nodes in future versions):
     and both "Club" and "Knockback" abilities.
     Can slay even a fully fresh imp summoner in a few strikes.
 - **alchemist** - lost all bombs except for the Push Bomb.
-  Also, "Heal"'s cooldown in increased to 3 turns.
+  Also, "Heal"'s cooldown increased to 3 turns.
   - **healer** - heals more points with a 2 turns cooldown
     and can throw only Poison Bomb.
     Also, can do double moves in one turn for cases
     when the wounded fighter in on the other side of the map.
   - **firer** - can't heal anyone,
-    but can do a mass destruction by throwing exploding and fire bombs.
+    but can do mass destruction by throwing exploding and fire bombs.
 
 (_See [objects.ron] for exact details._)
 
@@ -278,7 +277,7 @@ two possessed imps run towards a lonely and badly positioned fighter.
 
 _Note_: "Possession" looks like to be a bad name
 for one demon forcing a lesser demon to be more performing,
-so this ability and effect will likely be renamed in future version.
+so this ability and effect will likely be renamed in future versions.
 
 ## Visual Improvements
 
@@ -309,7 +308,7 @@ Weapon flashes are also now flipped when needed.
 
 I've wanted to add this for a long time because previously
 humans were facing strictly to the right (imps - to the left)
-and sometimes they were attacking each other backwards.
+and sometimes they were attacking each other backward.
 
 To implement this `enum Facing { Left, Right }`,
 a `Sprite::set_facing` method,
@@ -319,8 +318,8 @@ and a corresponding `action::SetFacing` scene action
 The implementation of `Sprite:set_facing` is a little hacky atm.
 I was hoping to implement this method
 using only ggez's [ggez::DrawParams][draw_param]' `scale` and `offset` fields,
-but because of the [this bug][ggez_i439]
-it doesn't really works with custom screen coordinates that I'm using.
+but because of [this bug][ggez_i439],
+it doesn't really work with custom screen coordinates that I'm using.
 So the method was implemented on `zscene::Sprite`'s abstraction level using external offset.
 
 [pr473]: https://github.com/ozkriff/zemeroth/pull/473
@@ -329,11 +328,11 @@ So the method was implemented on `zscene::Sprite`'s abstraction level using exte
 
 ### Dodge Animations
 
-In real life it's hard to actually miss while attacking
+In real life, it's hard to actually miss while attacking
 a static target with a melee weapon.
 Most of the misses are caused by the targets dodging moves.
-Simple target dodge animations when attack misses
-[where added to the game][pr471] to display this.
+Simple target dodge animations when an attack misses
+[were added to the game][pr471] to display this.
 
 ![Dodge animation demo](dodge-demo.gif)
 
@@ -398,7 +397,7 @@ I've tried adding "attack frames", but they conflicted too much with weapon flas
 and I decided that the game looks better without these frames.
 
 Though, it's likely that spearman will get special directional attack frames
-[in the next versions][i477],
+[in the next versions][i477]
 because he can attack enemies two tiles away from him
 and it looks weird with a completely static sprite sometimes
 because the spear is too far away from its target.
@@ -492,12 +491,12 @@ There're three lasting effects atm:
 
 ![image files](status-effect-icons-images.png)
 
-If there're more than one lasting effect applied to one agent,
+If there's more than one lasting effect applied to one agent,
 icons are stacked vertically:
 
 ![stacked icons demo](status-effect-icons-stacked.png)
 
-The icons are twice the size of brief info dots,
+The icons are twice the size of brief info dots
 because they're more detailed.
 
 [pr511]: https://github.com/ozkriff/zemeroth/pull/511
@@ -525,14 +524,14 @@ Thanks, folks!
 ## Other Changes
 
 - AIs of the Summoner and Bomber imps [were tweaked][pr508]
-  to keep shorter distances,
+  to keep shorter distances
   because chasing summoners through the whole map
   with slow heavy fighters is just boring.
 - The "Explosion Bomb" ability was balanced:
   explosions [now destroy armor][pr505].
   This was done to balance this ability with a "Fire Bomb".
 - The "Club" ability [was balanced][pr514]:
-  its duration was educed and the "Fly Off" effect was remove.
+  its duration was educed and the "Fly Off" effect was removed.
   This was done to better differentiate it with the "Knockback" ability.
 - A mostly empty rustfmt.toml file [was added][pr495] to the repo
   ([to explicitly document the desired formatting][i492]).
@@ -598,8 +597,8 @@ I also created new social pages
 - [gamejolt]
 - [gamedev.ru] (ru)
 
-The initial plan was to post weekly updates to Patreon, forums, and catalogue pages
-but as that experiment was cancelled (see the preface)
+The initial plan was to post weekly updates to Patreon, forums,
+and catalog pages but as that experiment was canceled (see the preface)
 I most likely will just post links to new version announces there.
 Let's hope that this will motivate me to make smaller releases more often. :)
 
@@ -639,7 +638,7 @@ I use **[Audacity][audacity]** to do the recording
 and to [filter out most noticeable background noises][audacity bg noises].
 
 Then, I record short intro and outro clips using my phone's
-(its camera isn't perfect, but still much better then my laptop's webcam)
+(its camera isn't perfect, but still much better than my laptop's webcam)
 to personalize the voiceover a little bit.
 
 GIFs from the post can't be reused for the visualization
@@ -647,7 +646,7 @@ because they're too small, so I go through the script
 and use **[SimpleScreenRecorder]** to record a lot of screen clips.
 
 I'm using Kubuntu as my main OS,
-so the natural choice for video editor is **[Kdenlive][kdenlive]**.
+so the natural choice for a video editor is **[Kdenlive][kdenlive]**.
 Its UI feels a little bit clunky, but docs are fine
 and it seems to do all the basic stuff that I need:
 cut/match the video clips to the voiceover
