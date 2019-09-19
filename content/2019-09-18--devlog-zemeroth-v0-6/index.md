@@ -51,7 +51,7 @@ So, what does this release add to the game?
 
 ## Renown and Fighter Upgrades
 
-The biggest updates of this release are
+The biggest additions of this release are
 the renown system and fighter upgrades.
 
 "Renown" is the currency of the campaign mode
@@ -162,7 +162,8 @@ Basic fighter types were nerfed:
 fewer strength points, accuracy, abilities, etc,
 but are still useful.
 
-The idea is that the player should have fighters from all three types in their group:
+The idea is that the player should have fighters
+from all three kinds in their group:
 slow heavies are supposed to be used as devastating "iron fist",
 quick and agile elites are used for vanguard and flanks,
 and basic fighters are used to fight weak enemies or finish off wounded ones.
@@ -202,8 +203,9 @@ add more nodes in future versions):
     has 6 health, a "Heavy Strike" passive ability
     and both "Club" and "Knockback" abilities.
     Can slay even a fully fresh imp summoner in a few strikes.
-- **alchemist** - lost all bombs except for the Push Bomb.
-  Also, "Heal"'s cooldown increased to 3 turns.
+- **alchemist** - is a special type, because he can't attack directly.
+  He lost all bombs except for the Push Bomb.
+  Also, the cooldown of the "Heal" ability was increased.
   - **healer** - heals more points with a 2 turns cooldown
     and can throw only Poison Bomb.
     Also, can do double moves in one turn for cases
@@ -326,10 +328,10 @@ So the method was implemented on `zscene::Sprite`'s abstraction level using exte
 
 ### Dodge Animations
 
-In real life, it's hard to actually miss while attacking
-a static target with a melee weapon.
+It's hard to actually miss while attacking
+a static target with a melee weapon in real life.
 Most of the misses are caused by the targets dodging moves.
-Simple target dodge animations when an attack misses
+So, simple target dodge animations when an attack misses
 [were added to the game][pr471] to display this.
 
 ![Dodge animation demo](dodge-demo.gif)
@@ -344,8 +346,8 @@ If any tile of a movement path is inside the attack range
 of an enemy agent with attack points, a reaction attack is triggered.
 If this attack succeeds the movement is interrupted.
 
-Move point (or Joker) is spent even if the agent hasn't actually moved anywhere:
-the starting tile is also considered a part of the movement path.
+A move point (or a joker) is spent even if the agent hasn't actually moved anywhere:
+the starting tile is also considered a part of the path.
 This prevents agents from exiting a melee too easily
 ("Jump" and "Dash" abilities exist to counter this).
 
