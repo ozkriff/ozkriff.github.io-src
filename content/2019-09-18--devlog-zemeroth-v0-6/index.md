@@ -386,8 +386,6 @@ but all agents still used only one sprite.
 With this release, agents finally
 [get special sprite frames for (some) abilities][pr476]!
 
-**TODO**: _re-record the GIF with new agents_:
-
 ![frames demo](frames-demo.gif)
 
 ^ _A demo of special ability frames ("Rage", "Heal", and "Summon")_
