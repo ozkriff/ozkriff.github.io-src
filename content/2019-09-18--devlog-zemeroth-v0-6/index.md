@@ -9,8 +9,8 @@ slug = "2019-09-18--devlog-zemeroth-v0-6"
 
 Hi, folks! I'm happy to announce **Zemeroth v0.6**.
 Main features of this release are:
-renown and fighter upgrades, possessions, status effect icons,
-and sprite frames and flips.
+renown and fighter upgrades, possessions, sprite frames and flips,
+and status effect icons.
 
 ![Title image showing new fighter types, icons, explosions, etc](title-screenshot.png)
 
@@ -30,15 +30,13 @@ Actually, I only managed to publish one such update:
 drafts for second and third updates were never finished.
 So, I decided to cancel my attempts at making weeklies and
 squashed all the "weekly" text drafts together
-into this normal announcement post.
+into this larger announcement post.
 
 Video drafts were also squashed into
 **[a video version of this post][YouTube devlog]**,
 check it out:
 
-<!-- **TODO**: **{YouTube video}** -->
-
-[![TODO](youtube-devlog-screenshot-REPLACE.png)][YouTube devlog] <!--TODO-->
+[![YouTube vide preview](youtube-devlog-screenshot.png)][YouTube devlog]
 
 So, what does this release add to the game?
 
@@ -47,7 +45,7 @@ So, what does this release add to the game?
 [itch_zemeroth]: https://ozkriff.itch.io/zemeroth
 [release v0.6]: https://github.com/ozkriff/zemeroth/releases/tag/v0.6.0
 [zemeroth weekly]: https://users.rust-lang.org/t/zemeroth-a-2d-turn-based-strategy-game/28311/5
-[YouTube devlog]: https://TODO.todo
+[YouTube devlog]: https://www.youtube.com/watch?v=6tZByt4LBlU
 
 ## Renown and Fighter Upgrades
 
@@ -57,14 +55,13 @@ the renown system and fighter upgrades.
 "Renown" is the currency of the campaign mode
 that the player receives by winning battles
 and spends on recruiting and upgrading their fighters between battles.
-The term obviously borrowed from [Banner Saga].
+The term is obviously borrowed from [Banner Saga].
 
 Updated campaign menu looks like this:
 
 ![a screenshot of campaign menu](campaign-menu.png)
 
-Now it shows not only the player's last battle casualties
-and their current fighters
+Now it shows not only the last battle casualties and their current fighters
 but also their current renown and a list of possible actions
 with their costs (in renown).
 
@@ -126,7 +123,7 @@ that looks like this:
     // . . .
 ```
 
-Recruitment cost consists is a basic type cost
+Recruitment cost consists of a basic type cost
 plus a group size penalty (the player's fighters count).
 The penalty is added because the intended size of the group
 is four to six fighters.
@@ -209,7 +206,7 @@ add more nodes in future versions):
   - **healer** - heals more points with a 2 turns cooldown
     and can throw only Poison Bomb.
     Also, can do double moves in one turn for cases
-    when the wounded fighter in on the other side of the map.
+    when the wounded fighter is on the other side of the map.
   - **firer** - can't heal anyone,
     but can do mass destruction by throwing exploding and fire bombs.
 
@@ -232,8 +229,6 @@ so the situation described in this [itch.io review] won't repeat:
 [implicit_some]: https://github.com/ron-rs/ron/blob/master/docs/extensions.md#implicit_some
 [objects.ron]: https://github.com/ozkriff/zemeroth_assets/blob/master/objects.ron
 [itch.io review]: https://itch.io/post/660275
-
-<!-- ^ **TODO**: upgrade the commit (use v0.6's final commit) -->
 
 ## Agent's Info Screen
 
@@ -288,7 +283,7 @@ There're many small visual improvements in this release.
 First, a tile under the cursor is highlighted now
 when using a mouse (it was requested by many playtesters).
 It makes no sense do this with touch inputs because
-the user will just constantly see the latest tile he touched,
+the user will just constantly see the latest tile they touched,
 so the feature only works when input event's delta movement isn't zero.
 
 ![demo of the tile highlighting](tile-highlighting.gif)
@@ -541,19 +536,7 @@ Thanks, folks!
 [pr495]: https://github.com/ozkriff/zemeroth/pull/495
 [pr514]: https://github.com/ozkriff/zemeroth/pull/514
 [i492]: https://github.com/ozkriff/zemeroth/issues/492
-[inspiration]: https://github.com/ozkriff/zemeroth/blob/0e789a546/README.md#inspiration
-
-<!--
-## Gameplay Video
-
-**TODO**: _Record a gameplay video._
-
-Putting all these changes together:
-
-[![gameplay](gameplay-video-preview.png)](TODO)
-
-**TODO**: _Add some short description._
--->
+[inspiration]: https://github.com/ozkriff/zemeroth/blob/8586ef2ac/README.md#inspiration
 
 ## Text Logo
 
@@ -624,7 +607,7 @@ so it makes sense to add a few notes about my current routine to the devlog.
 
 Ideally, I'd like to do record a live demo without a strict script,
 but speaking to the camera when you're not used to it is quite stressful
-and additionally I'm not comfortable enough with English.
+and additionally I'm not quite comfortable with English.
 I've tried a few times to record the whole video "live" in one piece
 and it totally failed for me.
 
@@ -650,9 +633,7 @@ and it seems to do all the basic stuff that I need:
 cut/match the video clips to the voiceover
 and add some background music.
 
-![TODO: UPDATE THIS SCREENSHOT](kdenlive.png)
-<!-- 
-The volume level turned out to be a hard thing. -->
+![Kdenlive screenshot](kdenlive.png)
 
 Finally, I prepare and add subtitles.
 There're at least three reasons to do this:
@@ -663,6 +644,9 @@ and tweak the timings a little bit.
 
 And that's it, the video is done and can be uploaded to [YouTube][ozkriff YouTube].
 
+I'm not completely happy with the quality of the 0.6 announcement video,
+but I guess it's only a question of practice.
+
 [audacity]: https://audacityteam.org
 [kdenlive]: https://kdenlive.org
 [SimpleScreenRecorder]: https://en.wikipedia.org/wiki/SimpleScreenRecorder
@@ -671,9 +655,7 @@ And that's it, the video is done and can be uploaded to [YouTube][ozkriff YouTub
 
 ------
 
-<!-- (**TODO**:
-_Don't forget to check that the last image in the post looks cool:_
-_Reddit will use it as a preview._) -->
+![just silly final gif](final-sequence.gif)
 
 That's all for today, thanks for reading!
 
