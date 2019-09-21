@@ -668,12 +668,9 @@ or subscribe to my **[YouTube channel][ozkriff YouTube]**.
 Also, if you're interested in Rust game development in general,
 you may want to check **[@rust_gamedev on Twitter][@rust_gamedev]**.
 
-<!--
-TODO: uncomment when the post is published
 **Discussions of this post**:
-[/r/rust](TODO),
-[twitter](TODO).
--->
+[/r/rust](https://www.reddit.com/r/rust/comments/d7avev/zemeroth_v06_renown_upgrades_sprite_frames),
+[twitter](https://mobile.twitter.com/ozkriff/status/1175413716495622144).
 
 [roadmap]: https://github.com/ozkriff/zemeroth/blob/master/README.md#roadmap
 [@ozkriff]: https://twitter.com/ozkriff
