@@ -642,6 +642,8 @@ Again, KDE software seems to do the job fine:
 I just add the script to **[KDE Subtitle Composer]** line by line
 and tweak the timings a little bit.
 
+![How KDE Subtitle Composer looks](subtitles-creation.png)
+
 And that's it, the video is done and can be uploaded to [YouTube][ozkriff YouTube].
 
 I'm not completely happy with the quality of the 0.6 announcement video,
